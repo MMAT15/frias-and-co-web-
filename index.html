@@ -1,25 +1,152 @@
+<!-- index.html -->
 <!DOCTYPE html>
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>FRIAS & CO</title>
-  <meta name="description" content="Tienda online de moda urbana para jóvenes – FRIAS & CO. Calidad y estilo a tu alcance.">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>BERA clothing</title>
+  <meta name="description" content="Moda urbana para jóvenes – BERA clothing. Envíos a todo el país. Berazategui centro.">
+  <link rel="icon" href="assets/images/favicon.ico">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css">
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
+
   <header>
-    <div class="logo">
-      <h1>FRIAS &amp; CO</h1>
+    <div class="header-left">
+      <div class="logo-container" aria-label="Logo BERA clothing">
+        <img src="assets/images/logoo.jpeg" alt="Logo BERA clothing">
+      </div>
+      <h1 class="site-title">BERA clothing</h1>
     </div>
-    <nav>
+    <button class="nav-toggle" aria-label="Abrir menú">
+      <span></span><span></span><span></span>
+    </button>
+    <nav class="main-nav">
       <ul>
+        <li><a href="#about">Sobre Nosotros</a></li>
+        <li><a href="#hero">Inicio</a></li>
         <li><a href="#novedades">Novedades</a></li>
         <li><a href="#productos">Productos</a></li>
+        <li><a href="#ofertas">Ofertas</a></li>
+        <li><a href="#testimonios">Testimonios</a></li>
         <li><a href="#contacto">Contacto</a></li>
+        <li><a href="https://instagram.com/beraclothingg" target="_blank" rel="noopener">Instagram</a></li>
       </ul>
     </nav>
   </header>
+
+  <section id="hero" class="hero">
+    <div class="hero-overlay"></div>
+    <div class="hero-content container">
+      <h2>Estilo Urbano</h2>
+      <p>Descubre nuestra nueva colección primavera-verano</p>
+      <a href="#novedades" class="btn-primary">Comprar ahora</a>
+    </div>
+  </section>
+
+  <main>
+    <section id="about" class="section-padding container">
+      <h2>Sobre Nosotros</h2>
+      <div class="about-content">
+        <img src="assets/images/about.jpg" alt="Equipo BERA clothing">
+        <p>
+          Somos Melina y Candela Frías, hermanas con pasión por la moda urbana.
+          En BERA clothing diseñamos prendas únicas que combinan estilo y comodidad,
+          pensadas para jóvenes que buscan calidad y personalidad.
+        </p>
+      </div>
+    </section>
+
+    <section id="novedades" class="section-padding">
+      <h2>Novedades</h2>
+      <div class="swiper-container swiper-novedades container">
+        <div class="swiper-wrapper">
+          <div class="swiper-slide">
+            <img src="assets/images/slide1.jpg" alt="Prenda urbana 1">
+            <p>Camisa urbana – $1.200 <a href="#producto1">Ver producto</a></p>
+          </div>
+          <!-- más slides -->
+        </div>
+        <div class="swiper-pagination"></div>
+        <div class="swiper-button-prev"></div>
+        <div class="swiper-button-next"></div>
+      </div>
+    </section>
+
+    <section id="productos" class="section-padding container">
+      <h2>Productos</h2>
+      <div class="grid-productos">
+        <div class="producto-item" id="producto1">
+          <img src="assets/images/prod1.jpg" alt="Camisa urbana">
+          <h3>Camisa urbana</h3>
+          <p>$1.200</p>
+        </div>
+        <!-- más productos -->
+      </div>
+    </section>
+
+    <section id="ofertas" class="section-padding container">
+      <h2>Ofertas Especiales</h2>
+      <div class="grid-ofertas">
+        <div class="offer-item">
+          <img src="assets/images/oferta1.jpg" alt="Jogger cómodo en oferta">
+          <span class="badge">-20 %</span>
+          <h3>Jogger cómodo</h3>
+          <p><del>$2.000</del> $1.600</p>
+        </div>
+        <!-- más ofertas -->
+      </div>
+    </section>
+
+    <section id="testimonios" class="section-padding">
+      <h2>Testimonios</h2>
+      <div class="swiper-container swiper-testimonios container">
+        <div class="swiper-wrapper">
+          <div class="swiper-slide">
+            <blockquote>“¡Me encanta la calidad y el estilo de BERA clothing!”</blockquote>
+            <cite>— Juan P.</cite>
+          </div>
+          <!-- más testimonios -->
+        </div>
+        <div class="swiper-pagination"></div>
+      </div>
+    </section>
+
+    <section id="contacto" class="section-padding container">
+      <h2>Contacto</h2>
+      <form id="form-contacto">
+        <label for="nombre">Nombre</label>
+        <input type="text" id="nombre" name="nombre" required>
+
+        <label for="email">Correo electrónico</label>
+        <input type="email" id="email" name="email" required>
+
+        <label for="mensaje">Mensaje</label>
+        <textarea id="mensaje" name="mensaje" rows="4" required></textarea>
+
+        <button type="submit" class="btn-primary">Enviar</button>
+      </form>
+      <div id="form-respuesta"></div>
+    </section>
+  </main>
+
+  <button id="back-to-top" aria-label="Volver arriba">↑</button>
+
+  <footer>
+    <div class="footer-info container">
+      <p>
+        By 
+        <a href="https://instagram.com/melinaffrias" target="_blank" rel="noopener">@melinaffrias</a>
+        <a href="https://instagram.com/candelaffrias" target="_blank" rel="noopener">@candelaffrias</a>
+        | Shop online 24/7 🖤 | Envíos a todo el país ✈️ | Berazategui centro
+      </p>
+      <p>© 2025 BERA clothing. Todos los derechos reservados.</p>
+    </div>
+  </footer>
+
+  <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
   <script src="js/script.js"></script>
 </body>
 </html>
