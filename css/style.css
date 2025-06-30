@@ -244,18 +244,20 @@ img {
   transition: background var(--transition), transform var(--transition);
   cursor: pointer;
 }
+/* Modern cart icon styling */
 .cart-toggle .cart-icon {
-  width: 24px;
-  height: 24px;
-  filter: invert(0.1) sepia(1) saturate(5) hue-rotate(180deg);
-  transition: filter var(--transition);
+  width: 28px;
+  height: 28px;
+  fill: var(--color-principal);
+  transition: fill var(--transition), transform var(--transition);
+}
+.cart-toggle:hover .cart-icon {
+  fill: #fff;              /* White icon on hover */
+  transform: scale(1.2);   /* Slightly larger on hover */
 }
 .cart-toggle:hover {
   background: var(--color-acento);
   transform: scale(1.1);
-}
-.cart-toggle:hover .cart-icon {
-  filter: invert(1) sepia(0);
 }
 .cart-toggle .cart-count {
   position: absolute;
@@ -835,6 +837,55 @@ img {
   font-size: 1.5rem;
   cursor: pointer;
 }
+/* Contenedor para manejar ambos iconos */
+.icon-container {
+    position: relative;
+    display: inline-block;
+  }
+  
+  /* Mostrar icono cerrado por defecto, ocultar abierto */
+  .cart-icon-closed {
+    display: inline-block;
+  }
+  .cart-icon-open {
+    display: none;
+  }
+  
+  /* Cuando el contenedor .cart-toggle tenga la clase .open, intercambiar iconos */
+  .cart-toggle.open .cart-icon-closed {
+    display: none !important;
+  }
+  .cart-toggle.open .cart-icon-open {
+    display: inline-block !important;
+  }
+  
+  /* Estilos comunes para ambos SVGs */
+  .icon-container .cart-icon {
+    width: 24px;
+    height: 24px;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    transition: stroke var(--transition), transform var(--transition);
+  }
+  
+  /* Color en estado cerrado */
+  .cart-toggle .cart-icon-closed .cart-icon {
+    color: var(--color-principal);
+  }
+  
+  /* Hover: cambia color de trazo y escala el icono */
+  .cart-toggle:hover .cart-icon {
+    stroke: #fff;
+    transform: scale(1.1);
+  }
+  /* Hover sobre el botón: fondo y ligera escala */
+  .cart-toggle:hover {
+    background: var(--color-acento);
+    transform: scale(1.05);
+  }
   
 
 
