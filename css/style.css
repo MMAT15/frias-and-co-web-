@@ -1,3 +1,4 @@
+
 /* css/style.css */
 
 /* --------------------------------------------------
@@ -14,7 +15,7 @@
   border: 0 !important;
 }
 
-/* Reset heading margins and set line-height for readability */
+/* Reset heading margins and set line-height for lectura */
 h1, h2, h3, h4, h5, h6 {
   margin: 0 0 1rem;
   line-height: 1.2;
@@ -24,7 +25,7 @@ body {
   line-height: 1.6;
 }
 
-/* Default focus outline for accessibility */
+/* Focus outline para accesibilidad */
 a:focus,
 button:focus,
 input:focus,
@@ -67,7 +68,7 @@ img {
   max-width: 100%;
 }
 
-/* Enlace para saltar el contenido */
+/* Enlace para saltar contenido */
 .skip-link {
   position: absolute;
   top: -40px;
@@ -92,30 +93,30 @@ img {
 }
 
 /* --------------------------------------------------
-   HEADER (modificado para safe-area y separación visual)
+   HEADER (safe-area, sombra y posicionamiento)
 -------------------------------------------------- */
 .site-header {
   background-color: var(--color-fondo);
   position: sticky;
   top: 0;
-  /* espacio para notch/barra de estado en iOS */
+  /* espacio para notch o barra de estado */
   padding-top: env(safe-area-inset-top);
-  /* altura base de 56px más el safe-area */
+  /* altura total: 56px + safe-area */
   min-height: calc(56px + env(safe-area-inset-top));
   display: flex;
   align-items: center;
-  border-bottom: 1px solid #eee;
+  justify-content: center;
   box-shadow: 0 2px 4px rgba(0,0,0,0.05);
   z-index: 1000;
 }
 
+/* Contenido interno del header */
 .header-inner {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  width: 100%;
   padding: 0 1rem;
-  height: 56px;
-  margin-top: env(safe-area-inset-top);
 }
 
 /* Branding */
@@ -133,21 +134,11 @@ img {
   display: flex;
   align-items: center;
   justify-content: center;
-  flex-shrink: 0;
-}
-.site-tagline {
-  font-size: 0.875rem;
-  color: var(--color-acento-sec);
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-  margin-left: 0.5rem;
 }
 .logo-wrap img.logo {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  display: block;
-  border-radius: 50%;
 }
 .site-title {
   font-size: 1.75rem;
@@ -165,8 +156,20 @@ img {
   background-color: var(--color-acento);
   margin-top: 0.25rem;
 }
+.site-tagline {
+  font-size: 0.875rem;
+  color: var(--color-acento-sec);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
 
-/* Navegación */
+/* Botón hamburguesa y carrito */
+.nav-toggle,
+.cart-toggle {
+  z-index: 1001;
+}
+
+/* Hamburguesa */
 .nav-toggle {
   display: none;
   flex-direction: column;
@@ -174,9 +177,7 @@ img {
   background: none;
   border: none;
   cursor: pointer;
-  z-index: 1001;
 }
-.nav-toggle .bar,
 .nav-toggle span {
   width: 25px;
   height: 3px;
@@ -185,15 +186,16 @@ img {
   display: block;
 }
 .nav-toggle.open span:nth-child(1) {
-  transform: rotate(45deg) translate(5px, 5px);
+  transform: rotate(45deg) translate(5px,5px);
 }
 .nav-toggle.open span:nth-child(2) {
   opacity: 0;
 }
 .nav-toggle.open span:nth-child(3) {
-  transform: rotate(-45deg) translate(5px, -5px);
+  transform: rotate(-45deg) translate(5px,-5px);
 }
 
+/* Navegación principal */
 .main-nav {
   display: flex;
 }
@@ -215,7 +217,7 @@ img {
   color: var(--color-acento);
 }
 
-/* Cart icon */
+/* Icono de carrito */
 .cart-toggle {
   position: relative;
   display: inline-flex;
@@ -223,23 +225,21 @@ img {
   justify-content: center;
   width: 40px;
   height: 40px;
-  margin-left: 1rem;
   background: var(--color-fondo);
   border: 1px solid var(--color-acento-sec);
   border-radius: 50%;
   transition: background var(--transition), transform var(--transition);
   cursor: pointer;
-  z-index: 1001;
-}
-.cart-toggle:hover {
-  background: var(--color-acento);
-  transform: scale(1.1);
 }
 .cart-toggle .cart-icon {
   width: 24px;
   height: 24px;
-  transition: filter var(--transition);
   filter: invert(0.1) sepia(1) saturate(5) hue-rotate(180deg);
+  transition: filter var(--transition);
+}
+.cart-toggle:hover {
+  background: var(--color-acento);
+  transform: scale(1.1);
 }
 .cart-toggle:hover .cart-icon {
   filter: invert(1) sepia(0);
@@ -257,10 +257,11 @@ img {
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.2);
 }
 
-/* Menú móvil */
+/* --------------------------------------------------
+   Menú móvil
+-------------------------------------------------- */
 @media (max-width: 768px) {
   .nav-toggle {
     display: flex;
@@ -278,31 +279,27 @@ img {
   .header-inner {
     justify-content: center;
     position: relative;
-    padding: 0 1rem;
-    margin-top: env(safe-area-inset-top);
   }
   .site-branding {
     position: absolute;
     left: 50%;
     top: calc(env(safe-area-inset-top) + 50%);
     transform: translate(-50%, -50%);
-    z-index: 1002;
     flex-direction: column;
     align-items: center;
     text-align: center;
     gap: 0.25rem;
-  }
-  .site-title {
-    font-size: 1.5rem;
-    margin: 0;
-  }
-  .site-tagline {
-    font-size: 0.75rem;
-    margin: 0;
+    z-index: 1002;
   }
   .logo-wrap {
     width: 50px;
     height: 50px;
+  }
+  .site-title {
+    font-size: 1.5rem;
+  }
+  .site-tagline {
+    font-size: 0.75rem;
   }
   .main-nav {
     position: absolute;
@@ -324,6 +321,10 @@ img {
   }
 }
 
+/* --------------------------------------------------
+   Hero, secciones y resto del CSS sin cambios
+   (mantener igual que tu archivo original)
+-------------------------------------------------- */
 /* --------------------------------------------------
    HERO CAROUSEL
 -------------------------------------------------- */
