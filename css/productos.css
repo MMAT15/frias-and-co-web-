@@ -20,14 +20,6 @@
   margin: 0.5rem auto 0;
 }
 
-/* Grid layout */
-.grid-productos {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  gap: 2rem;
-  max-width: 1000px;
-  margin: 0 auto;
-}
 
 /* Product card */
 .producto-item {
@@ -209,7 +201,7 @@
 .filtros-selects {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-  gap: 1rem;
+  gap: 1.5rem;
   max-width: 800px;
   margin: 0 auto;
 }
@@ -266,9 +258,22 @@
   color: var(--color-acento);
 }
 
+
+/* Ensure add-to-cart button styling in modern grid */
 .modern-grid .add-to-cart-btn {
+  margin-top: auto;
   width: 100%;
-  margin-top: 1rem;
+  padding: 0.75rem;
+  background-color: var(--color-principal);
+  color: #fff;
+  border: none;
+  border-radius: var(--border-radius);
+  cursor: pointer;
+  transition: transform var(--transition), filter var(--transition);
+}
+.modern-grid .add-to-cart-btn:hover {
+  filter: brightness(0.9);
+  transform: translateY(-2px);
 }
 
 /* Responsive adjustments */
@@ -316,9 +321,12 @@
   opacity: 0;
   transition: opacity var(--transition);
   z-index: 1;
+  pointer-events: none;
 }
 .producto-item:hover::after {
   opacity: 1;
+  /* keep pointer-events none to continue allowing clicks */
+  pointer-events: none;
 }
 
 /* Ensure content above overlay */
@@ -353,13 +361,9 @@
 }
 
 /* Tighter grid gap for modern layout */
-.grid-productos,
-.modern-grid {
-  gap: 1rem;
-}
+
 
 @media (max-width: 480px) {
-  .grid-productos,
   .modern-grid {
     grid-template-columns: 1fr;
     gap: 0.5rem;
