@@ -101,6 +101,7 @@ img {
   top: 0;
   /* espacio para notch o barra de estado */
   padding-top: env(safe-area-inset-top);
+  padding-bottom: 0.5rem;
   /* altura total: 56px + safe-area */
   min-height: calc(56px + env(safe-area-inset-top));
   display: flex;
@@ -258,8 +259,8 @@ img {
 }
 .cart-toggle .cart-count {
   position: absolute;
-  top: -4px;
-  right: -4px;
+  top: 4px;
+  right: 4px;
   background: var(--color-acento);
   color: #fff;
   font-size: 0.7rem;
