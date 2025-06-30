@@ -113,10 +113,22 @@ img {
 /* Contenido interno del header */
 .header-inner {
   display: flex;
-  justify-content: space-between;
   align-items: center;
   width: 100%;
   padding: 0 1rem;
+}
+.nav-toggle {
+  order: 1;
+}
+.site-branding {
+  order: 2;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.cart-toggle {
+  order: 3;
 }
 
 /* Branding */
@@ -246,13 +258,13 @@ img {
 }
 .cart-toggle .cart-count {
   position: absolute;
-  top: -6px;
-  right: -6px;
+  top: -4px;
+  right: -4px;
   background: var(--color-acento);
   color: #fff;
-  font-size: 0.75rem;
-  width: 18px;
-  height: 18px;
+  font-size: 0.7rem;
+  width: 16px;
+  height: 16px;
   border-radius: 50%;
   display: flex;
   align-items: center;
