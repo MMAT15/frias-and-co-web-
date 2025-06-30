@@ -4,15 +4,14 @@
   <meta charset="UTF-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>BERA clothing – Inicio</title>
-  <meta name="description" content="BERA clothing: moda urbana para jóvenes. Envíos a todo el país desde Berazategui centro." />
+  <title>BERA clothing – Contacto</title>
+  <meta name="description" content="Contacto con BERA clothing: moda urbana para jóvenes. Envíos a todo el país desde Berazategui centro." />
   <link rel="icon" href="assets/images/favicon.ico" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
   <link rel="stylesheet" href="css/style.css" />
-
+  <link rel="stylesheet" href="css/newsteller.css" />
 </head>
 <body>
   <!-- Skip link -->
@@ -40,16 +39,15 @@
            role="navigation"
            aria-label="Menú principal">
         <ul class="nav-list">
-          <li><a href="index.html" class="active">Inicio</a></li>
+          <li><a href="index.html">Inicio</a></li>
           <li><a href="newsteller.html">Novedades</a></li>
           <li><a href="productos.html">Productos</a></li>
-          <li><a href="contacto.html">Contacto</a></li>
+          <li><a href="contacto.html" class="active">Contacto</a></li>
         </ul>
       </nav>
       <!-- Carrito de compras -->
       <a href="#" class="cart-toggle" aria-label="Ver carrito">
         <div class="icon-container">
-          <!-- Closed cart icon -->
           <span class="cart-icon-closed">
             <svg class="cart-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                  fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
@@ -60,7 +58,6 @@
               <circle cx="16" cy="19" r="1.5"/>
             </svg>
           </span>
-          <!-- Open cart icon -->
           <span class="cart-icon-open">
             <svg class="cart-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                  fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
@@ -78,29 +75,22 @@
   </header>
   <!-- MAIN CONTENT -->
   <main id="main-content">
-    <!-- Hero/Banner -->
-    <section class="section section-hero-newsletter">
+    <section class="section novedades-hero" role="region" aria-labelledby="novedades-hero-title">
       <div class="container">
-        <h1 class="section-title">¡Entérate de Nuestras Novedades!</h1>
-        <p class="section-subtitle">Recibe en tu correo las últimas ofertas, lanzamientos y contenido exclusivo de BERA clothing.</p>
+        <h2 id="novedades-hero-title" class="section-title">Novedades</h2>
+        <p class="novedades-description">
+          Suscribite a nuestro newsletter para recibir en tu correo las últimas prendas, ofertas exclusivas y lanzamientos de BERA clothing.
+        </p>
       </div>
     </section>
-
-    <!-- Newsletter Signup -->
-    <section id="newsletter" class="section section-newsletter" aria-labelledby="newsletter-title">
-      <div class="container newsletter-layout">
-        <div class="newsletter-info">
-          <h2 id="newsletter-title" class="newsletter-title">Suscríbete al Newsletter</h2>
-          <p class="newsletter-text">Únete a nuestra comunidad y no te pierdas ninguna novedad. Te mantendremos al tanto de promociones y lanzamientos.</p>
-        </div>
-        <div class="newsletter-form-wrap">
-          <form id="form-newsletter" class="newsletter-form" aria-label="Suscripción al newsletter" novalidate>
-            <label for="email-newsletter" class="form-label">Correo electrónico</label>
-            <input type="email" id="email-newsletter" name="email" class="form-input" placeholder="tucorreo@ejemplo.com" required aria-required="true" />
-            <button type="submit" class="btn btn-primary newsletter-btn">Suscribirme</button>
-            <p id="newsletter-response" class="form-response" aria-live="polite"></p>
-          </form>
-        </div>
+    <section class="section section-newsletter" role="region" aria-labelledby="newsletter-title">
+      <div class="container">
+        <h2 id="newsletter-title" class="section-title">Suscríbete a nuestro newsletter</h2>
+        <form class="newsletter-form" id="form-newsletter">
+          <input type="email" name="email-newsletter" placeholder="Tu correo electrónico" required />
+          <button type="submit" class="btn btn-secondary">Suscribirme</button>
+        </form>
+        <p id="newsletter-response" class="form-response" aria-live="polite"></p>
       </div>
     </section>
   </main>
