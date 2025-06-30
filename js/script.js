@@ -192,12 +192,29 @@ document.addEventListener('DOMContentLoaded', () => {
   };
   document.querySelectorAll('.add-to-cart-btn').forEach(btn => {
     btn.addEventListener('click', () => {
-      const prod = {
+      // Read price from data attribute
+      let price = Number(btn.dataset.price);
+      // Fallback: parse from DOM text, removing thousand separators and handling decimals
+      const priceEl = btn.closest('.producto-item')?.querySelector('.price') ||
+                      btn.closest('.product-item')?.querySelector('.price');
+      if (priceEl) {
+        let text = priceEl.textContent.trim();
+        // Remove currency symbols, spaces
+        text = text.replace(/[^0-9.,]/g, '');
+        // Remove thousand separators (dots), convert comma to dot for decimals
+        text = text.replace(/\./g, '').replace(/,/g, '.');
+        const domPrice = parseFloat(text) || 0;
+        // If data-price is not a valid number or mismatched, use domPrice
+        if (isNaN(price) || price !== domPrice) {
+          price = domPrice;
+        }
+      }
+      const product = {
         id: btn.dataset.id,
         name: btn.dataset.name,
-        price: parseFloat(btn.dataset.price)||0
+        price: price || 0
       };
-      addToCart(prod);
+      addToCart(product);
     });
   });
   updateCartCount();
