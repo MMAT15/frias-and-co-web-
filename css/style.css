@@ -263,31 +263,25 @@ img {
    Menú móvil
 -------------------------------------------------- */
 @media (max-width: 768px) {
-  .nav-toggle {
-    display: flex;
-    position: absolute;
-    left: max(1rem, env(safe-area-inset-left));
-    top: calc(env(safe-area-inset-top) + 50%);
-    transform: translateY(-50%);
-  }
-  .cart-toggle {
-    position: absolute;
-    right: max(1rem, env(safe-area-inset-right));
-    top: calc(env(safe-area-inset-top) + 50%);
-    transform: translateY(-50%);
-  }
+  /* .nav-toggle and .cart-toggle absolute rules removed for new layout */
   .header-inner {
-    justify-content: center;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
     position: relative;
+    padding: 0 1rem;
+  }
+  .nav-toggle,
+  .cart-toggle {
+    position: static;
+    margin: 0;
   }
   .site-branding {
-    position: absolute;
-    left: 50%;
-    top: calc(env(safe-area-inset-top) + 50%);
-    transform: translate(-50%, -50%);
+    position: static;
+    display: flex;
     flex-direction: column;
     align-items: center;
-    text-align: center;
+    margin: 0 auto;
     gap: 0.25rem;
     z-index: 1002;
   }
@@ -296,7 +290,8 @@ img {
     height: 50px;
   }
   .site-title {
-    font-size: 1.5rem;
+    font-size: 1.25rem;
+    margin: 0;
   }
   .site-tagline {
     font-size: 0.75rem;
