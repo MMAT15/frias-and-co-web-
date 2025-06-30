@@ -161,4 +161,50 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     });
   }
+  // --------------------------------------------------
+  // PRODUCTS FILTERING AND SORTING (Modern)
+  // --------------------------------------------------
+  const filterTipo = document.getElementById('filter-tipo');
+  const filterTalle = document.getElementById('filter-talle');
+  const sortBySelect = document.getElementById('sort-by');
+  const productsGrid = document.getElementById('products-grid');
+  const productItems = Array.from(productsGrid.children);
+
+  function applyFilters() {
+    const tipoVal = filterTipo.value;
+    const talleVal = filterTalle.value;
+    const sortBy = sortBySelect.value;
+
+    let filtered = productItems.filter(item => {
+      const tipo = item.dataset.tipo;
+      const talle = item.dataset.talle;
+      return (!tipoVal || tipo === tipoVal) &&
+             (!talleVal || talle === talleVal);
+    });
+
+    // Sorting
+    filtered.sort((a, b) => {
+      const pa = parseFloat(a.dataset.precio) || 0;
+      const pb = parseFloat(b.dataset.precio) || 0;
+      switch (sortBy) {
+        case 'precio-asc': return pa - pb;
+        case 'precio-desc': return pb - pa;
+        case 'nuevos':
+        case 'relevancia': 
+        default: return 0;
+      }
+    });
+
+    // Render filtered + sorted items
+    productsGrid.innerHTML = '';
+    filtered.forEach(item => productsGrid.appendChild(item));
+  }
+
+  // Event listeners
+  filterTipo.addEventListener('change', applyFilters);
+  filterTalle.addEventListener('change', applyFilters);
+  sortBySelect.addEventListener('change', applyFilters);
+
+  // Initial render
+  applyFilters();
 });

@@ -1,5 +1,3 @@
-
-
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -12,7 +10,6 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
   <link rel="stylesheet" href="css/style.css" />
   <link rel="stylesheet" href="css/productos.css" />
 </head>
@@ -30,20 +27,16 @@
           </div>
         </a>
         <h1 class="site-title">BERA clothing</h1>
+        <span class="site-tagline">By FRIAS</span>
       </div>
-      <button class="nav-toggle"
-              aria-controls="primary-navigation"
-              aria-expanded="false"
-              aria-label="Abrir menú">
+      <button class="nav-toggle" aria-controls="primary-navigation" aria-expanded="false" aria-label="Abrir menú">
         <span class="bar"></span><span class="bar"></span><span class="bar"></span>
       </button>
-      <nav id="primary-navigation" class="main-nav"
-           role="navigation"
-           aria-label="Menú principal">
+      <nav id="primary-navigation" class="main-nav" role="navigation" aria-label="Menú principal">
         <ul class="nav-list">
           <li><a href="index.html">Inicio</a></li>
           <li><a href="newsteller.html">Newsletter</a></li>
-          <li><a href="productos.html">Productos</a></li>
+          <li><a href="productos.html" class="active">Productos</a></li>
           <li><a href="contacto.html">Contacto</a></li>
         </ul>
       </nav>
@@ -52,52 +45,77 @@
 
   <!-- MAIN CONTENT -->
   <main id="main-content">
-    <section id="productos" class="section section-productos" role="region" aria-labelledby="productos-title">
+    <!-- Productos Hero -->
+    <section class="productos-hero">
       <div class="container">
-        <h2 id="productos-title" class="section-title">Nuestro Catálogo</h2>
-        <div class="grid-productos">
-          <div class="producto-item">
-            <img src="assets/images/gris.jpg" alt="Prueba Gris" loading="lazy" />
-            <h3>Prueba Gris</h3>
-            <p class="price">$1.000</p>
-            <a href="#" class="btn btn-secondary">Ver detalle</a>
+        <h2 class="hero-title">Descubrí nuestra colección</h2>
+        <p class="hero-subtitle">Prendas urbanas, cómodas y con estilo</p>
+      </div>
+    </section>
+
+    <!-- Filtros y Orden -->
+    <section class="productos-filtros-bar">
+      <div class="container">
+        <div class="filtros-selects">
+          <select id="filter-tipo">
+            <option value="">Todas las prendas</option>
+            <option value="buzo">Buzos</option>
+            <option value="pantalon">Pantalones</option>
+            <option value="remera">Remeras</option>
+            <option value="accesorio">Accesorios</option>
+          </select>
+          <select id="filter-talle">
+            <option value="">Todos los talles</option>
+            <option value="s">S</option>
+            <option value="m">M</option>
+            <option value="l">L</option>
+            <option value="xl">XL</option>
+          </select>
+          <select id="sort-by">
+            <option value="relevancia">Relevancia</option>
+            <option value="precio-asc">Precio: menor a mayor</option>
+            <option value="precio-desc">Precio: mayor a menor</option>
+            <option value="nuevos">Novedades</option>
+          </select>
+        </div>
+      </div>
+    </section>
+
+    <!-- Grid de Productos -->
+    <section id="productos" class="section section-productos modern">
+      <div class="container">
+        <div class="grid modern-grid" id="products-grid">
+          <!-- Ejemplos de productos -->
+          <div class="producto-item" data-tipo="buzo" data-talle="m" data-precio="1200">
+            <img src="assets/images/buzo.jpg" alt="Buzo Gris">
+            <h3>Buzo Gris</h3><p class="price">$1.200</p>
           </div>
-          <div class="producto-item">
-            <img src="assets/images/buzo.jpg" alt="Prueba Buzo" loading="lazy" />
-            <h3>Prueba Buzo</h3>
-            <p class="price">$1.200</p>
-            <a href="#" class="btn btn-secondary">Ver detalle</a>
+          <div class="producto-item" data-tipo="buzo" data-talle="l" data-precio="1500">
+            <img src="assets/images/over.jpg" alt="Buzo Over">
+            <h3>Buzo Over</h3><p class="price">$1.500</p>
           </div>
-          <div class="producto-item">
-            <img src="assets/images/over.jpg" alt="Prueba Over" loading="lazy" />
-            <h3>Prueba Over</h3>
-            <p class="price">$1.300</p>
-            <a href="#" class="btn btn-secondary">Ver detalle</a>
+          <div class="producto-item" data-tipo="pantalon" data-talle="m" data-precio="2000">
+            <img src="assets/images/rosa.jpg" alt="Pantalón Rosa">
+            <h3>Pantalón Rosa</h3><p class="price">$2.000</p>
           </div>
-          <div class="producto-item">
-            <img src="assets/images/shift.jpg" alt="Prueba Shift" loading="lazy" />
-            <h3>Prueba Shift</h3>
-            <p class="price">$1.400</p>
-            <a href="#" class="btn btn-secondary">Ver detalle</a>
+          <div class="producto-item" data-tipo="pantalon" data-talle="l" data-precio="2200">
+            <img src="assets/images/gris.jpg" alt="Pantalón Gris">
+            <h3>Pantalón Gris</h3><p class="price">$2.200</p>
           </div>
-          <div class="producto-item">
-            <img src="assets/images/rosa.jpg" alt="Prueba Rosa" loading="lazy" />
-            <h3>Prueba Rosa</h3>
-            <p class="price">$1.500</p>
-            <a href="#" class="btn btn-secondary">Ver detalle</a>
+          <div class="producto-item" data-tipo="remera" data-talle="s" data-precio="800">
+            <img src="assets/images/shift.jpg" alt="Remera Shift">
+            <h3>Remera Shift</h3><p class="price">$800</p>
           </div>
-          <div class="producto-item">
-            <img src="assets/images/dibujo.jpg" alt="Prueba Dibujo" loading="lazy" />
-            <h3>Prueba Dibujo</h3>
-            <p class="price">$1.600</p>
-            <a href="#" class="btn btn-secondary">Ver detalle</a>
+          <div class="producto-item" data-tipo="remera" data-talle="m" data-precio="900">
+            <img src="assets/images/dibujo.jpg" alt="Remera Dibujo">
+            <h3>Remera Dibujo</h3><p class="price">$900</p>
           </div>
         </div>
       </div>
     </section>
   </main>
 
-  <!-- BACK TO TOP BUTTON -->
+  <!-- BACK TO TOP -->
   <button id="back-to-top" class="back-to-top" aria-label="Volver arriba">↑</button>
 
   <!-- FOOTER -->
@@ -110,13 +128,12 @@
         | Shop online 24/7 🖤 | Envíos a todo el país ✈️ | Berazategui centro
       </p>
       By 
-        <a href="https://instagram.com/melinaffrias" target="_blank" rel="noopener">@melinaffrias</a>
-        <a href="https://instagram.com/candelaffrias" target="_blank" rel="noopener">@candelaffrias</a>
+        <a href="https://instagram.com/melinaffrias" target="_blank" rel="noopener">@melinaffrias</a> <a>&</a>
+        <a href="https://instagram.com/candelaffrias" target="_blank" rel="noopener">@candelaffrias</a> <p>❤️</p>
       <p>© 2025 BERA clothing. Todos los derechos reservados.</p>
     </div>
   </footer>
 
-    <!-- SCRIPTS -->
   <script src="https://unpkg.com/swiper/swiper-bundle.min.js" defer></script>
   <script src="js/script.js" defer></script>
 </body>
