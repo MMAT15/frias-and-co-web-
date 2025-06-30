@@ -8,6 +8,7 @@
 }
 
 /* Container grid */
+/*
 .contacto-layout {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -17,6 +18,19 @@
 @media (max-width: 768px) {
   .contacto-layout {
     grid-template-columns: 1fr;
+  }
+}
+*/
+
+/* Main content wrapper */
+.contacto-content {
+  display: flex;
+  gap: 2rem;
+  align-items: flex-start;
+}
+@media (max-width: 768px) {
+  .contacto-content {
+    flex-direction: column;
   }
 }
 

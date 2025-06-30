@@ -212,6 +212,21 @@ document.addEventListener('DOMContentLoaded', () => {
     else cart.push({ ...product, qty: 1 });
     saveCart();
     updateCartCount();
+    // Show confirmation toast
+    showToast('Se ha añadido al carrito');
+  }
+
+  // Toast message utility
+  function showToast(message) {
+    const toast = document.createElement('div');
+    toast.className = 'cart-toast';
+    toast.textContent = message;
+    document.body.appendChild(toast);
+    // Automatically remove after 2 seconds
+    setTimeout(() => {
+      toast.classList.add('hide');
+      toast.addEventListener('transitionend', () => toast.remove());
+    }, 2000);
   }
 
   updateCartCount();
