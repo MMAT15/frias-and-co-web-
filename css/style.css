@@ -1,5 +1,39 @@
 /* css/style.css */
 
+/* --------------------------------------------------
+   Utility Classes & Base Enhancements
+-------------------------------------------------- */
+.visually-hidden {
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+  padding: 0 !important;
+  overflow: hidden !important;
+  clip: rect(0,0,0,0) !important;
+  white-space: nowrap !important;
+  border: 0 !important;
+}
+
+/* Reset heading margins and set line-height for readability */
+h1, h2, h3, h4, h5, h6 {
+  margin: 0 0 1rem;
+  line-height: 1.2;
+}
+
+body {
+  line-height: 1.6;
+}
+
+/* Default focus outline for accessibility */
+a:focus,
+button:focus,
+input:focus,
+select:focus,
+textarea:focus {
+  outline: 3px solid var(--color-acento);
+  outline-offset: 2px;
+}
+
 /* Variables de tema */
 :root {
     --color-principal: #222222;
@@ -655,4 +689,22 @@
 }
 .instagram-icon:hover {
   transform: scale(1.1);
+}
+
+/* Footer layout enhancements */
+.footer-top,
+.footer-credits {
+  margin-bottom: 1rem;
+}
+.footer-top {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+}
+.footer-credits {
+  text-align: center;
+  font-size: 0.875rem;
+  color: var(--color-acento-sec);
 }

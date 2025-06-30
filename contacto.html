@@ -14,6 +14,7 @@
   <link rel="stylesheet" href="css/contacto.css" />
 </head>
 <body>
+  <!-- Skip link -->
   <a href="#main-content" class="skip-link">Saltar al contenido</a>
 
   <!-- HEADER -->
@@ -26,19 +27,15 @@
           </div>
         </a>
         <h1 class="site-title">BERA clothing</h1>
+        <span class="site-tagline">By FRIAS</span>
       </div>
-      <button class="nav-toggle"
-              aria-controls="primary-navigation"
-              aria-expanded="false"
-              aria-label="Abrir menú">
+      <button class="nav-toggle" aria-controls="primary-navigation" aria-expanded="false" aria-label="Abrir menú">
         <span class="bar"></span><span class="bar"></span><span class="bar"></span>
       </button>
-      <nav id="primary-navigation" class="main-nav"
-           role="navigation"
-           aria-label="Menú principal">
+      <nav id="primary-navigation" class="main-nav" role="navigation" aria-label="Menú principal">
         <ul class="nav-list">
           <li><a href="index.html">Inicio</a></li>
-          <li><a href="newsteller.html">Newsletter</a></li>
+          <li><a href="newsteller.html">Novedades</a></li>
           <li><a href="productos.html">Productos</a></li>
           <li><a href="contacto.html" class="active">Contacto</a></li>
         </ul>
@@ -49,29 +46,49 @@
   <!-- MAIN CONTENT -->
   <main id="main-content">
     <section id="contacto" class="section section-contacto" role="region" aria-labelledby="contacto-title">
-      <div class="container">
-        <h2 id="contacto-title" class="section-title">Contacto</h2>
-        <p>¿Tienes preguntas, pedidos especiales o sugerencias? ¡Escríbenos!</p>
-        <form id="form-contacto" class="contact-form" aria-label="Formulario de contacto">
-          <div class="form-group">
-            <label for="nombre">Nombre completo</label>
-            <input type="text" id="nombre" name="nombre" placeholder="Tu nombre" required />
+      <h1 class="visually-hidden">Contacto BERA clothing</h1>
+      <div class="container contacto-layout">
+        <div class="contact-form-wrap">
+          <form id="form-contacto" class="contact-form" aria-label="Formulario de contacto" novalidate>
+            <fieldset>
+              <legend class="visually-hidden">Formulario de contacto</legend>
+              <div class="form-group">
+                <label for="nombre">Nombre completo</label>
+                <input type="text" id="nombre" name="nombre" placeholder="Tu nombre" required />
+              </div>
+              <div class="form-group">
+                <label for="email">Correo electrónico</label>
+                <input type="email" id="email" name="email" placeholder="tucorreo@ejemplo.com" required />
+              </div>
+              <div class="form-group">
+                <label for="asunto">Asunto</label>
+                <input type="text" id="asunto" name="asunto" placeholder="Motivo de tu mensaje" required />
+              </div>
+              <div class="form-group">
+                <label for="mensaje">Mensaje</label>
+                <textarea id="mensaje" name="mensaje" rows="5" placeholder="Escribe tu mensaje..." required></textarea>
+              </div>
+              <button type="submit" class="btn btn-primary">Enviar mensaje</button>
+            </fieldset>
+          </form>
+          <p id="form-respuesta" class="form-response" aria-live="polite"></p>
+        </div>
+
+        <aside class="contact-info">
+          <h3>Información de contacto</h3>
+          <ul>
+            <li><strong>Dirección:</strong> Av. Mitre 123, Berazategui, Buenos Aires</li>
+            <li><strong>Teléfono:</strong> <a href="tel:+5491123456789">+54 9 11 2345-6789</a></li>
+            <li><strong>Email:</strong> <a href="mailto:info@beraclothing.com">info@beraclothing.com</a></li>
+            <li><strong>Horario:</strong> Lunes a viernes de 10:00 a 18:00</li>
+          </ul>
+          <h3>Encuéntranos</h3>
+          <div class="map-container">
+            <iframe
+              src="https://www.google.com/maps?q=Av.+Mitre+123+Berazategui+Buenos+Aires&output=embed"
+              width="100%" height="200" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
           </div>
-          <div class="form-group">
-            <label for="email">Correo electrónico</label>
-            <input type="email" id="email" name="email" placeholder="tucorreo@ejemplo.com" required />
-          </div>
-          <div class="form-group">
-            <label for="asunto">Asunto</label>
-            <input type="text" id="asunto" name="asunto" placeholder="Motivo de tu mensaje" required />
-          </div>
-          <div class="form-group">
-            <label for="mensaje">Mensaje</label>
-            <textarea id="mensaje" name="mensaje" rows="5" placeholder="Escribe tu mensaje aquí..." required></textarea>
-          </div>
-          <button type="submit" class="btn btn-primary">Enviar mensaje</button>
-        </form>
-        <p id="form-respuesta" class="form-response" aria-live="polite"></p>
+        </aside>
       </div>
     </section>
   </main>
@@ -89,8 +106,8 @@
         | Shop online 24/7 🖤 | Envíos a todo el país ✈️ | Berazategui centro
       </p>
       By 
-        <a href="https://instagram.com/melinaffrias" target="_blank" rel="noopener">@melinaffrias</a>
-        <a href="https://instagram.com/candelaffrias" target="_blank" rel="noopener">@candelaffrias</a>
+        <a href="https://instagram.com/melinaffrias" target="_blank" rel="noopener">@melinaffrias</a> <a>&</a>
+        <a href="https://instagram.com/candelaffrias" target="_blank" rel="noopener">@candelaffrias</a> <p>❤️</p>
       <p>© 2025 BERA clothing. Todos los derechos reservados.</p>
     </div>
   </footer>

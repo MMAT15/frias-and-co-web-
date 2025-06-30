@@ -76,7 +76,7 @@
   transition: background-color var(--transition), transform var(--transition), box-shadow var(--transition);
 }
 .newsletter-form button[type="submit"]:hover {
-  background-color: #333;
+  filter: brightness(0.9);
   transform: translateY(-2px);
   box-shadow: 0 4px 10px rgba(0,0,0,0.1);
 }
@@ -98,4 +98,36 @@
   max-width: 1200px;
   margin: 0 auto;
   padding: 0 1rem;
+}
+
+/* Responsive adjustments for newsletter form */
+@media (max-width: 600px) {
+  .newsletter-form {
+    flex-direction: column;
+    padding: 1.5rem;
+  }
+  .newsletter-form button[type="submit"] {
+    width: 100%;
+    margin-top: 1rem;
+  }
+}
+
+/* Placeholder styling */
+.newsletter-form input::placeholder {
+  color: var(--color-acento-sec);
+  opacity: 1;
+}
+
+/* Button hover update for consistency */
+.newsletter-form button[type="submit"]:hover {
+  filter: brightness(0.9);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+/* Focus outline consistency */
+.newsletter-form input:focus,
+.newsletter-form button:focus {
+  outline: 3px solid var(--color-acento);
+  outline-offset: 2px;
 }

@@ -38,7 +38,7 @@
            aria-label="Menú principal">
         <ul class="nav-list">
           <li><a href="index.html">Inicio</a></li>
-          <li><a href="newsteller.html" class="active">Newsletter</a></li>
+          <li><a href="newsteller.html" class="active">Novedades</a></li>
           <li><a href="productos.html">Productos</a></li>
           <li><a href="contacto.html">Contacto</a></li>
         </ul>
@@ -49,15 +49,19 @@
   <!-- MAIN CONTENT -->
   <main id="main-content">
     <section id="newsletter" class="section section-newsletter" role="region" aria-labelledby="newsletter-title">
+      <h1 class="visually-hidden">Suscripción al Newsletter de BERA clothing</h1>
       <div class="container">
-        <h2 id="newsletter-title" class="section-title">Newsletter</h2>
+        <h2 id="newsletter-title" class="section-title">Novedades</h2>
         <p>Suscríbete para recibir en tu correo las últimas ofertas, lanzamientos y contenido exclusivo.</p>
-        <form id="form-newsletter" class="newsletter-form" aria-label="Formulario de suscripción">
-          <div class="form-group">
-            <label for="email-newsletter">Correo electrónico</label>
-            <input type="email" id="email-newsletter" name="email-newsletter" placeholder="tu@correo.com" required />
-          </div>
-          <button type="submit" class="btn btn-primary">Suscribirme</button>
+        <form id="form-newsletter" class="newsletter-form" aria-label="Formulario de suscripción al newsletter" novalidate>
+          <fieldset>
+            <legend class="visually-hidden">Formulario de suscripción al newsletter</legend>
+            <div class="form-group">
+              <label for="email-newsletter">Correo electrónico</label>
+              <input type="email" id="email-newsletter" name="email" placeholder="tu@correo.com" required aria-required="true" />
+            </div>
+            <button type="submit" class="btn btn-primary">Suscribirme</button>
+          </fieldset>
         </form>
         <p id="newsletter-response" class="form-response" aria-live="polite"></p>
       </div>
@@ -77,8 +81,8 @@
         | Shop online 24/7 🖤 | Envíos a todo el país ✈️ | Berazategui centro
       </p>
       By 
-        <a href="https://instagram.com/melinaffrias" target="_blank" rel="noopener">@melinaffrias</a>
-        <a href="https://instagram.com/candelaffrias" target="_blank" rel="noopener">@candelaffrias</a>
+        <a href="https://instagram.com/melinaffrias" target="_blank" rel="noopener">@melinaffrias</a> <a>&</a>
+        <a href="https://instagram.com/candelaffrias" target="_blank" rel="noopener">@candelaffrias</a> <p>❤️</p>
       <p>© 2025 BERA clothing. Todos los derechos reservados.</p>
     </div>
   </footer>

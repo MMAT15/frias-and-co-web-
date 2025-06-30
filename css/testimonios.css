@@ -67,3 +67,52 @@
   margin: 0 auto;
   padding: 0 1rem;
 }
+
+/* --------------------------------------------------
+   Testimonios: Responsive & Control Styles
+-------------------------------------------------- */
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .swiper-testimonios {
+    max-width: 90%;
+    padding: 0 1rem;
+  }
+  .swiper-testimonios .swiper-slide {
+    padding: 1rem;
+  }
+  .swiper-testimonios blockquote {
+    font-size: 1rem;
+  }
+}
+
+/* Navigation buttons styling */
+.swiper-testimonios .swiper-button-prev,
+.swiper-testimonios .swiper-button-next {
+  color: var(--color-principal);
+  opacity: 0.75;
+  transition: color 0.2s, opacity 0.2s;
+}
+.swiper-testimonios .swiper-button-prev:hover,
+.swiper-testimonios .swiper-button-next:hover {
+  color: var(--color-acento);
+  opacity: 1;
+}
+
+/* Active slide emphasis */
+.swiper-testimonios .swiper-slide {
+  opacity: 0.7;
+  transition: transform var(--transition), opacity var(--transition);
+}
+.swiper-testimonios .swiper-slide-active {
+  opacity: 1;
+  transform: translateY(-5px);
+}
+
+/* Center pagination and enlarge bullets */
+.swiper-testimonios .swiper-pagination {
+  bottom: -0.5rem;
+}
+.swiper-testimonios .swiper-pagination-bullet {
+  width: 0.75rem;
+  height: 0.75rem;
+}

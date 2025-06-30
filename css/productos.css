@@ -185,13 +185,30 @@
   gap: 1rem;
   flex-wrap: wrap;
   justify-content: center;
+  align-items: center;
 }
 .filtros-selects select {
-  padding: 0.5rem 1rem;
-  border: 1px solid #ccc;
+  flex: 1;
+  min-width: 180px;
+  max-width: 300px;
+  padding: 0.75rem 1.5rem;
+  border: 1px solid #ddd;
   border-radius: var(--border-radius);
   font-family: var(--fuente-base);
-  background: #fff;
+  font-size: 1rem;
+  color: var(--color-principal);
+  background: #fff url("data:image/svg+xml;charset=UTF-8,%3Csvg width='10' height='6' viewBox='0 0 10 6' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%23666'/%3E%3C/svg%3E") no-repeat right 1rem center;
+  background-size: 0.65rem auto;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  box-shadow: inset 0 1px 3px rgba(0,0,0,0.05);
+  transition: border-color 0.2s;
+}
+.filtros-selects select:hover,
+.filtros-selects select:focus {
+  border-color: var(--color-acento);
+  outline: none;
 }
 
 /* Modern grid layout */
@@ -228,4 +245,80 @@
   .modern-grid {
     grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
   }
+}
+
+/* --------------------------------------------------
+   Product Card Enhancements
+-------------------------------------------------- */
+/* Add "Destacado" badge based on data attribute */
+.producto-item[data-destacado="true"] {
+  position: relative;
+}
+.producto-item[data-destacado="true"]::before {
+  content: 'DESTACADO';
+  position: absolute;
+  top: 0.75rem;
+  left: 0.75rem;
+  background: var(--color-acento);
+  color: #fff;
+  padding: 0.25rem 0.5rem;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  border-radius: var(--border-radius);
+  z-index: 2;
+}
+
+/* Darken overlay on hover */
+.producto-item {
+  position: relative;
+  overflow: hidden;
+}
+.producto-item::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.15);
+  opacity: 0;
+  transition: opacity var(--transition);
+  z-index: 1;
+}
+.producto-item:hover::after {
+  opacity: 1;
+}
+
+/* Ensure content above overlay */
+.producto-item img,
+.producto-item h3,
+.producto-item .price {
+  position: relative;
+  z-index: 2;
+}
+
+/* Add smooth scale on hover for image */
+.producto-item img {
+  transition: transform var(--transition);
+}
+.producto-item:hover img {
+  transform: scale(1.05);
+}
+
+/* Action button reveal (if you add one later) */
+.producto-item .btn-primary {
+  position: absolute;
+  bottom: 1rem;
+  left: 50%;
+  transform: translateX(-50%) translateY(20px);
+  opacity: 0;
+  transition: opacity var(--transition), transform var(--transition);
+  z-index: 2;
+}
+.producto-item:hover .btn-primary {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
+
+/* Tighter grid gap for modern layout */
+.grid-productos,
+.modern-grid {
+  gap: 1rem;
 }
