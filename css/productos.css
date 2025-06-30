@@ -175,6 +175,9 @@
   .sorting {
     justify-content: flex-start;
   }
+  .filtros-selects {
+    grid-template-columns: 1fr;
+  }
 }
 /* --------------------------------------------------
    Modern Product Page Styles
@@ -204,17 +207,16 @@
   margin-bottom: 2rem;
 }
 .filtros-selects {
-  display: flex;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
   gap: 1rem;
-  flex-wrap: wrap;
-  justify-content: center;
-  align-items: center;
+  max-width: 800px;
+  margin: 0 auto;
 }
 .filtros-selects select {
-  flex: 1;
-  min-width: 180px;
-  max-width: 300px;
-  padding: 0.75rem 1.5rem;
+  width: 100%;
+  height: 3rem;
+  padding: 0 1rem;
   border: 1px solid #ddd;
   border-radius: var(--border-radius);
   font-family: var(--fuente-base);
@@ -223,15 +225,8 @@
   background: #fff url("data:image/svg+xml;charset=UTF-8,%3Csvg width='10' height='6' viewBox='0 0 10 6' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%23666'/%3E%3C/svg%3E") no-repeat right 1rem center;
   background-size: 0.65rem auto;
   appearance: none;
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  box-shadow: inset 0 1px 3px rgba(0,0,0,0.05);
-  transition: border-color 0.2s;
-}
-.filtros-selects select:hover,
-.filtros-selects select:focus {
-  border-color: var(--color-acento);
-  outline: none;
+  box-sizing: border-box;
+  transition: border-color var(--transition);
 }
 
 /* Modern grid layout */

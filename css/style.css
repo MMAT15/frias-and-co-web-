@@ -254,7 +254,26 @@ textarea:focus {
     }
     .nav-toggle {
       position: absolute;
+      left: 1rem;
+      top: 50%;
+      transform: translateY(-50%);
+      z-index: 1001;
+    }
+    .cart-toggle {
+      position: absolute;
       right: 1rem;
+      top: 50%;
+      transform: translateY(-50%);
+      z-index: 1001;
+    }
+
+    /* Center branding in mobile header */
+    .site-branding {
+      position: absolute;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      top: 50%;
+      z-index: 1002;
     }
   }
   
