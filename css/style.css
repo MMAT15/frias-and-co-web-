@@ -259,13 +259,13 @@ img {
 }
 .cart-toggle .cart-count {
   position: absolute;
-  top: 4px;
-  right: 4px;
+  top: 0;
+  right: 0;
   background: var(--color-acento);
   color: #fff;
-  font-size: 0.7rem;
-  width: 16px;
-  height: 16px;
+  font-size: 0.65rem;
+  width: 14px;
+  height: 14px;
   border-radius: 50%;
   display: flex;
   align-items: center;
@@ -286,6 +286,10 @@ img {
     display: inline-flex;      /* ensure cart icon is visible */
     position: static;          /* follow the header flex layout */
     margin: 0;                 /* reset any margins */
+  }
+  .site-header {
+    padding-top: calc(env(safe-area-inset-top) + 1rem);
+    padding-bottom: 0.5rem;
   }
   .header-inner {
     display: flex;
