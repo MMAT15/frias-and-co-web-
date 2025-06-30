@@ -4,17 +4,16 @@
   <meta charset="UTF-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>BERA clothing – Inicio</title>
-  <meta name="description" content="BERA clothing: moda urbana para jóvenes. Envíos a todo el país desde Berazategui centro." />
+  <title>BERA clothing – Newsletter</title>
+  <meta name="description" content="Suscríbete al newsletter de BERA clothing para recibir ofertas y novedades directamente en tu correo." />
   <link rel="icon" href="assets/images/favicon.ico" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
   <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="css/newsteller.css" />
 </head>
 <body>
-  <!-- Skip link -->
   <a href="#main-content" class="skip-link">Saltar al contenido</a>
 
   <!-- HEADER -->
@@ -27,7 +26,6 @@
           </div>
         </a>
         <h1 class="site-title">BERA clothing</h1>
-       <span class="site-tagline">By FRIAS</span>
       </div>
       <button class="nav-toggle"
               aria-controls="primary-navigation"
@@ -39,8 +37,8 @@
            role="navigation"
            aria-label="Menú principal">
         <ul class="nav-list">
-          <li><a href="index.html" class="active">Inicio</a></li>
-          <li><a href="newsteller.html">Newsletter</a></li>
+          <li><a href="index.html">Inicio</a></li>
+          <li><a href="newsteller.html" class="active">Newsletter</a></li>
           <li><a href="testimonios.html">Testimonios</a></li>
           <li><a href="contacto.html">Contacto</a></li>
         </ul>
@@ -48,42 +46,20 @@
     </div>
   </header>
 
-  <!-- HERO -->
-  <section id="hero" class="hero" role="region" aria-labelledby="hero-title">
-    <div class="hero-overlay"></div>
-    <div class="container hero-content">
-      <h2 id="hero-title" class="hero-title">Bienvenido a    <h1 class="site-title">BERA clothing</h1></h2>
-      <p class="hero-subtitle">Tu destino de moda urbana, 24/7</p>
-      <a href="productos.html" class="btn btn-primary">Ver Productos</a>
-    </div>
-  </section>
-
   <!-- MAIN CONTENT -->
   <main id="main-content">
-    <!-- FEATURED DEALS -->
-    <section id="featured" class="section section-featured" role="region" aria-labelledby="featured-title">
+    <section id="newsletter" class="section section-newsletter" role="region" aria-labelledby="newsletter-title">
       <div class="container">
-        <h2 id="featured-title" class="section-title">Ofertas Destacadas</h2>
-        <div class="grid-featured">
-          <div class="card featured-card animate-on-scroll">
-            <img src="assets/images/feat1.jpg" alt="Camisa Urbana - 20% OFF" loading="lazy" />
-            <h3>Camisa Urbana</h3>
-            <p class="price"><del>$1.500</del> $1.200</p>
+        <h2 id="newsletter-title" class="section-title">Newsletter</h2>
+        <p>Suscríbete para recibir en tu correo las últimas ofertas, lanzamientos y contenido exclusivo.</p>
+        <form id="form-newsletter" class="newsletter-form" aria-label="Formulario de suscripción">
+          <div class="form-group">
+            <label for="email-newsletter">Correo electrónico</label>
+            <input type="email" id="email-newsletter" name="email-newsletter" placeholder="tu@correo.com" required />
           </div>
-          <div class="card featured-card animate-on-scroll">
-            <img src="assets/images/feat2.jpg" alt="Jogger Cómodo - 15% OFF" loading="lazy" />
-            <h3>Jogger Cómodo</h3>
-            <p class="price"><del>$2.000</del> $1.700</p>
-          </div>
-          <div class="card featured-card animate-on-scroll">
-            <img src="assets/images/feat3.jpg" alt="Gorra Street - 25% OFF" loading="lazy" />
-            <h3>Gorra Street</h3>
-            <p class="price"><del>$800</del> $600</p>
-          </div>
-        </div>
-        <div class="text-center" style="margin-top:1rem;">
-          <a href="productos.html" class="btn btn-primary">Ver todas las ofertas</a>
-        </div>
+          <button type="submit" class="btn btn-primary">Suscribirme</button>
+        </form>
+        <p id="newsletter-response" class="form-response" aria-live="polite"></p>
       </div>
     </section>
   </main>
@@ -98,6 +74,7 @@
         By 
         <a href="https://instagram.com/melinaffrias" target="_blank" rel="noopener">@melinaffrias</a>,
         <a href="https://instagram.com/candelaffrias" target="_blank" rel="noopener">@candelaffrias</a>
+        | Shop online 24/7 🖤 | Envíos a todo el país ✈️ | Berazategui centro
       </p>
       <p>© 2025 BERA clothing. Todos los derechos reservados.</p>
     </div>

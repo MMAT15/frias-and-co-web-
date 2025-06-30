@@ -1,17 +1,20 @@
+
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
   <meta charset="UTF-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>BERA clothing – Inicio</title>
-  <meta name="description" content="BERA clothing: moda urbana para jóvenes. Envíos a todo el país desde Berazategui centro." />
+  <title>BERA clothing – Productos</title>
+  <meta name="description" content="Catálogo de productos de BERA clothing. Descubre nuestras prendas urbanas para jóvenes." />
   <link rel="icon" href="assets/images/favicon.ico" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
   <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="css/productos.css" />
 </head>
 <body>
   <!-- Skip link -->
@@ -27,7 +30,6 @@
           </div>
         </a>
         <h1 class="site-title">BERA clothing</h1>
-       <span class="site-tagline">By FRIAS</span>
       </div>
       <button class="nav-toggle"
               aria-controls="primary-navigation"
@@ -39,7 +41,7 @@
            role="navigation"
            aria-label="Menú principal">
         <ul class="nav-list">
-          <li><a href="index.html" class="active">Inicio</a></li>
+          <li><a href="index.html">Inicio</a></li>
           <li><a href="newsteller.html">Newsletter</a></li>
           <li><a href="testimonios.html">Testimonios</a></li>
           <li><a href="contacto.html">Contacto</a></li>
@@ -48,41 +50,37 @@
     </div>
   </header>
 
-  <!-- HERO -->
-  <section id="hero" class="hero" role="region" aria-labelledby="hero-title">
-    <div class="hero-overlay"></div>
-    <div class="container hero-content">
-      <h2 id="hero-title" class="hero-title">Bienvenido a    <h1 class="site-title">BERA clothing</h1></h2>
-      <p class="hero-subtitle">Tu destino de moda urbana, 24/7</p>
-      <a href="productos.html" class="btn btn-primary">Ver Productos</a>
-    </div>
-  </section>
-
   <!-- MAIN CONTENT -->
   <main id="main-content">
-    <!-- FEATURED DEALS -->
-    <section id="featured" class="section section-featured" role="region" aria-labelledby="featured-title">
+    <section id="productos" class="section section-productos" role="region" aria-labelledby="productos-title">
       <div class="container">
-        <h2 id="featured-title" class="section-title">Ofertas Destacadas</h2>
-        <div class="grid-featured">
-          <div class="card featured-card animate-on-scroll">
-            <img src="assets/images/feat1.jpg" alt="Camisa Urbana - 20% OFF" loading="lazy" />
+        <h2 id="productos-title" class="section-title">Nuestro Catálogo</h2>
+        <div class="grid-productos">
+          <div class="producto-item">
+            <img src="assets/images/prod1.jpg" alt="Camisa Urbana" loading="lazy" />
             <h3>Camisa Urbana</h3>
-            <p class="price"><del>$1.500</del> $1.200</p>
+            <p class="price">$1.200</p>
+            <a href="#" class="btn btn-secondary">Ver detalle</a>
           </div>
-          <div class="card featured-card animate-on-scroll">
-            <img src="assets/images/feat2.jpg" alt="Jogger Cómodo - 15% OFF" loading="lazy" />
+          <div class="producto-item">
+            <img src="assets/images/prod2.jpg" alt="Jogger Cómodo" loading="lazy" />
             <h3>Jogger Cómodo</h3>
-            <p class="price"><del>$2.000</del> $1.700</p>
+            <p class="price">$1.800</p>
+            <a href="#" class="btn btn-secondary">Ver detalle</a>
           </div>
-          <div class="card featured-card animate-on-scroll">
-            <img src="assets/images/feat3.jpg" alt="Gorra Street - 25% OFF" loading="lazy" />
+          <div class="producto-item">
+            <img src="assets/images/prod3.jpg" alt="Gorra Street" loading="lazy" />
             <h3>Gorra Street</h3>
-            <p class="price"><del>$800</del> $600</p>
+            <p class="price">$600</p>
+            <a href="#" class="btn btn-secondary">Ver detalle</a>
           </div>
-        </div>
-        <div class="text-center" style="margin-top:1rem;">
-          <a href="productos.html" class="btn btn-primary">Ver todas las ofertas</a>
+          <div class="producto-item">
+            <img src="assets/images/prod4.jpg" alt="Pantalón Cargo" loading="lazy" />
+            <h3>Pantalón Cargo</h3>
+            <p class="price">$2.200</p>
+            <a href="#" class="btn btn-secondary">Ver detalle</a>
+          </div>
+          <!-- Añade más .producto-item según catálogo -->
         </div>
       </div>
     </section>

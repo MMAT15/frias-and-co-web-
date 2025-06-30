@@ -1,0 +1,101 @@
+/* css/newsteller.css */
+
+/* Section styling */
+.section-newsletter {
+  padding: 4rem 0;
+  background-color: #f4f4f4;
+}
+.section-newsletter .section-title {
+  text-align: center;
+  margin-bottom: 2rem;
+  font-size: 2rem;
+  position: relative;
+}
+.section-newsletter .section-title::after {
+  content: '';
+  position: absolute;
+  bottom: -0.5rem;
+  left: 50%;
+  transform: translateX(-50%) scaleX(0);
+  width: 60px;
+  height: 4px;
+  background-color: var(--color-acento);
+  border-radius: 2px;
+  transition: transform var(--transition);
+}
+.section-newsletter .section-title:hover::after,
+.section-newsletter .section-title.animated::after {
+  transform: translateX(-50%) scaleX(1);
+}
+
+/* Newsletter form */
+.newsletter-form {
+  max-width: 500px;
+  margin: 0 auto;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  justify-content: center;
+  background-color: #fff;
+  padding: 2rem;
+  border-radius: var(--border-radius);
+  box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+  transition: transform var(--transition);
+}
+.newsletter-form:hover {
+  transform: translateY(-5px);
+}
+
+/* Form group */
+.newsletter-form .form-group {
+  flex: 1 1 100%;
+}
+.newsletter-form input[type="email"] {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  border: 1px solid #ccc;
+  border-radius: var(--border-radius);
+  font-family: var(--fuente-base);
+  transition: border-color var(--transition), box-shadow var(--transition);
+}
+.newsletter-form input[type="email"]:focus {
+  border-color: var(--color-acento);
+  box-shadow: 0 0 8px rgba(0,0,0,0.1);
+  outline: none;
+}
+
+/* Submit button */
+.newsletter-form button[type="submit"] {
+  background-color: var(--color-acento);
+  color: #fff;
+  padding: 0.75rem 2rem;
+  border: none;
+  border-radius: var(--border-radius);
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color var(--transition), transform var(--transition), box-shadow var(--transition);
+}
+.newsletter-form button[type="submit"]:hover {
+  background-color: #333;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+.newsletter-form button[type="submit"]:focus {
+  outline: 3px solid rgba(0,0,0,0.2);
+}
+
+/* Response message */
+.form-response {
+  margin-top: 1rem;
+  text-align: center;
+  font-style: italic;
+  min-height: 1.2em;
+  color: var(--color-principal);
+}
+
+/* Container consistency */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}

@@ -1,0 +1,92 @@
+/* css/contacto.css */
+
+/* Section styling */
+.section-contacto {
+  padding: 4rem 0;
+  background-color: #fafafa;
+}
+.section-contacto .section-title {
+  text-align: center;
+  margin-bottom: 2rem;
+  font-size: 2rem;
+  position: relative;
+}
+.section-contacto .section-title::after {
+  content: '';
+  display: block;
+  width: 60px;
+  height: 4px;
+  background-color: var(--color-acento);
+  margin: 0.5rem auto 0;
+}
+
+/* Contact form container */
+.contact-form {
+  max-width: 600px;
+  margin: 0 auto;
+  background: #fff;
+  padding: 2rem;
+  border-radius: var(--border-radius);
+  box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+  transition: transform var(--transition);
+}
+.contact-form:hover {
+  transform: scale(1.02);
+}
+
+/* Form groups */
+.contact-form .form-group {
+  margin-bottom: 1.5rem;
+}
+.contact-form label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: 600;
+}
+.contact-form input,
+.contact-form textarea {
+  width: 100%;
+  padding: 0.75rem;
+  border: 1px solid #ccc;
+  border-radius: var(--border-radius);
+  font-family: var(--fuente-base);
+  transition: border-color var(--transition), box-shadow var(--transition);
+}
+.contact-form input:focus,
+.contact-form textarea:focus {
+  border-color: var(--color-acento);
+  box-shadow: 0 0 5px rgba(0,0,0,0.1);
+  outline: none;
+}
+
+/* Submit button */
+.contact-form button[type="submit"] {
+  display: inline-block;
+  background-color: var(--color-acento);
+  color: #fff;
+  padding: 0.75rem 2rem;
+  border: none;
+  border-radius: var(--border-radius);
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color var(--transition), transform var(--transition);
+}
+.contact-form button[type="submit"]:hover {
+  background-color: darken(var(--color-acento), 10%);
+  transform: translateY(-2px);
+}
+
+/* Response message */
+.form-response {
+  margin-top: 1rem;
+  text-align: center;
+  font-style: italic;
+  min-height: 1.2em;
+}
+
+/* Accessibility and container consistency */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}

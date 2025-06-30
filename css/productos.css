@@ -1,0 +1,77 @@
+
+/* css/productos.css */
+
+/* Section styling */
+.section-productos {
+  padding: 4rem 0;
+  background-color: #fafafa;
+}
+.section-productos .section-title {
+  text-align: center;
+  margin-bottom: 2rem;
+  font-size: 2rem;
+  position: relative;
+}
+.section-productos .section-title::after {
+  content: '';
+  display: block;
+  width: 60px;
+  height: 4px;
+  background-color: var(--color-acento);
+  margin: 0.5rem auto 0;
+}
+
+/* Grid layout */
+.grid-productos {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 2rem;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+/* Product card */
+.producto-item {
+  background-color: #fff;
+  border-radius: var(--border-radius);
+  box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transition: transform var(--transition), box-shadow var(--transition);
+}
+.producto-item:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+}
+.producto-item img {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+}
+.producto-item h3 {
+  margin: 1rem;
+  font-size: 1.1rem;
+}
+.producto-item .price {
+  margin: 0 1rem 1rem;
+  font-weight: 600;
+  color: var(--color-acento);
+}
+.producto-item .btn-secondary {
+  margin: 0 1rem 1rem;
+}
+
+/* Container consistency */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+/* Responsive adjustments */
+@media (max-width: 600px) {
+  .grid-productos {
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  }
+}
