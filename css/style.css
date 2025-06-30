@@ -193,6 +193,16 @@
       gap: 1rem;
       padding: 1rem;
     }
+
+    /* Centrar "BERA clothing" en móvil */
+    .header-inner {
+      justify-content: center;
+      position: relative;
+    }
+    .nav-toggle {
+      position: absolute;
+      left: 1rem;
+    }
   }
   
   /* HERO CAROUSEL */
