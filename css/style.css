@@ -264,17 +264,22 @@ img {
 -------------------------------------------------- */
 @media (max-width: 768px) {
   /* .nav-toggle and .cart-toggle absolute rules removed for new layout */
+  .nav-toggle {
+    display: flex;             /* ensure hamburger is visible */
+    position: static;          /* follow the header flex layout */
+    margin: 0;                 /* reset any margins */
+  }
+  .cart-toggle {
+    display: inline-flex;      /* ensure cart icon is visible */
+    position: static;          /* follow the header flex layout */
+    margin: 0;                 /* reset any margins */
+  }
   .header-inner {
     display: flex;
     justify-content: space-between;
     align-items: center;
     position: relative;
     padding: 0 1rem;
-  }
-  .nav-toggle,
-  .cart-toggle {
-    position: static;
-    margin: 0;
   }
   .site-branding {
     position: static;
