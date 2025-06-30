@@ -886,14 +886,41 @@ img {
     background: var(--color-acento);
     transform: scale(1.05);
   }
+  /* --------------------------------------------------
+   Cart item layout and remove button styling
+-------------------------------------------------- */
+.cart-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.5rem 0;
+    border-bottom: 1px solid #eee;
+  }
   
-
-
- 
-
- 
-
-
-
-
-
+  .cart-item-info {
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
+    align-items: center;
+    flex: 1;
+  }
+  
+  .remove-item {
+    background: transparent;
+    border: none;
+    color: var(--color-acento);
+    font-size: 1.25rem;
+    line-height: 1;
+    cursor: pointer;
+    padding: 0;
+    transition: color var(--transition);
+  }
+  
+  .remove-item:hover {
+    color: #e00;
+  }
+  
+.text-center {
+  text-align: center;
+  margin-top: 1rem;
+}

@@ -269,12 +269,25 @@ document.addEventListener('DOMContentLoaded', () => {
       const row = document.createElement('div');
       row.className = 'cart-item';
       row.innerHTML = `
-        <div>${item.name} x${item.qty}</div>
-        <div>$${line.toFixed(2)}</div>
+        <div class="cart-item-info">
+          <span>${item.name} x${item.qty}</span>
+          <span>$${line.toFixed(2)}</span>
+        </div>
+        <button class="remove-item" data-id="${item.id}" aria-label="Eliminar ${item.name}">&times;</button>
       `;
       cartItemsContainer.appendChild(row);
     });
     cartTotalEl.textContent = `$${total.toFixed(2)}`;
+    // Attach remove handlers
+    cartItemsContainer.querySelectorAll('.remove-item').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const id = btn.dataset.id;
+        cart = cart.filter(i => i.id !== id);
+        saveCart();
+        updateCartCount();
+        renderCartPage();
+      });
+    });
   }
 
   // --------------------------------------------------
