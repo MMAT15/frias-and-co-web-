@@ -195,33 +195,70 @@
     }
   }
   
-  /* HERO */
-  .hero {
+  /* HERO CAROUSEL */
+  .swiper-hero {
     position: relative;
-    height: 60vh;
-    background: url('assets/images/hero.jpg') center/cover no-repeat;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
+    height: 70vh;
+    overflow: hidden;
   }
-  .hero-overlay {
+  .swiper-hero .swiper-container,
+  .swiper-hero .swiper-wrapper,
+  .swiper-hero .swiper-slide {
+    height: 100%;
+  }
+  .swiper-hero .swiper-slide {
+    position: relative;
+    background-size: cover;
+    background-position: center;
+  }
+  .swiper-hero .hero-overlay {
     position: absolute;
     inset: 0;
-    background-color: rgba(0,0,0,0.5);
+    background-color: rgba(0, 0, 0, 0.4);
+    z-index: 1;
   }
-  .hero-content {
+  .swiper-hero .hero-content {
     position: relative;
+    z-index: 2;
+    top: 50%;
+    transform: translateY(-50%);
     color: #fff;
-    max-width: 90%;
+    text-align: center;
+    padding: 0 1rem;
   }
-  .hero-title {
-    font-size: 2.5rem;
+  .swiper-hero .hero-title {
+    font-size: 3rem;
     margin-bottom: 0.5rem;
   }
-  .hero-subtitle {
-    font-size: 1.1rem;
+  .swiper-hero .hero-subtitle {
+    font-size: 1.25rem;
     margin-bottom: 1.5rem;
+  }
+  /* Pagination */
+  .swiper-hero .swiper-pagination {
+    position: absolute;
+    bottom: 1rem;
+    left: 0;
+    width: 100%;
+    text-align: center;
+    z-index: 3;
+  }
+  .swiper-hero .swiper-pagination-bullet {
+    background: #fff;
+    opacity: 0.7;
+  }
+  .swiper-hero .swiper-pagination-bullet-active {
+    opacity: 1;
+  }
+  /* Navigation buttons */
+  .swiper-hero .swiper-button-prev,
+  .swiper-hero .swiper-button-next {
+    color: #fff;
+    width: 2.5rem;
+    height: 2.5rem;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 3;
   }
   
   /* BOTONES */
@@ -468,7 +505,125 @@
     text-align: center;
     font-size: 0.9rem;
   }
-  .site-footer a {
+.site-footer a {
     color: var(--color-principal);
     margin: 0 0.25rem;
-  }
+}
+
+/* FEATURED DEALS (Index) */
+.section-featured {
+  padding: 4rem 0;
+  background-color: #fafafa;
+}
+.section-featured .section-title {
+  text-align: center;
+  margin-bottom: 2rem;
+  font-size: 2rem;
+  position: relative;
+}
+.section-featured .section-title::after {
+  content: '';
+  display: block;
+  width: 60px;
+  height: 4px;
+  background-color: var(--color-acento);
+  margin: 0.5rem auto 0;
+}
+.grid-featured {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 2rem;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+.featured-card {
+  background-color: #fff;
+  border-radius: var(--border-radius);
+  overflow: hidden;
+  text-align: center;
+  transition: transform var(--transition), box-shadow var(--transition);
+}
+.featured-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+}
+.featured-card img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  display: block;
+}
+.featured-card h3 {
+  margin: 1rem 0 0.5rem;
+  font-size: 1.1rem;
+}
+.featured-card .price {
+  margin-bottom: 1rem;
+  font-weight: 600;
+  color: var(--color-acento);
+} 
+
+/* --------------------------------------------------
+   Animaciones y efectos sutiles
+-------------------------------------------------- */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Aplicar fadeIn a header y footer */
+.site-header,
+.site-footer {
+  animation: fadeIn var(--transition) ease-in-out;
+}
+
+/* Efecto de elevación en botones al pasar el cursor */
+.btn-primary:hover,
+.btn-secondary:hover {
+  transform: translateY(-3px);
+}
+
+/* Subrayado animado en enlaces de navegación */
+.nav-list li a {
+  position: relative;
+}
+.nav-list li a::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: -4px;
+  width: 0;
+  height: 2px;
+  background-color: var(--color-acento);
+  transition: width var(--transition);
+}
+.nav-list li a:hover::after {
+  width: 100%;
+}
+
+/* Zoom suave en imágenes de productos y ofertas destacadas */
+.producto-item img,
+.featured-card img {
+  transition: transform var(--transition);
+}
+.producto-item:hover img,
+.featured-card:hover img {
+  transform: scale(1.05);
+}
+
+/* Instagram icon en footer */
+.instagram-icon {
+  width: 50px;
+  height: 50px;
+  display: inline-block;
+  vertical-align: middle;
+  transition: transform 0.3s;
+  margin-left: 0.5rem;
+}
+.instagram-icon img {
+  width: 100%;
+  height: 100%;
+}
+.instagram-icon:hover {
+  transform: scale(1.1);
+}
