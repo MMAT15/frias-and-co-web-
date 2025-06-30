@@ -139,3 +139,98 @@
   outline: 3px solid var(--color-acento);
   outline-offset: 2px;
 }
+/* Hero/Banner for Newsletter Page */
+.section-hero-newsletter {
+  background-color: var(--color-acento-sec);
+  color: #fff;
+  padding: 4rem 0;
+  text-align: center;
+}
+.section-hero-newsletter .section-title {
+  font-size: 2.5rem;
+  margin-bottom: 0.5rem;
+}
+.section-hero-newsletter .section-subtitle {
+  font-size: 1.125rem;
+  opacity: 0.9;
+}
+
+/* Layout for newsletter section */
+.newsletter-layout {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  align-items: start;
+  margin-top: 2rem;
+}
+@media (max-width: 768px) {
+  .newsletter-layout {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Info column */
+.newsletter-info {
+  padding-right: 1rem;
+}
+.newsletter-title {
+  font-size: 1.75rem;
+  margin-bottom: 0.75rem;
+}
+.newsletter-text {
+  font-size: 1rem;
+  color: var(--color-acento-sec);
+  line-height: 1.6;
+}
+
+/* Form column */
+.newsletter-form-wrap {
+  background: #fff;
+  padding: 2rem;
+  border-radius: var(--border-radius);
+  box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+}
+.newsletter-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+.form-label {
+  font-weight: 600;
+}
+.form-input {
+  padding: 0.75rem 1rem;
+  border: 1px solid #ccc;
+  border-radius: var(--border-radius);
+  font-size: 1rem;
+  transition: border-color var(--transition), box-shadow var(--transition);
+}
+.form-input:focus {
+  border-color: var(--color-acento);
+  box-shadow: 0 0 8px rgba(0,0,0,0.1);
+  outline: none;
+}
+.newsletter-btn {
+  align-self: flex-start;
+  background-color: var(--color-acento);
+  color: #fff;
+  padding: 0.75rem 2rem;
+  border: none;
+  border-radius: var(--border-radius);
+  cursor: pointer;
+  transition: filter var(--transition), transform var(--transition);
+}
+.newsletter-btn:hover {
+  filter: brightness(0.9);
+  transform: translateY(-2px);
+}
+.newsletter-btn:focus {
+  outline: 3px solid var(--color-acento);
+  outline-offset: 2px;
+}
+
+/* Response styling override if needed */
+#newsletter-response {
+  margin-top: 1rem;
+  font-style: italic;
+}

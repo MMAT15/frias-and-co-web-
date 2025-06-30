@@ -78,22 +78,29 @@
   </header>
   <!-- MAIN CONTENT -->
   <main id="main-content">
-    <section id="newsletter" class="section section-newsletter" role="region" aria-labelledby="newsletter-title">
-      <h1 class="visually-hidden">Suscripción al Newsletter de BERA clothing</h1>
+    <!-- Hero/Banner -->
+    <section class="section section-hero-newsletter">
       <div class="container">
-        <h2 id="newsletter-title" class="section-title">Novedades</h2>
-        <p>Suscríbete para recibir en tu correo las últimas ofertas, lanzamientos y contenido exclusivo.</p>
-        <form id="form-newsletter" class="newsletter-form" aria-label="Formulario de suscripción al newsletter" novalidate>
-          <fieldset>
-            <legend class="visually-hidden">Formulario de suscripción al newsletter</legend>
-            <div class="form-group">
-              <label for="email-newsletter">Correo electrónico</label>
-              <input type="email" id="email-newsletter" name="email" placeholder="tu@correo.com" required aria-required="true" />
-            </div>
-            <button type="submit" class="btn btn-primary">Suscribirme</button>
-          </fieldset>
-        </form>
-        <p id="newsletter-response" class="form-response" aria-live="polite"></p>
+        <h1 class="section-title">¡Entérate de Nuestras Novedades!</h1>
+        <p class="section-subtitle">Recibe en tu correo las últimas ofertas, lanzamientos y contenido exclusivo de BERA clothing.</p>
+      </div>
+    </section>
+
+    <!-- Newsletter Signup -->
+    <section id="newsletter" class="section section-newsletter" aria-labelledby="newsletter-title">
+      <div class="container newsletter-layout">
+        <div class="newsletter-info">
+          <h2 id="newsletter-title" class="newsletter-title">Suscríbete al Newsletter</h2>
+          <p class="newsletter-text">Únete a nuestra comunidad y no te pierdas ninguna novedad. Te mantendremos al tanto de promociones y lanzamientos.</p>
+        </div>
+        <div class="newsletter-form-wrap">
+          <form id="form-newsletter" class="newsletter-form" aria-label="Suscripción al newsletter" novalidate>
+            <label for="email-newsletter" class="form-label">Correo electrónico</label>
+            <input type="email" id="email-newsletter" name="email" class="form-input" placeholder="tucorreo@ejemplo.com" required aria-required="true" />
+            <button type="submit" class="btn btn-primary newsletter-btn">Suscribirme</button>
+            <p id="newsletter-response" class="form-response" aria-live="polite"></p>
+          </form>
+        </div>
       </div>
     </section>
   </main>
