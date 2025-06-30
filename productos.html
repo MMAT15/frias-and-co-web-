@@ -1,15 +1,9 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>BERA clothing – Productos</title>
-  <meta name="description" content="Catálogo de productos de BERA clothing. Descubre nuestras prendas urbanas para jóvenes." />
-  <link rel="icon" href="assets/images/favicon.ico" />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap" rel="stylesheet" />
+  <title>BERA clothing – Inicio</title>
   <link rel="stylesheet" href="css/style.css" />
   <link rel="stylesheet" href="css/productos.css" />
 </head>
@@ -27,21 +21,44 @@
           </div>
         </a>
         <h1 class="site-title">BERA clothing</h1>
-        <span class="site-tagline">By FRIAS</span>
+       <span class="site-tagline">By FRIAS</span>
       </div>
-      <button class="nav-toggle" aria-controls="primary-navigation" aria-expanded="false" aria-label="Abrir menú">
+      <button class="nav-toggle"
+              aria-controls="primary-navigation"
+              aria-expanded="false"
+              aria-label="Abrir menú">
         <span class="bar"></span><span class="bar"></span><span class="bar"></span>
       </button>
-      <nav id="primary-navigation" class="main-nav" role="navigation" aria-label="Menú principal">
+      <nav id="primary-navigation" class="main-nav"
+           role="navigation"
+           aria-label="Menú principal">
         <ul class="nav-list">
-          <li><a href="index.html">Inicio</a></li>
+          <li><a href="index.html" class="active">Inicio</a></li>
           <li><a href="newsteller.html">Novedades</a></li>
-          <li><a href="productos.html" class="active">Productos</a></li>
+          <li><a href="productos.html">Productos</a></li>
           <li><a href="contacto.html">Contacto</a></li>
         </ul>
       </nav>
+      <!-- Carrito de compras -->
+      <a href="#" class="cart-toggle" aria-label="Ver carrito">
+        <img src="assets/images/carrito.jpg"   alt="Carrito de compras" class="cart-icon">
+        <span class="cart-count" aria-live="polite">0</span>
+      </a>
     </div>
   </header>
+
+  <!-- Modal de Carrito -->
+  <div id="cart-modal" class="cart-modal hidden" role="dialog" aria-modal="true" aria-labelledby="cart-title">
+    <div class="cart-modal-content">
+      <button id="close-cart" class="cart-close" aria-label="Cerrar carrito">&times;</button>
+      <h2 id="cart-title" class="section-title">Mi Carrito</h2>
+      <div id="cart-items"></div>
+      <div class="cart-summary">
+        <p>Total: <strong id="cart-total">$0</strong></p>
+        <button id="checkout-btn" class="btn btn-primary">Finalizar compra</button>
+      </div>
+    </div>
+  </div>
 
   <!-- MAIN CONTENT -->
   <main id="main-content">
@@ -89,26 +106,62 @@
           <div class="producto-item" data-tipo="buzo" data-talle="m" data-precio="1200">
             <img src="assets/images/buzo.jpg" alt="Buzo Gris">
             <h3>Buzo Gris</h3><p class="price">$1.200</p>
+            <button class="add-to-cart-btn btn btn-secondary"
+                    data-id="buzo-gris"
+                    data-name="Buzo Gris"
+                    data-price="1200">
+              Añadir al carrito
+            </button>
           </div>
           <div class="producto-item" data-tipo="buzo" data-talle="l" data-precio="1500">
             <img src="assets/images/over.jpg" alt="Buzo Over">
             <h3>Buzo Over</h3><p class="price">$1.500</p>
+            <button class="add-to-cart-btn btn btn-secondary"
+                    data-id="buzo-over"
+                    data-name="Buzo Over"
+                    data-price="1500">
+              Añadir al carrito
+            </button>
           </div>
           <div class="producto-item" data-tipo="pantalon" data-talle="m" data-precio="2000">
             <img src="assets/images/rosa.jpg" alt="Pantalón Rosa">
             <h3>Pantalón Rosa</h3><p class="price">$2.000</p>
+            <button class="add-to-cart-btn btn btn-secondary"
+                    data-id="pantalon-rosa"
+                    data-name="Pantalón Rosa"
+                    data-price="2000">
+              Añadir al carrito
+            </button>
           </div>
           <div class="producto-item" data-tipo="pantalon" data-talle="l" data-precio="2200">
             <img src="assets/images/gris.jpg" alt="Pantalón Gris">
             <h3>Pantalón Gris</h3><p class="price">$2.200</p>
+            <button class="add-to-cart-btn btn btn-secondary"
+                    data-id="pantalon-gris"
+                    data-name="Pantalón Gris"
+                    data-price="2200">
+              Añadir al carrito
+            </button>
           </div>
           <div class="producto-item" data-tipo="remera" data-talle="s" data-precio="800">
             <img src="assets/images/shift.jpg" alt="Remera Shift">
             <h3>Remera Shift</h3><p class="price">$800</p>
+            <button class="add-to-cart-btn btn btn-secondary"
+                    data-id="remera-shift"
+                    data-name="Remera Shift"
+                    data-price="800">
+              Añadir al carrito
+            </button>
           </div>
           <div class="producto-item" data-tipo="remera" data-talle="m" data-precio="900">
             <img src="assets/images/dibujo.jpg" alt="Remera Dibujo">
             <h3>Remera Dibujo</h3><p class="price">$900</p>
+            <button class="add-to-cart-btn btn btn-secondary"
+                    data-id="remera-dibujo"
+                    data-name="Remera Dibujo"
+                    data-price="900">
+              Añadir al carrito
+            </button>
           </div>
         </div>
       </div>

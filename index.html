@@ -12,9 +12,11 @@
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
   <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="css/productos.css" />
 
 </head>
 <body>
+      
   <!-- Skip link -->
   <a href="#main-content" class="skip-link">Saltar al contenido</a>
 
@@ -46,9 +48,25 @@
           <li><a href="contacto.html">Contacto</a></li>
         </ul>
       </nav>
+      <!-- Carrito de compras -->
+      <a href="#" class="cart-toggle" aria-label="Ver carrito">
+        <img src="assets/images/carrito.jpg" alt="Carrito de compras" class="cart-icon">
+        <span class="cart-count" aria-live="polite">0</span>
+      </a>
     </div>
   </header>
-
+<!-- Modal de Carrito -->
+<div id="cart-modal" class="cart-modal hidden" role="dialog" aria-modal="true" aria-labelledby="cart-title">
+    <div class="cart-modal-content">
+      <button id="close-cart" class="cart-close" aria-label="Cerrar carrito">&times;</button>
+      <h2 id="cart-title" class="section-title">Mi Carrito</h2>
+      <div id="cart-items"></div>
+      <div class="cart-summary">
+        <p>Total: <strong id="cart-total">$0</strong></p>
+        <button id="checkout-btn" class="btn btn-primary">Finalizar compra</button>
+      </div>
+    </div>
+  </div>
   <!-- HERO -->
   <section id="hero" class="hero swiper-hero" role="region" aria-label="Hero carousel">
     <h1 class="visually-hidden">Bienvenido a BERA clothing</h1>
@@ -139,31 +157,67 @@
             <img src="assets/images/gris.jpg" alt="Prueba Gris" loading="lazy" />
             <h3>Prueba Gris</h3>
             <p class="price">$1.000</p>
+            <button class="add-to-cart-btn btn btn-secondary"
+                    data-id="featured-gris"
+                    data-name="Prueba Gris"
+                    data-price="1000">
+              Añadir al carrito
+            </button>
           </div>
           <div class="card featured-card animate-on-scroll">
             <img src="assets/images/buzo.jpg" alt="Prueba Buzo" loading="lazy" />
             <h3>Prueba Buzo</h3>
             <p class="price">$1.200</p>
+            <button class="add-to-cart-btn btn btn-secondary"
+                    data-id="featured-buzo"
+                    data-name="Prueba Buzo"
+                    data-price="1200">
+              Añadir al carrito
+            </button>
           </div>
           <div class="card featured-card animate-on-scroll">
             <img src="assets/images/over.jpg" alt="Prueba Over" loading="lazy" />
             <h3>Prueba Over</h3>
             <p class="price">$1.300</p>
+            <button class="add-to-cart-btn btn btn-secondary"
+                    data-id="featured-over"
+                    data-name="Prueba Over"
+                    data-price="1300">
+              Añadir al carrito
+            </button>
           </div>
           <div class="card featured-card animate-on-scroll">
             <img src="assets/images/shift.jpg" alt="Prueba Shift" loading="lazy" />
             <h3>Prueba Shift</h3>
             <p class="price">$1.400</p>
+            <button class="add-to-cart-btn btn btn-secondary"
+                    data-id="featured-shift"
+                    data-name="Prueba Shift"
+                    data-price="1400">
+              Añadir al carrito
+            </button>
           </div>
           <div class="card featured-card animate-on-scroll">
             <img src="assets/images/rosa.jpg" alt="Prueba Rosa" loading="lazy" />
             <h3>Prueba Rosa</h3>
             <p class="price">$1.500</p>
+            <button class="add-to-cart-btn btn btn-secondary"
+                    data-id="featured-rosa"
+                    data-name="Prueba Rosa"
+                    data-price="1500">
+              Añadir al carrito
+            </button>
           </div>
           <div class="card featured-card animate-on-scroll">
             <img src="assets/images/dibujo.jpg" alt="Prueba Dibujo" loading="lazy" />
             <h3>Prueba Dibujo</h3>
             <p class="price">$1.600</p>
+            <button class="add-to-cart-btn btn btn-secondary"
+                    data-id="featured-dibujo"
+                    data-name="Prueba Dibujo"
+                    data-price="1600">
+              Añadir al carrito
+            </button>
           </div>
         </div>
         <div class="text-center" style="margin-top:1rem;">

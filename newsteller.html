@@ -4,16 +4,18 @@
   <meta charset="UTF-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>BERA clothing – Newsletter</title>
-  <meta name="description" content="Suscríbete al newsletter de BERA clothing para recibir ofertas y novedades directamente en tu correo." />
+  <title>BERA clothing – Inicio</title>
+  <meta name="description" content="BERA clothing: moda urbana para jóvenes. Envíos a todo el país desde Berazategui centro." />
   <link rel="icon" href="assets/images/favicon.ico" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
   <link rel="stylesheet" href="css/style.css" />
-  <link rel="stylesheet" href="css/newsteller.css" />
+
 </head>
 <body>
+  <!-- Skip link -->
   <a href="#main-content" class="skip-link">Saltar al contenido</a>
 
   <!-- HEADER -->
@@ -26,6 +28,7 @@
           </div>
         </a>
         <h1 class="site-title">BERA clothing</h1>
+       <span class="site-tagline">By FRIAS</span>
       </div>
       <button class="nav-toggle"
               aria-controls="primary-navigation"
@@ -37,15 +40,19 @@
            role="navigation"
            aria-label="Menú principal">
         <ul class="nav-list">
-          <li><a href="index.html">Inicio</a></li>
-          <li><a href="newsteller.html" class="active">Novedades</a></li>
+          <li><a href="index.html" class="active">Inicio</a></li>
+          <li><a href="newsteller.html">Novedades</a></li>
           <li><a href="productos.html">Productos</a></li>
           <li><a href="contacto.html">Contacto</a></li>
         </ul>
       </nav>
+      <!-- Carrito de compras -->
+      <a href="cart.html" class="cart-toggle" aria-label="Ver carrito">
+        <img src="assets/images/carrito.jpg" alt="Carrito de compras" class="cart-icon">
+        <span class="cart-count" aria-live="polite">0</span>
+      </a>
     </div>
   </header>
-
   <!-- MAIN CONTENT -->
   <main id="main-content">
     <section id="newsletter" class="section section-newsletter" role="region" aria-labelledby="newsletter-title">

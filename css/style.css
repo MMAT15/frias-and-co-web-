@@ -708,3 +708,81 @@ textarea:focus {
   font-size: 0.875rem;
   color: var(--color-acento-sec);
 }
+
+/* -------------------------------
+   Cart icon in header (updated)
+------------------------------- */
+.cart-toggle {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  margin-left: 1rem;
+  background: var(--color-fondo);
+  border: 1px solid var(--color-acento-sec);
+  border-radius: 50%;
+  transition: background var(--transition), transform var(--transition);
+  cursor: pointer;
+}
+.cart-toggle:hover {
+  background: var(--color-acento);
+  transform: scale(1.1);
+}
+.cart-toggle .cart-icon {
+  width: 24px;
+  height: 24px;
+  transition: filter var(--transition);
+  filter: invert(0.1) sepia(1) saturate(5) hue-rotate(180deg);
+}
+.cart-toggle:hover .cart-icon {
+  filter: invert(1) sepia(0);
+}
+.cart-toggle .cart-count {
+  position: absolute;
+  top: -6px;
+  right: -6px;
+  background: var(--color-acento);
+  color: #fff;
+  font-size: 0.75rem;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+}
+/* Modal Carrito */
+.hidden {
+    display: none !important;
+  }
+  .cart-modal {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 2000;
+  }
+  .cart-modal-content {
+    background: #fff;
+    padding: 2rem;
+    width: 90%;
+    max-width: 500px;
+    border-radius: var(--border-radius);
+    position: relative;
+    max-height: 80vh;
+    overflow-y: auto;
+  }
+  .cart-close {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+  }

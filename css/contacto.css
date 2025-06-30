@@ -1,5 +1,3 @@
-
-
 /* --------------------------------------------------
    Contact Page Styles
 -------------------------------------------------- */
@@ -104,4 +102,92 @@
   margin-top: 1rem;
   border-radius: var(--border-radius);
   overflow: hidden;
+}
+
+/* --------------------------------------------------
+   Contact Page Improvements
+-------------------------------------------------- */
+/* Section title and intro */
+.section-contacto .section-title {
+  text-align: center;
+  font-size: 2rem;
+  margin-bottom: 1rem;
+  position: relative;
+}
+.section-contacto .intro-text {
+  text-align: center;
+  color: var(--color-acento-sec);
+  margin-bottom: 2rem;
+}
+
+/* Form and info wrappers */
+.contact-form-wrap,
+.contact-info {
+  width: 100%;
+}
+.contact-form-wrap {
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+/* Contact info list spacing */
+.contact-info ul li {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+.contact-info ul li strong {
+  flex-shrink: 0;
+  width: 6rem;
+}
+
+/* Adjust map to fill width */
+.map-container iframe {
+  width: 100%;
+  height: 250px;
+  border-radius: var(--border-radius);
+  border: 0;
+}
+
+/* Responsive tweaks */
+@media (max-width: 768px) {
+  .contact-form-wrap {
+    padding: 1rem 0;
+  }
+  .contact-info {
+    margin-top: 2rem;
+  }
+}
+
+/* Contact info list with icons */
+.contact-list {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 2rem;
+}
+.contact-list li {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+.contact-list .icon {
+  flex-shrink: 0;
+  width: 24px;
+  height: 24px;
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+.icon-location { background-image: url("../assets/icons/location.svg"); }
+.icon-phone    { background-image: url("../assets/icons/phone.svg"); }
+.icon-mail     { background-image: url("../assets/icons/mail.svg"); }
+.icon-clock    { background-image: url("../assets/icons/clock.svg"); }
+.contact-list strong {
+  display: block;
+  font-weight: 600;
+  margin-bottom: 0.25rem;
+}
+.contact-list p {
+  margin: 0;
+  font-size: 0.9rem;
 }

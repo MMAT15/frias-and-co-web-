@@ -4,14 +4,15 @@
   <meta charset="UTF-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>BERA clothing – Contacto</title>
-  <meta name="description" content="Contacto de BERA clothing. Escríbenos para consultas, pedidos o sugerencias." />
+  <title>BERA clothing – Inicio</title>
+  <meta name="description" content="BERA clothing: moda urbana para jóvenes. Envíos a todo el país desde Berazategui centro." />
   <link rel="icon" href="assets/images/favicon.ico" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
   <link rel="stylesheet" href="css/style.css" />
-  <link rel="stylesheet" href="css/contacto.css" />
+
 </head>
 <body>
   <!-- Skip link -->
@@ -27,19 +28,29 @@
           </div>
         </a>
         <h1 class="site-title">BERA clothing</h1>
-        <span class="site-tagline">By FRIAS</span>
+       <span class="site-tagline">By FRIAS</span>
       </div>
-      <button class="nav-toggle" aria-controls="primary-navigation" aria-expanded="false" aria-label="Abrir menú">
+      <button class="nav-toggle"
+              aria-controls="primary-navigation"
+              aria-expanded="false"
+              aria-label="Abrir menú">
         <span class="bar"></span><span class="bar"></span><span class="bar"></span>
       </button>
-      <nav id="primary-navigation" class="main-nav" role="navigation" aria-label="Menú principal">
+      <nav id="primary-navigation" class="main-nav"
+           role="navigation"
+           aria-label="Menú principal">
         <ul class="nav-list">
-          <li><a href="index.html">Inicio</a></li>
+          <li><a href="index.html" class="active">Inicio</a></li>
           <li><a href="newsteller.html">Novedades</a></li>
           <li><a href="productos.html">Productos</a></li>
-          <li><a href="contacto.html" class="active">Contacto</a></li>
+          <li><a href="contacto.html">Contacto</a></li>
         </ul>
       </nav>
+      <!-- Carrito de compras -->
+      <a href="cart.html" class="cart-toggle" aria-label="Ver carrito">
+        <img src="assets/images/carrito.jpg" alt="Carrito de compras" class="cart-icon">
+        <span class="cart-count" aria-live="polite">0</span>
+      </a>
     </div>
   </header>
 

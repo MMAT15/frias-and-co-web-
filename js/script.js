@@ -1,6 +1,9 @@
 // js/script.js
 
 document.addEventListener('DOMContentLoaded', () => {
+  console.log('🔥 script.js cargado y DOM listo');
+  console.log('Add-to-cart buttons:', document.querySelectorAll('.add-to-cart-btn').length);
+  console.log('Cart toggle exists:', !!document.querySelector('.cart-toggle'));
   // Throttle helper
   function throttle(fn, wait) {
     let last = 0;
@@ -25,7 +28,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // SMOOTH SCROLL FOR IN-PAGE LINKS
-  document.querySelectorAll('a[href^="#"]').forEach(link => {
+  document.querySelectorAll('a[href^="#"]:not([href="#"])').forEach(link => {
     link.addEventListener('click', e => {
       const targetId = link.getAttribute('href');
       const target = document.querySelector(targetId);
@@ -164,47 +167,136 @@ document.addEventListener('DOMContentLoaded', () => {
   // --------------------------------------------------
   // PRODUCTS FILTERING AND SORTING (Modern)
   // --------------------------------------------------
-  const filterTipo = document.getElementById('filter-tipo');
-  const filterTalle = document.getElementById('filter-talle');
-  const sortBySelect = document.getElementById('sort-by');
   const productsGrid = document.getElementById('products-grid');
-  const productItems = Array.from(productsGrid.children);
+  if (productsGrid) {
+    const filterTipo = document.getElementById('filter-tipo');
+    const filterTalle = document.getElementById('filter-talle');
+    const sortBySelect = document.getElementById('sort-by');
+    const productItems = Array.from(productsGrid.children);
 
-  function applyFilters() {
-    const tipoVal = filterTipo.value;
-    const talleVal = filterTalle.value;
-    const sortBy = sortBySelect.value;
+    function applyFilters() {
+      const tipoVal = filterTipo.value;
+      const talleVal = filterTalle.value;
+      const sortBy = sortBySelect.value;
 
-    let filtered = productItems.filter(item => {
-      const tipo = item.dataset.tipo;
-      const talle = item.dataset.talle;
-      return (!tipoVal || tipo === tipoVal) &&
-             (!talleVal || talle === talleVal);
-    });
+      let filtered = productItems.filter(item => {
+        const tipo = item.dataset.tipo;
+        const talle = item.dataset.talle;
+        return (!tipoVal || tipo === tipoVal) &&
+               (!talleVal || talle === talleVal);
+      });
 
-    // Sorting
-    filtered.sort((a, b) => {
-      const pa = parseFloat(a.dataset.precio) || 0;
-      const pb = parseFloat(b.dataset.precio) || 0;
-      switch (sortBy) {
-        case 'precio-asc': return pa - pb;
-        case 'precio-desc': return pb - pa;
-        case 'nuevos':
-        case 'relevancia': 
-        default: return 0;
-      }
-    });
+      // Sorting
+      filtered.sort((a, b) => {
+        const pa = parseFloat(a.dataset.precio) || 0;
+        const pb = parseFloat(b.dataset.precio) || 0;
+        switch (sortBy) {
+          case 'precio-asc': return pa - pb;
+          case 'precio-desc': return pb - pa;
+          case 'nuevos':
+          case 'relevancia': 
+          default: return 0;
+        }
+      });
 
-    // Render filtered + sorted items
-    productsGrid.innerHTML = '';
-    filtered.forEach(item => productsGrid.appendChild(item));
+      // Render filtered + sorted items
+      productsGrid.innerHTML = '';
+      filtered.forEach(item => productsGrid.appendChild(item));
+    }
+
+    // Event listeners
+    filterTipo.addEventListener('change', applyFilters);
+    filterTalle.addEventListener('change', applyFilters);
+    sortBySelect.addEventListener('change', applyFilters);
+
+    // Initial render
+    applyFilters();
   }
 
-  // Event listeners
-  filterTipo.addEventListener('change', applyFilters);
-  filterTalle.addEventListener('change', applyFilters);
-  sortBySelect.addEventListener('change', applyFilters);
+  // --------------------------------------------------
+  // SHOPPING CART FUNCTIONALITY
+  // --------------------------------------------------
+  const cartToggleCount = document.querySelector('.cart-count');
+  let cart = JSON.parse(localStorage.getItem('cart')) || [];
 
-  // Initial render
-  applyFilters();
-});
+  function updateCartCount() {
+    const totalCount = cart.reduce((sum, item) => sum + item.qty, 0);
+    if (cartToggleCount) cartToggleCount.textContent = totalCount;
+  }
+
+  function saveCart() {
+    localStorage.setItem('cart', JSON.stringify(cart));
+  }
+
+  function addToCart(product) {
+    const existing = cart.find(item => item.id === product.id);
+    if (existing) {
+      existing.qty += 1;
+    } else {
+      cart.push({ ...product, qty: 1 });
+    }
+    saveCart();
+    updateCartCount();
+  }
+
+  // Attach add-to-cart buttons if present
+  document.querySelectorAll('.add-to-cart-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const product = {
+        id: btn.dataset.id,
+        name: btn.dataset.name,
+        price: parseFloat(btn.dataset.price) || 0
+      };
+      addToCart(product);
+    });
+  });
+
+  // Initialize cart count on page load
+  updateCartCount();
+
+  // --------------------------------------------------
+  // RENDER CART IN MODAL
+  // --------------------------------------------------
+  const cartItemsContainer = document.getElementById('cart-items');
+  const cartTotalEl         = document.getElementById('cart-total');
+  function renderCartPage() {
+    if (!cartItemsContainer) return;
+    cartItemsContainer.innerHTML = '';
+    let total = 0;
+    cart.forEach(item => {
+      const line = item.price * item.qty;
+      total += line;
+      const row = document.createElement('div');
+      row.className = 'cart-item';
+      row.innerHTML = `
+        <div>${item.name} x${item.qty}</div>
+        <div>$${line.toFixed(2)}</div>
+      `;
+      cartItemsContainer.appendChild(row);
+    });
+    cartTotalEl.textContent = `$${total.toFixed(2)}`;
+  }
+
+  // --------------------------------------------------
+  // SHOW/HIDE CART MODAL
+  // --------------------------------------------------
+  const cartToggle = document.querySelector('.cart-toggle');
+  const cartModal  = document.getElementById('cart-modal');
+  const closeCart  = document.getElementById('close-cart');
+
+  if (cartToggle && cartModal) {
+    cartToggle.addEventListener('click', e => {
+      e.preventDefault();
+      updateCartCount();   // opcional, refresca el badge
+      renderCartPage();    // rellena la lista en el modal
+      cartModal.classList.remove('hidden');
+    });
+    closeCart.addEventListener('click', () => {
+      cartModal.classList.add('hidden');
+    });
+    cartModal.addEventListener('click', e => {
+      if (e.target === cartModal) cartModal.classList.add('hidden');
+    });
+  }
+
+}); // fin DOMContentLoaded
