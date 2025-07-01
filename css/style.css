@@ -1104,7 +1104,7 @@ img {
 /* (opcional) Si quieres que el título del header y el botón “BeraClothing”
    no se pisen visualmente, dales estilos distintos: */
 .site-branding .site-title{
-  color:#007aff;          /* azul marca */
+  color:#0c1620;          /* azul marca */
   font-size:1.35rem;
   letter-spacing:.1em;
 }
@@ -1113,3 +1113,63 @@ img {
   font-weight:600;
 }
 .collection-toggle:hover{ color:#007aff; }
+/* ---------- LOOK & FEEL GENERAL ---------- */
+
+/* Panel con esquinas redondeadas y sombra suave */
+.collection-menu{
+  border-top-right-radius:12px;
+  border-bottom-right-radius:12px;
+  box-shadow:4px 0 14px rgba(0,0,0,.22);
+}
+
+/* Aumenta aire interior */
+.collection-menu{
+  padding:2rem 1.75rem;
+}
+
+/* Título de bloque */
+.collection-heading{
+  font-size:1.35rem;
+  font-weight:600;
+  margin-bottom:1rem;
+  border-bottom:2px solid var(--brand-accent);
+  padding-bottom:.25rem;
+}
+
+/* ---------- LISTA DE ÍTEMS ---------- */
+
+/* Separadores sutiles y más espacio */
+.collection-list li+li{
+  margin-top:1.1rem;               /* aire vertical */
+  padding-top:1.1rem;
+  border-top:1px solid #ececec;    /* línea divisoria ligera */
+}
+
+/* Link con micro-interacción */
+.collection-list a{
+  font-size:1.05rem;
+  letter-spacing:.2px;
+}
+.collection-list a:active{         /* toque en móvil */
+  transform:translateX(4px) scale(.97);
+}
+
+/* ---------- BOTONES Y OVERLAY ---------- */
+
+/* Botón "×" con área clic ampliada */
+.collection-close{
+  padding:.3rem .6rem;
+  border:1px solid transparent;
+  border-radius:50%;
+}
+.collection-close:hover{
+  border-color:var(--brand-accent);
+}
+
+/* Overlay con degradado lateral para mayor profundidad */
+.collection-overlay::before{
+  content:'';
+  position:absolute;
+  inset:0;
+  background:linear-gradient(90deg,rgba(0,0,0,.55) 0%,rgba(0,0,0,.25) 40%,transparent 100%);
+}
