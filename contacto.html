@@ -37,6 +37,16 @@
               aria-label="Abrir menú">
         <span class="bar"></span><span class="bar"></span><span class="bar"></span>
       </button>
+          <!-- Botón que abre el menú de colecciones -->
+<button class="collection-toggle" aria-expanded="false" aria-controls="collection-menu">
+<svg width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Texto "Catálogo" arriba -->
+  <text x="32" y="14" text-anchor="middle" font-size="7" font-family="Arial, sans-serif" fill="#000000">Catálogo</text>
+  
+  <!-- Percha -->
+  <path d="M32 20C29.79 20 28 21.79 28 24C28 25.86 29.28 27.43 31 27.9V30.17L14.59 46.59C13.21 47.97 14.17 50.25 16.09 50.25H47.91C49.83 50.25 50.79 47.97 49.41 46.59L33 30.17V27.9C34.72 27.43 36 25.86 36 24C36 21.79 34.21 20 32 20ZM32 22C33.1 22 34 22.9 34 24C34 25.1 33.1 26 32 26C30.9 26 30 25.1 30 24C30 22.9 30.9 22 32 22ZM16.91 48.25L32 33.17L47.09 48.25H16.91Z" fill="#000000"/>
+</svg>
+</button>
       <nav id="primary-navigation" class="main-nav"
            role="navigation"
            aria-label="Menú principal">
@@ -162,5 +172,25 @@
   <!-- SCRIPTS -->
   <script src="https://unpkg.com/swiper/swiper-bundle.min.js" defer></script>
   <script src="js/script.js" defer></script>
+  <!-- Off-canvas con las categorías -->
+<aside id="collection-menu" class="collection-menu" aria-hidden="true">
+  <button id="collection-close" class="collection-close" aria-label="Cerrar menú">×</button>
+
+  <nav class="collection-nav" role="navigation" aria-label="Categorías de ropa">
+    <h2 class="collection-heading">CLOTHING ▾</h2>
+    <ul class="collection-list">
+      <li><a href="productos.html?cat=all">Ver todo en CLOTHING</a></li>
+      <li><a href="productos.html?cat=remeras">Remeras</a></li>
+      <li><a href="productos.html?cat=tops">Tops / Blusas</a></li>
+      <li><a href="productos.html?cat=camisas">Camisas</a></li>
+      <li><a href="productos.html?cat=shorts">Shorts / Minis</a></li>
+      <li><a href="productos.html?cat=pantalones">Pantalones</a></li>
+      <li><a href="productos.html?cat=buzos">Buzos y Sweaters</a></li>
+      <li><a href="productos.html?cat=sets">Sets</a></li>
+      <li><a href="productos.html?cat=abrigos">Abrigos</a></li>
+      <li><a href="productos.html?cat=vestidos">Vestidos y Monos</a></li>
+    </ul>
+  </nav>
+</aside>
 </body>
 </html>

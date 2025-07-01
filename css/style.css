@@ -1173,3 +1173,22 @@ img {
   inset:0;
   background:linear-gradient(90deg,rgba(0,0,0,.55) 0%,rgba(0,0,0,.25) 40%,transparent 100%);
 }
+/* ---------- BOTÓN CATÁLOGO ---------- */
+.catalog-btn{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  margin-left:.5rem;          /* separa del logo / menú */
+}
+
+.catalog-icon{
+  width:32px;                 /* mismo alto aprox. que tu logo */
+  height:32px;
+  object-fit:contain;
+  transition:transform .2s ease;
+}
+
+/* micro-interacción */
+.catalog-btn:hover .catalog-icon{
+  transform:scale(1.1);
+}

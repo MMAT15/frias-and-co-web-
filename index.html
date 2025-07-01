@@ -40,7 +40,24 @@
       </button>
     <!-- Botón que abre el menú de colecciones -->
 <button class="collection-toggle" aria-expanded="false" aria-controls="collection-menu">
-   ¶
+<svg width="64" height="64" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
+  <!-- Marco exterior -->
+  <rect x="4" y="4" width="56" height="56" rx="6" stroke="#000000" stroke-width="2" fill="none"/>
+
+  <!-- Gancho (curva suave a la izquierda) -->
+  <path d="M32 24
+           C32 20 28 20 28 24
+           C28 26 30 27.5 32 28"
+        fill="none" stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <!-- Cuerpo de la percha -->
+  <path d="M16 40 L32 28 L48 40" fill="none"
+        stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <!-- Texto "Catálogo" -->
+  <text x="32" y="52" text-anchor="middle" font-size="10"
+        font-family="Arial, sans-serif" fill="#000000">Catálogo</text>
+</svg>
 </button>
       <nav id="primary-navigation" class="main-nav"
            role="navigation"
