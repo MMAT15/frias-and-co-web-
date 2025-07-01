@@ -1088,3 +1088,28 @@ img {
   transition:color .25s;
 }
 .collection-toggle:hover{color:var(--brand-accent);}
+/* ---------- RE-HABILITAR EL TEXTO DE MARCA ---------- */
+
+/* 1. Header: mostrar de nuevo el H1 azul */
+@media (max-width:768px){
+  /* Anula la regla anterior pero sólo dentro del header */
+  .site-branding .site-title{ display:block; }
+}
+
+/* 2. Hero: asegurar que el span interno se vea siempre */
+.hero-title .site-title{               /* “Bienvenido a BERA clothing” */
+  display:inline;
+}
+
+/* (opcional) Si quieres que el título del header y el botón “BeraClothing”
+   no se pisen visualmente, dales estilos distintos: */
+.site-branding .site-title{
+  color:#007aff;          /* azul marca */
+  font-size:1.35rem;
+  letter-spacing:.1em;
+}
+.collection-toggle{       /* botón que abre el off-canvas */
+  color:#000;
+  font-weight:600;
+}
+.collection-toggle:hover{ color:#007aff; }
