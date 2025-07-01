@@ -23,6 +23,47 @@ document.addEventListener('DOMContentLoaded', () => {
       navToggle.setAttribute('aria-expanded', open);
     });
   }
+  // COLLECTION MENU (BeraClothing)
+const collectionToggle  = document.querySelector('.collection-toggle');
+const collectionMenu    = document.getElementById('collection-menu');
+const collectionOverlay = document.getElementById('collection-overlay');
+const collectionClose   = document.getElementById('collection-close');
+
+if (collectionToggle && collectionMenu && collectionOverlay && collectionClose) {
+  const openMenu  = () => {
+    collectionMenu.classList.add('show');
+    collectionOverlay.classList.add('show');
+    collectionToggle.setAttribute('aria-expanded', 'true');
+    collectionMenu.setAttribute('aria-hidden', 'false');
+  };
+
+  const closeMenu = () => {
+    collectionMenu.classList.remove('show');
+    collectionOverlay.classList.remove('show');
+    collectionToggle.setAttribute('aria-expanded', 'false');
+    collectionMenu.setAttribute('aria-hidden', 'true');
+  };
+
+  collectionToggle.addEventListener('click', openMenu);
+  collectionClose.addEventListener('click', closeMenu);
+  collectionOverlay.addEventListener('click', closeMenu);
+
+  // cerrar con Escape
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape' && collectionMenu.classList.contains('show')) closeMenu();
+  });
+
+  // cerrar deslizando hacia la izquierda
+  let startX = null;
+  collectionMenu.addEventListener('touchstart', e => { startX = e.touches[0].clientX; });
+  collectionMenu.addEventListener('touchend',   e => {
+    if (startX !== null) {
+      const diff = e.changedTouches[0].clientX - startX;
+      if (diff < -50) closeMenu();  // swipe left
+      startX = null;
+    }
+  });
+}
 
   // SMOOTH SCROLL
   document.querySelectorAll('a[href^="#"]:not([href="#"])').forEach(link => {
