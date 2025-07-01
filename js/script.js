@@ -23,44 +23,49 @@ document.addEventListener('DOMContentLoaded', () => {
       navToggle.setAttribute('aria-expanded', open);
     });
   }
-  // COLLECTION MENU (BeraClothing)
+// COLLECTION MENU (BeraClothing) — animación + bloqueo scroll
 const collectionToggle  = document.querySelector('.collection-toggle');
 const collectionMenu    = document.getElementById('collection-menu');
 const collectionOverlay = document.getElementById('collection-overlay');
 const collectionClose   = document.getElementById('collection-close');
 
 if (collectionToggle && collectionMenu && collectionOverlay && collectionClose) {
+
+  const lockScroll   = () => { document.body.style.overflow = 'hidden'; };
+  const unlockScroll = () => { document.body.style.overflow = '';       };
+
   const openMenu  = () => {
     collectionMenu.classList.add('show');
     collectionOverlay.classList.add('show');
-    collectionToggle.setAttribute('aria-expanded', 'true');
-    collectionMenu.setAttribute('aria-hidden', 'false');
+    collectionToggle.setAttribute('aria-expanded','true');
+    collectionMenu.setAttribute('aria-hidden','false');
+    lockScroll();
   };
 
   const closeMenu = () => {
     collectionMenu.classList.remove('show');
     collectionOverlay.classList.remove('show');
-    collectionToggle.setAttribute('aria-expanded', 'false');
-    collectionMenu.setAttribute('aria-hidden', 'true');
+    collectionToggle.setAttribute('aria-expanded','false');
+    collectionMenu.setAttribute('aria-hidden','true');
+    unlockScroll();
   };
 
   collectionToggle.addEventListener('click', openMenu);
-  collectionClose.addEventListener('click', closeMenu);
+  collectionClose .addEventListener('click', closeMenu);
   collectionOverlay.addEventListener('click', closeMenu);
 
-  // cerrar con Escape
-  document.addEventListener('keydown', e => {
-    if (e.key === 'Escape' && collectionMenu.classList.contains('show')) closeMenu();
+  /* ESC para cerrar */
+  document.addEventListener('keydown', e=>{
+    if(e.key==='Escape' && collectionMenu.classList.contains('show')) closeMenu();
   });
 
-  // cerrar deslizando hacia la izquierda
-  let startX = null;
-  collectionMenu.addEventListener('touchstart', e => { startX = e.touches[0].clientX; });
-  collectionMenu.addEventListener('touchend',   e => {
-    if (startX !== null) {
-      const diff = e.changedTouches[0].clientX - startX;
-      if (diff < -50) closeMenu();  // swipe left
-      startX = null;
+  /* Swipe izquierdo para cerrar */
+  let startX;
+  collectionMenu.addEventListener('touchstart',e=>{ startX=e.touches[0].clientX; });
+  collectionMenu.addEventListener('touchend',e=>{
+    if(startX!==undefined){
+      if(e.changedTouches[0].clientX - startX < -60) closeMenu();
+      startX=undefined;
     }
   });
 }
