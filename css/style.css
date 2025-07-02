@@ -1,6 +1,14 @@
 
 /* css/style.css */
 
+/*************** General styles *******************/
+body {
+  font-family: 'Montserrat', sans-serif;
+  margin: 0;
+  padding: 0;
+  color: var(--color-text);
+  background-color: var(--color-bg);
+}
 /* --------------------------------------------------
    Utility Classes & Base Enhancements
 -------------------------------------------------- */
@@ -273,7 +281,18 @@ img {
   align-items: center;
   justify-content: center;
 }
-
+/* Collection toggle button */
+.collection-toggle {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  margin: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.3s ease, transform 0.3s ease;
+}
 /* --------------------------------------------------
    Menú móvil
 -------------------------------------------------- */
@@ -1227,4 +1246,19 @@ img {
 }
 .collection-toggle {  /* botón Catálogo a la izquierda */
   order: 1;
+}
+/* ---------- Hover / focus effects for Catálogo button ---------- */
+.collection-toggle:hover,
+.collection-toggle:focus-visible {
+  background: var(--color-acento);
+  transform: scale(1.08) rotate(-2deg);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.25);
+  outline: none;
+}
+.collection-toggle svg {
+  transition: transform 0.25s ease;
+}
+.collection-toggle:hover svg,
+.collection-toggle:focus-visible svg {
+  transform: rotate(8deg) scale(1.1);
 }
