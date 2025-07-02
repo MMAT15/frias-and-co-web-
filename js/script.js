@@ -431,32 +431,74 @@ if (collectionToggle && collectionMenu && collectionOverlay && collectionClose) 
   }
 
   // PRODUCTS FILTERING & SORTING
-  const productsGrid = document.getElementById('products-grid');
-  if (productsGrid) {
-    const filterTipo = document.getElementById('filter-tipo');
-    const filterTalle = document.getElementById('filter-talle');
-    const sortBy = document.getElementById('sort-by');
-    const items = Array.from(productsGrid.children);
-    function applyFilters() {
-      let filtered = items.filter(it => {
-        return (!filterTipo.value || it.dataset.tipo === filterTipo.value) &&
-               (!filterTalle.value || it.dataset.talle === filterTalle.value);
-      });
-      // sort
-      filtered.sort((a,b) => {
-        const pa = parseFloat(a.dataset.precio), pb = parseFloat(b.dataset.precio);
-        switch (sortBy.value) {
-          case 'precio-asc': return pa - pb;
-          case 'precio-desc': return pb - pa;
-          default: return 0;
-        }
-      });
-      productsGrid.innerHTML = '';
-      filtered.forEach(f => productsGrid.appendChild(f));
+  const allProductItems = Array.from(document.querySelectorAll('.producto-item'));
+  const filterTipo  = document.getElementById('filter-tipo');
+  const filterTalle = document.getElementById('filter-talle');
+  const sortBy      = document.getElementById('sort-by');
+
+  const typeToSection = {
+    remera: 'remeras',
+    top: 'tops',
+    camisa: 'camisas',
+    short: 'shorts',
+    pantalon: 'pantalones',
+    buzo: 'buzos',
+    set: 'sets',
+    abrigo: 'abrigos',
+    vestido: 'vestidos'
+  };
+
+  function applyFilters() {
+    const tipoVal  = filterTipo ? filterTipo.value : '';
+    const talleVal = filterTalle ? filterTalle.value : '';
+
+    allProductItems.forEach(item => {
+      const match =
+        (!tipoVal  || item.dataset.tipo  === tipoVal) &&
+        (!talleVal || item.dataset.talle === talleVal);
+      item.style.display = match ? '' : 'none';
+    });
+
+    applySorting(); // re‑sort visible items after filtering
+
+    // Auto-scroll to the relevant section if a specific tipo is selected
+    if (tipoVal && typeToSection[tipoVal]) {
+      const targetSec = document.getElementById(typeToSection[tipoVal]);
+      if (targetSec) {
+        const offset = targetSec.getBoundingClientRect().top + window.scrollY - 60;
+        window.scrollTo({ top: offset, behavior: 'smooth' });
+      }
     }
-    [filterTipo,filterTalle,sortBy].forEach(el => el.addEventListener('change', applyFilters));
-    applyFilters();
   }
+
+  function applySorting() {
+    if (!sortBy) return;
+    const sortVal = sortBy.value;
+
+    // Only price sorting for now; "relevancia" keeps natural order
+    if (sortVal === 'precio-asc' || sortVal === 'precio-desc') {
+      document.querySelectorAll('.grid-products').forEach(grid => {
+        const visible = Array.from(grid.children).filter(
+          c => c.classList.contains('producto-item') && c.style.display !== 'none'
+        );
+        visible.sort((a, b) => {
+          const pa = parseFloat(a.dataset.precio) || 0;
+          const pb = parseFloat(b.dataset.precio) || 0;
+          return sortVal === 'precio-asc' ? pa - pb : pb - pa;
+        });
+        visible.forEach(el => grid.appendChild(el));
+      });
+    }
+  }
+
+  // Attach listeners
+  [filterTipo, filterTalle].forEach(sel => {
+    if (sel) sel.addEventListener('change', applyFilters);
+  });
+  if (sortBy) sortBy.addEventListener('change', applySorting);
+
+  // Initial run
+  applyFilters();
 
   // SHOPPING CART & MODAL
   let cart = JSON.parse(localStorage.getItem('cart')) || [];
