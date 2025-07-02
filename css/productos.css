@@ -430,8 +430,7 @@
 
 /* Para que los dos botones queden uno encima de otro en móvil */
 @media (max-width: 480px) {
-  .add-to-cart-btn,
-  .add-to-cart-icon {
+  .add-to-cart-btn {
     width: 100%;
   }
 }
