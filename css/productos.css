@@ -369,3 +369,119 @@
     gap: 0.5rem;
   }
 }
+
+/* --------------------------------------------------
+   Secciones por categoría de producto
+-------------------------------------------------- */
+.product-category {
+  padding: 3rem 0;
+}
+.product-category .category-title {
+  text-align: center;
+  font-size: 2rem;
+  margin-bottom: 2rem;
+  position: relative;
+}
+.product-category .category-title::after {
+  content: '';
+  display: block;
+  width: 60px;
+  height: 4px;
+  background: var(--color-acento);
+  margin: 0.5rem auto 0;
+}
+
+/* Reutiliza el layout moderno para cada grid de categoría */
+.grid-products {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  grid-auto-rows: 1fr;
+  gap: 1.5rem;
+}
+
+/* --------------------------------------------------
+   Icono "+" para añadir al carrito
+-------------------------------------------------- */
+.add-to-cart-icon {
+  width: 40px;
+  height: 40px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--color-principal);
+  border-radius: 50%;
+  background: #fff;
+  color: var(--color-principal);
+  font-size: 1.25rem;
+  line-height: 1;
+  cursor: pointer;
+  transition: background var(--transition), transform var(--transition), color var(--transition);
+  margin-top: 0.75rem;
+}
+.add-to-cart-icon:hover {
+  background: var(--color-principal);
+  color: #fff;
+  transform: scale(1.05);
+}
+
+/* Para que los dos botones queden uno encima de otro en móvil */
+@media (max-width: 480px) {
+  .add-to-cart-btn,
+  .add-to-cart-icon {
+    width: 100%;
+  }
+}
+
+
+/* ---------- PRODUCT MODAL (heredado de style.css, se duplica aquí por si se carga este CSS de forma independiente) ---------- */
+.product-modal {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.65);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 10000;
+}
+.product-modal.show {
+  display: flex;
+}
+
+.product-modal-content {
+  background: #fff;
+  width: 90%;
+  max-width: 420px;
+  max-height: 90vh;
+  overflow-y: auto;
+  border-radius: 8px;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.25);
+  position: relative;
+  padding: 1rem;
+}
+
+.product-modal-close {
+  position: absolute;
+  top: 0.5rem;
+  right: 0.75rem;
+  background: none;
+  border: none;
+  font-size: 2rem;
+  line-height: 1;
+  font-weight: 700;
+  color: #333;
+  cursor: pointer;
+  z-index: 2;
+}
+
+.product-gallery {
+  margin-bottom: 1rem;
+}
+
+.product-info h3 {
+  margin: 0.5rem 0;
+}
+
+.product-info .price {
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+}

@@ -1340,3 +1340,16 @@ img {
   font-weight: 600;
   margin-bottom: 0.5rem;
 }
+.product-modal-close {
+  position: absolute;
+  top: 0.5rem;
+  right: 0.75rem;
+  background: none;
+  border: none;
+  font-size: 2rem;   /* más grande */
+  line-height: 1;
+  font-weight: 700;
+  color: #333;       /* contraste sobre fondo blanco */
+  cursor: pointer;
+  z-index: 2;        /* por encima de la galería */
+}

@@ -166,6 +166,73 @@ if (collectionToggle && collectionMenu && collectionOverlay && collectionClose) 
         'assets/images/BuzoOver.png',
         'assets/images/BuzoOver.png'
       ]
+    },  /* ← mantiene coma porque hay más elementos */
+
+    'remera-shift': {
+      title: 'Remera Shift',
+      price: '$15.400',
+      details: 'Talle: S‑XL<br>Tela: Algodón peinado 24/1<br>Color: Blanco con print',
+      description: 'Remera manga corta con estampa “Shift”. Corte regular y tacto suave.',
+      images: [
+        'assets/images/Gorra.png',
+        'assets/images/Gorra.png',
+        'assets/images/Gorra.png'
+      ]
+    },
+    'remera-dibujo': {
+      title: 'Remera Dibujo',
+      price: '$21.200',
+      details: 'Talle: S‑XL<br>Tela: Algodón 100%<br>Estampa: Dibujo artístico',
+      description: 'Remera básica con ilustración frontal impresa en serigrafía eco.',
+      images: [
+        'assets/images/Gorroinv.png',
+        'assets/images/Gorroinv.png',
+        'assets/images/Gorroinv.png'
+      ]
+    },
+    'buzo-gris': {
+      title: 'Buzo Gris',
+      price: '$58.200',
+      details: 'Talle: XL<br>Tela: Frisa premium 320 g<br>Corte: Oversize',
+      description: 'Buzo unisex oversize color gris, interior súper suave para días fríos.',
+      images: [
+        'assets/images/Buzoxl.png',
+        'assets/images/Buzoxl.png',
+        'assets/images/Buzoxl.png'
+      ]
+    },
+    'buzo-over': {
+      title: 'Buzo Over',
+      price: '$34.500',
+      details: 'Talle: L<br>Tela: French Terry<br>Fit: Oversize relajado',
+      description: 'Buzo liviano oversize con cuello redondo y terminaciones en rib.',
+      images: [
+        'assets/images/RemeraL.png',
+        'assets/images/RemeraL.png',
+        'assets/images/RemeraL.png'
+      ]
+    },
+    'pantalon-rosa': {
+      title: 'Pantalón Rosa',
+      price: '$45.000',
+      details: 'Talle: S<br>Tela: Gabardina stretch<br>Corte: Cargo slim',
+      description: 'Pantalón cargo rosa con bolsillos laterales y cintura elástica.',
+      images: [
+        'assets/images/PantalonS.png',
+        'assets/images/PantalonS.png',
+        'assets/images/PantalonS.png'
+      ]
+    },
+    'pantalon-gris': {
+      title: 'Pantalón Gris',
+      price: '$50.400',
+      details: 'Talle: L<br>Tela: Gabardina premium<br>Corte: Recto',
+      description: 'Pantalón gris de gabardina con bolsillos profundos y ajuste cómodo.',
+      images: [
+        'assets/images/BuzoOver.png',
+        'assets/images/BuzoOver.png',
+        'assets/images/BuzoOver.png'
+      ]
     }
   };
 
