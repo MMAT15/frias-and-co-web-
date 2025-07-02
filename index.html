@@ -170,7 +170,7 @@
                     data-id="featured-gris"
                     data-name="Prueba Gris"
                     data-price="1000">
-              Añadir al carrito
+              Ver producto
             </button>
           </div>
           <div class="card featured-card animate-on-scroll">
@@ -181,7 +181,7 @@
                     data-id="featured-buzo"
                     data-name="Prueba Buzo"
                     data-price="1200">
-              Añadir al carrito
+              Ver producto
             </button>
           </div>
           <div class="card featured-card animate-on-scroll">
@@ -192,7 +192,7 @@
                     data-id="featured-over"
                     data-name="Prueba Over"
                     data-price="1300">
-              Añadir al carrito
+              Ver producto
             </button>
           </div>
           <div class="card featured-card animate-on-scroll">
@@ -203,7 +203,7 @@
                     data-id="featured-shift"
                     data-name="Prueba Shift"
                     data-price="1400">
-              Añadir al carrito
+              Ver producto
             </button>
           </div>
           <div class="card featured-card animate-on-scroll">
@@ -214,7 +214,7 @@
                     data-id="featured-rosa"
                     data-name="Prueba Rosa"
                     data-price="1500">
-              Añadir al carrito
+              Ver producto
             </button>
           </div>
           <div class="card featured-card animate-on-scroll">
@@ -225,7 +225,7 @@
                     data-id="featured-dibujo"
                     data-name="Prueba Dibujo"
                     data-price="1600">
-              Añadir al carrito
+              Ver producto
             </button>
           </div>
         </div>
@@ -281,4 +281,26 @@
   </nav>
 </aside>
 </body>
+    <!-- ---------- PRODUCT MODAL ---------- -->
+    <div id="product-modal" class="product-modal" aria-hidden="true">
+      <div class="product-modal-content">
+        <button class="product-modal-close" aria-label="Cerrar">×</button>
+
+        <!-- Swiper gallery -->
+        <div class="product-gallery swiper">
+          <div class="swiper-wrapper" id="product-gallery-wrapper"></div>
+          <div class="swiper-pagination"></div>
+          <div class="swiper-button-prev" aria-label="Anterior foto"></div>
+          <div class="swiper-button-next" aria-label="Siguiente foto"></div>
+        </div>
+
+        <!-- Info -->
+        <div class="product-info">
+          <h3 id="product-modal-title"></h3>
+          <p id="product-modal-price" class="price"></p>
+          <p id="product-modal-description"></p>
+        </div>
+      </div>
+    </div>
+    <!-- ---------- /PRODUCT MODAL ---------- -->
 </html>

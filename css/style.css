@@ -222,7 +222,9 @@ img {
   background: rgba(255, 255, 255, 0.97);   /* ligeramente translúcido */
   backdrop-filter: blur(6px);              /* frosted glass */
   box-shadow: 0 4px 10px rgba(0,0,0,0.08); /* separa del header */
-  border-bottom: 1px solid #eaeaea;        /* línea divisora */
+  border: 1px solid #eaeaea;   /* marco completo */
+  border-top: none;            /* se une con el header */
+  border-radius: 0 0 8px 8px;  /* esquinas inferiores redondeadas */
 }
 .nav-list {
   display: flex;
@@ -351,7 +353,9 @@ img {
     background: rgba(255, 255, 255, 0.97);  /* coincide con desktop */
     backdrop-filter: blur(6px);
     box-shadow: 0 6px 12px rgba(0,0,0,0.12);
-    border-bottom: 1px solid #eaeaea;
+    border: 1px solid #eaeaea;
+    border-top: none;
+    border-radius: 0 0 8px 8px;
     display: none;
     flex-direction: column;
     animation: slideDown 0.35s ease forwards;
@@ -1287,4 +1291,52 @@ img {
 @keyframes fall {
   0%   { transform: translateY(0) rotate(0deg);   opacity: 1; }
   100% { transform: translateY(100vh) rotate(360deg); opacity: 0; }
+}
+/* ---------- PRODUCT MODAL ---------- */
+.product-modal {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.65);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 10000;
+}
+.product-modal.show {
+  display: flex;
+}
+
+.product-modal-content {
+  background: #fff;
+  width: 90%;
+  max-width: 420px;
+  max-height: 90vh;
+  overflow-y: auto;
+  border-radius: 8px;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.25);
+  position: relative;
+  padding: 1rem;
+}
+
+.product-modal-close {
+  position: absolute;
+  top: 0.5rem;
+  right: 0.75rem;
+  background: none;
+  border: none;
+  font-size: 1.75rem;
+  cursor: pointer;
+}
+
+.product-gallery {
+  margin-bottom: 1rem;
+}
+
+.product-info h3 {
+  margin: 0.5rem 0;
+}
+
+.product-info .price {
+  font-weight: 600;
+  margin-bottom: 0.5rem;
 }

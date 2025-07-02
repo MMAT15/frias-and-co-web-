@@ -99,6 +99,146 @@ if (collectionToggle && collectionMenu && collectionOverlay && collectionClose) 
     }
   }
 
+  /* ---------- PRODUCT MODAL ---------- */
+  const productData = {
+    'featured-gris': {
+      title: 'Prueba Gris',
+      price: '$15.400',
+      details: 'Talle: Único<br>Tela: Algodón 100%<br>Color: Gris',
+      description: 'Gorra color gris de ala curva ideal para looks urbanos.',
+      images: [
+        'assets/images/Gorra.png',
+        'assets/images/Gorra.png',
+        'assets/images/Gorra.png'
+      ]
+    },
+    'featured-buzo': {
+      title: 'Prueba Buzo',
+      price: '$58.200',
+      details: 'Talle: S‑XL<br>Tela: Frisa premium 320 g<br>Corte: Oversize',
+      description: 'Buzo unisex oversize de frisa suave, ideal para días fríos y estilo urbano.',
+      images: [
+        'assets/images/Buzoxl.png',
+        'assets/images/Buzoxl.png',
+        'assets/images/Buzoxl.png'
+      ]
+    },
+    'featured-over': {
+      title: 'Prueba Over',
+      price: '$45.500',
+      details: 'Talle: 38‑44<br>Tela: Gabardina stretch<br>Bolsillos: Cargo laterales',
+      description: 'Pantalón cargo oversize de gabardina elástica con múltiples bolsillos.',
+      images: [
+        'assets/images/PantalonS.png',
+        'assets/images/PantalonS.png',
+        'assets/images/PantalonS.png'
+      ]
+    },
+    'featured-shift': {
+      title: 'Prueba Shift',
+      price: '$34.500',
+      details: 'Talle: S‑XL<br>Tela: Algodón peinado 24/1<br>Estampa: Serigrafía eco‑friendly',
+      description: 'Remera de algodón premium con estampa frontal, corte regular y costuras reforzadas.',
+      images: [
+        'assets/images/RemeraL.png',
+        'assets/images/RemeraL.png',
+        'assets/images/RemeraL.png'
+      ]
+    },
+    'featured-rosa': {
+      title: 'Prueba Rosa',
+      price: '$21.200',
+      details: 'Talle: Único<br>Tela: Acrílico hipoalergénico<br>Tejido: Punto inglés',
+      description: 'Gorro tejido color rosa, suave y abrigado, perfecto para el invierno.',
+      images: [
+        'assets/images/Gorroinv.png',
+        'assets/images/Gorroinv.png',
+        'assets/images/Gorroinv.png'
+      ]
+    },
+    'featured-dibujo': {
+      title: 'Prueba Dibujo',
+      price: '$34.500',
+      details: 'Talle: S‑L<br>Tela: Frisa liviana<br>Ilustración: DTG edición limitada',
+      description: 'Buzo oversize con ilustración exclusiva impresa mediante DTG de alta calidad.',
+      images: [
+        'assets/images/BuzoOver.png',
+        'assets/images/BuzoOver.png',
+        'assets/images/BuzoOver.png'
+      ]
+    }
+  };
+
+  const productModal      = document.getElementById('product-modal');
+  const galleryWrapper    = document.getElementById('product-gallery-wrapper');
+  const modalTitle        = document.getElementById('product-modal-title');
+  const modalPrice        = document.getElementById('product-modal-price');
+  const modalDescription  = document.getElementById('product-modal-description');
+  const modalCloseBtn     = document.querySelector('.product-modal-close');
+
+  if (productModal) {
+    // Override buttons to open modal
+    document.querySelectorAll('.add-to-cart-btn').forEach(btn => {
+      btn.addEventListener('click', e => {
+        e.preventDefault();
+        e.stopImmediatePropagation();
+        openProductModal(btn.dataset.id);
+      });
+    });
+
+    function openProductModal(id) {
+      const data = productData[id];
+      if (!data) return;
+      modalTitle.textContent = data.title;
+      modalPrice.textContent = data.price;
+      modalDescription.innerHTML = `
+  <p>${data.details}</p>
+  <p>${data.description}</p>
+`;
+      galleryWrapper.innerHTML = '';
+      data.images.forEach(src => {
+        const slide = document.createElement('div');
+        slide.className = 'swiper-slide';
+        slide.innerHTML = `<img src="${src}" alt="${data.title}" loading="lazy">`;
+        galleryWrapper.appendChild(slide);
+      });
+
+      // init / update Swiper
+      if (window.productGallerySwiper) {
+        productGallerySwiper.update();
+        productGallerySwiper.slideTo(0);
+      } else if (typeof Swiper !== 'undefined') {
+        window.productGallerySwiper = new Swiper('.product-gallery', {
+          pagination: { el: '.product-gallery .swiper-pagination', clickable: true },
+          navigation: {
+            nextEl: '.product-gallery .swiper-button-next',
+            prevEl: '.product-gallery .swiper-button-prev'
+          },
+          loop: true
+        });
+      }
+
+      productModal.classList.add('show');
+      productModal.setAttribute('aria-hidden','false');
+    }
+
+    function closeProductModal() {
+      productModal.classList.remove('show');
+      productModal.setAttribute('aria-hidden','true');
+    }
+
+    modalCloseBtn?.addEventListener('click', closeProductModal);
+    productModal.addEventListener('click', e => {
+      if (e.target === productModal) closeProductModal();
+    });
+
+    document.addEventListener('keydown', e => {
+      if (e.key === 'Escape' && productModal.classList.contains('show')) {
+        closeProductModal();
+      }
+    });
+  }
+
   // SMOOTH SCROLL
   document.querySelectorAll('a[href^="#"]:not([href="#"])').forEach(link => {
     link.addEventListener('click', e => {
