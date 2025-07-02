@@ -40,8 +40,10 @@
 }
 .producto-item img {
   width: 100%;
-  height: 200px;
-  object-fit: cover;
+  height: auto;            /* auto height preserves full image */
+  max-height: 250px;       /* cap height so cards stay equilibrated */
+  object-fit: contain;     /* show whole picture without cropping */
+  background: #fff;        /* fallback background */
 }
 
 .producto-item h3 {
@@ -244,8 +246,10 @@
 }
 .modern-grid .producto-item img {
   width: 100%;
-  height: 250px;
-  object-fit: cover;
+  height: auto;
+  max-height: 280px;       /* slightly taller for modern grid */
+  object-fit: contain;
+  background: #fff;
   border-bottom: 1px solid #eee;
 }
 .modern-grid .producto-item h3 {
