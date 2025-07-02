@@ -1192,3 +1192,39 @@ img {
 .catalog-btn:hover .catalog-icon{
   transform:scale(1.1);
 }
+/* --- Nueva distribución header --- */
+.catalog-btn {          /* Botón Catálogo a la izquierda */
+  order: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  margin-right: 0.5rem;
+  cursor: pointer;
+  background: var(--color-fondo);
+  border: 1px solid var(--color-acento-sec);
+  border-radius: 50%;
+  transition: background var(--transition), transform var(--transition);
+}
+.catalog-btn:hover {
+  background: var(--color-acento);
+  transform: scale(1.05);
+}
+.catalog-btn svg {
+  width: 28px;
+  height: 28px;
+}
+
+.nav-toggle {           /* Hamburguesa a la derecha */
+  order: 3;
+  margin-left: 0.5rem;
+}
+
+.site-branding {        /* Logo + nombre centrados */
+  order: 2;
+  flex: 1 1 auto;
+}
+.collection-toggle {  /* botón Catálogo a la izquierda */
+  order: 1;
+}
