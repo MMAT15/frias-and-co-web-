@@ -35,6 +35,7 @@ if (collectionToggle && collectionMenu && collectionOverlay && collectionClose) 
   const unlockScroll = () => { document.body.style.overflow = '';       };
 
   const openMenu  = () => {
+    dropClothingEmojis();   // 🎉 lluvia de emojis
     collectionMenu.classList.add('show');
     collectionOverlay.classList.add('show');
     collectionToggle.setAttribute('aria-expanded','true');
@@ -69,6 +70,34 @@ if (collectionToggle && collectionMenu && collectionOverlay && collectionClose) 
     }
   });
 }
+  
+  /* --------------------------------------------------
+     Falling Clothing Emojis 🎉
+  -------------------------------------------------- */
+  function dropClothingEmojis() {
+    const emojis = ['👚','👕','👗','🧢','🥼','👔','👖'];
+    const spawnDuration = 2000;   // ms de generación
+    const fallDuration  = 4000;   // ms caída
+    const spawnEvery    = 120;    // intervalo entre emojis
+
+    const start = Date.now();
+    const spawner = setInterval(() => {
+      if (Date.now() - start > spawnDuration) clearInterval(spawner);
+      createEmoji();
+    }, spawnEvery);
+
+    function createEmoji() {
+      const span = document.createElement('span');
+      span.className = 'fall-emoji';
+      span.textContent = emojis[Math.floor(Math.random() * emojis.length)];
+      span.style.left = Math.random() * 100 + 'vw';
+      span.style.fontSize = (20 + Math.random() * 16) + 'px';
+      span.style.setProperty('--emoji-duration',
+                              (fallDuration + Math.random() * 1500) + 'ms');
+      document.body.appendChild(span);
+      span.addEventListener('animationend', () => span.remove());
+    }
+  }
 
   // SMOOTH SCROLL
   document.querySelectorAll('a[href^="#"]:not([href="#"])').forEach(link => {
