@@ -384,6 +384,21 @@ img {
     aspect-ratio: 4 / 5;          /* mantiene proporción vertical */
     border-radius: var(--border-radius);
   }
+
+  /* --- Mostrar 2 tarjetas por fila en móvil --- */
+  .grid-productos,
+  .grid-ofertas,
+  .grid-featured {
+    grid-template-columns: repeat(2, 1fr);   /* 2 columnas iguales */
+    gap: 1rem;                                /* un poco menos de espacio */
+  }
+
+  /* Imágenes más compactas para no hacer scroll infinito */
+  .producto-item img,
+  .featured-card img,
+  .offer-item img {
+    height: 160px !important;        /* antes 250 / 200 px */
+  }
 }
 
 /* --------------------------------------------------
