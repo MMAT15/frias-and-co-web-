@@ -1590,3 +1590,162 @@ img {
 }
 .qty-stepper button:hover{ background:#e3e3e3; }
 .qty-stepper button:disabled{ opacity:.5; cursor:not-allowed; }
+
+
+
+/* ===== Desktop header refined alignment (≥ 769 px) ===== */
+@media (min-width: 769px) {
+  /* 0. Ocultar hamburguesa en escritorio */
+  .nav-toggle { 
+    display: none !important;
+  }
+
+  /* 1. Layout en grid: [Catálogo] [Brand centrado] [Nav derecha] */
+  .header-inner {
+    display: grid;
+    grid-template-columns: auto 1fr auto; /* izquierda, centro, derecha */
+    align-items: center;
+    padding: 0 2rem;
+    gap: 1rem;
+  }
+
+  /* 2. Botón Catálogo (o collection‑toggle) – columna 1 */
+  .catalog-btn,
+  .collection-toggle {
+    grid-column: 1;
+    margin: 0;            /* quita márgenes anteriores */
+  }
+
+  /* 3. Branding perfectamente centrado – columna 2 */
+  .site-branding {
+    grid-column: 2;
+    justify-self: center;
+    position: static;     /* anula absolute de versiones previas */
+    transform: none;
+    flex: 0 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 0;
+  }
+
+  /* Mantiene visible el subtítulo “BY FRIAS” */
+  .site-tagline {
+    display: block;
+  }
+
+  /* 4. Navegación principal – columna 3 (derecha) */
+  .main-nav {
+    grid-column: 3;
+    justify-self: end;
+    background: transparent;
+    border: none;
+    box-shadow: none;
+    margin: 0;
+  }
+
+  .nav-list {
+    gap: 1.5rem;          /* separación cómoda */
+  }
+}
+/* ===== Desktop header tweaks: bigger Catálogo button & vertical centering (≥ 769 px) ===== */
+@media (min-width: 769px) {
+  /* 1. Agranda el botón Catálogo para escritorio */
+  .catalog-btn,
+  .collection-toggle {
+    width: 56px;
+    height: 56px;
+    border-width: 2px;
+  }
+  .catalog-btn svg,
+  .collection-toggle svg {
+    width: 32px;
+    height: 32px;
+  }
+
+  /* 2. Asegura que la navegación quede centrada verticalmente */
+  .main-nav {
+    align-self: center;        /* centra el bloque .main-nav en la celda */
+    display: flex;
+    align-items: center;       /* centra los links dentro */
+  }
+
+  /* 3. Garantiza que el branding también esté centrado verticalmente */
+  .site-branding {
+    align-self: center;
+  }
+}
+/* ===== Desktop header final polish (≥ 769 px) ===== */
+@media (min-width: 769px) {
+  /* 0. Asegura contexto para posicionamiento absoluto */
+  .header-inner {
+    position: relative !important;
+    min-height: 96px;         /* altura cómoda para logo + nav */
+  }
+
+  /* 1. Branding perfectamente centrado (h & v) independiente del grid */
+  .site-branding {
+    position: absolute !important;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    grid-column: 1 / -1;      /* cubre todo el ancho del grid */
+  }
+
+  /* 2. Agranda más el botón Catálogo para escritorio */
+  .catalog-btn,
+  .collection-toggle {
+    width: 64px !important;
+    height: 64px !important;
+    border-width: 2px;
+  }
+  .catalog-btn svg,
+  .collection-toggle svg {
+    width: 36px !important;
+    height: 36px !important;
+  }
+
+  /* 3. Centra verticalmente la navegación con fuerza */
+  .main-nav {
+    align-self: center !important;
+  }
+}
+/* ===== Desktop header final fix: nav centering & Catálogo size (≥ 769 px) ===== */
+@media (min-width: 769px) {
+  /* Botón Catálogo / collection-toggle aún más grande para desktop */
+  .catalog-btn,
+  .collection-toggle {
+    width: 90px !important;
+    height: 90px !important;
+    border-width: 2px;
+  }
+  .catalog-btn svg,
+  .collection-toggle svg {
+    width: 54px !important;
+    height: 54px !important;
+  }
+
+  /* Navegación pegada al centro vertical del header */
+  .main-nav {
+    position: static !important;   /* garantiza que no herede top de mobile */
+    align-self: center !important; /* centra dentro del grid */
+    height: 100%;                  /* ocupa toda la altura disponible */
+    display: flex !important;
+    align-items: center !important; /* alinea sus links verticalmente */
+  }
+}
+/* ===== Desktop header – final nav centering tweak (≥ 769 px) ===== */
+@media (min-width: 769px) {
+  .main-nav {
+    /* Alinea el bloque en la columna derecha y centrado verticalmente */
+    place-self: center end !important;   /* shorthand de align‑self + justify‑self */
+    align-self: center !important;
+    justify-self: end !important;
+    height: auto !important;             /* evita ocupar 100 % si desconfigura */
+  }
+
+  /* Centra los enlaces dentro del nav */
+  .nav-list {
+    align-items: center;                  /* eje transversal */
+  }
+}
