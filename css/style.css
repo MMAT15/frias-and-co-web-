@@ -1353,3 +1353,62 @@ img {
   cursor: pointer;
   z-index: 2;        /* por encima de la galería */
 }
+
+
+/* --------------------------------------------------
+   FOOTER (Enhanced visual style)
+-------------------------------------------------- */
+.site-footer {
+  background: linear-gradient(135deg, #262626 0%, #1a1a1a 100%);
+  padding: 3rem 0;
+  text-align: center;
+  font-size: 1rem;
+  color: #f1f1f1;
+  animation: fadeIn var(--transition) ease-in-out;
+}
+
+.site-footer a {
+  color: #f1f1f1;
+  margin: 0 0.5rem;
+  transition: color var(--transition);
+}
+.site-footer a:hover,
+.site-footer a:focus-visible {
+  color: var(--color-acento);
+}
+
+.footer-top {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1.25rem;
+  flex-wrap: wrap;
+  margin-bottom: 1.5rem;
+  font-size: 1.05rem;
+}
+.footer-top img {
+  width: 28px;
+  height: 28px;
+  filter: brightness(0) invert(1); /* white icons on dark bg */
+  transition: transform var(--transition);
+}
+.footer-top img:hover {
+  transform: scale(1.15);
+}
+
+.footer-credits {
+  font-size: 0.9rem;
+  color: #d1d1d1;
+  margin-bottom: 1rem;
+}
+.footer-copy {
+  font-size: 0.8rem;
+  color: #b5b5b5;
+}
+
+/* Responsive footer spacing */
+@media (max-width: 480px) {
+  .site-footer {
+    padding: 2rem 1rem;
+  }
+}

@@ -245,7 +245,7 @@ if (collectionToggle && collectionMenu && collectionOverlay && collectionClose) 
 
   if (productModal) {
     // Override buttons to open modal
-    document.querySelectorAll('.add-to-cart-btn').forEach(btn => {
+ document.querySelectorAll('.add-to-cart-btn').forEach(btn => {
       btn.addEventListener('click', e => {
         e.preventDefault();
         e.stopImmediatePropagation();
@@ -698,3 +698,33 @@ if (collectionToggle && collectionMenu && collectionOverlay && collectionClose) 
   */
 
 });
+document.querySelectorAll('.view-product-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    // 1. Armar las diapositivas según las imágenes del data-attribute
+    const wrapper = document.querySelector('.product-modal .swiper-wrapper');
+    wrapper.innerHTML = btn.dataset.images
+      .split(',')
+      .map(src => `<div class="swiper-slide"><img src="${src.trim()}" alt=""></div>`)
+      .join('');
+
+    // 2. (Re)inicializar Swiper SOLO para este modal
+    if (window.productSwiper) { window.productSwiper.destroy(true, true); }
+    window.productSwiper = new Swiper('.product-modal .swiper-container', {
+      loop: true,
+      speed: 600,
+      pagination: { el: '.product-modal .swiper-pagination', clickable: true },
+      navigation: {
+        nextEl: '.product-modal .swiper-button-next',
+        prevEl: '.product-modal .swiper-button-prev'
+      }
+    });
+
+    // 3. Mostrar el modal
+    document.querySelector('.product-modal').classList.add('show');
+  });
+});
+
+// Cerrar modal (puede estar ya en tu código CSS/JS)
+document.querySelector('.product-modal-close')
+        .addEventListener('click', () =>
+          document.querySelector('.product-modal').classList.remove('show'));
