@@ -321,5 +321,54 @@
     </ul>
   </nav>
 </aside>
+<!-- FAB Carrito flotante -->
+<button id="cart-fab" class="cart-fab" aria-label="Ver carrito">
+  <!-- Ícono de carrito (SVG simplificado, podés reemplazarlo) -->
+  <svg viewBox="0 0 24 24" class="cart-icon" aria-hidden="true">
+    <path d="M6 6h15l-1.5 9.5a2 2 0 0 1-2 1.5H8a2 2 0 0 1-2-1.5L4 4H2"></path>
+    <circle cx="9"  cy="21" r="1.5"></circle>
+    <circle cx="18" cy="21" r="1.5"></circle>
+  </svg>
+
+  <!-- Contador de ítems -->
+  <span class="cart-counter" data-count>0</span>
+
+  <!-- Total acumulado en $ -->
+  <span class="cart-total"  data-total>$0</span>
+</button>
+
+<!-- Panel lateral de carrito -->
+<aside id="cart-panel" class="cart-panel hidden" role="dialog" aria-labelledby="cart-title" aria-modal="true">
+  <header class="cart-panel-header">
+    <h2 id="cart-title">Tu carrito</h2>
+    <button class="cart-close" aria-label="Cerrar carrito">×</button>
+  </header>
+
+  <!-- Lista dinámica de productos -->
+  <ul class="cart-items" data-items>
+    <!--
+      Ejemplo de ítem generado por JS:
+      <li class="cart-item" data-id="SKU123">
+        <span class="name">Remera Oversize</span>
+        <input type="number" class="qty" min="1" value="1" data-qty>
+        <span class="price" data-price>$12 000</span>
+        <button class="remove" aria-label="Quitar">🗑️</button>
+      </li>
+    -->
+  </ul>
+
+  <!-- Resumen -->
+  <div class="cart-summary">
+    <span>Total:</span>
+    <strong id="cart-total" data-total-final>$0</strong>
+  </div>
+
+  <button class="btn btn-primary btn-checkout" onclick="location.href='finalizarcompra.html'">
+    Finalizar compra
+  </button>
+</aside>
+
+<!-- Overlay para oscurecer contenido al abrir el panel -->
+<div id="cart-overlay" class="cart-overlay hidden" tabindex="-1"></div>
 </body>
 </html>

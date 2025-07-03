@@ -503,18 +503,17 @@ if (collectionToggle && collectionMenu && collectionOverlay && collectionClose) 
   // SHOPPING CART & MODAL
   let cart = JSON.parse(localStorage.getItem('cart')) || [];
   const cartCount = document.querySelector('.cart-count');
-  const updateCartCount = () => {
-    const total = cart.reduce((sum,i) => sum + i.qty, 0);
-    if (cartCount) cartCount.textContent = total;
-  };
   const saveCart = () => localStorage.setItem('cart', JSON.stringify(cart));
   const addToCart = prod => {
-    const ex = cart.find(i=>i.id===prod.id);
-    if (ex) ex.qty++;
-    else cart.push({ ...prod, qty:1 });
+    const ex = cart.find(i => i.id === prod.id);
+    if (ex) {
+      ex.qty = Math.min(ex.qty + 1, 10);   // límite 10
+    } else {
+      cart.push({ ...prod, qty: 1 });
+    }
     saveCart(); updateCartCount();
   };
-  document.querySelectorAll('.add-to-cart-btn').forEach(btn => {
+  document.querySelectorAll('.add-to-cart-icon').forEach(btn => {
     btn.addEventListener('click', () => {
       // Read price from data attribute
       let price = Number(btn.dataset.price);
@@ -541,7 +540,160 @@ if (collectionToggle && collectionMenu && collectionOverlay && collectionClose) 
       addToCart(product);
     });
   });
-  updateCartCount();
+
+  /* --------------------------------------------------
+   Floating Cart references
+-------------------------------------------------- */
+const cartFab          = document.getElementById('cart-fab');
+const cartCounterFab   = cartFab?.querySelector('[data-count]');
+const cartTotalFab     = cartFab?.querySelector('[data-total]');
+const cartPanelElm     = document.getElementById('cart-panel');
+const cartOverlayElm   = document.getElementById('cart-overlay');
+const cartItemsList    = cartPanelElm?.querySelector('[data-items]');
+const cartTotalFinalEl = document.getElementById('cart-total') 
+                      || cartPanelElm?.querySelector('[data-total-final]');
+const cartCloseFab     = cartPanelElm?.querySelector('.cart-close');
+
+/* --------------------------------------------------
+   Update counters & totals (reemplaza la función vieja)
+-------------------------------------------------- */
+const updateCartCount = () => {
+  const totalItems = cart.reduce((sum,i) => sum + i.qty, 0);
+  const totalPrice = cart.reduce((sum,i) => sum + i.qty * i.price, 0);
+
+  if (cartCount)       cartCount.textContent        = totalItems;
+  if (cartCounterFab)  cartCounterFab.textContent   = totalItems;
+  if (cartTotalFab)    cartTotalFab.textContent     = '$' + totalPrice.toLocaleString('es-AR');
+  // actualiza todos los elementos con data-total-final
+  document.querySelectorAll('[data-total-final]').forEach(el => {
+    el.textContent = '$' + totalPrice.toLocaleString('es-AR');
+  });
+
+  if (cartPanelElm?.classList.contains('show')) renderCartPanel();
+};
+// Inicializa contadores + total al cargar
+updateCartCount();
+
+/* --------------------------------------------------
+   Floating Cart Panel Logic
+-------------------------------------------------- */
+const lockScroll   = () => { document.body.style.overflow = 'hidden'; };
+const unlockScroll = () => { document.body.style.overflow = '';       };
+
+function renderCartPanel() {
+  if (!cartItemsList) return;
+  cartItemsList.innerHTML = '';
+  cart.forEach(item => {
+    const li = document.createElement('li');
+    li.className = 'cart-item';
+    li.dataset.id = item.id;
+  li.innerHTML = `
+  <span class="name">${item.name}</span>
+  <div class="qty-stepper">
+    <button class="qty-dec" aria-label="Menos">−</button>
+    <input type="number" class="qty" min="1" max="10" value="${item.qty}" data-qty>
+    <button class="qty-inc" aria-label="Más">+</button>
+  </div>
+  <span class="price" data-price>$${(item.price * item.qty).toLocaleString('es-AR')}</span>
+  <button class="remove" aria-label="Quitar">🗑️</button>
+`;
+    cartItemsList.appendChild(li);
+  });
+
+  // Qty + remove events
+  cartItemsList.querySelectorAll('[data-qty]').forEach(input => {
+    input.addEventListener('change', () => {
+     const id  = input.closest('.cart-item').dataset.id;
+const raw = parseInt(input.value, 10) || 1;
+const qty = Math.max(1, Math.min(10, raw));
+input.value = qty;          // fuerza valor válido
+updateItemQty(id, qty);
+refreshStepperState();
+    });
+  });
+  // Botones + / -
+cartItemsList.querySelectorAll('.qty-inc').forEach(btn => {
+  btn.addEventListener('click', () => {
+    changeQty(btn.closest('.cart-item').dataset.id, +1);
+  });
+});
+cartItemsList.querySelectorAll('.qty-dec').forEach(btn => {
+  btn.addEventListener('click', () => {
+    changeQty(btn.closest('.cart-item').dataset.id, -1);
+  });
+});
+
+// Habilita / deshabilita flechas según límites
+function refreshStepperState() {
+  cartItemsList.querySelectorAll('.cart-item').forEach(li => {
+    const item = cart.find(i => i.id === li.dataset.id);
+    if (!item) return;
+    li.querySelector('.qty-dec').disabled = item.qty <= 1;
+    li.querySelector('.qty-inc').disabled = item.qty >= 10;
+  });
+}
+refreshStepperState();
+  cartItemsList.querySelectorAll('.remove').forEach(btn => {
+    btn.addEventListener('click', () => {
+      removeItem(btn.closest('.cart-item').dataset.id);
+    });
+  });
+}
+// Cambia cantidad con delta (+1 / -1)
+function changeQty(id, delta) {
+  const item = cart.find(i => i.id === id);
+  if (!item) return;
+  const newQty = Math.max(1, Math.min(10, item.qty + delta));
+  if (newQty !== item.qty) {
+    item.qty = newQty;
+    saveCart(); updateCartCount();
+    if (typeof refreshStepperState === 'function') refreshStepperState();
+  }
+}
+function updateItemQty(id, qty) {
+  qty = Math.max(1, Math.min(10, qty));   // 1‑10 allowed
+  const item = cart.find(i => i.id === id);
+  if (!item) return;
+  item.qty = qty;
+  saveCart(); updateCartCount();
+}
+function removeItem(id) {
+  cart = cart.filter(i => i.id !== id);
+  saveCart(); updateCartCount();
+}
+
+function openCartPanel() {
+  if (!cartPanelElm) return;
+  renderCartPanel();
+  cartPanelElm.classList.remove('hidden');
+  cartPanelElm.classList.add('show');
+  cartOverlayElm?.classList.remove('hidden');
+  cartOverlayElm?.classList.add('show');
+  lockScroll();
+  updateCartCount();   // refresca total dentro del panel
+}
+function closeCartPanel() {
+  if (!cartPanelElm) return;
+  cartPanelElm.classList.add('hidden');
+  cartPanelElm.classList.remove('show');
+  cartOverlayElm?.classList.add('hidden');
+  cartOverlayElm?.classList.remove('show');
+  unlockScroll();
+}
+
+// Event bindings
+cartFab?.addEventListener('click', openCartPanel);
+cartCloseFab?.addEventListener('click', closeCartPanel);
+cartOverlayElm?.addEventListener('click', closeCartPanel);
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape' && cartPanelElm?.classList.contains('show')) closeCartPanel();
+});
+let startX;
+cartPanelElm?.addEventListener('touchstart', e => { startX = e.touches[0].clientX; });
+cartPanelElm?.addEventListener('touchend',   e => {
+  if (startX !== undefined && e.changedTouches[0].clientX - startX < -60) closeCartPanel();
+  startX = undefined;
+});
 
   // Cart modal
   const cartToggleBtn = document.querySelector('.cart-toggle');

@@ -1,149 +1,234 @@
 <!DOCTYPE html>
 <html lang="es">
-<head>
-  <meta charset="UTF-8" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>BERA clothing – Finalizar compra</title>
-  <meta name="description" content="Finaliza tu compra en BERA clothing: revisa tu pedido, elige envío y método de pago." />
-  <link rel="icon" href="assets/images/favicon.ico" />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap" rel="stylesheet" />
-  <script src="https://sdk.mercadopago.com/js/v2"></script>
-  <link rel="stylesheet" href="css/checkout.css" />
-</head>
-<body>
-  <!-- HEADER -->
-  <header class="site-header">
-    <!-- (aquí va tu mismo header de siempre) -->
-  </header>
+  <head>
+    <!-- General -->
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-  <!-- MAIN -->
-  <main id="main-content">
-    <!-- Hero / Info de tránsito -->
-    <section class="section section-hero">
-      <div class="container">
-        <h2 class="section-title">Finalizar compra</h2>
-        <p class="hero-subtitle">
-          Confirma tu pedido, elige envío y paga de forma segura con Mercado Pago o retiro en local.
-        </p>
-      </div>
-    </section>
+    <!-- SEO & Social -->
+    <title>BERA Clothing | Finalizar compra</title>
+    <meta
+      name="description"
+      content="Finalizá tu compra en BERA Clothing: revisá tu pedido, elegí envío y pagá de forma segura con Mercado Pago o retiro en local."
+    />
+    <link rel="icon" href="assets/images/favicon.ico" />
 
-    <!-- Contenido de checkout -->
-    <section class="section section-checkout">
-      <div class="container checkout-container">
-        <!-- Resumen de pedido -->
-        <aside class="checkout-summary-panel">
-          <h3 class="panel-title">Resumen de tu pedido</h3>
-          <ul class="order-items">
-            <!-- JS inyecta productos aquí -->
-          </ul>
-          <div class="summary-totals">
-            <div class="summary-row"><span>Subtotal</span><strong id="summary-subtotal">$0</strong></div>
-            <div class="summary-row"><span>Impuestos (21%)</span><strong id="summary-tax">$0</strong></div>
-            <div class="summary-row"><span>Envío</span><strong id="summary-shipping">$0</strong></div>
-            <div class="summary-row total"><span>Total</span><strong id="summary-total">$0</strong></div>
-          </div>
-          <button id="cancel-checkout" type="button" class="btn btn-secondary btn-block">
-            ¿Te arrepentiste? Volver al inicio
-          </button>
-        </aside>
+    <!-- Typography -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap"
+      rel="stylesheet"
+    />
 
-        <!-- Formulario de opciones y pago -->
-        <form id="checkout-form" class="checkout-form">
-          <!-- Código postal -->
-          <div class="form-group">
-            <label for="zip-input">Código postal</label>
-            <input type="text" id="zip-input" name="zip" placeholder="Ej. 1900" required />
-            <p class="zip-help">
-              ¿No sabes tu código postal?
-              <a href="https://www.correoargentino.com.ar/formularios/cpa" target="_blank" rel="noopener">Búscalo aquí</a>.
-            </p>
-          </div>
+    <!-- Styles -->
+    <link rel="stylesheet" href="css/checkout.css" />
+    <link rel="stylesheet" href="css/style.css" />
 
-          <!-- Envío -->
-          <fieldset class="form-group">
-            <legend>Método de envío</legend>
-            <div id="shipping-methods" class="shipping-methods">
-              <label>
-                <span class="option-wrapper">
-                  <input type="radio" name="shipping" value="standard" data-cost="800" checked />
-                  <span class="option-label">Estándar</span>
-                  <span class="option-detail">3–5 días – $800</span>
-                </span>
-              </label>
-              <label>
-                <span class="option-wrapper">
-                  <input type="radio" name="shipping" value="express" data-cost="1200" />
-                  <span class="option-label">Express</span>
-                  <span class="option-detail">1–2 días – $1200</span>
-                </span>
-              </label>
-              <label>
-                <span class="option-wrapper">
-                  <input type="radio" name="shipping" value="pickup" data-cost="0" />
-                  <span class="option-label">Retiro en local</span>
-                  <span class="option-detail">Gratis</span>
-                </span>
-              </label>
-            </div>
-          </fieldset>
+    <!-- Mercado Pago SDK -->
+    <script src="https://sdk.mercadopago.com/js/v2"></script>
+  </head>
 
-          <!-- Pago -->
-          <fieldset class="form-group">
-            <legend>Método de pago</legend>
-            <div class="payment-methods">
-              <label>
-                <span class="option-wrapper">
-                  <input type="radio" name="payment" value="mercadopago" checked />
+  <body>
+    <!-- HEADER -->
+    <header class="site-header" role="banner">
+      <!-- (aquí va tu mismo header de siempre) -->
+    </header>
+
+    <!-- MAIN CONTENT -->
+    <main id="main-content" tabindex="-1">
+      <!-- Hero -->
+      <section class="section section-hero" aria-labelledby="hero-title">
+        <div class="container">
+          <h1 id="hero-title" class="section-title">Finalizar compra</h1>
+          <p class="hero-subtitle">
+            Confirmá tu pedido, elegí un método de envío y pagá de forma segura con Mercado Pago o retiro en local.
+          </p>
+        </div>
+      </section>
+
+      <!-- Checkout -->
+      <section class="section section-checkout">
+        <div class="container checkout-container">
+          <!-- Resumen -->
+          <aside
+            class="checkout-summary-panel"
+            aria-labelledby="summary-title"
+          >
+            <h2 id="summary-title" class="panel-title">Resumen de tu pedido</h2>
+            <ul class="order-items" role="list">
+              <!-- JS inyecta productos aquí -->
+            </ul>
+
+            <dl class="summary-totals" aria-live="polite">
+              <div class="summary-row">
+                <dt>Subtotal</dt>
+                <dd id="summary-subtotal">$0</dd>
+              </div>
+              <div class="summary-row">
+                <dt>Impuestos (21&nbsp;%)</dt>
+                <dd id="summary-tax">$0</dd>
+              </div>
+              <div class="summary-row">
+                <dt>Envío</dt>
+                <dd id="summary-shipping">$0</dd>
+              </div>
+              <div class="summary-row total">
+                <dt>Total</dt>
+                <dd id="summary-total">$0</dd>
+              </div>
+            </dl>
+
+            <button
+              id="cancel-checkout"
+              type="button"
+              class="btn btn-secondary btn-block"
+            >
+              ¿Te arrepentiste? Volver al inicio
+            </button>
+          </aside>
+
+          <!-- Formulario -->
+          <form
+            id="checkout-form"
+            class="checkout-form"
+            autocomplete="on"
+            novalidate
+          >
+            <!-- Datos de envío -->
+            <fieldset class="form-group" aria-labelledby="legend-shipping-data">
+              <legend id="legend-shipping-data">Datos de envío</legend>
+
+              <!-- Código postal -->
+              <div class="form-group">
+                <label for="zip-input"
+                  >Código postal <span aria-hidden="true">*</span></label
+                >
+                <input
+                  type="text"
+                  id="zip-input"
+                  name="zip"
+                  inputmode="numeric"
+                  pattern="[0-9]{4}"
+                  maxlength="4"
+                  placeholder="Ej. 1900"
+                  required
+                  aria-describedby="zip-help"
+                />
+                <small id="zip-help" class="zip-help">
+                  ¿No sabés tu código postal?
+                  <a
+                    href="https://www.correoargentino.com.ar/formularios/cpa"
+                    target="_blank"
+                    rel="noopener"
+                    >Buscalo acá</a
+                  >.
+                </small>
+              </div>
+
+              <!-- Método de envío -->
+              <fieldset
+                class="form-group"
+                aria-labelledby="legend-shipping-method"
+              >
+                <legend id="legend-shipping-method">Método de envío</legend>
+
+                <div id="shipping-methods" class="shipping-methods">
+                  <!-- Cada label envuelve su input para mayor área clickeable -->
+                  <label class="option-wrapper">
+                    <input
+                      type="radio"
+                      name="shipping"
+                      value="standard"
+                      data-cost="800"
+                      checked
+                    />
+                    <span class="option-label">Estándar</span>
+                    <span class="option-detail">3–5 días – $800</span>
+                  </label>
+
+                  <label class="option-wrapper">
+                    <input
+                      type="radio"
+                      name="shipping"
+                      value="express"
+                      data-cost="1200"
+                    />
+                    <span class="option-label">Express</span>
+                    <span class="option-detail">1–2 días – $1200</span>
+                  </label>
+
+                  <label class="option-wrapper">
+                    <input
+                      type="radio"
+                      name="shipping"
+                      value="pickup"
+                      data-cost="0"
+                    />
+                    <span class="option-label">Retiro en local</span>
+                    <span class="option-detail">Gratis</span>
+                  </label>
+                </div>
+              </fieldset>
+            </fieldset>
+
+            <!-- Método de pago -->
+            <fieldset class="form-group" aria-labelledby="legend-payment-method">
+              <legend id="legend-payment-method">Método de pago</legend>
+
+              <div class="payment-methods">
+                <label class="option-wrapper">
+                  <input
+                    type="radio"
+                    name="payment"
+                    value="mercadopago"
+                    checked
+                  />
                   <span>Mercado Pago (tarjeta/crédito/débito)</span>
-                </span>
-              </label>
-              <label>
-                <span class="option-wrapper">
+                </label>
+
+                <label class="option-wrapper">
                   <input type="radio" name="payment" value="transferencia" />
                   <span>Transferencia bancaria</span>
-                </span>
-              </label>
-              <label>
-                <span class="option-wrapper">
+                </label>
+
+                <label class="option-wrapper">
                   <input type="radio" name="payment" value="cash" />
                   <span>Efectivo (retiro en local)</span>
-                </span>
-              </label>
-            </div>
-          </fieldset>
+                </label>
+              </div>
+            </fieldset>
 
-          <!-- Botón Mercado Pago -->
-          <div id="mp-button-container"></div>
+            <!-- Botón Mercado Pago (se injecta vía JS) -->
+            <div id="mp-button-container"></div>
 
-          <!-- Botón de confirmación -->
-          <div class="form-group text-center">
-            <button type="submit" id="confirm-order" class="btn btn-primary btn-block">
+            <!-- Confirmación -->
+            <button
+              type="submit"
+              id="confirm-order"
+              class="btn btn-primary btn-block"
+            >
               Confirmar pedido
             </button>
-          </div>
-        </form>
-      </div>
-    </section>
-  </main>
+          </form>
+        </div>
+      </section>
+    </main>
 
-  <!-- FOOTER -->
-  <footer class="site-footer">
-    <!-- (aquí va tu mismo footer de siempre) -->
-  </footer>
+    <!-- FOOTER -->
+    <footer class="site-footer" role="contentinfo">
+      <!-- (aquí va tu mismo footer de siempre) -->
+    </footer>
 
-  <!-- Scripts -->
-  <script src="js/script.js" defer></script>
-  <script src="js/checkout.js" defer></script>
-  <!-- Definir clave pública de Mercado Pago (sandbox o producción) -->
-  <script>
-    // En pruebas utiliza la TEST_PUBLIC_KEY de sandbox (empieza con 'TEST-')
-    // En producción reemplaza con tu Public Key real (empieza con 'APP_USR-')
-    window.MP_PUBLIC_KEY = 'TU_PUBLIC_KEY_AQUÍ';
-  </script>
-  <script src="js/mp-checkout.js" defer></script>
-</body>
+    <!-- Scripts -->
+    <script src="js/script.js" defer></script>
+    <script src="js/checkout.js" defer></script>
+    <!-- Definí tu clave pública de MP -->
+    <script>
+      // Reemplazá por tu clave de producción cuando pases a live
+      window.MP_PUBLIC_KEY = 'TU_PUBLIC_KEY_AQUÍ';
+    </script>
+    <script src="js/mp-checkout.js" defer></script>
+  </body>
 </html>
