@@ -149,7 +149,7 @@ if (collectionToggle && collectionMenu && collectionOverlay && collectionClose) 
       title: 'Prueba Rosa',
       price: '$21.200',
       details: 'Talle: Único<br>Tela: Acrílico hipoalergénico<br>Tejido: Punto inglés',
-      description: 'Gorro tejido color rosa, suave y abrigado, perfecto para el invierno.',
+      description: 'Gorro tejido color gris, suave y abrigado, perfecto para el invierno.',
       images: [
         'assets/images/Gorroinv.png',
         'assets/images/Gorroinv.png',
@@ -171,8 +171,8 @@ if (collectionToggle && collectionMenu && collectionOverlay && collectionClose) 
     'remera-shift': {
       title: 'Remera Shift',
       price: '$15.400',
-      details: 'Talle: S‑XL<br>Tela: Algodón peinado 24/1<br>Color: Blanco con print',
-      description: 'Remera manga corta con estampa “Shift”. Corte regular y tacto suave.',
+      details: 'Talle: ‑ <br>Tela: Algodón peinado 24/1<br>Color: gris con letras blancas',
+      description: 'Gorra con estampa “BeraClothing”.',
       images: [
         'assets/images/Gorra.png',
         'assets/images/Gorra.png',
@@ -180,10 +180,10 @@ if (collectionToggle && collectionMenu && collectionOverlay && collectionClose) 
       ]
     },
     'remera-dibujo': {
-      title: 'Remera Dibujo',
+      title: 'Gorro Invierno',
       price: '$21.200',
-      details: 'Talle: S‑XL<br>Tela: Algodón 100%<br>Estampa: Dibujo artístico',
-      description: 'Remera básica con ilustración frontal impresa en serigrafía eco.',
+      details: 'Talle: S‑XL<br>Tela: Algodón 100%<br>Estampa: BeraClothing',
+      description: 'Gorro de invierno de algodon con estampa BeraClothing.',
       images: [
         'assets/images/Gorroinv.png',
         'assets/images/Gorroinv.png',
@@ -191,10 +191,10 @@ if (collectionToggle && collectionMenu && collectionOverlay && collectionClose) 
       ]
     },
     'buzo-gris': {
-      title: 'Buzo Gris',
+      title: 'Buzo Gris oscuro',
       price: '$58.200',
       details: 'Talle: XL<br>Tela: Frisa premium 320 g<br>Corte: Oversize',
-      description: 'Buzo unisex oversize color gris, interior súper suave para días fríos.',
+      description: 'Buzo unisex oversize color gris oscuro, interior súper suave para días fríos.',
       images: [
         'assets/images/Buzoxl.png',
         'assets/images/Buzoxl.png',
@@ -202,10 +202,10 @@ if (collectionToggle && collectionMenu && collectionOverlay && collectionClose) 
       ]
     },
     'buzo-over': {
-      title: 'Buzo Over',
+      title: 'Remera Gris s',
       price: '$34.500',
       details: 'Talle: L<br>Tela: French Terry<br>Fit: Oversize relajado',
-      description: 'Buzo liviano oversize con cuello redondo y terminaciones en rib.',
+      description: 'Remera gris S con Estampa.',
       images: [
         'assets/images/RemeraL.png',
         'assets/images/RemeraL.png',
@@ -213,10 +213,10 @@ if (collectionToggle && collectionMenu && collectionOverlay && collectionClose) 
       ]
     },
     'pantalon-rosa': {
-      title: 'Pantalón Rosa',
+      title: 'Pantalon Over negro',
       price: '$45.000',
       details: 'Talle: S<br>Tela: Gabardina stretch<br>Corte: Cargo slim',
-      description: 'Pantalón cargo rosa con bolsillos laterales y cintura elástica.',
+      description: 'Pantalón cargo negro con bolsillos laterales y cintura elástica.',
       images: [
         'assets/images/PantalonS.png',
         'assets/images/PantalonS.png',
