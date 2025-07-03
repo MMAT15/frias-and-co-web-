@@ -302,8 +302,8 @@ img {
 /* --------------------------------------------------
    Menú móvil
 -------------------------------------------------- */
-@media (max-width: 768px) {
   /* .nav-toggle and .cart-toggle absolute rules removed for new layout */
+  @media (max-width: 768px) {
   .nav-toggle {
     display: flex;             /* ensure hamburger is visible */
     position: static;          /* follow the header flex layout */
@@ -374,6 +374,15 @@ img {
     flex-direction: column;
     gap: 1rem;
     padding: 1rem;
+  }
+  /* --- Ajuste imágenes producto en móvil --- */
+  .producto-item img,
+  .featured-card img {
+    width: 100%;
+    height: auto !important;      /* quita la altura fija que recortaba */
+    object-fit: cover;            /* llena sin dejar bordes blancos */
+    aspect-ratio: 4 / 5;          /* mantiene proporción vertical */
+    border-radius: var(--border-radius);
   }
 }
 
