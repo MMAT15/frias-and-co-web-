@@ -376,16 +376,6 @@ img {
     padding: 1rem;
   }
   /* --- Ajuste imágenes producto en móvil --- */
-  .producto-item img,
-  .featured-card img {
-    width: 100%;
-    height: auto !important;      /* quita la altura fija que recortaba */
-    object-fit: cover;            /* llena sin dejar bordes blancos */
-    aspect-ratio: 4 / 5;          /* mantiene proporción vertical */
-    border-radius: var(--border-radius);
-  }
-
-  /* --- Mostrar 2 tarjetas por fila en móvil --- */
   .grid-productos,
   .grid-ofertas,
   .grid-featured {
@@ -393,19 +383,13 @@ img {
     gap: 1rem;                                /* un poco menos de espacio */
   }
 
-  /* Tarjetas a lo Nike: 2 por fila, img cuadrada 1:1 */
-  .producto-item,
-  .featured-card,
-  .offer-item {
-    aspect-ratio: 1 / 1;           /* hace que la tarjeta sea cuadrada */
-    overflow: hidden;              /* recorta exceso de imagen */
-  }
+  /* Tarjetas móviles: 2 por fila, imagen fija y texto/button debajo */
   .producto-item img,
   .featured-card img,
   .offer-item img {
     width: 100%;
-    height: 100% !important;       /* llena la tarjeta */
-    object-fit: cover;             /* recorte estético */
+    height: 180px !important;   /* alto consistente sin tapar el texto */
+    object-fit: cover;
   }
 }
 
