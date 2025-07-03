@@ -488,3 +488,15 @@
   font-weight: 600;
   margin-bottom: 0.5rem;
 }
+
+/* --- Ajuste imágenes producto (móvil) --- */
+@media (max-width: 768px) {
+  .producto-item img,
+  .modern-grid .producto-item img {
+    width: 100%;
+    height: auto !important;   /* evita recortes verticales */
+    max-height: none !important;
+    object-fit: cover;         /* llena la tarjeta sin bordes blancos */
+    aspect-ratio: 4 / 5;       /* proporción 4:5 uniforme */
+  }
+}
