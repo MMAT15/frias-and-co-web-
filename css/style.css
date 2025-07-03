@@ -393,11 +393,19 @@ img {
     gap: 1rem;                                /* un poco menos de espacio */
   }
 
-  /* Imágenes más compactas para no hacer scroll infinito */
+  /* Tarjetas a lo Nike: 2 por fila, img cuadrada 1:1 */
+  .producto-item,
+  .featured-card,
+  .offer-item {
+    aspect-ratio: 1 / 1;           /* hace que la tarjeta sea cuadrada */
+    overflow: hidden;              /* recorta exceso de imagen */
+  }
   .producto-item img,
   .featured-card img,
   .offer-item img {
-    height: 160px !important;        /* antes 250 / 200 px */
+    width: 100%;
+    height: 100% !important;       /* llena la tarjeta */
+    object-fit: cover;             /* recorte estético */
   }
 }
 
