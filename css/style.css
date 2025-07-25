@@ -1332,19 +1332,6 @@ img {
 .collection-toggle:focus-visible svg {
   transform: rotate(8deg) scale(1.1);
 }
-.fall-emoji {
-  position: fixed;
-  top: -60px;
-  z-index: 9999;
-  pointer-events: none;
-  animation: fall var(--emoji-duration, 4s) linear forwards;
-  transform-origin: center;
-}
-
-@keyframes fall {
-  0%   { transform: translateY(0) rotate(0deg);   opacity: 1; }
-  100% { transform: translateY(100vh) rotate(360deg); opacity: 0; }
-}
 /* ---------- PRODUCT MODAL ---------- */
 .product-modal {
   position: fixed;
