@@ -1,18 +1,21 @@
 #!/bin/sh
-
 if [ -z "$husky_skip_init" ]; then
-  debug() {
-    [ "$HUSKY_DEBUG" = "1" ] && echo "husky: $*"
+  debug () {
+    [ "$HUSKY_DEBUG" = "1" ] && echo "husky (debug) - $1"
   }
   readonly hook_name="$(basename "$0")"
   debug "starting $hook_name..."
-  readonly husky_dir="$(dirname "$0")/.."
-  debug "husky_dir: $husky_dir"
-  readonly git_params="$(printf '%q ' "$@")"
-  if [ -f "$husky_dir/husky.sh" ]; then
-    . "$husky_dir/husky.sh"
-  else
-    debug "running npx --no-install husky-run $hook_name $git_params"
-    npx --no-install husky-run "$hook_name" $git_params
+  if [ "$HUSKY" = "0" ]; then
+    debug "HUSKY env variable is set to 0, skipping hook";
+    exit 0
   fi
+  if [ -f ~/.huskyrc ]; then
+    debug "sourcing ~/.huskyrc"
+    . ~/.huskyrc
+  fi
+  export readonly husky_skip_init=1
+  sh -e "$0" "$@"
+  exitCode="$?"
+  debug "Exiting $hook_name with exit code $exitCode"
+  exit "$exitCode"
 fi

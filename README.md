@@ -1,17 +1,10 @@
 # BERA Clothing
-Este repositorio contiene únicamente la aplicación Next.js tras eliminar la versión estática previa.
 
-Proyecto de e-commerce basado en Next.js 14.
+Proyecto Next.js 13 con App Router y TypeScript.
 
-## Scripts
-- `npm run dev` inicia entorno de desarrollo
-- `npm run build` crea build de producción
-- `npm run start` sirve la app
+## Instalaci\u00f3n
 
-## Variables de entorno
-- `NEXT_PUBLIC_SITE_URL` URL pública del sitio
-
-## Despliegue
-Configurar variables y ejecutar `npm run build` seguido de `npm run start`. Para regenerar páginas estáticas se pueden usar webhooks desde el CMS.
-✅ Proyecto Next.js funcionando desde raíz
-
+```bash
+pnpm i
+pnpm dev
+```
