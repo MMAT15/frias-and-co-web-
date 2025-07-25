@@ -13,3 +13,5 @@ Proyecto de e-commerce basado en Next.js 14.
 
 ## Despliegue
 Configurar variables y ejecutar `npm run build` seguido de `npm run start`. Para regenerar páginas estáticas se pueden usar webhooks desde el CMS.
+✅ Proyecto Next.js funcionando desde raíz
+
