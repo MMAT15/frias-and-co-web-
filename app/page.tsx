@@ -1,5 +1,4 @@
-'use client';
-export const dynamic = 'force-dynamic';
+
 import HeroSlider from '@/components/commerce/HeroSlider'
 import ProductGrid from '@/components/commerce/ProductGrid'
 import Newsletter from '@/components/commerce/Newsletter'
