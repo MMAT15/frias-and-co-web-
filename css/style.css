@@ -3,7 +3,7 @@
 
 /*************** General styles *******************/
 body {
-  font-family: 'Montserrat', sans-serif;
+  font-family: var(--fuente-base);
   margin: 0;
   padding: 0;
   color: var(--color-text);
@@ -45,12 +45,19 @@ textarea:focus {
 
 /* Variables de tema */
 :root {
-  --color-principal: #222222;
-  --color-fondo: #ffffff;
-  --color-acento: #000000;
-  --color-acento-sec: #555555;
+  /* Modern color palette */
+  --color-principal: #333333;          /* base text color */
+  --color-fondo: #ffffff;              /* page background */
+  --color-acento: #e91e63;             /* primary accent */
+  --color-acento-sec: #757575;         /* secondary accent */
+
+  /* Additional aliases used in legacy rules */
+  --color-text: var(--color-principal);
+  --color-bg: var(--color-fondo);
+  --color-text-light: #ffffff;
+
   --border-radius: 0.5rem;
-  --fuente-base: 'Montserrat', sans-serif;
+  --fuente-base: 'Poppins', sans-serif;
   --transition: 0.3s ease;
 }
 
@@ -104,7 +111,7 @@ img {
    HEADER (safe-area, sombra y posicionamiento)
 -------------------------------------------------- */
 .site-header {
-  background-color: var(--color-fondo);
+  background: linear-gradient(90deg, #fff, #f9f9f9);
   position: sticky;
   top: 0;
   /* espacio para notch o barra de estado */
@@ -418,7 +425,7 @@ img {
 .swiper-hero .hero-overlay {
   position: absolute;
   inset: 0;
-  background-color: rgba(0, 0, 0, 0.4);
+  background: linear-gradient(rgba(0,0,0,0.45), rgba(0,0,0,0.25));
   z-index: 1;
 }
 .swiper-hero .hero-content {
@@ -431,12 +438,14 @@ img {
   padding: 0 1rem;
 }
 .swiper-hero .hero-title {
-  font-size: 3rem;
-  margin-bottom: 0.5rem;
+  font-size: 3.5rem;
+  margin-bottom: 0.75rem;
+  letter-spacing: -0.5px;
 }
 .swiper-hero .hero-subtitle {
-  font-size: 1.25rem;
-  margin-bottom: 1.5rem;
+  font-size: 1.35rem;
+  margin-bottom: 1.75rem;
+  font-weight: 400;
 }
 .swiper-hero .swiper-pagination {
   position: absolute;
@@ -478,6 +487,7 @@ img {
   padding: 0.75rem 1.5rem;
   border: none;
   border-radius: var(--border-radius);
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
   transition: var(--transition);
 }
 .btn-primary:hover {
@@ -490,6 +500,7 @@ img {
   padding: 0.75rem 1.5rem;
   border: none;
   border-radius: var(--border-radius);
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
   transition: var(--transition);
 }
 .btn-secondary:hover {
@@ -575,6 +586,7 @@ img {
   border-radius: var(--border-radius);
   overflow: hidden;
   transition: transform var(--transition), box-shadow var(--transition);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.06);
 }
 .producto-item:hover {
   transform: translateY(-5px);
