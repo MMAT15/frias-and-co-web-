@@ -33,6 +33,7 @@
     "prettier": "^3.0.3",
     "tailwindcss": "^3.4.0",
     "typescript": "^5.2.2"
+    "@types/react": "^18.2.0"
     },
     "resolutions": {
   "eslint": "^8.56.0"
