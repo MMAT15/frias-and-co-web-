@@ -1,3 +1,5 @@
+'use client';
+
 import './globals.css'
 import type { ReactNode } from 'react'
 import Header from '@/components/ui/Header'
