@@ -1,4 +1,5 @@
 # BERA Clothing
+Este repositorio contiene únicamente la aplicación Next.js tras eliminar la versión estática previa.
 
 Proyecto de e-commerce basado en Next.js 14.
 
