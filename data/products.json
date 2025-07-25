@@ -1,0 +1,32 @@
+[
+  {
+    "id": "1",
+    "name": "Top Básico Negro",
+    "slug": "top-basico-negro",
+    "description": "Top de algodón con breteles ajustables.",
+    "price": 12900,
+    "sizes": ["S", "M", "L"],
+    "colors": ["#000000"],
+    "images": ["https://images.unsplash.com/photo-1602810312-9a30b962f8d8"]
+  },
+  {
+    "id": "2",
+    "name": "Body Blanco",
+    "slug": "body-blanco",
+    "description": "Body clásico manga larga.",
+    "price": 15900,
+    "sizes": ["S", "M", "L", "XL"],
+    "colors": ["#FFFFFF"],
+    "images": ["https://images.unsplash.com/photo-1587300003388-59208cc962cb"]
+  },
+  {
+    "id": "3",
+    "name": "Top Burdeos",
+    "slug": "top-burdeos",
+    "description": "Top color burdeos de lycra.",
+    "price": 13900,
+    "sizes": ["S", "M", "L"],
+    "colors": ["#7B183A"],
+    "images": ["https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e"]
+  }
+]
