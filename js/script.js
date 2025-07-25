@@ -334,6 +334,14 @@ if (collectionToggle && collectionMenu && collectionOverlay && collectionClose) 
     });
   }
 
+  // Header shadow on scroll
+  const siteHeader = document.querySelector('.site-header');
+  if (siteHeader) {
+    window.addEventListener('scroll', throttle(() => {
+      siteHeader.classList.toggle('scrolled', window.scrollY > 50);
+    }, 100));
+  }
+
   // LAZY ANIMATIONS
   const animItems = document.querySelectorAll('.animate-on-scroll');
   if (animItems.length) {

@@ -123,7 +123,15 @@ img {
   align-items: center;
   justify-content: center;
   box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+  transition: background var(--transition), box-shadow var(--transition);
   z-index: 1000;
+}
+
+/* Apariencia cuando la página se ha scrolleado */
+.site-header.scrolled {
+  background: rgba(255,255,255,0.9);
+  backdrop-filter: saturate(180%) blur(15px);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
 }
 
 /* Contenido interno del header */
@@ -480,6 +488,11 @@ img {
   text-align: center;
   display: inline-block;
   cursor: pointer;
+  outline: none;
+}
+.btn:focus-visible {
+  outline: 2px solid var(--color-acento);
+  outline-offset: 2px;
 }
 .btn-primary {
   background-color: var(--color-acento);
@@ -1023,11 +1036,23 @@ img {
   }
   /* ---------- OFF-CANVAS “BeraClothing” ---------- */
 .collection-toggle {
-  background: none;
-  border: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  margin-right: 0.5rem;
+  background: var(--color-fondo);
+  border: 1px solid var(--color-acento-sec);
+  border-radius: 50%;
   font: inherit;
   cursor: pointer;
-  margin-left: .5rem;
+  transition: background var(--transition), transform var(--transition);
+}
+.collection-toggle:hover {
+  background: var(--color-acento);
+  color: var(--color-text-light);
+  transform: scale(1.05);
 }
 
 .collection-overlay {
