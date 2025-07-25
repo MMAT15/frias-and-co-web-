@@ -11,7 +11,7 @@ const products = {
 };
 
 export default function ProductPage({ params }: { params: { id: string } }) {
-  const product = products[params.id];
+const product = products[params.id as keyof typeof products];
   if (!product) return notFound();
   return (
     <div className="max-w-4xl mx-auto p-4 grid md:grid-cols-2 gap-6">
