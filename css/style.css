@@ -1,4 +1,3 @@
-
 /* css/style.css */
 
 /*************** General styles *******************/
@@ -1321,8 +1320,9 @@ img {
 /* ---------- Hover / focus effects for Catálogo button ---------- */
 .collection-toggle:hover,
 .collection-toggle:focus-visible {
-  background: var(--color-acento-sec); /* lighter accent so it doesn't appear completely black */
+  background: var(--color-acento);
   color: var(--color-text-light);
+  outline: 3px solid var(--color-acento);
   outline-offset: 2px;
 }
 .collection-toggle svg {
@@ -1344,6 +1344,11 @@ img {
 }
 .product-modal.show {
   display: flex;
+  animation: fadeInModal 0.35s cubic-bezier(.4,0,.2,1);
+}
+@keyframes fadeInModal {
+  from { opacity: 0; transform: scale(0.97);}
+  to   { opacity: 1; transform: scale(1);}
 }
 
 .product-modal-content {
@@ -1353,33 +1358,12 @@ img {
   max-height: 90vh;
   overflow-y: auto;
   border-radius: 8px;
-  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.25);
+  box-shadow: 0 10px 32px rgba(0, 0, 0, 0.28);
   position: relative;
   padding: 1rem;
+  transition: box-shadow 0.35s cubic-bezier(.4,0,.2,1), transform 0.35s cubic-bezier(.4,0,.2,1);
 }
 
-.product-modal-close {
-  position: absolute;
-  top: 0.5rem;
-  right: 0.75rem;
-  background: none;
-  border: none;
-  font-size: 1.75rem;
-  cursor: pointer;
-}
-
-.product-gallery {
-  margin-bottom: 1rem;
-}
-
-.product-info h3 {
-  margin: 0.5rem 0;
-}
-
-.product-info .price {
-  font-weight: 600;
-  margin-bottom: 0.5rem;
-}
 .product-modal-close {
   position: absolute;
   top: 0.5rem;
@@ -1394,7 +1378,18 @@ img {
   z-index: 2;        /* por encima de la galería */
 }
 
+.product-gallery {
+  margin-bottom: 1rem;
+}
 
+.product-info h3 {
+  margin: 0.5rem 0;
+}
+
+.product-info .price {
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+}
 /* --------------------------------------------------
    FOOTER (Enhanced visual style)
 -------------------------------------------------- */
@@ -1707,7 +1702,7 @@ img {
   .main-nav {
     align-self: center;        /* centra el bloque .main-nav en la celda */
     display: flex;
-    align-items: center;       /* centra los links dentro */
+    align-items: center;       /* centra sus links dentro */
   }
 
   /* 3. Garantiza que el branding también esté centrado verticalmente */
@@ -1787,5 +1782,58 @@ img {
   /* Centra los enlaces dentro del nav */
   .nav-list {
     align-items: center;                  /* eje transversal */
+  }
+}
+
+/* Mejoras para visualización móvil, especialmente el botón Catálogo */
+@media (max-width: 768px) {
+  .header-inner {
+    min-height: 60px;
+    padding: 0 0.5rem;
+    gap: 0.5rem;
+  }
+  .collection-toggle {
+    width: 48px !important;
+    height: 48px !important;
+    min-width: 48px;
+    min-height: 48px;
+    margin-right: 0.5rem;
+    padding: 0;
+    border-width: 1.5px;
+    border-radius: 50%;
+    background: var(--color-fondo);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: none;
+    touch-action: manipulation;
+  }
+  .collection-toggle svg {
+    width: 40px !important;
+    height: 40px !important;
+    display: block;
+  }
+  .collection-toggle text {
+    font-size: 10px !important;
+    dominant-baseline: middle;
+    alignment-baseline: middle;
+    y: 54 !important;
+  }
+  .logo-wrap {
+    width: 44px;
+    height: 44px;
+  }
+  .site-title {
+    font-size: 1.05rem;
+  }
+  .site-tagline {
+    font-size: 0.7rem;
+  }
+  .collection-toggle:active,
+  .collection-toggle:focus-visible {
+    background: var(--color-acento);
+    color: var(--color-text-light);
+    outline: 2px solid var(--color-acento);
+    outline-offset: 2px;
   }
 }

@@ -24,38 +24,23 @@
   <!-- HEADER -->
   <header class="site-header" role="banner">
     <div class="container header-inner">
-       <!-- Botón que abre el menú de colecciones -->
-<button class="collection-toggle" aria-label="Ir al catálogo" aria-expanded="false" aria-controls="collection-menu">
-<svg width="44" height="44" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
-  <!-- Marco exterior -->
-  <rect x="4" y="4" width="56" height="56" rx="6"
-        stroke="#000" stroke-width="2" fill="none"/>
-
-  <!-- Gancho -->
-  <path d="M32 24
-           C32 20 28 20 28 24
-           C28 26 30 27.5 32 28"
-        fill="none" stroke="#000" stroke-width="2"
-        stroke-linecap="round" stroke-linejoin="round"/>
-
-  <!-- Cuerpo de la percha -->
-  <path d="M16 40 L32 28 L48 40" fill="none"
-        stroke="#000" stroke-width="2"
-        stroke-linecap="round" stroke-linejoin="round"/>
-
-  <!-- Texto -->
-  <text x="32" y="52" text-anchor="middle" font-size="11"
-        font-family="Arial, sans-serif" fill="#000">Catálogo</text>
-</svg>
-</button>
+      <!-- Botón que abre el menú de colecciones -->
+      <button class="collection-toggle" aria-label="Abrir menú Catálogo" aria-expanded="false" aria-controls="collection-menu">
+        <svg width="44" height="44" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
+          <rect x="4" y="4" width="56" height="56" rx="6" stroke="#000" stroke-width="2" fill="none"/>
+          <path d="M32 24 C32 20 28 20 28 24 C28 26 30 27.5 32 28" fill="none" stroke="#000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M16 40 L32 28 L48 40" fill="none" stroke="#000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          <text x="32" y="54" text-anchor="middle" font-size="10" font-family="Arial, sans-serif" fill="#000">Catálogo</text>
+        </svg>
+      </button>
       <div class="site-branding">
-        <a href="index.html" class="logo-link" aria-label="Inicio">
+        <a href="index.html" class="logo-link" aria-label="Inicio" aria-current="page">
           <div class="logo-wrap">
             <img src="assets/images/logoo.jpeg" alt="Logo BERA clothing" class="logo" />
           </div>
         </a>
         <h1 class="site-title">BERA clothing</h1>
-       <span class="site-tagline">By FRIAS</span>
+        <span class="site-tagline">By FRIAS</span>
       </div>
       <button class="nav-toggle"
               aria-controls="primary-navigation"
@@ -68,7 +53,7 @@
            role="navigation"
            aria-label="Menú principal">
         <ul class="nav-list">
-          <li><a href="index.html" class="active">Inicio</a></li>
+          <li><a href="index.html" class="active" aria-current="page">Inicio</a></li>
           <li><a href="newsletter.html">Novedades</a></li>
           <li><a href="productos.html">Productos</a></li>
           <li><a href="contacto.html">Contacto</a></li>
@@ -255,53 +240,55 @@
       <p>© 2025 BERA clothing. Todos los derechos reservados.</p>
     </div>
   </footer>
+  <!-- Overlay oscurece la pantalla y cierra el menú al tocar fuera -->
+  <div id="collection-overlay" class="collection-overlay"></div>
+
+  <!-- Off-canvas con las categorías -->
+  <aside id="collection-menu" class="collection-menu" aria-hidden="true">
+    <button id="collection-close" class="collection-close" aria-label="Cerrar menú">×</button>
+
+    <nav class="collection-nav" role="navigation" aria-label="Categorías de ropa">
+      <h2 class="collection-heading">CLOTHING ▾</h2>
+      <ul class="collection-list">
+        <li><a href="productos.html">Ver todo en CLOTHING</a></li>
+        <li><a href="productos.html#remeras">Remeras</a></li>
+        <li><a href="productos.html#tops">Tops / Blusas</a></li>
+        <li><a href="productos.html#camisas">Camisas</a></li>
+        <li><a href="productos.html#shorts">Shorts / Minis</a></li>
+        <li><a href="productos.html#pantalones">Pantalones</a></li>
+        <li><a href="productos.html#buzos">Buzos y Sweaters</a></li>
+        <li><a href="productos.html#sets">Sets</a></li>
+        <li><a href="productos.html#abrigos">Abrigos</a></li>
+        <li><a href="productos.html#vestidos">Vestidos y Monos</a></li>
+      </ul>
+    </nav>
+  </aside>
+
+  <!-- ---------- PRODUCT MODAL ---------- -->
+  <div id="product-modal" class="product-modal" aria-hidden="true" tabindex="-1">
+    <div class="product-modal-content">
+      <button class="product-modal-close" aria-label="Cerrar">×</button>
+
+      <!-- Swiper gallery -->
+      <div class="product-gallery swiper">
+        <div class="swiper-wrapper" id="product-gallery-wrapper"></div>
+        <div class="swiper-pagination"></div>
+        <div class="swiper-button-prev" aria-label="Anterior foto"></div>
+        <div class="swiper-button-next" aria-label="Siguiente foto"></div>
+      </div>
+
+      <!-- Info -->
+      <div class="product-info">
+        <h3 id="product-modal-title"></h3>
+        <p id="product-modal-price" class="price"></p>
+        <p id="product-modal-description"></p>
+      </div>
+    </div>
+  </div>
+  <!-- ---------- /PRODUCT MODAL ---------- -->
+
   <!-- SCRIPTS -->
   <script src="https://unpkg.com/swiper/swiper-bundle.min.js" defer></script>
   <script src="js/script.js" defer></script>
-  <!-- Overlay oscurece la pantalla y cierra el menú al tocar fuera -->
-<div id="collection-overlay" class="collection-overlay"></div>
-
-<!-- Off-canvas con las categorías -->
-<aside id="collection-menu" class="collection-menu" aria-hidden="true">
-  <button id="collection-close" class="collection-close" aria-label="Cerrar menú">×</button>
-
-  <nav class="collection-nav" role="navigation" aria-label="Categorías de ropa">
-    <h2 class="collection-heading">CLOTHING ▾</h2>
-    <ul class="collection-list">
-      <li><a href="productos.html">Ver todo en CLOTHING</a></li>
-      <li><a href="productos.html#remeras">Remeras</a></li>
-      <li><a href="productos.html#tops">Tops / Blusas</a></li>
-      <li><a href="productos.html#camisas">Camisas</a></li>
-      <li><a href="productos.html#shorts">Shorts / Minis</a></li>
-      <li><a href="productos.html#pantalones">Pantalones</a></li>
-      <li><a href="productos.html#buzos">Buzos y Sweaters</a></li>
-      <li><a href="productos.html#sets">Sets</a></li>
-      <li><a href="productos.html#abrigos">Abrigos</a></li>
-      <li><a href="productos.html#vestidos">Vestidos y Monos</a></li>
-    </ul>
-  </nav>
-</aside>
 </body>
-    <!-- ---------- PRODUCT MODAL ---------- -->
-    <div id="product-modal" class="product-modal" aria-hidden="true">
-      <div class="product-modal-content">
-        <button class="product-modal-close" aria-label="Cerrar">×</button>
-
-        <!-- Swiper gallery -->
-        <div class="product-gallery swiper">
-          <div class="swiper-wrapper" id="product-gallery-wrapper"></div>
-          <div class="swiper-pagination"></div>
-          <div class="swiper-button-prev" aria-label="Anterior foto"></div>
-          <div class="swiper-button-next" aria-label="Siguiente foto"></div>
-        </div>
-
-        <!-- Info -->
-        <div class="product-info">
-          <h3 id="product-modal-title"></h3>
-          <p id="product-modal-price" class="price"></p>
-          <p id="product-modal-description"></p>
-        </div>
-      </div>
-    </div>
-    <!-- ---------- /PRODUCT MODAL ---------- -->
 </html>
