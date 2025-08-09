@@ -500,3 +500,5 @@
     aspect-ratio: 4 / 5;       /* proporción 4:5 uniforme */
   }
 }
+
+/* Las nuevas imágenes y combos usan las mismas reglas de .producto-item y grid-products */

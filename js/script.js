@@ -204,6 +204,84 @@ if (collectionToggle && collectionMenu && collectionOverlay && collectionClose) 
         'assets/images/BuzoOver.png',
         'assets/images/BuzoOver.png'
       ]
+    },
+    // Shorts y combos nuevos
+    'shorts-cuero': {
+      title: 'Shorts cuero negro',
+      price: '$18.000',
+      details: 'Talle: S<br>Tela: Símil cuero<br>Color: Negro',
+      description: 'Shorts de símil cuero negro, tiro alto, ideal para looks urbanos y nocturnos.',
+      images: ['assets/images/IMG_7221.jpeg']
+    },
+    'falda-cuero': {
+      title: 'Falda cuero negro',
+      price: '$17.000',
+      details: 'Talle: S<br>Tela: Símil cuero<br>Color: Negro',
+      description: 'Falda corta de símil cuero negro, corte clásico, perfecta para combinar.',
+      images: ['assets/images/IMG_7222.jpeg']
+    },
+    'shorts-hebilla': {
+      title: 'Shorts negro hebilla',
+      price: '$18.500',
+      details: 'Talle: S<br>Tela: Símil cuero<br>Detalle: Hebilla metálica',
+      description: 'Shorts negro con hebilla decorativa, estilo moderno y versátil.',
+      images: ['assets/images/IMG_7223.jpeg']
+    },
+    'top-halter': {
+      title: 'Top halter negro',
+      price: '$12.000',
+      details: 'Talle: Único<br>Tela: Lycra<br>Color: Negro',
+      description: 'Top halter negro, espalda descubierta, ideal para salidas y fiestas.',
+      images: ['assets/images/IMG_7224.jpeg']
+    },
+    'combo-body': {
+      title: 'Combo body vino y marrón',
+      price: '$22.000',
+      details: 'Talle: Único<br>Incluye: Body color vino y body color marrón',
+      description: 'Combo de dos bodys: uno color vino y otro marrón, ambos de lycra suave.',
+      images: ['assets/images/IMG_7226.jpeg']
+    },
+    'combo-shorts': {
+      title: 'Combo shorts marrón y negro',
+      price: '$35.000',
+      details: 'Talle: S<br>Incluye: Shorts marrón y shorts negro',
+      description: 'Combo de dos shorts: uno marrón y uno negro, ambos en símil cuero.',
+      images: ['assets/images/IMG_7227.jpeg']
+    },
+    'combo-blusa-falda': {
+      title: 'Combo blusa transparente negra + falda cuero',
+      price: '$32.000',
+      details: 'Talle: Único<br>Incluye: Blusa transparente negra y falda de cuero negro',
+      description: 'Combo elegante para noche: blusa transparente negra y falda de cuero.',
+      images: ['assets/images/IMG_7228.jpeg']
+    },
+    'combo-halter-shorts': {
+      title: 'Combo top halter negro + shorts negro (dos modelos)',
+      price: '$29.500',
+      details: 'Talle: Único<br>Incluye: Top halter negro y dos modelos de shorts negro',
+      description: 'Combo de top halter negro y shorts negro, dos estilos para combinar.',
+      images: ['assets/images/IMG_7229.jpeg']
+    },
+    'combo-body-falda': {
+      title: 'Combo body vino y marrón + falda cuero negro',
+      price: '$37.000',
+      details: 'Talle: Único<br>Incluye: Body vino, body marrón y falda cuero negro',
+      description: 'Combo completo: dos bodys y una falda de cuero negro.',
+      images: ['assets/images/IMG_7230.jpeg']
+    },
+    'tops-animal': {
+      title: 'Tops manga larga animal print gris y marrón',
+      price: '$14.000',
+      details: 'Talle: Único<br>Incluye: Top gris y top marrón animal print',
+      description: 'Tops manga larga con estampado animal print, colores gris y marrón.',
+      images: ['assets/images/IMG_7231.jpeg']
+    },
+    'body-vino-falda': {
+      title: 'Body vino con falda cuero negro',
+      price: '$21.000',
+      details: 'Talle: Único<br>Incluye: Body color vino y falda cuero negro',
+      description: 'Body color vino combinado con falda de cuero negro.',
+      images: ['assets/images/IMG_7232.jpeg']
     }
   };
 
