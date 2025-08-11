@@ -25,9 +25,18 @@
   <header class="site-header" role="banner">
     <div class="container header-inner">
      <!-- Botón que abre el menú de colecciones -->
-<button class="collection-toggle" aria-label="Abrir menú Catálogo" aria-expanded="false" aria-controls="collection-menu">
-  <span>Catálogo</span>
-  <img src="assets/icons/percha.svg" alt="" class="icono-percha" />
+<!-- Botón que abre el menú de colecciones -->
+<button class="collection-toggle"
+        aria-label="Abrir menú Catálogo"
+        aria-expanded="false"
+        aria-controls="collection-menu">
+  <span class="collection-label">Catálogo</span>
+  <!-- Ícono percha minimal -->
+  <svg class="icon-hanger" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+    <path d="M12 7.5c0-.8-.6-1.5-1.4-1.5S9 6.7 9 7.5c0 .9.7 1.3 1.5 1.8.6.4 1.1.7 1.1 1.2 0 .5-.4.9-1 .9H10"
+          fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+    <path d="M3 16.5l9-6 9 6" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+  </svg>
 </button>
       <div class="site-branding">
         <a href="index.html" class="logo-link" aria-label="Inicio" aria-current="page">

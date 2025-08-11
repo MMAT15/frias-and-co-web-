@@ -1829,26 +1829,64 @@ img {
   .site-tagline {
     font-size: 0.7rem;
   }
-  .collection-toggle:active,
-  .collection-toggle:focus-visible {
-    background: var(--color-acento);
-    color: var(--color-text-light);
-    outline: 2px solid var(--color-acento);
-    outline-offset: 2px;
-  }.collection-toggle {
-  display: flex;
-  align-items: center;
-  gap: 6px; /* espacio entre texto e ícono */
-  background: none;
-  border: none;
-  font-size: 16px;
-  cursor: pointer;
+}
+/* Layout del header */
+.site-header .header-inner{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:12px;
 }
 
-.collection-toggle .icono-percha {
-  width: 16px; /* ícono pequeño */
-  height: auto;
-}
+/* Que el centro (logo+título) pueda encogerse sin empujar fuera al botón */
+.site-branding{
+  flex:1 1 auto;
+  min-width:0;            /* evita que empuje al botón fuera de pantalla */
+  text-align:center;
 }
 
-/* Las nuevas tarjetas de producto y combos usan los mismos estilos responsive y de tarjetas */
+/* Botón Catálogo: texto + ícono */
+.collection-toggle{
+  display:inline-flex;
+  align-items:center;
+  gap:6px;
+  padding:8px 10px;
+  background:transparent;
+  border:0;
+  font:inherit;
+  line-height:1;
+  white-space:nowrap;     /* no partir “Catálogo” */
+  cursor:pointer;
+  color:#111;             /* ajusta a tu paleta */
+}
+
+/* Quitar cualquier rastro de SVG anterior o fondos raros */
+.collection-toggle svg,
+.collection-toggle .icono-percha{
+  display:block;
+}
+
+.icon-hanger{
+  width:16px;
+  height:16px;
+  flex:0 0 auto;
+}
+
+/* Accesibilidad: foco visible pero sin “cuadradito” feo */
+.collection-toggle:focus-visible{
+  outline:2px solid #e01660; /* tu magenta */
+  outline-offset:2px;
+  border-radius:4px;
+}
+
+/* Hamburguesa y botón con ancho fijo para que no colisionen */
+.nav-toggle{ flex:0 0 auto; }
+.collection-toggle{ flex:0 0 auto; }
+
+/* Mobile */
+@media (max-width:768px){
+  .site-header .container{ padding-left:12px; padding-right:12px; }
+  .header-inner{ gap:8px; }
+  .collection-toggle{ font-size:14px; padding:8px 6px; }
+  .site-title{ font-size:18px; }       /* baja un toque el título si hace falta */
+}
