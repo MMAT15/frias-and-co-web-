@@ -574,3 +574,35 @@
   bottom:calc(env(safe-area-inset-bottom, 0) + 16px);
   z-index:50;
 }
+/* === FIX visualización mobile === */
+
+/* 1) Grilla: 2 tarjetas por fila en celulares chicos */
+.grid-products {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  gap: 12px !important;
+}
+
+/* 2) Escalonar cantidad de columnas según ancho */
+@media (min-width: 560px) {
+  .grid-products { grid-template-columns: repeat(3, 1fr) !important; }
+}
+@media (min-width: 900px) {
+  .grid-products { grid-template-columns: repeat(4, 1fr) !important; }
+}
+
+/* 3) Imágenes: altura controlada por relación de aspecto, sin “clamp” alto */
+.producto-item img,
+.grid-products .producto-item img {
+  width: 100%;
+  height: auto !important;      /* anulamos alturas previas */
+  aspect-ratio: 4 / 5;          /* alto proporcionado al ancho */
+  object-fit: cover;
+  max-height: none !important;  /* evita otros topes */
+  border-radius: 12px;
+}
+
+/* 4) Tarjeta un poco más compacta en mobile */
+.producto-item h3 { font-size: 1rem; }
+.producto-item .price { margin-bottom: 0.5rem; }
+.producto-item .btn { padding: 12px; }
