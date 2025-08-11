@@ -1835,7 +1835,20 @@ img {
     color: var(--color-text-light);
     outline: 2px solid var(--color-acento);
     outline-offset: 2px;
-  }
+  }.collection-toggle {
+  display: flex;
+  align-items: center;
+  gap: 6px; /* espacio entre texto e ícono */
+  background: none;
+  border: none;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.collection-toggle .icono-percha {
+  width: 16px; /* ícono pequeño */
+  height: auto;
+}
 }
 
 /* Las nuevas tarjetas de producto y combos usan los mismos estilos responsive y de tarjetas */
