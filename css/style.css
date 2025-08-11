@@ -1890,3 +1890,100 @@ img {
   .collection-toggle{ font-size:14px; padding:8px 6px; }
   .site-title{ font-size:18px; }       /* baja un toque el título si hace falta */
 }
+/* ====== FIX: Safe-area + botón Catálogo texto+ícono ====== */
+
+/* Variable para padding base */
+:root { --safe-pad: 12px; }
+
+/* Header con safe-area (iPhone notch) */
+.site-header{
+  padding-left: calc(var(--safe-pad) + env(safe-area-inset-left));
+  padding-right: calc(var(--safe-pad) + env(safe-area-inset-right));
+}
+
+/* El contenedor interno no debe añadir padding extra */
+.header-inner{ padding: 0 !important; }
+
+/* Botón Catálogo en formato texto + ícono (anula estilos circulares) */
+.collection-toggle{
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  width: auto !important;
+  height: auto !important;
+  min-width: 0 !important;
+  min-height: 0 !important;
+  border-radius: 4px !important;
+  margin: 0 .25rem 0 0 !important;
+  padding: 6px 10px !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 6px !important;
+  line-height: 1 !important;
+  white-space: nowrap !important;
+  color: var(--color-principal) !important;
+  transition: color .25s ease, transform .25s ease !important;
+}
+
+/* Ícono percha chico */
+.collection-toggle .icon-hanger{
+  width: 16px !important;
+  height: 16px !important;
+  display: block;
+}
+
+/* Hover/focus accesible sin “círculo” */
+.collection-toggle:hover,
+.collection-toggle:focus-visible{
+  color: var(--color-acento) !important;
+  background: transparent !important;
+  outline: 2px solid var(--color-acento) !important;
+  outline-offset: 2px !important;
+}
+
+/* Suavidad al mover el ícono */
+.collection-toggle svg{ transition: transform .25s ease; }
+.collection-toggle:hover svg,
+.collection-toggle:focus-visible svg{ transform: rotate(8deg) scale(1.08); }
+
+/* Evita que el branding empuje el botón fuera de pantalla */
+.site-header .header-inner{
+  display:flex !important;
+  align-items:center !important;
+  justify-content:space-between !important;
+  gap:12px;
+}
+.site-branding{
+  flex:1 1 auto !important;
+  min-width:0 !important;
+  text-align:center;
+}
+.nav-toggle{ flex:0 0 auto; }
+.collection-toggle{ flex:0 0 auto; }
+
+/* Mobile: respeta safe-area también en .container si existe */
+@media (max-width:768px){
+  .site-header .container{
+    padding-left: calc(12px + env(safe-area-inset-left)) !important;
+    padding-right: calc(12px + env(safe-area-inset-right)) !important;
+  }
+  .collection-toggle{
+    font-size: 14px !important;
+    padding: 8px 6px !important;
+  }
+}
+
+/* Desktop: NO agrandes .collection-toggle, deja los tamaños para .catalog-btn únicamente */
+@media (min-width:769px){
+  /* Si tienes reglas que decían: `.catalog-btn, .collection-toggle { ... }`,
+     este override garantiza que la collection-toggle no herede tamaños gigantes. */
+  .collection-toggle{
+    width: auto !important;
+    height: auto !important;
+    padding: 6px 10px !important;
+  }
+  .collection-toggle svg{
+    width: 16px !important;
+    height: 16px !important;
+  }
+}
