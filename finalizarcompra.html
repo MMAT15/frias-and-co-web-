@@ -44,7 +44,7 @@
         <div class="container">
           <h1 id="hero-title" class="section-title">Finalizar compra</h1>
           <p class="hero-subtitle">
-            Confirmá tu pedido, elegí un método de envío y pagá de forma segura con Mercado Pago o retiro en local.
+            Confirmá tu pedido y pagá de forma segura con Mercado Pago. Podés usar dinero en tu cuenta de Mercado Pago o tus tarjetas de débito y crédito guardadas.
           </p>
         </div>
       </section>
@@ -180,29 +180,18 @@
 
               <div class="payment-methods">
                 <label class="option-wrapper">
-                  <input
-                    type="radio"
-                    name="payment"
-                    value="mercadopago"
-                    checked
-                  />
-                  <span>Mercado Pago (tarjeta/crédito/débito)</span>
+                  <input type="radio" name="payment" value="mercadopago" checked />
+                  <span>Mercado Pago (redirige a entorno seguro)</span>
                 </label>
-
-                <label class="option-wrapper">
-                  <input type="radio" name="payment" value="transferencia" />
-                  <span>Transferencia bancaria</span>
-                </label>
-
-                <label class="option-wrapper">
-                  <input type="radio" name="payment" value="cash" />
-                  <span>Efectivo (retiro en local)</span>
-                </label>
+                <p class="payment-help" aria-live="polite">
+                  Mercado Pago procesa el cobro y ofrece múltiples medios: dinero en cuenta de Mercado Pago y tarjetas de débito/crédito guardadas. No almacenamos datos de tarjeta en este sitio.
+                </p>
               </div>
             </fieldset>
 
             <!-- Botón Mercado Pago (se injecta vía JS) -->
             <div id="mp-button-container"></div>
+            <small class="mp-note">Al continuar, te llevamos al checkout seguro de Mercado Pago para finalizar el pago.</small>
 
             <!-- Confirmación -->
             <button
@@ -210,7 +199,7 @@
               id="confirm-order"
               class="btn btn-primary btn-block"
             >
-              Confirmar pedido
+              Confirmar y pagar con Mercado Pago
             </button>
           </form>
         </div>

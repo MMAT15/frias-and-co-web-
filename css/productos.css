@@ -502,3 +502,75 @@
 }
 
 /* Las nuevas imágenes y combos usan las mismas reglas de .producto-item y grid-products */
+
+/* ======= MOBILE POLISH (PRODUCTOS) ======= */
+
+/* Cards más “shop” */
+.producto-item{
+  background:#fff;
+  border-radius:16px;
+  box-shadow:0 6px 18px rgba(0,0,0,.06);
+  padding:14px;
+  overflow:hidden;
+  transition:transform .15s ease, box-shadow .15s ease;
+}
+.producto-item:active{ transform:scale(.99); }
+.producto-item h3{
+  font-size:1.05rem;
+  line-height:1.2;
+  margin:10px 0 6px;
+}
+.producto-item .price{
+  color:#e91e63;
+  font-weight:700;
+  font-size:1.05rem;
+  margin-bottom:10px;
+  display:block;
+}
+
+/* IMAGEN CONSISTENTE EN CELU
+   – alto fluido entre 260 y 420, recorte elegante */
+.producto-item img{
+  width:100%;
+  height:clamp(260px, 62vw, 420px);
+  object-fit:cover;
+  border-radius:12px;
+  display:block;
+  background:#f4f5f7; /* evita parpadeo al cargar */
+}
+
+/* Botón principal full-width */
+.producto-item .btn{
+  width:100%;
+  border-radius:12px;
+  padding:14px 16px;
+  font-weight:600;
+}
+
+/* Grid respirando en móvil */
+.grid-products{
+  display:grid;
+  grid-template-columns:1fr;
+  gap:18px;
+  padding-bottom:84px; /* espacio para que el FAB no tape botones */
+}
+
+/* 2 columnas cuando hay ancho */
+@media (min-width:560px){
+  .grid-products{ grid-template-columns:repeat(2,1fr); gap:20px; }
+}
+@media (min-width:900px){
+  .grid-products{ grid-template-columns:repeat(3,1fr); gap:22px; }
+}
+
+/* Título de categoría más compacto en móvil */
+.category-title{
+  margin:18px 0 12px;
+}
+
+/* FAB: que no invada contenidos y respete safe-area iOS */
+.cart-fab{
+  right:16px;
+  bottom:calc(env(safe-area-inset-bottom, 0) + 16px);
+  z-index:50;
+}
