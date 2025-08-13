@@ -2237,61 +2237,65 @@ img {
   .logo-wrap{ width: 38px; height: 38px; }
   .site-title{ font-size: 1.05rem; }
 }
-/* ===== Móvil: Catálogo ↙ y Hamburguesa ↘ DENTRO del header ===== */
+/* ===== MOBILE: controles pro en las esquinas del header ===== */
 @media (max-width: 768px){
 
-  /* 0) Header seguro para notch y con altura suficiente */
+  /* Header con aire arriba (notch) y altura para ubicar controles abajo */
   .site-header{
-    padding-top: calc(env(safe-area-inset-top, 0px) + 6px);
-    padding-bottom: 4px;
+    padding-top: calc(env(safe-area-inset-top,0px) + 8px);
+    padding-bottom: 10px;
     background:#fff;
   }
 
   .header-inner{
-    position: relative;                 /* <- ancla para posicionar absolutos */
+    position: relative;          /* ancla para posicionar los botones */
     display: flex !important;
-    justify-content: center !important; /* branding centrado */
+    justify-content: center !important;  /* branding centrado */
     align-items: center !important;
-    min-height: 70px;                   /* da espacio para poner botones abajo */
+    min-height: 96px;            /* DA ESPACIO para que los botones no toquen el título */
     padding: 0;
   }
 
-  /* 1) Branding centrado, sin empujes raros */
-  .site-branding{
-    display: inline-flex;
-    align-items: center;
-    gap: .5rem;
-    text-align: center;
-    transform: none !important;
-    margin: 0;
-    min-width: 0;
-  }
-  .logo-wrap{ width: 42px; height: 42px; }
-  .site-title{ white-space: nowrap; line-height: 1; margin: 0; }
-  .site-tagline{ display:block; font-size:.72rem; letter-spacing:.06em; margin-top:2px; }
+  /* Branding intacto, pero con un pequeño margen inferior */
+  .site-branding{ margin-bottom: 8px; }
+  .site-title{ white-space: nowrap; line-height:1; margin: 6px 0 2px; }
+  .site-tagline{ display:block; margin-top: 2px; }
 
-  /* 2) Botones pegados a las esquinas INFERIORES del header */
+  /* BOTONES: redondos, sutiles, pegados a las esquinas inferiores del header */
   .collection-toggle,
   .nav-toggle{
-    position: absolute !important;      /* << ya no son fixed */
-    bottom: 6px;                         /* pegados al borde inferior del header */
+    position: absolute !important;
+    bottom: 8px;
+    width: 44px; height: 44px;               /* tap target iOS */
+    border-radius: 999px;
+    display: inline-flex; align-items: center; justify-content: center;
+    background: #fff;
+    border: 1px solid rgba(0,0,0,.08);
+    box-shadow: 0 2px 8px rgba(0,0,0,.06);
+    color: #111;
+    padding: 0;
+    margin: 0;
     z-index: 5;
-    /* reset por si quedó algo del estilo “flotante” anterior */
-    box-shadow: none !important;
-    background: transparent !important;
-    color: inherit !important;
-    border-radius: 0 !important;
-    width: auto; height: auto;
   }
   .collection-toggle{ left: 10px; }
   .nav-toggle{       right: 10px; }
 
-  /* 3) Ajuste de contenido del botón Catálogo para que no invada */
-  .collection-toggle .collection-label{ display: inline; font-weight: 600; }
-  .collection-toggle .icon-hanger{ width: 22px; height: 22px; }
+  /* Solo ícono en mobile para que no “baje” la línea del título */
+  .collection-toggle .collection-label{ display:none; }
+  .collection-toggle .icon-hanger{ width:22px; height:22px; }
 
-  /* 4) Opcional: en pantallas muy chicas, usá solo ícono para ahorrar ancho */
-  @media (max-width: 360px){
-    .collection-toggle .collection-label{ display:none; }
+  /* Hamburguesa centrada dentro del botón redondo */
+  .nav-toggle .bar{
+    display:block; width:22px; height:2px; background:#111; margin:3px 0;
   }
+
+  /* Si tenías reglas previas que movían cosas, las anulamos aquí */
+  .site-branding, .site-title, .site-tagline, .logo-wrap{ transform:none !important; }
+  .collection-toggle, .nav-toggle{ box-shadow: 0 2px 8px rgba(0,0,0,.06) !important; background:#fff !important; }
+}
+
+/* Muy chicas (iPhone mini): un poco más compacto */
+@media (max-width: 360px){
+  .header-inner{ min-height: 90px; }
+  .collection-toggle, .nav-toggle{ width: 42px; height: 42px; }
 }
