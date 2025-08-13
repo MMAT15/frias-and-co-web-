@@ -2099,3 +2099,57 @@ img {
   .site-title { font-size: clamp(15px, 4.2vw, 18px); letter-spacing: 0.06em; }
   .logo-wrap  { width: 38px; height: 38px; }
 }
+/* ===== Ajuste fino de alturas en MOBILE (no toca desktop) ===== */
+@media (max-width: 768px){
+
+  /* 1) Respeto del notch/safe-area y header compacto */
+  .site-header{
+    /* deja espacio seguro para el notch y reduce el padding */
+    padding-top: calc(env(safe-area-inset-top, 0px) + 8px);
+    padding-bottom: 6px;
+  }
+
+  .header-inner{
+    align-items: center;
+    min-height: 56px;   /* evita que nada se superponga */
+    position: relative;
+  }
+
+  /* 2) Subo TODO el bloque de branding respecto de los botones */
+  .site-branding{
+    transform: translateY(-10px);   /* << sube el conjunto */
+    will-change: transform;
+  }
+
+  /* 3) Reacomodo piezas internas, según lo que pediste:
+        - el TÍTULO a la altura donde hoy está el LOGO
+        - el "BY FRIAS" donde hoy está el TÍTULO
+        - el LOGO un poco más arriba que antes               */
+  .logo-wrap{            /* logo un poco más alto */
+    transform: translateY(-6px);
+  }
+
+  .site-title{           /* título más arriba (queda donde estaba el logo) */
+    transform: translateY(-10px);
+  }
+
+  .site-tagline{         /* tagline sube un poco (queda donde estaba el título) */
+    transform: translateY(-4px);
+  }
+
+  /* Si usás subrayado bajo “BERA”, que no baje demasiado al subir el título */
+  .site-title .title-bera::after{
+    bottom: -3px;
+  }
+
+  /* Botones laterales: pequeño respiro para que no “toquen” el branding */
+  .collection-toggle{ margin-right: 4px; }
+  .nav-toggle{         margin-left:  4px; }
+
+  /* Extra: en pantallas MUY chicas, bajamos un toque el ajuste para no rozar el notch */
+  @media (max-width: 360px){
+    .site-branding{ transform: translateY(-8px); }
+    .site-title{    transform: translateY(-8px); }
+    .logo-wrap{     transform: translateY(-4px); }
+  }
+}
