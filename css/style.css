@@ -2299,3 +2299,45 @@ img {
   .header-inner{ min-height: 90px; }
   .collection-toggle, .nav-toggle{ width: 42px; height: 42px; }
 }
+/* === Mejora de hit-area y prioridad de los botones del header (mobile) === */
+@media (max-width: 768px){
+  /* 1) Botones más grandes y por encima de todo */
+  .collection-toggle,
+  .nav-toggle{
+    width: 56px;                 /* antes 44px */
+    height: 56px;
+    z-index: 1200;               /* por encima del carrusel u overlays */
+    touch-action: manipulation;  /* ayuda a iOS a priorizar el tap */
+    -webkit-tap-highlight-color: rgba(0,0,0,.08);
+  }
+
+  /* 2) Cualquier toque dentro del botón cuenta (no solo sobre las barritas/ícono) */
+  .collection-toggle *, 
+  .nav-toggle *{
+    pointer-events: none;        /* el click llega al <button> */
+  }
+
+  /* 3) Un poco más de separación del borde para que el pulgar no choque el gesto del sistema */
+  .collection-toggle{ left: 12px; bottom: 10px; }
+  .nav-toggle{       right: 12px; bottom: 10px; }
+
+  /* 4) Evitar que algo del header/carrusel los cubra */
+  .site-header{ position: sticky; top: 0; z-index: 1100; }
+  .header-inner{ min-height: 100px; } /* deja aire para los botones más grandes */
+
+  /* 5) Cierre del Catálogo con área amable */
+  .collection-menu{ z-index: 1300; }
+  .collection-close{
+    position: absolute; top: 8px; right: 8px;
+    width: 44px; height: 44px;
+  }
+  .collection-close::after{
+    content: ''; position: absolute; inset: -12px;   /* hit-area ampliada */
+  }
+
+  /* 6) Overlay a pantalla completa, aseguro clicks para cerrar */
+  #collection-overlay{
+    position: fixed; inset: 0; z-index: 1250;
+    pointer-events: auto;
+  }
+}
