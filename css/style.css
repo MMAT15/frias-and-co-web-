@@ -2153,3 +2153,87 @@ img {
     .logo-wrap{     transform: translateY(-4px); }
   }
 }
+/* ===== Header mobile: 2 filas seguras (notch-friendly) ===== */
+@media (max-width: 768px) {
+
+  /* Respeta la safe-area del notch y deja “aire” arriba */
+  .site-header {
+    padding-top: calc(env(safe-area-inset-top, 0px) + 6px);
+    padding-bottom: 6px;
+    background: #fff; /* asegura fondo cuando es sticky */
+  }
+
+  /* Dos filas: 
+     fila 1 -> botones; fila 2 -> branding centrado */
+  .header-inner{
+    display: grid !important;
+    grid-template-columns: 1fr auto;   /* izq: catálogo, der: hamburguesa */
+    grid-template-areas:
+      "catalogo menu"
+      "branding branding";
+    align-items: center;
+    row-gap: 6px;
+    min-height: 0; /* que no fuerce alturas raras */
+    padding: 0;
+  }
+
+  .collection-toggle{ grid-area: catalogo; justify-self: start; margin-right: 8px; }
+  .nav-toggle      { grid-area: menu;     justify-self: end;   margin-left:  8px; }
+
+  .site-branding{
+    grid-area: branding;
+    justify-self: center;
+    display: inline-flex;
+    align-items: center;
+    gap: .5rem;
+    /* IMPORTANT: anulamos “hacks” previos que cortaban el logo */
+    transform: none !important;
+    margin: 0;
+    min-width: 0;
+    text-align: center;
+  }
+
+  .logo-wrap{ width: 42px; height: 42px; }
+  .logo{ width: 100%; height: 100%; object-fit: cover; border-radius: 50%; }
+
+  /* Título en una línea y subrayado como te gusta */
+  .site-title{
+    display: inline-flex;
+    align-items: baseline;
+    gap: .35rem;
+    margin: 0;
+    font-size: 1.15rem;
+    letter-spacing: .08em;
+    white-space: nowrap;
+    line-height: 1;
+  }
+
+  /* Si estás usando spans para BERA/CLOTHING, mantené el subrayado así;
+     si no, este bloque no rompe nada. */
+  .site-title .title-bera{ position: relative; }
+  .site-title .title-bera::after{
+    content: '';
+    position: absolute;
+    left: 0; right: 0; bottom: -3px;
+    height: 3px; border-radius: 2px;
+    background: var(--color-acento, #e91e63);
+  }
+
+  .site-tagline{
+    display: block;
+    font-size: .72rem;
+    letter-spacing: .06em;
+    color: var(--color-acento-sec);
+    text-transform: uppercase;
+    margin-top: 2px;
+  }
+
+  /* Por si quedó alguna regla previa que subía piezas: neutralizamos */
+  .site-title, .site-tagline, .logo-wrap{ transform: none !important; }
+}
+
+/* Extra seguridad en pantallas muy chicas */
+@media (max-width: 360px){
+  .logo-wrap{ width: 38px; height: 38px; }
+  .site-title{ font-size: 1.05rem; }
+}
