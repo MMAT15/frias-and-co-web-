@@ -2032,3 +2032,46 @@ img {
     height: 16px !important;
   }
 }
+/* ===== MOBILE: branding en una sola línea ===== */
+@media (max-width: 768px) {
+
+  /* 1) Logo + nombre en una sola fila, centrados */
+  .site-branding{
+    display:flex !important;
+    flex-direction: row !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: .5rem !important;
+    flex: 1 1 auto !important;   /* deja espacio a izq/der para Catálogo y menú */
+    min-width: 0 !important;
+    text-align: center !important;
+  }
+
+  /* 2) Tamaños justos para que entre en una línea */
+  .logo-wrap{ width: 40px !important; height: 40px !important; }
+  .site-title{
+    display: inline !important;
+    font-size: 1.15rem !important;
+    line-height: 1 !important;
+    letter-spacing: .08em !important;
+    white-space: nowrap !important; /* no partir “BERA CLOTHING” */
+    margin: 0 !important;
+  }
+  .site-title::after{ display: none !important; } /* quita la rayita rosa que agrega altura */
+
+  /* 3) Ocultar el “By FRIAS” solo en mobile (para que no baje de renglón).
+        Si preferís que se vea, quita esta línea. */
+  .site-tagline{ display: none !important; }
+
+  /* 4) Mantener Catálogo a la izquierda y hamburguesa a la derecha */
+  .collection-toggle{ order: 1 !important; flex: 0 0 auto !important; }
+  .nav-toggle{ order: 3 !important; flex: 0 0 auto !important; }
+
+  /* 5) El contenedor del header sin acolchados que empujen */
+  .header-inner{
+    justify-content: space-between !important;
+    align-items: center !important;
+    gap: .5rem !important;
+    padding: 0 !important;
+  }
+}
