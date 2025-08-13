@@ -2421,3 +2421,25 @@ img {
   background: var(--color-acento);
   border-radius: 2px;
 }
+/* Asegurar jerarquía de capas */
+.site-header { position: relative; z-index: 1100; }
+
+/* El panel y su overlay siempre por arriba del hero */
+.collection-menu { position: fixed; z-index: 1200; }
+.collection-overlay { position: fixed; z-index: 1150; }
+
+/* Que el hero NO tape nada */
+.hero, 
+.hero .swiper-container,
+.hero .swiper-wrapper,
+.hero .swiper-slide {
+  position: relative;
+  z-index: 0;
+}
+
+/* (por si Swiper trae z-index altos en botones) */
+.swiper-button-prev,
+.swiper-button-next,
+.swiper-pagination {
+  z-index: 100; /* debajo del overlay (1150) y panel (1200) */
+}
