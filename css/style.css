@@ -2341,3 +2341,18 @@ img {
     pointer-events: auto;
   }
 }
+/* Catálogo más grande en móvil */
+@media (max-width: 768px){
+  .collection-toggle{
+    width: 64px;                 /* antes 56/44 */
+    height: 64px;
+  }
+  .collection-toggle .icon-hanger{ width: 26px; height: 26px; }
+
+  /* hit-area invisible extra alrededor, sin cambiar el look */
+  .collection-toggle::after{
+    content:"";
+    position:absolute;
+    inset:-8px;                  /* +8px de área clickeable */
+  }
+}
