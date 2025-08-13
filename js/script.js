@@ -937,3 +937,20 @@ document.querySelectorAll('.view-product-btn').forEach(btn => {
 document.querySelector('.product-modal-close')
         .addEventListener('click', () =>
           document.querySelector('.product-modal').classList.remove('show'));
+          // Marca el item activo según la URL en TODAS las navs (desktop + off-canvas)
+(function setActiveNav() {
+  // nombre de archivo actual (index.html si viene vacío)
+  let current = location.pathname.split('/').pop() || 'index.html';
+
+  // normalizaciones y typos comunes
+  const lc = current.toLowerCase();
+  if (lc === '' || lc === '/') current = 'index.html';
+  if (lc.includes('newst')) current = 'newsletter.html'; // "newsteller" -> newsletter
+
+  // quita activos previos y marca el correcto
+  document.querySelectorAll('#primary-navigation a, .collection-menu a').forEach(a => {
+    a.classList.remove('active');
+    const href = (a.getAttribute('href') || '').split('/').pop();
+    if (href === current) a.classList.add('active');
+  });
+})();
