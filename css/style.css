@@ -2356,3 +2356,16 @@ img {
     inset:-8px;                  /* +8px de área clickeable */
   }
 }
+.collection-toggle {
+  width: 50px;   /* Igual o apenas más que el menú hamburguesa */
+  height: 50px;
+  padding: 0;    /* El padding extra puede reducir el área de clic, mejor usar width/height */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.collection-toggle svg {
+  width: 44px;  /* Ajustar proporcionalmente */
+  height: 44px;
+}
