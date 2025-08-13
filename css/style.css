@@ -140,6 +140,51 @@ img {
   width: 100%;
   padding: 0 1rem;
 }
+/* Layout del header con grid para centrar branding */
+.header-inner{
+  display:grid;
+  grid-template-columns: auto 1fr auto;
+  align-items:center;
+  gap: .75rem;
+}
+
+.site-branding{
+  justify-self:center;  /* centra el logo+nombre */
+  text-align:center;
+}
+
+/* Botón Catálogo (misma apariencia del index) */
+.collection-toggle{
+  display:inline-flex;
+  align-items:center;
+  gap:.5rem;
+  border:1px solid currentColor;
+  padding:.35rem .6rem;
+  background:transparent;
+  border-radius:8px;
+  line-height:1;
+  cursor:pointer;
+}
+.collection-toggle .collection-label{
+  font-weight:600;
+  font-size:.95rem;
+}
+.collection-toggle .icon-hanger{
+  width:22px; height:22px;
+}
+
+/* Asegura tamaños del logo dentro del branding */
+.logo-wrap { display:inline-block; }
+.logo { width:44px; height:44px; object-fit:cover; border-radius:50%; }
+
+/* Responsive: en pantallas chicas mantené el centrado */
+@media (max-width: 640px){
+  .header-inner{
+    grid-template-columns: auto 1fr auto; /* igual, pero dejamos respirar */
+  }
+  .site-branding .site-title{ font-size:1.05rem; }
+  .site-branding .site-tagline{ font-size:.75rem; }
+}
 .nav-toggle {
   order: 1;
 }
