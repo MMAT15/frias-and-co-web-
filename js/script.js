@@ -53,7 +53,28 @@ if (collectionToggle && collectionMenu && collectionOverlay && collectionClose) 
   collectionToggle.addEventListener('click', openMenu);
   collectionClose .addEventListener('click', closeMenu);
   collectionOverlay.addEventListener('click', closeMenu);
+// Navegación desde el menú de Catálogo: si es hash en la misma página, hace scroll;
+// si es a otra página (productos.html#seccion), navega y listo.
+collectionMenu.addEventListener('click', (e) => {
+  const a = e.target.closest('a[href]');
+  if (!a) return;
+  e.preventDefault();
+  const href = a.getAttribute('href');
 
+  closeMenu(); // cerrar panel siempre
+
+  if (href.startsWith('#')) {
+    // mismo documento: scroll suave a la sección
+    const target = document.querySelector(href);
+    if (target) {
+      const top = target.getBoundingClientRect().top + window.scrollY - 60;
+      window.scrollTo({ top, behavior: 'smooth' });
+    }
+  } else {
+    // otra página (ej: productos.html#remeras)
+    window.location.href = href;
+  }
+});
   /* ESC para cerrar */
   document.addEventListener('keydown', e=>{
     if(e.key==='Escape' && collectionMenu.classList.contains('show')) closeMenu();
