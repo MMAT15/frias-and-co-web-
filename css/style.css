@@ -2397,3 +2397,27 @@ img {
 .hero-title .site-title::after{
   display: none !important;
 }
+/* Título del hero */
+.hero-title {
+  font-weight: 700;
+  line-height: 1.1;
+  letter-spacing: -0.5px;
+}
+
+/* Subrayado SOLO bajo "BERA" */
+.hero-bera {
+  position: relative;
+  display: inline-block;
+  padding-bottom: 0.08em; /* separa el subrayado del texto */
+}
+
+.hero-bera::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;          /* asegura que ocupe el ancho exacto de "BERA" */
+  bottom: -0.02em;   /* fino ajuste vertical */
+  height: 0.16em;
+  background: var(--color-acento);
+  border-radius: 2px;
+}
