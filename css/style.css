@@ -2369,3 +2369,31 @@ img {
   width: 44px;  /* Ajustar proporcionalmente */
   height: 44px;
 }
+/* Subrayado correcto SOLO para el "BERA" del hero */
+.hero-bera{
+  position: relative;
+  display: inline-block;
+  white-space: nowrap;           /* evita salto de línea en BERA */
+}
+
+.hero-bera::after{
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -0.25em;               /* distancia respecto a la base del texto */
+  height: 3px;                   /* grosor de la línea */
+  background: var(--color-acento);
+  border-radius: 2px;
+}
+
+/* En pantallas muy chicas, que la línea no “grite” */
+@media (max-width: 360px){
+  .hero-bera::after{ height: 2px; bottom: -0.22em; }
+}
+
+/* Blindaje: si algún estilo global intenta subrayar el título del hero, lo anulamos aquí */
+.hero-title .title-bera::after,
+.hero-title .site-title::after{
+  display: none !important;
+}
