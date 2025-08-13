@@ -2032,46 +2032,70 @@ img {
     height: 16px !important;
   }
 }
-/* ===== MOBILE: branding en una sola línea ===== */
+/* ===== Header móvil: que no choque y que “BERA CLOTHING” vaya en una línea ===== */
 @media (max-width: 768px) {
-
-  /* 1) Logo + nombre en una sola fila, centrados */
-  .site-branding{
-    display:flex !important;
-    flex-direction: row !important;
+  .site-header { padding-top: calc(env(safe-area-inset-top) + 8px); }
+  .header-inner {
+    display: flex !important;
     align-items: center !important;
-    justify-content: center !important;
-    gap: .5rem !important;
-    flex: 1 1 auto !important;   /* deja espacio a izq/der para Catálogo y menú */
-    min-width: 0 !important;
-    text-align: center !important;
-  }
-
-  /* 2) Tamaños justos para que entre en una línea */
-  .logo-wrap{ width: 40px !important; height: 40px !important; }
-  .site-title{
-    display: inline !important;
-    font-size: 1.15rem !important;
-    line-height: 1 !important;
-    letter-spacing: .08em !important;
-    white-space: nowrap !important; /* no partir “BERA CLOTHING” */
-    margin: 0 !important;
-  }
-  .site-title::after{ display: none !important; } /* quita la rayita rosa que agrega altura */
-
-  /* 3) Ocultar el “By FRIAS” solo en mobile (para que no baje de renglón).
-        Si preferís que se vea, quita esta línea. */
-  .site-tagline{ display: none !important; }
-
-  /* 4) Mantener Catálogo a la izquierda y hamburguesa a la derecha */
-  .collection-toggle{ order: 1 !important; flex: 0 0 auto !important; }
-  .nav-toggle{ order: 3 !important; flex: 0 0 auto !important; }
-
-  /* 5) El contenedor del header sin acolchados que empujen */
-  .header-inner{
     justify-content: space-between !important;
-    align-items: center !important;
-    gap: .5rem !important;
+    gap: 10px !important;
     padding: 0 !important;
   }
+
+  /* Botones laterales con ancho fijo (no invaden el centro) */
+  .collection-toggle,
+  .nav-toggle { flex: 0 0 48px; }
+
+  /* El bloque de marca puede encogerse sin empujar a los botones */
+  .site-branding {
+    flex: 1 1 auto !important;
+    min-width: 0 !important;
+    text-align: center;
+    margin: 0 auto;
+    gap: 2px;
+  }
+
+  .logo-wrap { width: 42px; height: 42px; }
+
+  /* Título en una línea y tamaño fluido */
+  .site-title {
+    display: inline-flex;
+    align-items: baseline;
+    gap: .35rem;
+    white-space: nowrap;                /* <- evita salto de línea */
+    font-size: clamp(16px, 4.6vw, 20px);
+    letter-spacing: 0.08em;
+    margin: 0;
+  }
+
+  /* Subrayado solo bajo “BERA” */
+  .site-title .title-bera {
+    position: relative;
+  }
+  .site-title .title-bera::after {
+    content: '';
+    position: absolute;
+    left: 0; right: 0;
+    bottom: -3px;                       /* distancia a la base */
+    height: 3px;
+    background: var(--color-acento);
+    border-radius: 2px;
+  }
+
+  /* “BY FRIAS” pequeño y separado del título */
+  .site-tagline {
+    display: block;
+    font-size: 10px;
+    letter-spacing: .12em;
+    color: var(--color-acento-sec);
+    text-transform: uppercase;
+    margin-top: 2px;
+  }
+}
+
+/* Evita que el título se meta debajo de los botones incluso en pantallas MUY chicas */
+@media (max-width: 360px) {
+  .site-title { font-size: clamp(15px, 4.2vw, 18px); letter-spacing: 0.06em; }
+  .logo-wrap  { width: 38px; height: 38px; }
 }
