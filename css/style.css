@@ -462,7 +462,8 @@ img {
 -------------------------------------------------- */
 .swiper-hero {
   position: relative;
-  height: 70vh;
+  min-height: clamp(420px, 70vh, 860px);
+  height: auto;                 /* permite que el contenido ajuste sin forzar recorte */
   overflow: hidden;
 }
 .swiper-hero .swiper-container,
@@ -472,8 +473,9 @@ img {
 }
 .swiper-hero .swiper-slide {
   position: relative;
-  background-size: cover;
-  background-position: center;
+  background-size: cover;          /* llena el ancho/alto */
+  background-position: center 20%; /* sube el encuadre para no cortar caras */
+  background-repeat: no-repeat;    /* evita mosaico si la imagen es chica */
 }
 .swiper-hero .hero-overlay {
   position: absolute;
@@ -523,6 +525,28 @@ img {
   top: 50%;
   transform: translateY(-50%);
   z-index: 3;
+}
+
+/* ==== HERO responsive tweaks para mejor encuadre ====*/
+@media (max-width: 768px){
+  .swiper-hero { min-height: 58vh; }
+  .swiper-hero .hero-title{ font-size: clamp(1.6rem, 6vw, 2.2rem); }
+  .swiper-hero .hero-subtitle{ font-size: clamp(0.9rem, 3.8vw, 1.2rem); }
+  .swiper-hero .swiper-slide{ background-position: center 15%; }
+}
+@media (min-width: 1200px){
+  .swiper-hero { min-height: 72vh; }
+}
+
+/* Helpers para elegir foco por slide en el HTML */
+.bg-top    { background-position: center top    !important; }
+.bg-center { background-position: center center !important; }
+.bg-bottom { background-position: center bottom !important; }
+
+/* Modo alternativo: mostrar la imagen completa sin recorte (con franjas) */
+.hero-fit-contain .swiper-slide{
+  background-size: contain !important;  /* muestra todo */
+  background-color: #111 !important;    /* relleno neutro */
 }
 
 /* --------------------------------------------------
@@ -2496,3 +2520,16 @@ img {
   pointer-events: auto !important;
 }
 .collection-menu.show { transform: translateX(0); }
+/* ===== Mobile tweak: bigger Catálogo button (wins over previous rules) ===== */
+@media (max-width: 768px){
+  .collection-toggle{
+    width: 72px !important;          /* antes 44–64 */
+    height: 72px !important;
+    border-radius: 999px !important;  /* mantiene formato circular */
+    padding: 0 !important;            /* el tamaño lo definen width/height */
+  }
+  .collection-toggle .icon-hanger{
+    width: 30px !important;           /* icono un poco más grande */
+    height: 30px !important;
+  }
+}
