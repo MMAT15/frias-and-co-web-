@@ -2541,3 +2541,28 @@ img {
     height: 30px !important;
   }
 }
+/* ===== FINAL MOBILE OVERRIDE: Catálogo = Hamburguesa + empuje a la izquierda ===== */
+@media (max-width: 768px){
+  /* Igualar dimensiones del círculo de Catálogo con el del menú hamburguesa */
+  .collection-toggle,
+  .nav-toggle{
+    width: 56px !important;      /* mismo alto/ancho */
+    height: 56px !important;
+    border-radius: 999px !important;
+    padding: 0 !important;       /* el tamaño lo definen width/height */
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+  }
+
+  /* Empujar un poco más a la izquierda el botón de Catálogo */
+  .collection-toggle{
+    left: 6px !important;        /* antes ~10–12px */
+  }
+
+  /* Asegurar tamaño coherente del icono dentro del círculo */
+  .collection-toggle .icon-hanger{
+    width: 22px !important;
+    height: 22px !important;
+  }
+}
