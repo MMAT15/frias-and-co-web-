@@ -2874,3 +2874,40 @@ img {
 @media (min-width:769px){
   .site-header:not(.search-open) .header-search-desktop{ display:block !important; }
 }
+
+
+/* ===== FINAL FIXES – search + header spacing (2025‑08‑14) ===== */
+
+/* 1) MOBILE: ocultar cualquier barra de búsqueda del header (la del menú queda) */
+@media (max-width: 768px){
+  .header-search,
+  .header-search-desktop{ 
+    display: none !important;   /* sólo usamos .menu-search en el menú */
+  }
+}
+
+/* 2) DESKTOP: lupa más pegada a la derecha y campo anclado a esa posición */
+@media (min-width: 769px){
+  /* lupa y campo salen desde el borde derecho */
+  .header-search-toggle{ right: 12px !important; }
+  .header-search-desktop{ right: 12px !important; }
+}
+
+/* 3) DESKTOP: más aire vertical para que el logo no toque el marquee
+      y el "BY FRIAS" no se salga del header */
+@media (min-width: 769px){
+  .site-header{ 
+    padding-top: 12px !important;   /* antes era muy justo */
+    padding-bottom: 12px !important;
+  }
+  .header-inner{ 
+    min-height: 110px !important;   /* asegura espacio para logo + tagline */
+  }
+  .site-tagline{ font-size: .8rem !important; margin-top: 2px !important; }
+}
+
+/* 4) Si existe el bloque que posiciona Catálogo y la lupa con variables,
+      empuja un poco más a la derecha reduciendo el margen final */
+@media (min-width: 769px){
+  :root{ --ctl-right: 10px; }   /* en ese bloque se usaba 16px */
+}
