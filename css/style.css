@@ -462,20 +462,22 @@ img {
 -------------------------------------------------- */
 .swiper-hero {
   position: relative;
-  min-height: clamp(420px, 70vh, 860px);
-  height: auto;                 /* permite que el contenido ajuste sin forzar recorte */
+  height: 72vh;            /* altura estable: evita que se "achique" */
+  min-height: 520px;       /* asegura buen alto en notebooks/móviles altos */
+  max-height: 860px;       /* techo razonable para pantallas grandes */
   overflow: hidden;
 }
 .swiper-hero .swiper-container,
 .swiper-hero .swiper-wrapper,
 .swiper-hero .swiper-slide {
-  height: 100%;
+  height: 100% !important;   /* hace que los hijos tomen el alto del hero */
+  min-height: inherit;       /* heredan min-height del contenedor */
 }
 .swiper-hero .swiper-slide {
   position: relative;
-  background-size: cover;          /* llena el ancho/alto */
-  background-position: center 20%; /* sube el encuadre para no cortar caras */
-  background-repeat: no-repeat;    /* evita mosaico si la imagen es chica */
+  background-size: cover;        /* llena sin deformar */
+  background-position: center 20%;
+  background-repeat: no-repeat;
 }
 .swiper-hero .hero-overlay {
   position: absolute;
@@ -529,13 +531,19 @@ img {
 
 /* ==== HERO responsive tweaks para mejor encuadre ====*/
 @media (max-width: 768px){
-  .swiper-hero { min-height: 58vh; }
+  .swiper-hero { 
+    height: 78vh;         /* MÁS alto en mobile, no se corta */
+    min-height: 70vh;     /* evita que baje a una franja */
+  }
   .swiper-hero .hero-title{ font-size: clamp(1.6rem, 6vw, 2.2rem); }
   .swiper-hero .hero-subtitle{ font-size: clamp(0.9rem, 3.8vw, 1.2rem); }
-  .swiper-hero .swiper-slide{ background-position: center 15%; }
+  .swiper-hero .swiper-slide{ background-position: center 20%; }
 }
 @media (min-width: 1200px){
-  .swiper-hero { min-height: 72vh; }
+  .swiper-hero { 
+    height: 80vh;          /* un poco más alto en desktop grande */
+    min-height: 680px;     /* asegura altura agradable en monitores */
+  }
 }
 
 /* Helpers para elegir foco por slide en el HTML */
