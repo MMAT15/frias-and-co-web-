@@ -1076,3 +1076,71 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 });
+// === Desktop expanding search (header) ===
+(function(){
+  const header = document.querySelector('.site-header');
+  const toggle = document.querySelector('.header-search-toggle');
+  const form   = document.querySelector('form.header-search-desktop');
+  const input  = form ? form.querySelector('.header-search-input') : null;
+  if(!header || !toggle || !form || !input) return;
+
+  function closeHamburgerAndCatalog(){
+    // cierra hamburguesa si estuviera abierta
+    const nav = document.getElementById('primary-navigation');
+    const burger = document.querySelector('.nav-toggle');
+    if (nav && nav.classList.contains('show')) {
+      nav.classList.remove('show');
+      burger?.classList.remove('open');
+      burger?.setAttribute('aria-expanded','false');
+    }
+    // cierra catálogo off‑canvas si estuviera abierto
+    const colMenu = document.getElementById('collection-menu');
+    const colOv   = document.getElementById('collection-overlay');
+    if (colMenu?.classList.contains('show') || colOv?.classList.contains('show')) {
+      colMenu?.classList.remove('show');
+      colOv?.classList.remove('show');
+      colMenu?.setAttribute('aria-hidden','true');
+      const colToggle = document.querySelector('.collection-toggle');
+      colToggle?.setAttribute('aria-expanded','false');
+      document.body.style.overflow = ''; // por si quedó bloqueado
+    }
+  }
+
+  function openSearch(){
+    header.classList.add('search-open');
+    toggle.setAttribute('aria-expanded','true');
+    closeHamburgerAndCatalog();
+    // asegura que el form ya sea interactivo antes de focus
+    requestAnimationFrame(()=> input.focus());
+  }
+  function closeSearch(){
+    header.classList.remove('search-open');
+    toggle.setAttribute('aria-expanded','false');
+  }
+
+  toggle.addEventListener('click', ()=>{
+    header.classList.contains('search-open') ? closeSearch() : openSearch();
+  });
+
+  // ESC para cerrar
+  document.addEventListener('keydown', (e)=>{
+    if(e.key === 'Escape') closeSearch();
+  });
+
+  // Clic fuera del header cierra
+  document.addEventListener('click', (e)=>{
+    if(!header.classList.contains('search-open')) return;
+    if(!header.contains(e.target)) closeSearch();
+  });
+
+  // Al pasar a mobile, cerramos la búsqueda para no interferir
+  const mq = window.matchMedia('(max-width: 768px)');
+  mq.addEventListener('change', ()=>{ if(mq.matches) closeSearch(); });
+
+  // Redirección a productos.html?q=... y cerrar al enviar
+  form.addEventListener('submit', ()=>{
+    const q = (input.value||'').trim();
+    form.action = q ? `productos.html?q=${encodeURIComponent(q)}` : 'productos.html';
+    closeSearch();
+  });
+})();

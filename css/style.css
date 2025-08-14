@@ -2730,3 +2730,147 @@ img {
   /* si tu menú no usa .show, y se muestra con display:flex, podés usar: */
   /* .main-nav { position:relative; } .main-nav .menu-search{ display:flex; } */
 }
+
+
+
+/* ====== Desktop: catálogo + lupa alineados a la derecha, sin superponerse ====== */
+@media (min-width: 769px) {
+  :root{
+    --ctl-size: 44px;   /* diámetro de los botones redondos */
+    --ctl-gap: 10px;    /* separación entre Catálogo y Lupa */
+    --ctl-right: 16px;  /* margen al borde derecho */
+  }
+
+  /* El header sirve de referencia para posiciones absolutas */
+  .header-inner{ position: relative !important; }
+
+  /* Botón Catálogo fijo al extremo derecho */
+  .collection-toggle{
+    position: absolute !important;
+    right: var(--ctl-right) !important;
+    top: 50% !important;
+    transform: translateY(-50%) !important;
+    width: var(--ctl-size) !important;
+    height: var(--ctl-size) !important;
+    border-radius: 999px !important;
+    z-index: 2; /* encima del carrusel */
+  }
+
+  /* Lupa: a la izquierda de Catálogo (no lo tapa) */
+  .header-search-toggle{
+    position: absolute !important;
+    right: calc(var(--ctl-right) + var(--ctl-size) + var(--ctl-gap)) !important;
+    top: 50% !important;
+    transform: translateY(-50%) !important;
+    display: inline-flex !important;
+    width: var(--ctl-size) !important;
+    height: var(--ctl-size) !important;
+    border-radius: 999px !important;
+    border: 1px solid var(--color-acento-sec) !important;
+    background: var(--color-fondo) !important;
+    align-items: center; justify-content: center;
+    z-index: 2;
+  }
+
+  /* Campo de búsqueda colapsado por defecto (anclado a la lupa) */
+  .header-search-desktop{
+    position: absolute !important;
+    right: calc(var(--ctl-right) + var(--ctl-size) + var(--ctl-gap)) !important;
+    top: 50% !important;
+    transform: translateY(-50%) !important;
+    width: 0; opacity: 0; pointer-events: none; overflow: hidden;
+    background: #fff; border: 1px solid #ccc;
+    border-radius: 999px; box-shadow: 0 2px 6px rgba(0,0,0,.15);
+    transition: width .25s ease, opacity .2s ease, right .25s ease;
+  }
+  .header-search-desktop .header-search-input{ 
+    width: 420px; max-width: 46vw; height: var(--ctl-size); 
+    border: 0; outline: 0; padding: 0 .75rem; font-size: .95rem;
+  }
+  .header-search-desktop .header-search-btn{ 
+    width: var(--ctl-size); height: var(--ctl-size); background: transparent; border: 0; cursor: pointer;
+  }
+
+  /* ===== Estado ABIERTO ===== */
+  /* Al abrir: ocultamos Catálogo y corremos la lupa al borde derecho;
+     el campo se despliega desde esa posición (efecto “sale de la lupa”). */
+  .site-header.search-open .collection-toggle{
+    display: none !important;
+  }
+  .site-header.search-open .header-search-toggle{
+    right: var(--ctl-right) !important;   /* la lupa queda pegada al borde */
+  }
+  .site-header.search-open .header-search-desktop{
+    right: var(--ctl-right) !important;
+    width: min(420px, 46vw); 
+    opacity: 1; 
+    pointer-events: auto;
+  }
+
+  /* Mientras está abierta, evitamos que el menú principal reciba clics (opcional) */
+  .site-header.search-open .main-nav{ opacity: .85; pointer-events: none; }
+}
+/* ======= Desktop search/lens – overrides ======= */
+@media (min-width:769px){
+  .header-inner{ position:relative !important; }
+
+  /* Lupita fija a la derecha */
+  .header-search-toggle{
+    display:inline-flex !important;
+    position:absolute !important;
+    right:20px !important;               /* <- más a la derecha */
+    top:50% !important;
+    transform:translateY(-50%) !important;
+    margin:0 !important;
+    width:44px; height:44px; border-radius:999px;
+    border:1px solid var(--color-acento-sec);
+    background:var(--color-fondo);
+    align-items:center; justify-content:center;
+    cursor:pointer;
+    transition: background var(--transition), transform var(--transition);
+  }
+  .header-search-toggle:hover{ background:var(--color-acento); color:#fff; transform:scale(1.05); }
+  .header-search-toggle svg{ width:22px; height:22px; display:block; }
+
+  /* Campo expandible */
+  .header-search-desktop{
+    position:absolute !important;
+    right:20px !important;               /* <- acompaña a la lupita */
+    top:50% !important;
+    transform:translateY(-50%) !important;
+    width:0 !important;
+    opacity:0 !important;
+    pointer-events:none !important;
+    overflow:hidden !important;
+    background:#fff;
+    border:1px solid #ccc;
+    border-radius:999px;
+    padding:0.25rem 0.5rem;
+    box-shadow:0 2px 6px rgba(0,0,0,.15);
+    transition:width .25s ease, opacity .2s ease;
+  }
+  .header-search-desktop .header-search-input{
+    width:420px; max-width:46vw; height:44px;
+    border:0; outline:0; font-size:.9rem; padding:0 .5rem;
+  }
+  .header-search-desktop .header-search-btn{
+    width:44px; height:44px; background:none; border:0; cursor:pointer;
+  }
+
+  /* Abierto */
+  .site-header.search-open .header-search-desktop{
+    width:min(420px,46vw) !important;
+    opacity:1 !important;
+    pointer-events:auto !important;
+  }
+  .site-header.search-open .main-nav{ opacity:0 !important; pointer-events:none !important; }
+  .site-header.search-open .collection-toggle{ display:none !important; }
+
+  /* Deja aire al botón Catálogo cuando está cerrada la búsqueda */
+  .collection-toggle{ margin-right:78px !important; } /* 78px > 64px */
+}
+
+/* Asegura que el campo exista en desktop (aunque colapsado) */
+@media (min-width:769px){
+  .site-header:not(.search-open) .header-search-desktop{ display:block !important; }
+}
