@@ -14,7 +14,38 @@
   <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
   <link rel="stylesheet" href="css/style.css" />
   <link rel="stylesheet" href="css/productos.css" />
+<link rel="canonical" href="https://www.beraclothing.com/" />
 
+<!-- Open Graph -->
+<meta property="og:type" content="website">
+<meta property="og:title" content="BERA clothing – Moda urbana 24/7">
+<meta property="og:description" content="Moda urbana para jóvenes. Envíos a todo el país desde Berazategui centro.">
+<meta property="og:url" content="https://www.beraclothing.com/">
+<meta property="og:image" content="https://www.beraclothing.com/assets/og/bera-cover.jpg">
+
+<!-- Twitter -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="BERA clothing – Moda urbana 24/7">
+<meta name="twitter:description" content="Shop online, envíos a todo el país.">
+<meta name="twitter:image" content="https://www.beraclothing.com/assets/og/bera-cover.jpg">
+
+<!-- Preload hero (las 2 primeras para LCP) -->
+<link rel="preload" as="image" href="assets/images/Gorra.png" imagesrcset="assets/images/Gorra.png 1x">
+<link rel="preload" as="image" href="assets/images/Buzoxl.png" imagesrcset="assets/images/Buzoxl.png 1x">
+
+<!-- JSON-LD básico Organización -->
+<script type="application/ld+json">
+{
+  "@context":"https://schema.org",
+  "@type":"Organization",
+  "name":"BERA clothing",
+  "url":"https://www.beraclothing.com/",
+  "logo":"https://www.beraclothing.com/assets/images/logoo.jpeg",
+  "sameAs":[
+    "https://instagram.com/beraclothingg"
+  ]
+}
+</script>
 </head>
 <body>
       
@@ -35,18 +66,16 @@
     <path d="M3 16.5l9-6 9 6" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
   </svg>
 </button>
-     <div class="site-branding">
+    <div class="site-branding">
   <a href="index.html" class="logo-link" aria-label="Inicio">
     <div class="logo-wrap">
       <img src="assets/images/logoo.jpeg" alt="Logo BERA clothing" class="logo" />
     </div>
   </a>
-
-  <h1 class="site-title">
+  <div class="site-title" aria-label="BERA CLOTHING">
     <span class="title-bera">BERA</span>
     <span class="title-clothing">CLOTHING</span>
-  </h1>
-
+  </div>
   <span class="site-tagline">BY FRIAS</span>
 </div>
       <button class="nav-toggle"
@@ -78,10 +107,10 @@
       <div class="swiper-slide" style="background-image: url('assets/images/Gorra.png');">
         <div class="hero-overlay"></div>
         <div class="container hero-content">
-          <h2 class="hero-title">
-            Bienvenido a <span class="hero-bera">BERA</span> CLOTHING
-          </h2>
-          <p class="hero-subtitle">Tu destino de moda urbana, 24/7</p>
+          <h1 class="hero-title">
+  Bienvenido a <span class="hero-bera">BERA</span> CLOTHING
+</h1>
+<p class="hero-subtitle">Tu destino de moda urbana, 24/7</p>
           <a href="productos.html" class="btn btn-primary">Ver Productos</a>
         </div>
       </div>
@@ -250,14 +279,16 @@
   </footer>
   <!-- Overlay oscurece la pantalla y cierra el menú al tocar fuera -->
  <!-- Overlay -->
-<div id="collection-overlay" class="collection-overlay"></div>
+<div id="collection-overlay" class="collection-overlay" aria-hidden="true"></div>
 
 <!-- Off-canvas con las categorías (INDEX) -->
-<aside id="collection-menu" class="collection-menu" aria-hidden="true">
+<aside id="collection-menu"
+       class="collection-menu"
+       aria-hidden="true"
+       aria-labelledby="collection-heading">
   <button id="collection-close" class="collection-close" aria-label="Cerrar menú">×</button>
-
   <nav class="collection-nav" role="navigation" aria-label="Categorías de ropa">
-    <h2 class="collection-heading">CLOTHING ▾</h2>
+    <h2 id="collection-heading" class="collection-heading">CLOTHING ▾</h2>
   <ul class="collection-list">
   <li><a href="productos.html#remeras">Remeras</a></li>
   <li><a href="productos.html#tops">Tops / Blusas</a></li>
@@ -275,26 +306,32 @@
 </aside>
   
   <!-- ---------- PRODUCT MODAL ---------- -->
-  <div id="product-modal" class="product-modal" aria-hidden="true" tabindex="-1">
-    <div class="product-modal-content">
-      <button class="product-modal-close" aria-label="Cerrar">×</button>
+  <!-- PRODUCT MODAL accesible -->
+<div id="product-modal"
+     class="product-modal"
+     role="dialog"
+     aria-modal="true"
+     aria-labelledby="product-modal-title"
+     aria-describedby="product-modal-description"
+     aria-hidden="true"
+     tabindex="-1">
+  <div class="product-modal-content" tabindex="-1">
+    <button class="product-modal-close" aria-label="Cerrar">×</button>
 
-      <!-- Swiper gallery -->
-      <div class="product-gallery swiper">
-        <div class="swiper-wrapper" id="product-gallery-wrapper"></div>
-        <div class="swiper-pagination"></div>
-        <div class="swiper-button-prev" aria-label="Anterior foto"></div>
-        <div class="swiper-button-next" aria-label="Siguiente foto"></div>
-      </div>
+    <div class="product-gallery swiper">
+      <div class="swiper-wrapper" id="product-gallery-wrapper"></div>
+      <div class="swiper-pagination"></div>
+      <div class="swiper-button-prev" aria-label="Anterior foto"></div>
+      <div class="swiper-button-next" aria-label="Siguiente foto"></div>
+    </div>
 
-      <!-- Info -->
-      <div class="product-info">
-        <h3 id="product-modal-title"></h3>
-        <p id="product-modal-price" class="price"></p>
-        <p id="product-modal-description"></p>
-      </div>
+    <div class="product-info">
+      <h2 id="product-modal-title"></h2>
+      <p id="product-modal-price" class="price"></p>
+      <div id="product-modal-description"></div>
     </div>
   </div>
+</div>
   <!-- ---------- /PRODUCT MODAL ---------- -->
 
   <!-- SCRIPTS -->

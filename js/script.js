@@ -314,11 +314,13 @@ collectionMenu.addEventListener('click', (e) => {
   const modalCloseBtn     = document.querySelector('.product-modal-close');
 
   if (productModal) {
+    let lastOpener = null;
     // Override buttons to open modal
- document.querySelectorAll('.add-to-cart-btn').forEach(btn => {
+    document.querySelectorAll('.view-product-btn').forEach(btn => {
       btn.addEventListener('click', e => {
         e.preventDefault();
         e.stopImmediatePropagation();
+        lastOpener = btn;
         openProductModal(btn.dataset.id);
       });
     });
@@ -342,8 +344,8 @@ collectionMenu.addEventListener('click', (e) => {
 
       // init / update Swiper
       if (window.productGallerySwiper) {
-        productGallerySwiper.update();
-        productGallerySwiper.slideTo(0);
+        window.productGallerySwiper.update();
+        window.productGallerySwiper.slideTo(0);
       } else if (typeof Swiper !== 'undefined') {
         window.productGallerySwiper = new Swiper('.product-gallery', {
           pagination: { el: '.product-gallery .swiper-pagination', clickable: true },
@@ -357,11 +359,45 @@ collectionMenu.addEventListener('click', (e) => {
 
       productModal.classList.add('show');
       productModal.setAttribute('aria-hidden','false');
+      // Focus management for accessibility
+      const previouslyFocused = document.activeElement;
+      productModal.dataset.prevFocus = previouslyFocused && previouslyFocused instanceof HTMLElement ? (previouslyFocused.className || previouslyFocused.id || previouslyFocused.tagName) : '';
+      const focusableSelectors = 'a[href], button:not([disabled]), textarea, input, select, [tabindex]:not([tabindex="-1"])';
+      const focusables = productModal.querySelectorAll(focusableSelectors);
+      const firstFocusable = focusables[0];
+      if (firstFocusable) firstFocusable.focus();
+
+      const trap = (e) => {
+        if (!productModal.classList.contains('show') || e.key !== 'Tab') return;
+        const focusable = productModal.querySelectorAll(focusableSelectors);
+        if (!focusable.length) return;
+        const first = focusable[0];
+        const last  = focusable[focusable.length - 1];
+        if (e.shiftKey && document.activeElement === first) {
+          e.preventDefault();
+          last.focus();
+        } else if (!e.shiftKey && document.activeElement === last) {
+          e.preventDefault();
+          first.focus();
+        }
+      };
+      productModal._trapFocus = trap;
+      productModal.addEventListener('keydown', trap);
+      productModal.dataset.trap = '1';
     }
 
     function closeProductModal() {
+      // restore focus and remove trap
+      if (productModal.dataset.trap && productModal._trapFocus) {
+        productModal.removeEventListener('keydown', productModal._trapFocus);
+        delete productModal._trapFocus;
+        delete productModal.dataset.trap;
+      }
       productModal.classList.remove('show');
       productModal.setAttribute('aria-hidden','true');
+      if (lastOpener) {
+        lastOpener.focus();
+      }
     }
 
     modalCloseBtn?.addEventListener('click', closeProductModal);
@@ -384,7 +420,7 @@ collectionMenu.addEventListener('click', (e) => {
         e.preventDefault();
         const offset = target.getBoundingClientRect().top + window.scrollY - 60;
         window.scrollTo({ top: offset, behavior: 'smooth' });
-        if (mainNav.classList.contains('show')) {
+        if (mainNav && navToggle && mainNav.classList.contains('show')) {
           mainNav.classList.remove('show');
           navToggle.classList.remove('open');
           navToggle.setAttribute('aria-expanded', 'false');
@@ -560,8 +596,8 @@ collectionMenu.addEventListener('click', (e) => {
           c => c.classList.contains('producto-item') && c.style.display !== 'none'
         );
         visible.sort((a, b) => {
-          const pa = parseFloat(a.dataset.precio) || 0;
-          const pb = parseFloat(b.dataset.precio) || 0;
+          const pa = parseFloat(a.dataset.price) || 0;
+          const pb = parseFloat(b.dataset.price) || 0;
           return sortVal === 'precio-asc' ? pa - pb : pb - pa;
         });
         visible.forEach(el => grid.appendChild(el));
@@ -579,7 +615,14 @@ collectionMenu.addEventListener('click', (e) => {
   applyFilters();
 
   // SHOPPING CART & MODAL
-  let cart = JSON.parse(localStorage.getItem('cart')) || [];
+  let cart = [];
+  try {
+    const raw = localStorage.getItem('cart');
+    cart = raw ? JSON.parse(raw) : [];
+    if (!Array.isArray(cart)) cart = [];
+  } catch (_) {
+    cart = [];
+  }
   const cartCount = document.querySelector('.cart-count');
   const saveCart = () => localStorage.setItem('cart', JSON.stringify(cart));
   const addToCart = prod => {
@@ -616,6 +659,8 @@ collectionMenu.addEventListener('click', (e) => {
         price: price || 0
       };
       addToCart(product);
+      showCartToast();
+      openCartPanel?.();
     });
   });
 
@@ -824,7 +869,7 @@ cartPanelElm?.addEventListener('touchend',   e => {
       `;
       cartItemsContainer.appendChild(row);
     });
-    cartTotalEl.textContent = `$${total.toFixed(2)}`;
+    if (cartTotalEl) cartTotalEl.textContent = `$${total.toFixed(2)}`;
     cartItemsContainer.querySelectorAll('.remove-item').forEach(btn =>
       btn.addEventListener('click', () => {
         cart = cart.filter(i=>i.id!==btn.dataset.id);
@@ -928,36 +973,6 @@ cartPanelElm?.addEventListener('touchend',   e => {
   */
 
 });
-document.querySelectorAll('.view-product-btn').forEach(btn => {
-  btn.addEventListener('click', () => {
-    // 1. Armar las diapositivas según las imágenes del data-attribute
-    const wrapper = document.querySelector('.product-modal .swiper-wrapper');
-    wrapper.innerHTML = btn.dataset.images
-      .split(',')
-      .map(src => `<div class="swiper-slide"><img src="${src.trim()}" alt=""></div>`)
-      .join('');
-
-    // 2. (Re)inicializar Swiper SOLO para este modal
-    if (window.productSwiper) { window.productSwiper.destroy(true, true); }
-    window.productSwiper = new Swiper('.product-modal .swiper-container', {
-      loop: true,
-      speed: 600,
-      pagination: { el: '.product-modal .swiper-pagination', clickable: true },
-      navigation: {
-        nextEl: '.product-modal .swiper-button-next',
-        prevEl: '.product-modal .swiper-button-prev'
-      }
-    });
-
-    // 3. Mostrar el modal
-    document.querySelector('.product-modal').classList.add('show');
-  });
-});
-
-// Cerrar modal (puede estar ya en tu código CSS/JS)
-document.querySelector('.product-modal-close')
-        .addEventListener('click', () =>
-          document.querySelector('.product-modal').classList.remove('show'));
           // Marca el item activo según la URL en TODAS las navs (desktop + off-canvas)
 (function setActiveNav() {
   // nombre de archivo actual (index.html si viene vacío)
@@ -975,3 +990,11 @@ document.querySelector('.product-modal-close')
     if (href === current) a.classList.add('active');
   });
 })();
+function showCartToast(msg = 'Producto agregado al carrito') {
+  const t = document.createElement('div');
+  t.className = 'cart-toast';
+  t.textContent = msg;
+  document.body.appendChild(t);
+  setTimeout(() => t.classList.add('hide'), 1400);
+  setTimeout(() => t.remove(), 1800);
+} 

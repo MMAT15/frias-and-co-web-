@@ -436,8 +436,9 @@ img {
   }
   /* --- Ajuste imágenes producto en móvil --- */
   .grid-productos,
-  .grid-ofertas,
-  .grid-featured {
+.grid-products,
+.grid-ofertas,
+.grid-featured {
     grid-template-columns: repeat(2, 1fr);   /* 2 columnas iguales */
     gap: 1rem;                                /* un poco menos de espacio */
   }
@@ -633,7 +634,7 @@ img {
 /* --------------------------------------------------
    GRID PRODUCTOS
 -------------------------------------------------- */
-.grid-productos {
+.grid-productos, .grid-products {
   display: grid;
   grid-template-columns: repeat(auto-fit,minmax(200px,1fr));
   gap: 2rem;
@@ -2442,4 +2443,32 @@ img {
 .swiper-button-next,
 .swiper-pagination {
   z-index: 100; /* debajo del overlay (1150) y panel (1200) */
+}
+/* ===== A11y: Focus visible consistente en botones de producto ===== */
+.view-product-btn:focus-visible,
+.add-to-cart-icon:focus-visible,
+.btn:focus-visible {
+  outline: 3px solid var(--color-acento);
+  outline-offset: 2px;
+}
+/* ===== Accesibilidad: respeta "reduce motion" ===== */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation: none !important;
+    transition: none !important;
+    scroll-behavior: auto !important;
+  }
+}
+/* ===== Normalización final: tamaño razonable de .collection-toggle ===== */
+.collection-toggle {
+  width: auto !important;
+  height: auto !important;
+  padding: 6px 10px !important;
+  border-radius: 4px !important;
+}
+/* ===== A11y: foco en imágenes clicables dentro de tarjetas ===== */
+.producto-item a:focus-visible img,
+.featured-card a:focus-visible img {
+  outline: 3px solid var(--color-acento);
+  outline-offset: 2px;
 }
