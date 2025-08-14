@@ -1,6 +1,20 @@
 document.addEventListener('DOMContentLoaded', () => {
   console.log('script.js cargado');
+// ANNOUNCEMENT BAR (show once until closed)
+const annBar   = document.querySelector('.announcement-bar');
+const annClose = document.querySelector('.ann-close');
 
+if (annBar) {
+  // ocultar si el usuario ya lo cerró
+  if (localStorage.getItem('annBarDismissed') === '1') {
+    annBar.style.display = 'none';
+  }
+  // cerrar y recordar
+  annClose?.addEventListener('click', () => {
+    annBar.style.display = 'none';
+    localStorage.setItem('annBarDismissed', '1');
+  });
+}
   // Throttle helper
   function throttle(fn, wait) {
     let last = 0;
@@ -549,7 +563,10 @@ collectionMenu.addEventListener('click', (e) => {
   const filterTipo  = document.getElementById('filter-tipo');
   const filterTalle = document.getElementById('filter-talle');
   const sortBy      = document.getElementById('sort-by');
-
+// Secciones de categoría y contenedor para "sin resultados"
+const categorySections = Array.from(document.querySelectorAll('.product-category'));
+const productosMain = document.querySelector('.productos-main'); // ajusta si tu contenedor es otro
+let emptyStateEl;
   const typeToSection = {
     remera: 'remeras',
     top: 'tops',
@@ -563,27 +580,51 @@ collectionMenu.addEventListener('click', (e) => {
   };
 
   function applyFilters() {
-    const tipoVal  = filterTipo ? filterTipo.value : '';
-    const talleVal = filterTalle ? filterTalle.value : '';
+  const tipoVal  = filterTipo ? filterTipo.value : '';
+  const talleVal = filterTalle ? filterTalle.value : '';
 
-    allProductItems.forEach(item => {
-      const match =
-        (!tipoVal  || item.dataset.tipo  === tipoVal) &&
-        (!talleVal || item.dataset.talle === talleVal);
-      item.style.display = match ? '' : 'none';
-    });
+  // 1) Mostrar/ocultar CADA producto según los filtros
+  allProductItems.forEach(item => {
+    const match =
+      (!tipoVal  || item.dataset.tipo  === tipoVal) &&
+      (!talleVal || item.dataset.talle === talleVal);
+    item.style.display = match ? '' : 'none';
+  });
 
-    applySorting(); // re‑sort visible items after filtering
+  // 2) Ordenar los visibles (como ya hacías)
+  applySorting();
 
-    // Auto-scroll to the relevant section if a specific tipo is selected
-    if (tipoVal && typeToSection[tipoVal]) {
-      const targetSec = document.getElementById(typeToSection[tipoVal]);
-      if (targetSec) {
-        const offset = targetSec.getBoundingClientRect().top + window.scrollY - 60;
-        window.scrollTo({ top: offset, behavior: 'smooth' });
-      }
+  // 3) Ocultar secciones sin productos visibles
+  categorySections.forEach(sec => {
+    const visibles = Array
+      .from(sec.querySelectorAll('.producto-item'))
+      .filter(el => el.style.display !== 'none').length;
+    sec.classList.toggle('is-hidden', visibles === 0);
+  });
+
+  // 4) Mensaje "sin resultados" si TODO quedó vacío
+  const anyVisible = allProductItems.some(el => el.style.display !== 'none');
+  if (!anyVisible) {
+    if (!emptyStateEl) {
+      emptyStateEl = document.createElement('p');
+      emptyStateEl.className = 'empty-state';
+      emptyStateEl.textContent = 'No encontramos productos con esos filtros.';
+      productosMain?.prepend(emptyStateEl);
+    }
+  } else if (emptyStateEl) {
+    emptyStateEl.remove();
+    emptyStateEl = null;
+  }
+
+  // 5) Si eligió un tipo, desplazate a su sección (y ya está oculta cualquier otra)
+  if (tipoVal && typeToSection[tipoVal]) {
+    const targetSec = document.getElementById(typeToSection[tipoVal]);
+    if (targetSec && !targetSec.classList.contains('is-hidden')) {
+      const offset = targetSec.getBoundingClientRect().top + window.scrollY - 60;
+      window.scrollTo({ top: offset, behavior: 'smooth' });
     }
   }
+}
 
   function applySorting() {
     if (!sortBy) return;

@@ -606,3 +606,13 @@
 .producto-item h3 { font-size: 1rem; }
 .producto-item .price { margin-bottom: 0.5rem; }
 .producto-item .btn { padding: 12px; }
+/* Oculta secciones sin resultados */
+.product-category.is-hidden { display: none; }
+
+/* Mensaje de "sin resultados" */
+.empty-state {
+  margin: 2rem 0;
+  text-align: center;
+  color: var(--color-acento-sec);
+  font-weight: 500;
+}

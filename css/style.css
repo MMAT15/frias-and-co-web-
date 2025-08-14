@@ -2566,3 +2566,58 @@ img {
     height: 22px !important;
   }
 }
+/* === Announcement / Marquee bar === */
+.announcement-bar{
+  position: relative;
+  background:#111;                 /* color de fondo del cartel */
+  color:#fff;
+  height: 36px;
+  display:flex;
+  align-items:center;
+  overflow:hidden;
+  z-index: 1200;                   /* por encima del contenido, debajo de overlays */
+  padding-top: env(safe-area-inset-top,0px);
+}
+.announcement-bar .ann-close{
+  position:absolute;
+  right: 8px;
+  top: calc(4px + env(safe-area-inset-top,0px));
+  width:28px; height:28px;
+  border-radius:999px;
+  border:0; background:rgba(255,255,255,.1);
+  color:#fff; font-size:18px; line-height:1;
+  cursor:pointer;
+}
+.announcement-bar .ann-close:hover{ background:rgba(255,255,255,.2); }
+
+.announcement-bar .ann-track{
+  width:100%;
+  white-space: nowrap;
+  mask-image: linear-gradient(90deg, transparent 0, #000 8%, #000 92%, transparent 100%);
+  -webkit-mask-image: linear-gradient(90deg, transparent 0, #000 8%, #000 92%, transparent 100%);
+}
+
+.announcement-bar .ann-row{
+  display:inline-block;
+  padding-left: 100%;
+  /* velocidad de desplazamiento: ajustá la duración */
+  animation: ann-marquee 22s linear infinite;
+  font-size: 0.95rem;
+  letter-spacing:.2px;
+}
+
+@keyframes ann-marquee{
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(-100%); }
+}
+
+/* Respeta preferencias de movimiento reducido */
+@media (prefers-reduced-motion: reduce){
+  .announcement-bar .ann-row{ animation: none; }
+}
+
+/* Compacto en mobile pequeño */
+@media (max-width:420px){
+  .announcement-bar{ height:34px; }
+  .announcement-bar .ann-row{ font-size:.9rem; }
+}
