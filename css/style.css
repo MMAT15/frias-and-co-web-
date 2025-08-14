@@ -2982,3 +2982,45 @@ img {
   .site-header{ padding:12px 0 !important; }
   .header-inner{ min-height:110px !important; }
 }
+/* === FINAL MOBILE HEADER + FEATURED GRID FIX (2025‑08‑14) === */
+
+/* 1) MOBILE header: centra el branding y evita que se pegue a la hamburguesa
+      - Quitamos posicionamiento absoluto en los botones
+      - Armamos una grilla de 3 columnas: [Catálogo] [Branding] [Hamburguesa] */
+@media (max-width:768px){
+  .header-inner{
+    display: grid !important;
+    grid-template-columns: auto 1fr auto !important;
+    align-items: center !important;
+    gap: 8px !important;
+    min-height: 88px !important;        /* aire para logo + “BY FRIAS” */
+    padding: 0 !important;
+  }
+  .collection-toggle,
+  .nav-toggle{
+    position: static !important;         /* <- saca absolute previos */
+    width: 56px !important; 
+    height: 56px !important;
+    margin: 0 !important;
+  }
+  .site-branding{
+    grid-column: 2 !important;
+    justify-self: center !important;
+    text-align: center !important;
+    margin: 0 auto !important;
+  }
+}
+
+/* 2) MOBILE: Featured en 2 columnas como productos.html */
+@media (max-width:768px){
+  .grid-featured{
+    display: grid !important;
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    gap: 12px !important;
+    max-width: none !important;          /* que use todo el ancho disponible */
+  }
+  .featured-card img{
+    height: 160px !important;            /* imágenes más contenidas */
+    object-fit: cover !important;
+  }
+}
