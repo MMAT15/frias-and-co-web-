@@ -2911,3 +2911,74 @@ img {
 @media (min-width: 769px){
   :root{ --ctl-right: 10px; }   /* en ese bloque se usaba 16px */
 }
+/* === 2025-08-14 quick fixes: header search + spacing (final) === */
+/* 0) Kill any stray header search UI on MOBILE to avoid el "pedacito" detrás del Catálogo */
+@media (max-width:768px){
+  .header-search,
+  .header-search-desktop{
+    display:none !important; width:0 !important; height:0 !important;
+    padding:0 !important; margin:0 !important; border:0 !important; box-shadow:none !important;
+    position: static !important; overflow:hidden !important;
+  }
+}
+
+/* 1) MOBILE: más aire en las esquinas y branding centrado sin pegarse a la hamburguesa */
+@media (max-width:768px){
+  .header-inner{ min-height: 100px !important; }
+  .site-branding{ margin: 0 auto !important; }
+  .collection-toggle{ left: 14px !important; }
+  .nav-toggle{ right: 14px !important; }
+}
+
+/* 2) DESKTOP: la lupita bien pegada a la derecha y el campo anclado ahí */
+@media (min-width:769px){
+  .header-search-toggle{ right: 8px !important; }
+  .header-search-desktop{ right: 8px !important; }
+
+  /* Cuando la búsqueda está abierta, ocultamos Catálogo y mostramos el campo expandido */
+  .site-header.search-open .collection-toggle{ display:none !important; }
+  .site-header.search-open .header-search-desktop{
+    width: min(420px, 46vw) !important; opacity:1 !important; pointer-events:auto !important;
+  }
+}
+/* === 2025‑08‑14 FIX: header search + spacing === */
+
+/* (A) MOBILE: ocultar cualquier rastro del buscador del header
+   (evita el “pedacito” detrás del botón Catálogo) */
+@media (max-width:768px){
+  .header-search,
+  .header-search-desktop{
+    display:none !important; width:0 !important; height:0 !important;
+    padding:0 !important; margin:0 !important; border:0 !important; box-shadow:none !important;
+    position:static !important; overflow:hidden !important;
+  }
+}
+
+/* (B) MOBILE: más aire y branding centrado, sin pegarse a la hamburguesa */
+@media (max-width:768px){
+  .header-inner{ min-height:100px !important; }
+  .site-branding{ margin:0 auto !important; }
+  .collection-toggle{ left:14px !important; }
+  .nav-toggle{       right:14px !important; }
+}
+
+/* (C) DESKTOP: lupita y campo bien pegados a la derecha */
+@media (min-width:769px){
+  .header-search-toggle{ right:8px !important; }
+  .header-search-desktop{ right:8px !important; }
+
+  /* al abrir búsqueda se oculta Catálogo y el campo se expande */
+  .site-header.search-open .collection-toggle{ display:none !important; }
+  .site-header.search-open .header-search-desktop{
+    width:min(420px,46vw) !important;
+    opacity:1 !important;
+    pointer-events:auto !important;
+  }
+}
+
+/* (D) DESKTOP: un poco más de altura para que el logo no toque el cartel
+   y que “BY FRIAS” no se salga del header */
+@media (min-width:769px){
+  .site-header{ padding:12px 0 !important; }
+  .header-inner{ min-height:110px !important; }
+}

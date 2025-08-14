@@ -1060,7 +1060,7 @@ document.addEventListener('DOMContentLoaded', () => {
   };
 
   // Header search (desktop / global)
-  document.querySelectorAll('form.header-search')
+  document.querySelectorAll('form.header-search:not(.header-search-desktop)')
     .forEach(f => handleSubmit(f, '.header-search-input'));
 
   // Menu search (dentro del menú hamburguesa)
@@ -1076,71 +1076,64 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 });
-// === Desktop expanding search (header) ===
-(function(){
+// ==== Desktop Search Controller (single source of truth) ====
+(() => {
+  if (window.__beraSearchWired) return;  // evita múltiples bindings
+  window.__beraSearchWired = true;
+
   const header = document.querySelector('.site-header');
   const toggle = document.querySelector('.header-search-toggle');
   const form   = document.querySelector('form.header-search-desktop');
-  const input  = form ? form.querySelector('.header-search-input') : null;
-  if(!header || !toggle || !form || !input) return;
+  const input  = form?.querySelector('.header-search-input');
+  const btn    = form?.querySelector('.header-search-btn');
+  const mq     = window.matchMedia('(min-width: 769px)');
 
-  function closeHamburgerAndCatalog(){
-    // cierra hamburguesa si estuviera abierta
-    const nav = document.getElementById('primary-navigation');
-    const burger = document.querySelector('.nav-toggle');
-    if (nav && nav.classList.contains('show')) {
-      nav.classList.remove('show');
-      burger?.classList.remove('open');
-      burger?.setAttribute('aria-expanded','false');
-    }
-    // cierra catálogo off‑canvas si estuviera abierto
-    const colMenu = document.getElementById('collection-menu');
-    const colOv   = document.getElementById('collection-overlay');
-    if (colMenu?.classList.contains('show') || colOv?.classList.contains('show')) {
-      colMenu?.classList.remove('show');
-      colOv?.classList.remove('show');
-      colMenu?.setAttribute('aria-hidden','true');
-      const colToggle = document.querySelector('.collection-toggle');
-      colToggle?.setAttribute('aria-expanded','false');
-      document.body.style.overflow = ''; // por si quedó bloqueado
-    }
-  }
+  function isOpen(){ return header?.classList.contains('search-open'); }
+  function openSearch(){ header?.classList.add('search-open'); input?.focus(); }
+  function closeSearch(){ header?.classList.remove('search-open'); }
 
-  function openSearch(){
-    header.classList.add('search-open');
-    toggle.setAttribute('aria-expanded','true');
-    closeHamburgerAndCatalog();
-    // asegura que el form ya sea interactivo antes de focus
-    requestAnimationFrame(()=> input.focus());
-  }
-  function closeSearch(){
-    header.classList.remove('search-open');
-    toggle.setAttribute('aria-expanded','false');
-  }
-
-  toggle.addEventListener('click', ()=>{
-    header.classList.contains('search-open') ? closeSearch() : openSearch();
+  // 1) Click en la lupita: abre/cierra (no busca)
+  toggle?.addEventListener('click', (e) => {
+    if (!mq.matches) return; // en mobile no hace nada
+    e.preventDefault();
+    isOpen() ? closeSearch() : openSearch();
   });
 
-  // ESC para cerrar
-  document.addEventListener('keydown', (e)=>{
-    if(e.key === 'Escape') closeSearch();
+  // 2) Cerrar con click fuera
+  document.addEventListener('click', (e) => {
+    if (!mq.matches || !isOpen()) return;
+    const clickDentroForm = form?.contains(e.target);
+    const clickEnToggle   = toggle?.contains(e.target);
+    if (!clickDentroForm && !clickEnToggle) closeSearch();
   });
 
-  // Clic fuera del header cierra
-  document.addEventListener('click', (e)=>{
-    if(!header.classList.contains('search-open')) return;
-    if(!header.contains(e.target)) closeSearch();
+  // 3) Cerrar con Escape
+  document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeSearch(); });
+
+  // 4) Enviar: SOLO si hay texto (si está vacío, enfoca y NO navega)
+  form?.addEventListener('submit', (e) => {
+    const q = (input?.value || '').trim();
+    if (!q) { e.preventDefault(); input?.focus(); return; }
+    form.action = `productos.html?q=${encodeURIComponent(q)}`;
+  });
+  btn?.addEventListener('click', (e) => {
+    const q = (input?.value || '').trim();
+    if (!q) { e.preventDefault(); input?.focus(); }
   });
 
-  // Al pasar a mobile, cerramos la búsqueda para no interferir
-  const mq = window.matchMedia('(max-width: 768px)');
-  mq.addEventListener('change', ()=>{ if(mq.matches) closeSearch(); });
+  // 5) Si pasa a mobile, cerrar búsqueda si estaba abierta
+  mq.addEventListener?.('change', (ev) => { if (!ev.matches) closeSearch(); });
+})();
 
-  // Redirección a productos.html?q=... y cerrar al enviar
-  form.addEventListener('submit', ()=>{
-    const q = (input.value||'').trim();
-    form.action = q ? `productos.html?q=${encodeURIComponent(q)}` : 'productos.html';
-    closeSearch();
+// ==== Patch: ruteo consistente para los demás buscadores (header simple / menú) ====
+(function(){
+  document.querySelectorAll('form.header-search, form.menu-search').forEach((form) => {
+    form.addEventListener('submit', () => {
+      const inp = form.querySelector('input[name="q"], .header-search-input, .menu-search-input');
+      const q = (inp?.value || '').trim();
+      // en desktop header-search-desktop lo maneja el bloque de arriba
+      if (form.classList.contains('header-search-desktop')) return;
+      form.action = q ? `productos.html?q=${encodeURIComponent(q)}` : 'productos.html';
+    });
   });
 })();
