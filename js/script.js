@@ -29,7 +29,7 @@ const collectionMenu    = document.getElementById('collection-menu');
 const collectionOverlay = document.getElementById('collection-overlay');
 const collectionClose   = document.getElementById('collection-close');
 
-if (collectionToggle && collectionMenu && collectionOverlay && collectionClose) {
+if (collectionToggle && collectionMenu && collectionOverlay) {
 
   const lockScroll   = () => { document.body.style.overflow = 'hidden'; };
   const unlockScroll = () => { document.body.style.overflow = '';       };
@@ -51,7 +51,7 @@ if (collectionToggle && collectionMenu && collectionOverlay && collectionClose) 
   };
 
   collectionToggle.addEventListener('click', openMenu);
-  collectionClose .addEventListener('click', closeMenu);
+  collectionClose?.addEventListener('click', closeMenu);
   collectionOverlay.addEventListener('click', closeMenu);
 // Navegación desde el menú de Catálogo: si es hash en la misma página, hace scroll;
 // si es a otra página (productos.html#seccion), navega y listo.
