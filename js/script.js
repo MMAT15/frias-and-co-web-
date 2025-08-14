@@ -1039,3 +1039,40 @@ function showCartToast(msg = 'Producto agregado al carrito') {
   setTimeout(() => t.classList.add('hide'), 1400);
   setTimeout(() => t.remove(), 1800);
 } 
+// ===== Header & Menu search (global) =====
+document.addEventListener('DOMContentLoaded', () => {
+  const handleSubmit = (form, inputSelector) => {
+    form.addEventListener('submit', () => {
+      const input = form.querySelector(inputSelector);
+      const q = (input?.value || '').trim();
+      form.action = q ? `productos.html?q=${encodeURIComponent(q)}` : 'productos.html';
+
+      // Si es el buscador del menú, cerramos el off‑canvas al enviar
+      if (form.classList.contains('menu-search')) {
+        const nav = document.getElementById('primary-navigation');
+        const toggle = document.querySelector('.nav-toggle');
+        if (nav && toggle && nav.classList.contains('show')) {
+          nav.classList.remove('show');
+          toggle.setAttribute('aria-expanded', 'false');
+        }
+      }
+    });
+  };
+
+  // Header search (desktop / global)
+  document.querySelectorAll('form.header-search')
+    .forEach(f => handleSubmit(f, '.header-search-input'));
+
+  // Menu search (dentro del menú hamburguesa)
+  document.querySelectorAll('form.menu-search')
+    .forEach(f => handleSubmit(f, '.menu-search-input'));
+
+  // Prefill cuando llegás a productos.html?q=...
+  if (window.location.pathname.endsWith('productos.html')) {
+    const q = new URLSearchParams(location.search).get('q') || '';
+    if (q) {
+      document.querySelectorAll('.header-search-input, .menu-search-input')
+        .forEach(inp => inp.value = q);
+    }
+  }
+});

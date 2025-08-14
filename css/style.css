@@ -2621,3 +2621,112 @@ img {
   .announcement-bar{ height:34px; }
   .announcement-bar .ann-row{ font-size:.9rem; }
 }
+/* ===== Header search ===== */
+.header-search{
+  display:inline-flex;
+  align-items:center;
+  gap:.5rem;
+  margin: 0 .5rem;
+}
+
+.header-search-input{
+  width: min(52vw, 360px);
+  height: 40px;
+  padding: 0 .75rem;
+  border: 1px solid #e0e0e0;
+  border-radius: 999px;
+  background: #fff;
+  font: inherit;
+  color: var(--color-principal);
+  transition: box-shadow var(--transition), border-color var(--transition);
+}
+.header-search-input::placeholder{ color:#9c9c9c; }
+
+.header-search-input:focus{
+  outline: none;
+  border-color: var(--color-acento);
+  box-shadow: 0 0 0 3px rgba(233,30,99,.15);
+}
+
+.header-search-btn{
+  width: 40px; height: 40px;
+  border-radius: 999px;
+  border: 1px solid #e0e0e0;
+  background: #fff;
+  display: inline-flex; align-items: center; justify-content: center;
+  cursor: pointer;
+  color: var(--color-principal);
+  transition: background var(--transition), transform var(--transition), border-color var(--transition);
+}
+.header-search-btn:hover{
+  background: var(--color-acento);
+  color:#fff;
+  border-color: var(--color-acento);
+  transform: translateY(-1px);
+}
+
+/* Ubicación en el header (grid/flex friendly) */
+.header-inner .header-search { order: 2; }
+
+/* ===== Mobile: más compacto ===== */
+@media (max-width: 768px){
+  .header-search-input{
+    width: 44vw;
+    height: 36px;
+    padding: 0 .65rem;
+  }
+  .header-search-btn{ width: 36px; height: 36px; }
+  /* Si el header queda apretado, podés ocultar el botón y enviar con Enter */
+  /* .header-search-btn{ display:none; } */
+}
+/* ===== Buscador dentro del menú hamburguesa (mobile) ===== */
+.menu-search{
+  display: none;                 /* por defecto oculto (desktop) */
+  align-items: center;
+  gap: .5rem;
+  padding: .75rem 1rem .25rem;   /* arriba del listado */
+  border-bottom: 1px solid #eaeaea;
+  background: rgba(255,255,255,0.97);
+}
+.menu-search-input{
+  flex: 1 1 auto;
+  height: 40px;
+  padding: 0 .85rem;
+  border: 1px solid #e0e0e0;
+  border-radius: 999px;
+  background: #fff;
+  font: inherit;
+  color: var(--color-principal);
+  transition: box-shadow var(--transition), border-color var(--transition);
+}
+.menu-search-input::placeholder{ color:#9c9c9c; }
+.menu-search-input:focus{
+  outline: none;
+  border-color: var(--color-acento);
+  box-shadow: 0 0 0 3px rgba(233,30,99,.15);
+}
+
+.menu-search-btn{
+  flex: 0 0 auto;
+  width: 40px; height: 40px;
+  border-radius: 999px;
+  border: 1px solid #e0e0e0;
+  background: #fff;
+  display: inline-flex; align-items: center; justify-content: center;
+  cursor: pointer;
+  color: var(--color-principal);
+  transition: background var(--transition), transform var(--transition), border-color var(--transition);
+}
+.menu-search-btn:hover{
+  background: var(--color-acento);
+  color:#fff;
+  border-color: var(--color-acento);
+  transform: translateY(-1px);
+}
+
+/* Mostrar el buscador solo cuando el menú móvil está abierto */
+@media (max-width: 768px){
+  .main-nav.show .menu-search{ display: flex; }
+  /* si tu menú no usa .show, y se muestra con display:flex, podés usar: */
+  /* .main-nav { position:relative; } .main-nav .menu-search{ display:flex; } */
+}

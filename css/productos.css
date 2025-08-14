@@ -616,3 +616,16 @@
   color: var(--color-acento-sec);
   font-weight: 500;
 }
+.search-empty {
+  display: none;
+  text-align: center;
+  margin: 2.5rem 0 1rem;
+}
+.search-empty p {
+  margin: .25rem 0;
+  font-size: 1.05rem;
+}
+.search-empty .hint {
+  color: #777;
+  font-size: .95rem;
+}
