@@ -3116,3 +3116,25 @@ img {
 @media (max-width:768px){
   .main-nav.show{ z-index: 2000; }
 }
+/* Altura del cartel */
+:root{ --ann-h: 36px; }
+@media (max-width:420px){ :root{ --ann-h: 34px; } }
+
+/* Sticky + animación de plegado */
+.announcement-bar{
+  position: sticky;
+  top: 0;
+  z-index: 1400;
+  max-height: var(--ann-h);
+  transition: max-height .35s ease, opacity .25s ease;
+  will-change: max-height, opacity;
+}
+.announcement-bar.closing{
+  max-height: 0;         /* se pliega */
+  opacity: 0;            /* y se desvanece */
+  overflow: hidden;      /* evita “saltos” de contenido interno */
+}
+
+/* El header baja mientras el cartel esté activo (y anima el cambio) */
+.site-header{ transition: top .35s ease, background var(--transition), box-shadow var(--transition); }
+html.has-ann .site-header{ top: var(--ann-h); }
