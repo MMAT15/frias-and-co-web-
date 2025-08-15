@@ -3262,3 +3262,78 @@ body.has-ann{
 main > :first-child {
   margin-top: 0;
 }
+/* ===========================
+   Announcement bar compacta (finita)
+   =========================== */
+:root{
+  /* Altura objetivo en mobile */
+  --ann-max: 36px;
+  --ann-fs: 13px;
+  --ann-py: 6px;
+}
+
+/* Bar: una sola línea, centrada verticalmente, sticky y con animación por max-height */
+.announcement-bar{
+  position: sticky;
+  top: env(safe-area-inset-top, 0);
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  gap: .5rem;
+
+  /* Compacta */
+  padding: var(--ann-py) max(12px, env(safe-area-inset-left)) var(--ann-py) max(12px, env(safe-area-inset-right));
+  font-size: var(--ann-fs);
+  line-height: 1.2;
+  max-height: var(--ann-max);
+
+  /* Que no “salte” a dos líneas */
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+
+  /* Animación de cierre (tu JS usa .closing → max-height:0) */
+  transition: max-height .28s ease;
+}
+
+.announcement-bar.closing{ max-height: 0; }
+
+/* Texto dentro (si tenés un span/p contenedor) */
+.announcement-bar .ann-text{
+  flex: 1 1 auto;
+  min-width: 0;              /* permite elipsis */
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* Botón de cerrar chiquito y que no empuje altura */
+.announcement-bar .ann-close{
+  flex: 0 0 auto;
+  inline-size: 24px;
+  block-size: 24px;
+  display: inline-grid;
+  place-items: center;
+  border-radius: 999px;
+  background: rgba(255,255,255,.08);
+  border: 0;
+  line-height: 1;
+  cursor: pointer;
+}
+
+/* Header: que sólo se compense con --ann-h (sin márgenes extra) */
+.site-header{
+  position: sticky;                 /* si lo usás fixed, cambialo a fixed */
+  top: var(--ann-h);
+  margin-top: 0 !important;
+  padding-top: 0 !important;
+}
+
+/* Un toque más alto en desktop si querés */
+@media (min-width: 768px){
+  :root{
+    --ann-max: 40px;
+    --ann-fs: 14px;
+    --ann-py: 8px;
+  }
+}
