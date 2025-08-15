@@ -21,8 +21,7 @@
   <!-- HEADER -->
   <header class="site-header" role="banner">
     <div class="container header-inner">
-       <!-- Botón que abre el menú de colecciones -->
-<button class="collection-toggle"
+   <button class="collection-toggle"
         aria-label="Abrir menú Catálogo"
         aria-expanded="false"
         aria-controls="collection-menu">
@@ -33,37 +32,76 @@
     <path d="M3 16.5l9-6 9 6" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
   </svg>
 </button>
-     <div class="site-branding">
+<!-- Botón lupita (desktop) -->
+<button class="header-search-toggle" aria-label="Abrir búsqueda">
+  <svg viewBox="0 0 24 24" aria-hidden="true">
+    <path d="M11 18a7 7 0 1 1 4.95-2.05L21 21l-1.5 1.5-5.05-5.05A6.96 6.96 0 0 1 11 18z" fill="currentColor"/>
+  </svg>
+</button>
+
+<!-- Campo que se despliega desde la lupita (desktop) -->
+<form class="header-search header-search-desktop" role="search" aria-label="Buscar (desktop)">
+  <input class="header-search-input" name="q" type="search" placeholder="Buscar prendas…" autocomplete="off" />
+  <button class="header-search-btn" aria-label="Buscar">
+    <svg viewBox="0 0 24 24" aria-hidden="true">
+      <path d="M11 18a7 7 0 1 1 4.95-2.05L21 21l-1.5 1.5-5.05-5.05A6.96 6.96 0 0 1 11 18z" fill="currentColor"/>
+    </svg>
+  </button>
+</form>
+    <div class="site-branding">
   <a href="index.html" class="logo-link" aria-label="Inicio">
     <div class="logo-wrap">
       <img src="assets/images/logoo.jpeg" alt="Logo BERA clothing" class="logo" />
     </div>
   </a>
-
-  <h1 class="site-title">
+  <div class="site-title" aria-label="BERA CLOTHING">
     <span class="title-bera">BERA</span>
     <span class="title-clothing">CLOTHING</span>
-  </h1>
-
+  </div>
   <span class="site-tagline">BY FRIAS</span>
 </div>
+
       <button class="nav-toggle"
               aria-controls="primary-navigation"
               aria-expanded="false"
               aria-label="Abrir menú">
         <span class="bar"></span><span class="bar"></span><span class="bar"></span>
       </button>
+
       <nav id="primary-navigation" class="main-nav"
-           role="navigation"
-           aria-label="Menú principal">
-        <ul class="nav-list">
-          <li><a href="index.html">Inicio</a></li>
-          <li><a href="newsletter.html" class="active" aria-current="page">Novedades</a></li>
-          <li><a href="productos.html">Productos</a></li>
-        <li><a href="contacto.html">Contacto</a></li>
-        </ul>
-      </nav>
+     role="navigation"
+     aria-label="Menú principal">
+
+  <!-- ===== Buscador dentro del menú (mobile) ===== -->
+  <form class="menu-search" action="productos.html" method="get" role="search" aria-label="Buscar prendas">
+    <label class="visually-hidden" for="menu-search-input">Buscar</label>
+    <input
+      id="menu-search-input"
+      type="search"
+      name="q"
+      class="menu-search-input"
+      placeholder="Buscar prendas..."
+      autocomplete="off"
+      aria-label="Buscar"
+    />
+    <button class="menu-search-btn" type="submit" aria-label="Buscar">
+      <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" focusable="false">
+        <circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="2" fill="none"></circle>
+        <line x1="16.5" y1="16.5" x2="21" y2="21" stroke="currentColor" stroke-width="2" stroke-linecap="round"></line>
+      </svg>
+    </button>
+  </form>
+  <!-- ============================================ -->
+
+  <ul class="nav-list">
+    <li><a href="index.html" class="active" aria-current="page">Inicio</a></li>
+    <li><a href="newsletter.html">Novedades</a></li>
+    <li><a href="productos.html">Productos</a></li>
+    <li><a href="contacto.html">Contacto</a></li>
+  </ul>
+</nav>
      
+    </div>
   </header>
   <!-- MAIN CONTENT -->
   <main id="main-content">
