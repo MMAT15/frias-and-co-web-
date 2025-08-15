@@ -3351,3 +3351,38 @@ main > :first-child {
   background-color: #fff; /* relleno de fondo */
   border-radius: 8px; /* opcional, por estética */
 }
+/* === Main nav centrado y sobre el slider === */
+.main-nav{
+  position: absolute;               /* si lo tenés fixed, podés dejar fixed */
+  left: 50%;
+  transform: translateX(-50%);
+  width: min(680px, calc(100% - 32px)); /* centrado y con margen lateral */
+  z-index: 200;                      /* por encima del hero */
+}
+
+/* Si tu panel blanco es un contenedor interno, descomenta y usa esto también
+.main-nav > *{
+  width: 100%;
+  margin: 8px auto 0;
+  border-radius: 16px;
+}
+*/
+/* Botón hamburguesa: fondo sólido y sin blend/backdrop para que no se vea lo de atrás */
+.nav-toggle{
+  background: #fff;
+  box-shadow: 0 2px 10px rgba(0,0,0,.08);
+  -webkit-backdrop-filter: none;
+  backdrop-filter: none;
+  mix-blend-mode: normal;
+}
+.nav-toggle:hover{ background: #fff; }
+.nav-toggle.open{
+  background:#111;     /* estilo cuando está abierto (opcional) */
+  color:#fff;
+}
+
+/* Cuando el menú está abierto, ocultar los dots del slider que “ensucian” */
+.nav-open .swiper-hero .swiper-pagination{
+  opacity: 0;
+  pointer-events: none;
+}
