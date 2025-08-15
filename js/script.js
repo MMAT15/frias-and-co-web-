@@ -1,18 +1,35 @@
 document.addEventListener('DOMContentLoaded', () => {
   console.log('script.js cargado');
-// ANNOUNCEMENT BAR (show once until closed)
+// ANNOUNCEMENT BAR (sticky + close with fold animation)
 const annBar   = document.querySelector('.announcement-bar');
 const annClose = document.querySelector('.ann-close');
 
 if (annBar) {
-  // ocultar si el usuario ya lo cerró
-  if (localStorage.getItem('annBarDismissed') === '1') {
+  const DISMISSED = localStorage.getItem('annBarDismissed') === '1';
+
+  if (!DISMISSED) {
+    // hace que el header baje mientras el cartel esté visible
+    document.documentElement.classList.add('has-ann');
+    annBar.classList.remove('closing');    // por si venís de otra vista
+    annBar.style.display = '';             // aseguro que esté visible
+  } else {
     annBar.style.display = 'none';
+    document.documentElement.classList.remove('has-ann');
   }
-  // cerrar y recordar
+
   annClose?.addEventListener('click', () => {
-    annBar.style.display = 'none';
-    localStorage.setItem('annBarDismissed', '1');
+    // anima el plegado
+    annBar.classList.add('closing');
+
+    // cuando termina la transición, lo sacamos del flujo
+    const onEnd = (e) => {
+      if (e.propertyName !== 'max-height') return; // esperamos la prop correcta
+      annBar.style.display = 'none';
+      document.documentElement.classList.remove('has-ann');
+      localStorage.setItem('annBarDismissed', '1');
+      annBar.removeEventListener('transitionend', onEnd);
+    };
+    annBar.addEventListener('transitionend', onEnd);
   });
 }
   // Throttle helper
