@@ -894,6 +894,37 @@ if (sortBy) sortBy.addEventListener('change', () => {
 
 /* ---------- Primera corrida (con loader) ---------- */
 applyFiltersWrapped();
+// Crear botón y contador si existen filtros
+if (productosMain && (filterTipo || filterTalle)) {
+  const bar = document.createElement('div');
+  bar.className = 'filters-bar';
+  bar.innerHTML = `
+    <button type="button" class="btn clear-filters" aria-label="Limpiar filtros">Limpiar filtros</button>
+    <span class="results-count" aria-live="polite"></span>
+  `;
+  productosMain.prepend(bar);
+
+  const clearBtn = bar.querySelector('.clear-filters');
+  const countEl  = bar.querySelector('.results-count');
+
+  clearBtn.addEventListener('click', () => {
+    if (filterTipo)  filterTipo.value = '';
+    if (filterTalle) filterTalle.value = '';
+    try {
+      localStorage.removeItem('bera:filters:tipo');
+      localStorage.removeItem('bera:filters:talle');
+    } catch(_) {}
+    applyFiltersWrapped();
+  });
+
+  // Hook en applyFilters para actualizar contador
+  const _applyFilters = applyFilters;
+  window.applyFilters = function() {
+    _applyFilters();
+    const visibles = allProductItems.filter(el => el.style.display !== 'none').length;
+    countEl.textContent = `${visibles} producto${visibles===1?'':'s'} encontrado${visibles===1?'':'s'}.`;
+  };
+}
     /* ===========================
        8) TOAST DEL CARRITO SIN STACKING
        =========================== */
