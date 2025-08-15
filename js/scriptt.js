@@ -37,7 +37,7 @@ if (window.__beraBooted) {
         annBar.style.display = '';
         // Asegura que el bar sea sticky vía CSS. Si no lo tenés, podés añadir:
         // .announcement-bar{ position: sticky; top: 0; z-index: 50; }
-      } esto tengo que reemplazar?? Entero?
+      }
 
       // Ajusta var al cargar y al redimensionar
       setAnnHeightVar();
