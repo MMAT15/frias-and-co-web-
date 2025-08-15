@@ -10,52 +10,34 @@ if (window.__beraBooted) {
     console.log('script.js cargado');
 
     /* ===========================
-   ANNOUNCEMENT BAR (sticky + close con animación + compensación automática)
-   - SIN persistencia: se vuelve a mostrar al recargar.
-   =========================== */
-const annBar   = document.querySelector('.announcement-bar');
-const annClose = document.querySelector('.ann-close');
+       2) ANNOUNCEMENT BAR (sticky + close con animación + compensación automática)
+       - Usa la CSS var --ann-h para desplazar header/scroll.
+       - Recuerda cierre en localStorage.
+       =========================== */
+    const annBar   = document.querySelector('.announcement-bar');
+    const annClose = document.querySelector('.ann-close');
 
-// Limpia cualquier clave vieja que hayas guardado antes (por si venías con localStorage)
-try { localStorage.removeItem('annBarDismissed'); } catch(_) {}
-
-const setAnnHeightVar = () => {
-  const h = annBar && getComputedStyle(annBar).display !== 'none'
-    ? Math.ceil(annBar.getBoundingClientRect().height)
-    : 0;
-  document.documentElement.style.setProperty('--ann-h', h + 'px');
-  document.documentElement.classList.toggle('has-ann', h > 0);
-};
-
-if (annBar) {
-  // Mostrar siempre al cargar
-  annBar.classList.remove('closing');
-  annBar.style.display = '';      // aseguro visible
-  setAnnHeightVar();
-  window.addEventListener('resize', () => setAnnHeightVar(), { passive: true });
-
-  annClose?.addEventListener('click', () => {
-    // Anima plegado: requerís en CSS transición de max-height y overflow:hidden
-    annBar.classList.add('closing');
-    const onEnd = (e) => {
-      if (e.propertyName !== 'max-height') return;
-      annBar.style.display = 'none';
-      document.documentElement.classList.remove('has-ann');
-      document.documentElement.style.setProperty('--ann-h', '0px');
-      annBar.removeEventListener('transitionend', onEnd);
-      // Nota: NO guardamos nada en storage → al recargar volverá a mostrarse
+    const setAnnHeightVar = () => {
+      // Lee altura real (hasta max-height actual) y la vuelca a --ann-h
+      const h = annBar && getComputedStyle(annBar).display !== 'none'
+        ? Math.ceil(annBar.getBoundingClientRect().height)
+        : 0;
+      document.documentElement.style.setProperty('--ann-h', h + 'px');
+      document.documentElement.classList.toggle('has-ann', h > 0);
     };
-    annBar.addEventListener('transitionend', onEnd);
-  });
-}
 
-/* --- OPCIONAL: si quisieras que NO vuelva en la MISMA pestaña (solo hasta cerrar la pestaña)
-   reemplazá el onEnd de arriba por esto:
-   try { sessionStorage.setItem('annBarClosed', '1'); } catch(_) {}
-   y al inicio, antes de mostrar, chequeá:
-   const closedThisTab = sessionStorage.getItem('annBarClosed') === '1';
-   if (!closedThisTab) { ...mostrar... } else { ...ocultar... }
---- */
+    if (annBar) {
+      const DISMISSED = localStorage.getItem('annBarDismissed') === '1';
+      if (DISMISSED) {
+        annBar.style.display = 'none';
+        document.documentElement.classList.remove('has-ann');
+        document.documentElement.style.setProperty('--ann-h', '0px');
+      } else {
+        annBar.classList.remove('closing');
+        annBar.style.display = '';
+        // Asegura que el bar sea sticky vía CSS. Si no lo tenés, podés añadir:
+        // .announcement-bar{ position: sticky; top: 0; z-index: 50; }
+      } esto tengo que reemplazar?? Entero?
 
       // Ajusta var al cargar y al redimensionar
       setAnnHeightVar();
