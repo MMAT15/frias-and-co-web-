@@ -729,155 +729,194 @@ if (window.__beraBooted) {
       });
     }
 
-    // NEWSLETTER FORM (igual)
-    const newsletterForm = document.getElementById('form-newsletter');
-    const newsletterResp = document.getElementById('newsletter-response');
-    if (newsletterForm && newsletterResp) {
-      newsletterForm.addEventListener('submit', e => {
-        e.preventDefault();
-        const emailVal = newsletterForm['email-newsletter'].value.trim();
-        const valid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailVal);
-        if (!valid) {
-          newsletterResp.textContent = 'Ingresa un correo válido.';
-          newsletterResp.style.color = 'red';
-        } else {
-          newsletterResp.textContent = '¡Suscripción exitosa! Gracias.';
-          newsletterResp.style.color = 'green';
-          newsletterForm.reset();
-        }
-      });
-    }
+    // NEWSLETTER FORM (validación en español + mensajes propios)
+const newsletterForm = document.getElementById('form-newsletter');
+const newsletterResp = document.getElementById('newsletter-response');
+if (newsletterForm) {
+  const emailInput = newsletterForm.querySelector('input[type="email"], #email-newsletter, [name="email-newsletter"]');
+  newsletterForm.setAttribute('novalidate', 'novalidate');
+
+  const setMsg = (msg, ok=false) => {
+    if (!newsletterResp) return;
+    newsletterResp.textContent = msg;
+    newsletterResp.style.color = ok ? 'green' : 'red';
+  };
+
+  emailInput?.addEventListener('input', () => { emailInput.setCustomValidity(''); });
+
+  newsletterForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const email = (emailInput?.value || '').trim();
+    const valid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+    if (!email) { setMsg('Ingresá tu correo electrónico.'); emailInput?.focus(); return; }
+    if (!valid) { setMsg('El formato de correo no es válido. Ejemplo: nombre@dominio.com'); emailInput?.focus(); return; }
+    setMsg('¡Suscripción exitosa! Gracias.', true);
+    newsletterForm.reset();
+  });
+}
 
     /* ===========================
-       10) PRODUCTS FILTERING & SORTING + recordar selección
-       =========================== */
-    const allProductItems = Array.from(document.querySelectorAll('.producto-item'));
-    const filterTipo  = document.getElementById('filter-tipo');
-    const filterTalle = document.getElementById('filter-talle');
-    const sortBy      = document.getElementById('sort-by');
+   10) PRODUCTS FILTERING & SORTING + recordar selección
+   =========================== */
+const allProductItems = Array.from(document.querySelectorAll('.producto-item'));
+const filterTipo  = document.getElementById('filter-tipo');
+const filterTalle = document.getElementById('filter-talle');
+const sortBy      = document.getElementById('sort-by');
 
-    const categorySections = Array.from(document.querySelectorAll('.product-category'));
-    const productosMain = document.querySelector('.productos-main');
-    let emptyStateEl;
+const categorySections = Array.from(document.querySelectorAll('.product-category'));
+const productosMain = document.querySelector('.productos-main');
+let emptyStateEl;
 
-    const LS_KEYS = {
-      tipo:  'bera:filters:tipo',
-      talle: 'bera:filters:talle',
-      sort:  'bera:filters:sort'
-    };
+const LS_KEYS = {
+  tipo:  'bera:filters:tipo',
+  talle: 'bera:filters:talle',
+  sort:  'bera:filters:sort'
+};
 
-    // Restaurar selección guardada
+// Restaurar selección guardada
+try {
+  const t = localStorage.getItem(LS_KEYS.tipo);
+  const l = localStorage.getItem(LS_KEYS.talle);
+  const s = localStorage.getItem(LS_KEYS.sort);
+  if (filterTipo && t)  filterTipo.value = t;
+  if (filterTalle && l) filterTalle.value = l;
+  if (sortBy && s)      sortBy.value = s;
+} catch(_) {}
+
+const typeToSection = {
+  remera: 'remeras',
+  top: 'tops',
+  camisa: 'camisas',
+  short: 'shorts',
+  pantalon: 'pantalones',
+  buzo: 'buzos',
+  set: 'sets',
+  abrigo: 'abrigos',
+  vestido: 'vestidos'
+};
+
+function applySorting() {
+  if (!sortBy) return;
+  const sortVal = sortBy.value;
+  if (sortVal === 'precio-asc' || sortVal === 'precio-desc') {
+    document.querySelectorAll('.grid-products').forEach(grid => {
+      const visible = Array.from(grid.children).filter(
+        c => c.classList.contains('producto-item') && c.style.display !== 'none'
+      );
+      visible.sort((a, b) => {
+        const pa = parseFloat(a.dataset.price) || 0;
+        const pb = parseFloat(b.dataset.price) || 0;
+        return sortVal === 'precio-asc' ? pa - pb : pb - pa;
+      });
+      visible.forEach(el => grid.appendChild(el));
+    });
+  }
+}
+
+function applyFilters() {
+  const tipoVal  = filterTipo ? filterTipo.value : '';
+  const talleVal = filterTalle ? filterTalle.value : '';
+
+  // 1) Mostrar/ocultar según filtros
+  allProductItems.forEach(item => {
+    const match =
+      (!tipoVal  || item.dataset.tipo  === tipoVal) &&
+      (!talleVal || item.dataset.talle === talleVal);
+    item.style.display = match ? '' : 'none';
+  });
+
+  // 2) Ordenar visibles
+  applySorting();
+
+  // 3) Ocultar secciones vacías
+  categorySections.forEach(sec => {
+    const visibles = Array
+      .from(sec.querySelectorAll('.producto-item'))
+      .filter(el => el.style.display !== 'none').length;
+    sec.classList.toggle('is-hidden', visibles === 0);
+  });
+
+  // 4) Mensaje "sin resultados" accesible
+  const anyVisible = allProductItems.some(el => el.style.display !== 'none');
+  if (!anyVisible) {
+    if (!emptyStateEl) {
+      emptyStateEl = document.createElement('p');
+      emptyStateEl.className = 'empty-state';
+      emptyStateEl.setAttribute('role', 'status');
+      emptyStateEl.setAttribute('aria-live', 'polite');
+      emptyStateEl.tabIndex = -1;
+      emptyStateEl.textContent = 'No encontramos productos con esos filtros.';
+      productosMain?.prepend(emptyStateEl);
+      requestAnimationFrame(()=> emptyStateEl.focus());
+    }
+  } else if (emptyStateEl) {
+    emptyStateEl.remove();
+    emptyStateEl = null;
+  }
+
+  // 5) Si eligió tipo, scrollea a su sección visible
+  if (tipoVal && typeToSection[tipoVal]) {
+    const targetSec = document.getElementById(typeToSection[tipoVal]);
+    if (targetSec && !targetSec.classList.contains('is-hidden')) {
+      window.scrollTo({ top: computeOffsetTop(targetSec), behavior: 'smooth' });
+    }
+  }
+}
+
+/* ---------- Loader helpers (envoltorios) ---------- */
+function withLoader(container, fn) {
+  const host = typeof container === 'string' ? document.querySelector(container) : container;
+  if (!host) return fn();
+  host.setAttribute('aria-busy', 'true');
+  host.classList.add('is-loading');
+  const done = () => { host.removeAttribute('aria-busy'); host.classList.remove('is-loading'); };
+  requestAnimationFrame(() => { Promise.resolve().then(fn).finally(done); });
+}
+const productsShell = document.querySelector('.productos-main') || document.querySelector('.grid-products');
+
+function applyFiltersWrapped() { withLoader(productsShell, () => applyFilters()); }
+function applySortingWrapped() { withLoader(productsShell, () => applySorting()); }
+
+/* ---------- Listeners (únicos) ---------- */
+[filterTipo, filterTalle].forEach(sel => {
+  if (sel) sel.addEventListener('change', () => {
     try {
-      const t = localStorage.getItem(LS_KEYS.tipo);
-      const l = localStorage.getItem(LS_KEYS.talle);
-      const s = localStorage.getItem(LS_KEYS.sort);
-      if (filterTipo && t)  filterTipo.value = t;
-      if (filterTalle && l) filterTalle.value = l;
-      if (sortBy && s)      sortBy.value = s;
+      if (sel === filterTipo)  localStorage.setItem(LS_KEYS.tipo, sel.value);
+      if (sel === filterTalle) localStorage.setItem(LS_KEYS.talle, sel.value);
     } catch(_) {}
+    applyFiltersWrapped();
+  });
+});
+if (sortBy) sortBy.addEventListener('change', () => {
+  try { localStorage.setItem(LS_KEYS.sort, sortBy.value); } catch(_) {}
+  applySortingWrapped();
+});
 
-    const typeToSection = {
-      remera: 'remeras',
-      top: 'tops',
-      camisa: 'camisas',
-      short: 'shorts',
-      pantalon: 'pantalones',
-      buzo: 'buzos',
-      set: 'sets',
-      abrigo: 'abrigos',
-      vestido: 'vestidos'
-    };
-
-    function applySorting() {
-      if (!sortBy) return;
-      const sortVal = sortBy.value;
-      if (sortVal === 'precio-asc' || sortVal === 'precio-desc') {
-        document.querySelectorAll('.grid-products').forEach(grid => {
-          const visible = Array.from(grid.children).filter(
-            c => c.classList.contains('producto-item') && c.style.display !== 'none'
-          );
-          visible.sort((a, b) => {
-            const pa = parseFloat(a.dataset.price) || 0;
-            const pb = parseFloat(b.dataset.price) || 0;
-            return sortVal === 'precio-asc' ? pa - pb : pb - pa;
-          });
-          visible.forEach(el => grid.appendChild(el));
-        });
-      }
-    }
-
-    function applyFilters() {
-      const tipoVal  = filterTipo ? filterTipo.value : '';
-      const talleVal = filterTalle ? filterTalle.value : '';
-
-      allProductItems.forEach(item => {
-        const match =
-          (!tipoVal  || item.dataset.tipo  === tipoVal) &&
-          (!talleVal || item.dataset.talle === talleVal);
-        item.style.display = match ? '' : 'none';
-      });
-
-      applySorting();
-
-      categorySections.forEach(sec => {
-        const visibles = Array
-          .from(sec.querySelectorAll('.producto-item'))
-          .filter(el => el.style.display !== 'none').length;
-        sec.classList.toggle('is-hidden', visibles === 0);
-      });
-
-      const anyVisible = allProductItems.some(el => el.style.display !== 'none');
-      if (!anyVisible) {
-        if (!emptyStateEl) {
-          emptyStateEl = document.createElement('p');
-          emptyStateEl.className = 'empty-state';
-          emptyStateEl.textContent = 'No encontramos productos con esos filtros.';
-          productosMain?.prepend(emptyStateEl);
-        }
-      } else if (emptyStateEl) {
-        emptyStateEl.remove();
-        emptyStateEl = null;
-      }
-
-      if (tipoVal && typeToSection[tipoVal]) {
-        const targetSec = document.getElementById(typeToSection[tipoVal]);
-        if (targetSec && !targetSec.classList.contains('is-hidden')) {
-          window.scrollTo({ top: computeOffsetTop(targetSec), behavior: 'smooth' });
-        }
-      }
-    }
-
-    // Guardar cambios en LS
-    [filterTipo, filterTalle].forEach(sel => {
-      if (sel) sel.addEventListener('change', () => {
-        try {
-          if (sel === filterTipo)  localStorage.setItem(LS_KEYS.tipo, sel.value);
-          if (sel === filterTalle) localStorage.setItem(LS_KEYS.talle, sel.value);
-        } catch(_) {}
-        applyFilters();
-      });
-    });
-    if (sortBy) sortBy.addEventListener('change', () => {
-      try { localStorage.setItem(LS_KEYS.sort, sortBy.value); } catch(_) {}
-      applySorting();
-    });
-
-    // Primera corrida
-    applyFilters();
-
+/* ---------- Primera corrida (con loader) ---------- */
+applyFiltersWrapped();
     /* ===========================
        8) TOAST DEL CARRITO SIN STACKING
        =========================== */
     function showCartToast(msg = 'Producto agregado al carrito') {
-      const prev = document.querySelector('.cart-toast');
-      if (prev) prev.remove();
-      const t = document.createElement('div');
-      t.className = 'cart-toast';
-      t.textContent = msg;
-      document.body.appendChild(t);
-      setTimeout(() => t.classList.add('hide'), 1400);
-      setTimeout(() => t.remove(), 1800);
-    }
+  let container = document.getElementById('toast-layer');
+  if (!container) {
+    container = document.createElement('div');
+    container.id = 'toast-layer';
+    container.setAttribute('aria-live', 'polite');
+    container.setAttribute('role', 'status');
+    document.body.appendChild(container);
+  }
+  const prev = container.querySelector('.cart-toast');
+  if (prev) prev.remove();
+
+  const t = document.createElement('div');
+  t.className = 'cart-toast';
+  t.textContent = msg;
+  container.appendChild(t);
+  requestAnimationFrame(()=> t.classList.add('show'));
+  setTimeout(() => t.classList.add('hide'), 1600);
+  setTimeout(() => t.remove(), 2000);
+}
 
     /* ===========================
        SHOPPING CART & MODAL (con delegación para add-to-cart)
