@@ -3024,3 +3024,19 @@ img {
     object-fit: cover !important;
   }
 }
+/* Ocultar totalmente la búsqueda desktop en mobile */
+@media (max-width: 768px) {
+  .header-search-desktop,
+  .header-search-toggle {
+    display: none !important;
+    visibility: hidden !important;
+    width: 0 !important;
+    height: 0 !important;
+    overflow: hidden !important;
+  }
+}
+.collection-toggle {
+  position: relative;
+  z-index: 5; /* sobre cualquier resto */
+  background: #fff; /* mismo fondo que el header */
+}
