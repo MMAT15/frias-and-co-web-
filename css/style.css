@@ -3193,3 +3193,34 @@ html.has-ann .site-header{
 html.has-ann .site-header{
   margin-top: var(--ann-h) !important;
 }
+#toast-layer{
+  position: fixed; left: 50%; bottom: max(12px, env(safe-area-inset-bottom));
+  transform: translateX(-50%);
+  z-index: 9999; pointer-events: none;
+}
+.cart-toast{
+  pointer-events: auto;
+  padding: .6rem .9rem;
+  background: #111; color: #fff; border-radius: 6px;
+  opacity: 0; transform: translateY(8px);
+  transition: transform .18s ease, opacity .18s ease;
+  max-width: 90vw; text-align: center; font-size: .95rem;
+}
+.cart-toast.show{ opacity:1; transform: translateY(0); }
+.cart-toast.hide{ opacity:0; transform: translateY(8px); }
+.is-loading { position: relative; }
+.is-loading::after{
+  content:"";
+  position:absolute; inset:0;
+  background: rgba(255,255,255,.6);
+  backdrop-filter: blur(1px);
+}
+.is-loading::before{
+  content:"";
+  position:absolute; left:50%; top:50%;
+  width:24px; height:24px; margin:-12px 0 0 -12px;
+  border:3px solid currentColor; border-right-color: transparent;
+  border-radius:50%;
+  animation: spin .7s linear infinite;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
