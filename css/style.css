@@ -3341,3 +3341,12 @@ main > :first-child {
   object-fit: contain;
   background: #fff;
 }
+/* Aplica a productos.html y al index */
+.producto-item img,
+.card.featured-card img {
+  width: 100%;
+  height: 300px; /* altura consistente, ajusta si quieres más/menos */
+  object-fit: contain; /* para que no recorte la prenda */
+  background-color: #fff; /* relleno de fondo */
+  border-radius: 8px; /* opcional, por estética */
+}
