@@ -15,7 +15,7 @@ if (window.__beraBooted) {
        - Recuerda cierre en localStorage.
        =========================== */
     const annBar   = document.querySelector('.announcement-bar');
-    const annClose = document.querySelector('.ann-close');
+  
 
     const setAnnHeightVar = () => {
       // Lee altura real (hasta max-height actual) y la vuelca a --ann-h
