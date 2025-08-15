@@ -42,7 +42,14 @@ if (window.__beraBooted) {
       // Ajusta var al cargar y al redimensionar
       setAnnHeightVar();
       window.addEventListener('resize', () => setAnnHeightVar(), { passive: true });
-
+  /* === Altura real del header → CSS var --hdr-h === */
+  const headerEl = document.querySelector('.site-header');
+  function setHeaderHeightVar(){
+    const h = headerEl ? Math.ceil(headerEl.getBoundingClientRect().height) : 0;
+    document.documentElement.style.setProperty('--hdr-h', h + 'px');
+  }
+  setHeaderHeightVar();
+  window.addEventListener('resize', () => setHeaderHeightVar(), { passive: true });
       annClose?.addEventListener('click', () => {
         // Anima plegado (usa transición de max-height + overflow:hidden en CSS)
         annBar.classList.add('closing');
