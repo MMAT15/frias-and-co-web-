@@ -3040,3 +3040,14 @@ img {
   z-index: 5; /* sobre cualquier resto */
   background: #fff; /* mismo fondo que el header */
 }
+/* --- FIX: evitar doble subrayado en el header --- */
+.site-branding .site-title::after{
+  display: none !important;   /* quita la barra global del título */
+}
+
+/* (opcional) afinado del subrayado solo de "BERA" en el header */
+.site-branding .site-title .title-bera::after{
+  height: 3px;          /* grosor uniforme */
+  bottom: -3px;         /* separación del texto */
+  border-radius: 2px;
+}
