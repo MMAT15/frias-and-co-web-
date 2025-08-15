@@ -3337,3 +3337,7 @@ main > :first-child {
     --ann-py: 8px;
   }
 }
+.producto-item img {
+  object-fit: contain;
+  background: #fff;
+}
