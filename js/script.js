@@ -1137,3 +1137,33 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 })();
+// Lock/unlock scroll cuando se abre/cierra el menú mobile
+(() => {
+  const navToggle = document.querySelector('.nav-toggle');
+  const mainNav   = document.querySelector('.main-nav');
+  if (!navToggle || !mainNav) return;
+
+  const lock   = () => document.body.style.overflow = 'hidden';
+  const unlock = () => document.body.style.overflow = '';
+
+  const sync = () => mainNav.classList.contains('show') ? lock() : unlock();
+  // ya tenés el click que hace toggle; acá solo sincronizo
+  navToggle.addEventListener('click', sync);
+
+  // cerrar por tap fuera del panel
+  document.addEventListener('click', (e) => {
+    if (!mainNav.classList.contains('show')) return;
+    const inside = mainNav.contains(e.target) || navToggle.contains(e.target);
+    if (!inside){ mainNav.classList.remove('show'); navToggle.classList.remove('open'); navToggle.setAttribute('aria-expanded','false'); unlock(); }
+  });
+
+  // cerrar con Escape
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && mainNav.classList.contains('show')){
+      mainNav.classList.remove('show');
+      navToggle.classList.remove('open');
+      navToggle.setAttribute('aria-expanded','false');
+      unlock();
+    }
+  });
+})();
