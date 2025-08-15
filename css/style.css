@@ -3386,3 +3386,40 @@ main > :first-child {
   opacity: 0;
   pointer-events: none;
 }
+/* === Z-indexes coherentes: header bajo, menú arriba del hero === */
+.site-header{ z-index: 300; }
+
+/* === Menú desplegable centrado y estable === */
+.main-nav{
+  position: fixed;                           /* no depende del ancho del header */
+  left: 0; right: 0;
+  top: calc(var(--ann-h, 0px) + 64px);       /* 64px ≈ alto del header; ajustá si tu header es más alto */
+  width: min(700px, calc(100% - 24px));      /* centrado con respiración lateral */
+  margin: 0 auto;
+  z-index: 400;                               /* por encima del slider/paginación */
+  display: none;                              /* se muestra con la clase .show (tu JS ya la pone) */
+
+  /* Estilo del panel */
+  background: #fff;
+  border-radius: 16px;
+  box-shadow: 0 10px 30px rgba(0,0,0,.12);
+  overflow: hidden;
+}
+
+/* Mostrar cuando está abierto */
+.main-nav.show{ display: block; }
+
+/* Evitar que dots del slider "ensucien" el botón/menú */
+.nav-open .swiper-hero .swiper-pagination{ opacity: 0; pointer-events: none; }
+
+/* Botón hamburguesa sin efecto "pac‑man" */
+.nav-toggle{
+  background:#fff;
+  border:1px solid rgba(0,0,0,.06);
+  box-shadow:0 2px 10px rgba(0,0,0,.06);
+  -webkit-backdrop-filter:none; backdrop-filter:none;
+  mix-blend-mode:normal;
+  background-clip: padding-box;              /* evita halos raros */
+}
+.nav-toggle:hover{ background:#fff; }
+.nav-toggle.open{ background:#111; color:#fff; }
