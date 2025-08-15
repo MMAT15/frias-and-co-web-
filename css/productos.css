@@ -642,3 +642,34 @@
   /* si tu FAB mide ~64px y tiene 16px de margen, despejá ~80px */
   bottom: calc(max(12px, env(safe-area-inset-bottom)) + 80px);
 }
+/* Contenedor del botón + texto */
+.producto-item .add-to-cart-wrapper{
+  display: inline-flex;
+  align-items: center;
+  gap: .45rem;
+  margin-top: .5rem;
+  white-space: nowrap;          /* que no se corte en dos líneas */
+}
+
+/* El botón con el + (mejor área táctil) */
+.producto-item .add-to-cart-icon{
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: 2px solid var(--accent, #111);
+  background: #fff;
+  line-height: 1;
+  font-size: 20px;
+  cursor: pointer;
+  touch-action: manipulation;    /* mejora taps en mobile */
+}
+
+/* El texto al lado */
+.producto-item .add-to-cart-label{
+  font-size: .95rem;
+  font-weight: 600;
+  color: var(--text-strong, #222);
+}
