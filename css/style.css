@@ -3423,3 +3423,13 @@ main > :first-child {
 }
 .nav-toggle:hover{ background:#fff; }
 .nav-toggle.open{ background:#111; color:#fff; }
+@media (max-width: 768px) {
+  .site-logo {
+    margin-top: 2px; /* o 1px si querés algo mínimo */
+  }
+}
+@media (max-width: 768px) {
+  .logo {
+    margin-top: 2px; /* si quieres aún menos, usa 1px */
+  }
+}
