@@ -3224,3 +3224,5 @@ html.has-ann .site-header{
   animation: spin .7s linear infinite;
 }
 @keyframes spin { to { transform: rotate(360deg); } }
+.filters-bar{ display:flex; gap:.75rem; align-items:center; margin-bottom: .75rem; }
+.filters-bar .results-count{ font-size:.95rem; opacity:.8; }
