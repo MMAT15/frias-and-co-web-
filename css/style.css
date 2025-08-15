@@ -3267,10 +3267,11 @@ main > :first-child {
    =========================== */
 :root{
   /* Altura objetivo en mobile */
-  --ann-max: 36px;
-  --ann-fs: 13px;
-  --ann-py: 6px;
+  --ann-max: 44px;   /* antes 36px */
+  --ann-fs: 14px;    /* antes 13px */
+  --ann-py: 8px;     /* antes 6px */
 }
+
 
 /* Bar: una sola línea, centrada verticalmente, sticky y con animación por max-height */
 .announcement-bar{
@@ -3332,9 +3333,9 @@ main > :first-child {
 /* Un toque más alto en desktop si querés */
 @media (min-width: 768px){
   :root{
-    --ann-max: 40px;
-    --ann-fs: 14px;
-    --ann-py: 8px;
+    --ann-max: 48px; /* antes 40px */
+    --ann-fs: 15px;  /* antes 14px */
+    --ann-py: 10px;  /* antes 8px */
   }
 }
 .producto-item img {
