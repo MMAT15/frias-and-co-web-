@@ -3164,3 +3164,32 @@ html.has-ann .site-header{ top: var(--ann-h); }
 html.has-ann .site-header{
   top: var(--ann-h) !important;
 }
+/* === Announcement bar fijo (siempre visible al scrollear) === */
+:root{
+  /* alto + safe-area (iPhone notch) */
+  --ann-h: calc(36px + env(safe-area-inset-top, 0px));
+}
+@media (max-width:420px){
+  :root{ --ann-h: calc(34px + env(safe-area-inset-top, 0px)); }
+}
+
+.announcement-bar{
+  position: fixed !important;
+  top: 0; left: 0; right: 0;
+  z-index: 1400;                     /* > header (1100) */
+  height: var(--ann-h) !important;
+  padding-top: env(safe-area-inset-top, 0px);  /* respeta notch */
+  transition: max-height .25s ease, opacity .2s ease;
+}
+
+/* animación de plegado al cerrar (tu JS ya agrega .closing) */
+.announcement-bar.closing{
+  max-height: 0 !important;
+  opacity: 0 !important;
+  overflow: hidden !important;
+}
+
+/* empuja el header hacia abajo mientras el cartel esté visible */
+html.has-ann .site-header{
+  margin-top: var(--ann-h) !important;
+}
