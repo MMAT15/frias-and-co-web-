@@ -629,3 +629,16 @@
   color: #777;
   font-size: .95rem;
 }
+/* base (en todas las páginas) */
+.back-to-top{
+  position: fixed;
+  right: 12px;
+  bottom: max(12px, env(safe-area-inset-bottom));
+  z-index: 60; /* por detrás del FAB si este tiene >60 */
+}
+
+/* en productos.html, levantalo para que no se tape con el FAB */
+.productos-page .back-to-top{
+  /* si tu FAB mide ~64px y tiene 16px de margen, despejá ~80px */
+  bottom: calc(max(12px, env(safe-area-inset-bottom)) + 80px);
+}
