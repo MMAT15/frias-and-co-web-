@@ -1,0 +1,1151 @@
+/* ===========================
+   1) BOOT GUARD (poner al principio del fichero)
+   =========================== */
+if (window.__beraBooted) {
+  // Ya inicializado, no volvemos a cablear eventos
+} else {
+  window.__beraBooted = true;
+
+  document.addEventListener('DOMContentLoaded', () => {
+    console.log('script.js cargado');
+
+    /* ===========================
+       2) ANNOUNCEMENT BAR (sticky + close con animación + compensación automática)
+       - Usa la CSS var --ann-h para desplazar header/scroll.
+       - Recuerda cierre en localStorage.
+       =========================== */
+    const annBar   = document.querySelector('.announcement-bar');
+    const annClose = document.querySelector('.ann-close');
+
+    const setAnnHeightVar = () => {
+      // Lee altura real (hasta max-height actual) y la vuelca a --ann-h
+      const h = annBar && getComputedStyle(annBar).display !== 'none'
+        ? Math.ceil(annBar.getBoundingClientRect().height)
+        : 0;
+      document.documentElement.style.setProperty('--ann-h', h + 'px');
+      document.documentElement.classList.toggle('has-ann', h > 0);
+    };
+
+    if (annBar) {
+      const DISMISSED = localStorage.getItem('annBarDismissed') === '1';
+      if (DISMISSED) {
+        annBar.style.display = 'none';
+        document.documentElement.classList.remove('has-ann');
+        document.documentElement.style.setProperty('--ann-h', '0px');
+      } else {
+        annBar.classList.remove('closing');
+        annBar.style.display = '';
+        // Asegura que el bar sea sticky vía CSS. Si no lo tenés, podés añadir:
+        // .announcement-bar{ position: sticky; top: 0; z-index: 50; }
+      }
+
+      // Ajusta var al cargar y al redimensionar
+      setAnnHeightVar();
+      window.addEventListener('resize', () => setAnnHeightVar(), { passive: true });
+
+      annClose?.addEventListener('click', () => {
+        // Anima plegado (usa transición de max-height + overflow:hidden en CSS)
+        annBar.classList.add('closing');
+        const onEnd = (e) => {
+          if (e.propertyName !== 'max-height') return;
+          annBar.style.display = 'none';
+          localStorage.setItem('annBarDismissed', '1');
+          setAnnHeightVar();
+          annBar.removeEventListener('transitionend', onEnd);
+        };
+        annBar.addEventListener('transitionend', onEnd);
+      });
+    }
+
+    /* ===========================
+       3) THROTTLE HELPER (único en todo el archivo)
+       =========================== */
+    const throttle = (fn, wait = 100) => {
+      let last = 0;
+      let t;
+      return function throttled(...args) {
+        const now = Date.now();
+        const remaining = wait - (now - last);
+        if (remaining <= 0) {
+          last = now;
+          fn.apply(this, args);
+        } else {
+          clearTimeout(t);
+          t = setTimeout(() => {
+            last = Date.now();
+            fn.apply(this, args);
+          }, remaining);
+        }
+      };
+    };
+
+    /* ===========================
+       NAVIGATION TOGGLE (accesible) + lock/unlock scroll + cierres
+       =========================== */
+    const navToggle = document.querySelector('.nav-toggle');
+    const mainNav   = document.querySelector('.main-nav');
+    if (navToggle && mainNav) {
+      // Asegura atributos ARIA
+      if (!navToggle.getAttribute('aria-controls')) {
+        // Usa id existente o inyecta uno
+        if (!mainNav.id) mainNav.id = 'primary-navigation';
+        navToggle.setAttribute('aria-controls', mainNav.id);
+      }
+      navToggle.setAttribute('aria-expanded', 'false');
+
+      const lock   = () => document.body.style.overflow = 'hidden';
+      const unlock = () => document.body.style.overflow = '';
+
+      const openMenu = () => {
+        mainNav.classList.add('show');
+        navToggle.classList.add('open');
+        navToggle.setAttribute('aria-expanded', 'true');
+        lock();
+      };
+      const closeMenu = () => {
+        mainNav.classList.remove('show');
+        navToggle.classList.remove('open');
+        navToggle.setAttribute('aria-expanded', 'false');
+        unlock();
+      };
+
+      navToggle.addEventListener('click', () => {
+        mainNav.classList.contains('show') ? closeMenu() : openMenu();
+      });
+
+      // Cerrar por click fuera
+      document.addEventListener('click', (e) => {
+        if (!mainNav.classList.contains('show')) return;
+        const inside = mainNav.contains(e.target) || navToggle.contains(e.target);
+        if (!inside) closeMenu();
+      });
+
+      // Cerrar con Escape
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && mainNav.classList.contains('show')) closeMenu();
+      });
+    }
+
+    /* ===========================
+       COLLECTION MENU (tu panel lateral) — sin cambios de lógica, con cierres + lock/unlock
+       =========================== */
+    const collectionToggle  = document.querySelector('.collection-toggle');
+    const collectionMenu    = document.getElementById('collection-menu');
+    const collectionOverlay = document.getElementById('collection-overlay');
+    const collectionClose   = document.getElementById('collection-close');
+
+    if (collectionToggle && collectionMenu && collectionOverlay) {
+      const lockScroll   = () => { document.body.style.overflow = 'hidden'; };
+      const unlockScroll = () => { document.body.style.overflow = '';       };
+
+      const openMenu  = () => {
+        collectionMenu.classList.add('show');
+        collectionOverlay.classList.add('show');
+        collectionToggle.setAttribute('aria-expanded','true');
+        collectionMenu.setAttribute('aria-hidden','false');
+        lockScroll();
+      };
+      const closeMenu = () => {
+        collectionMenu.classList.remove('show');
+        collectionOverlay.classList.remove('show');
+        collectionToggle.setAttribute('aria-expanded','false');
+        collectionMenu.setAttribute('aria-hidden','true');
+        unlockScroll();
+      };
+
+      collectionToggle.addEventListener('click', openMenu);
+      collectionClose?.addEventListener('click', closeMenu);
+      collectionOverlay.addEventListener('click', closeMenu);
+
+      // Navegación hash/externa manteniendo cierre
+      collectionMenu.addEventListener('click', (e) => {
+        const a = e.target.closest('a[href]');
+        if (!a) return;
+        e.preventDefault();
+        const href = a.getAttribute('href');
+        closeMenu();
+        if (href.startsWith('#')) {
+          const target = document.querySelector(href);
+          if (target) {
+            const top = computeOffsetTop(target);
+            window.scrollTo({ top, behavior: 'smooth' });
+          }
+        } else {
+          window.location.href = href;
+        }
+      });
+
+      document.addEventListener('keydown', e=>{
+        if(e.key==='Escape' && collectionMenu.classList.contains('show')) closeMenu();
+      });
+      let startX;
+      collectionMenu.addEventListener('touchstart',e=>{ startX=e.touches[0].clientX; }, {passive:true});
+      collectionMenu.addEventListener('touchend',e=>{
+        if(startX!==undefined){
+          if(e.changedTouches[0].clientX - startX < -60) closeMenu();
+          startX=undefined;
+        }
+      }, {passive:true});
+    }
+
+    /* ===========================
+       4) SMOOTH SCROLL con offset (header + --ann-h)
+       - Cierra menú mobile si estaba abierto
+       =========================== */
+    function readAnnH() {
+      const v = getComputedStyle(document.documentElement).getPropertyValue('--ann-h').trim();
+      const n = parseInt(v, 10);
+      return isNaN(n) ? 0 : n;
+    }
+    function headerHeight() {
+      const h = document.querySelector('.site-header');
+      return h ? Math.ceil(h.getBoundingClientRect().height) : 0;
+    }
+    function computeOffsetTop(el) {
+      const y = el.getBoundingClientRect().top + window.scrollY;
+      return Math.max(0, y - (headerHeight() + readAnnH()));
+    }
+
+    document.querySelectorAll('a[href^="#"]:not([href="#"])').forEach(link => {
+      link.addEventListener('click', e => {
+        const sel = link.getAttribute('href');
+        const target = document.querySelector(sel);
+        if (!target) return;
+        e.preventDefault();
+        // cierra mainNav si estaba abierto
+        if (mainNav && navToggle && mainNav.classList.contains('show')) {
+          mainNav.classList.remove('show');
+          navToggle.classList.remove('open');
+          navToggle.setAttribute('aria-expanded', 'false');
+          document.body.style.overflow = ''; // unlock
+        }
+        window.scrollTo({ top: computeOffsetTop(target), behavior: 'smooth' });
+      });
+    });
+
+    /* ===========================
+       5) BÚSQUEDA DESKTOP MEJORADA
+       - Toggle en la lupa
+       - Cierre fuera/Escape
+       - Atajo "/" (si no estás tipear en un input/textarea/contenteditable)
+       - Enviar solo si hay texto
+       =========================== */
+    (() => {
+      if (window.__beraSearchWired) return;  // evita múltiples bindings
+      window.__beraSearchWired = true;
+
+      const header = document.querySelector('.site-header');
+      const toggle = document.querySelector('.header-search-toggle');
+      const form   = document.querySelector('form.header-search-desktop');
+      const input  = form?.querySelector('.header-search-input');
+      const btn    = form?.querySelector('.header-search-btn');
+      const mq     = window.matchMedia('(min-width: 769px)');
+
+      const isOpen = () => header?.classList.contains('search-open');
+      const openSearch  = () => { header?.classList.add('search-open'); input?.focus(); };
+      const closeSearch = () => { header?.classList.remove('search-open'); };
+
+      // Click en la lupa
+      toggle?.addEventListener('click', (e) => {
+        if (!mq.matches) return;
+        e.preventDefault();
+        isOpen() ? closeSearch() : openSearch();
+      });
+
+      // Click fuera
+      document.addEventListener('click', (e) => {
+        if (!mq.matches || !isOpen()) return;
+        const insideForm = form?.contains(e.target);
+        const onToggle   = toggle?.contains(e.target);
+        if (!insideForm && !onToggle) closeSearch();
+      });
+
+      // Escape
+      document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeSearch(); });
+
+      // Submit solo con texto
+      form?.addEventListener('submit', (e) => {
+        const q = (input?.value || '').trim();
+        if (!q) { e.preventDefault(); input?.focus(); return; }
+        form.action = `productos.html?q=${encodeURIComponent(q)}`;
+      });
+      btn?.addEventListener('click', (e) => {
+        const q = (input?.value || '').trim();
+        if (!q) { e.preventDefault(); input?.focus(); }
+      });
+
+      // Cierra si pasa a mobile
+      mq.addEventListener?.('change', (ev) => { if (!ev.matches) closeSearch(); });
+
+      // Atajo "/" para abrir
+      document.addEventListener('keydown', (e) => {
+        if (e.key !== '/') return;
+        const el = document.activeElement;
+        const typing = el && (
+          el.tagName === 'INPUT' ||
+          el.tagName === 'TEXTAREA' ||
+          el.isContentEditable
+        );
+        if (typing) return;
+        if (!mq.matches) return;
+        e.preventDefault();
+        openSearch();
+      });
+    })();
+
+    // Ruteo consistente para buscadores simples (header/menu no-desktop)
+    (function(){
+      const handleSubmit = (form, inputSelector) => {
+        form.addEventListener('submit', (e) => {
+          const input = form.querySelector(inputSelector);
+          const q = (input?.value || '').trim();
+          form.action = q ? `productos.html?q=${encodeURIComponent(q)}` : 'productos.html';
+          // Si es el buscador del menú, cerramos el off‑canvas al enviar
+          if (form.classList.contains('menu-search')) {
+            const nav = document.getElementById('primary-navigation') || document.querySelector('.main-nav');
+            const toggle = document.querySelector('.nav-toggle');
+            if (nav && toggle && nav.classList.contains('show')) {
+              nav.classList.remove('show');
+              toggle.setAttribute('aria-expanded', 'false');
+              document.body.style.overflow = '';
+            }
+          }
+        });
+      };
+      document.querySelectorAll('form.header-search:not(.header-search-desktop)').forEach(f => handleSubmit(f, '.header-search-input'));
+      document.querySelectorAll('form.menu-search').forEach(f => handleSubmit(f, '.menu-search-input'));
+
+      // Prefill en productos.html?q=...
+      if (window.location.pathname.endsWith('productos.html')) {
+        const q = new URLSearchParams(location.search).get('q') || '';
+        if (q) {
+          document.querySelectorAll('.header-search-input, .menu-search-input')
+            .forEach(inp => inp.value = q);
+        }
+      }
+    })();
+
+    /* ---------- PRODUCT MODAL (SIN CAMBIOS DE LÓGICA) ---------- */
+    const productData = {
+      'featured-gris': {
+        title: 'Prueba Gris',
+        price: '$15.400',
+        details: 'Talle: Único<br>Tela: Algodón 100%<br>Color: Gris',
+        description: 'Gorra color gris de ala curva ideal para looks urbanos.',
+        images: [
+          'assets/images/Gorra.png',
+          'assets/images/Gorra.png',
+          'assets/images/Gorra.png'
+        ]
+      },
+      'featured-buzo': {
+        title: 'Prueba Buzo',
+        price: '$58.200',
+        details: 'Talle: S‑XL<br>Tela: Frisa premium 320 g<br>Corte: Oversize',
+        description: 'Buzo unisex oversize de frisa suave, ideal para días fríos y estilo urbano.',
+        images: [
+          'assets/images/Buzoxl.png',
+          'assets/images/Buzoxl.png',
+          'assets/images/Buzoxl.png'
+        ]
+      },
+      'featured-over': {
+        title: 'Prueba Over',
+        price: '$45.500',
+        details: 'Talle: 38‑44<br>Tela: Gabardina stretch<br>Bolsillos: Cargo laterales',
+        description: 'Pantalón cargo oversize de gabardina elástica con múltiples bolsillos.',
+        images: [
+          'assets/images/PantalonS.png',
+          'assets/images/PantalonS.png',
+          'assets/images/PantalonS.png'
+        ]
+      },
+      'featured-shift': {
+        title: 'Prueba Shift',
+        price: '$34.500',
+        details: 'Talle: S‑XL<br>Tela: Algodón peinado 24/1<br>Estampa: Serigrafía eco‑friendly',
+        description: 'Remera de algodón premium con estampa frontal, corte regular y costuras reforzadas.',
+        images: [
+          'assets/images/RemeraL.png',
+          'assets/images/RemeraL.png',
+          'assets/images/RemeraL.png'
+        ]
+      },
+      'featured-rosa': {
+        title: 'Prueba Rosa',
+        price: '$21.200',
+        details: 'Talle: Único<br>Tela: Acrílico hipoalergénico<br>Tejido: Punto inglés',
+        description: 'Gorro tejido color gris, suave y abrigado, perfecto para el invierno.',
+        images: [
+          'assets/images/Gorroinv.png',
+          'assets/images/Gorroinv.png',
+          'assets/images/Gorroinv.png'
+        ]
+      },
+      'featured-dibujo': {
+        title: 'Prueba Dibujo',
+        price: '$34.500',
+        details: 'Talle: S‑L<br>Tela: Frisa liviana<br>Ilustración: DTG edición limitada',
+        description: 'Buzo oversize con ilustración exclusiva impresa mediante DTG de alta calidad.',
+        images: [
+          'assets/images/BuzoOver.png',
+          'assets/images/BuzoOver.png',
+          'assets/images/BuzoOver.png'
+        ]
+      },
+
+      'remera-shift': {
+        title: 'Remera Shift',
+        price: '$15.400',
+        details: 'Talle: ‑ <br>Tela: Algodón peinado 24/1<br>Color: gris con letras blancas',
+        description: 'Gorra con estampa “BeraClothing”.',
+        images: [
+          'assets/images/Gorra.png',
+          'assets/images/Gorra.png',
+          'assets/images/Gorra.png'
+        ]
+      },
+      'remera-dibujo': {
+        title: 'Gorro Invierno',
+        price: '$21.200',
+        details: 'Talle: S‑XL<br>Tela: Algodón 100%<br>Estampa: BeraClothing',
+        description: 'Gorro de invierno de algodon con estampa BeraClothing.',
+        images: [
+          'assets/images/Gorroinv.png',
+          'assets/images/Gorroinv.png',
+          'assets/images/Gorroinv.png'
+        ]
+      },
+      'buzo-gris': {
+        title: 'Buzo Gris oscuro',
+        price: '$58.200',
+        details: 'Talle: XL<br>Tela: Frisa premium 320 g<br>Corte: Oversize',
+        description: 'Buzo unisex oversize color gris oscuro, interior súper suave para días fríos.',
+        images: [
+          'assets/images/Buzoxl.png',
+          'assets/images/Buzoxl.png',
+          'assets/images/Buzoxl.png'
+        ]
+      },
+      'buzo-over': {
+        title: 'Remera Gris s',
+        price: '$34.500',
+        details: 'Talle: L<br>Tela: French Terry<br>Fit: Oversize relajado',
+        description: 'Remera gris S con Estampa.',
+        images: [
+          'assets/images/RemeraL.png',
+          'assets/images/RemeraL.png',
+          'assets/images/RemeraL.png'
+        ]
+      },
+      'pantalon-rosa': {
+        title: 'Pantalon Over negro',
+        price: '$45.000',
+        details: 'Talle: S<br>Tela: Gabardina stretch<br>Corte: Cargo slim',
+        description: 'Pantalón cargo negro con bolsillos laterales y cintura elástica.',
+        images: [
+          'assets/images/PantalonS.png',
+          'assets/images/PantalonS.png',
+          'assets/images/PantalonS.png'
+        ]
+      },
+      'pantalon-gris': {
+        title: 'Pantalón Gris',
+        price: '$50.400',
+        details: 'Talle: L<br>Tela: Gabardina premium<br>Corte: Recto',
+        description: 'Pantalón gris de gabardina con bolsillos profundos y ajuste cómodo.',
+        images: [
+          'assets/images/BuzoOver.png',
+          'assets/images/BuzoOver.png',
+          'assets/images/BuzoOver.png'
+        ]
+      },
+      // Shorts y combos nuevos
+      'shorts-cuero': {
+        title: 'Shorts cuero negro',
+        price: '$18.000',
+        details: 'Talle: S<br>Tela: Símil cuero<br>Color: Negro',
+        description: 'Shorts de símil cuero negro, tiro alto, ideal para looks urbanos y nocturnos.',
+        images: ['assets/images/IMG_7221.jpeg']
+      },
+      'falda-cuero': {
+        title: 'Falda cuero negro',
+        price: '$17.000',
+        details: 'Talle: S<br>Tela: Símil cuero<br>Color: Negro',
+        description: 'Falda corta de símil cuero negro, corte clásico, perfecta para combinar.',
+        images: ['assets/images/IMG_7222.jpeg']
+      },
+      'shorts-hebilla': {
+        title: 'Shorts negro hebilla',
+        price: '$18.500',
+        details: 'Talle: S<br>Tela: Símil cuero<br>Detalle: Hebilla metálica',
+        description: 'Shorts negro con hebilla decorativa, estilo moderno y versátil.',
+        images: ['assets/images/IMG_7223.jpeg']
+      },
+      'top-halter': {
+        title: 'Top halter negro',
+        price: '$12.000',
+        details: 'Talle: Único<br>Tela: Lycra<br>Color: Negro',
+        description: 'Top halter negro, espalda descubierta, ideal para salidas y fiestas.',
+        images: ['assets/images/IMG_7224.jpeg']
+      },
+      'combo-body': {
+        title: 'Combo body vino y marrón',
+        price: '$22.000',
+        details: 'Talle: Único<br>Incluye: Body color vino y body color marrón',
+        description: 'Combo de dos bodys: uno color vino y otro marrón, ambos de lycra suave.',
+        images: ['assets/images/IMG_7226.jpeg']
+      },
+      'combo-shorts': {
+        title: 'Combo shorts marrón y negro',
+        price: '$35.000',
+        details: 'Talle: S<br>Incluye: Shorts marrón y shorts negro',
+        description: 'Combo de dos shorts: uno marrón y uno negro, ambos en símil cuero.',
+        images: ['assets/images/IMG_7227.jpeg']
+      },
+      'combo-blusa-falda': {
+        title: 'Combo blusa transparente negra + falda cuero',
+        price: '$32.000',
+        details: 'Talle: Único<br>Incluye: Blusa transparente negra y falda de cuero negro',
+        description: 'Combo elegante para noche: blusa transparente negra y falda de cuero.',
+        images: ['assets/images/IMG_7228.jpeg']
+      },
+      'combo-halter-shorts': {
+        title: 'Combo top halter negro + shorts negro (dos modelos)',
+        price: '$29.500',
+        details: 'Talle: Único<br>Incluye: Top halter negro y dos modelos de shorts negro',
+        description: 'Combo de top halter negro y shorts negro, dos estilos para combinar.',
+        images: ['assets/images/IMG_7229.jpeg']
+      },
+      'combo-body-falda': {
+        title: 'Combo body vino y marrón + falda cuero negro',
+        price: '$37.000',
+        details: 'Talle: Único<br>Incluye: Body vino, body marrón y falda cuero negro',
+        description: 'Combo completo: dos bodys y una falda de cuero negro.',
+        images: ['assets/images/IMG_7230.jpeg']
+      },
+      'tops-animal': {
+        title: 'Tops manga larga animal print gris y marrón',
+        price: '$14.000',
+        details: 'Talle: Único<br>Incluye: Top gris y top marrón animal print',
+        description: 'Tops manga larga con estampado animal print, colores gris y marrón.',
+        images: ['assets/images/IMG_7231.jpeg']
+      },
+      'body-vino-falda': {
+        title: 'Body vino con falda cuero negro',
+        price: '$21.000',
+        details: 'Talle: Único<br>Incluye: Body color vino y falda cuero negro',
+        description: 'Body color vino combinado con falda de cuero negro.',
+        images: ['assets/images/IMG_7232.jpeg']
+      }
+    };
+
+    const productModal      = document.getElementById('product-modal');
+    const galleryWrapper    = document.getElementById('product-gallery-wrapper');
+    const modalTitle        = document.getElementById('product-modal-title');
+    const modalPrice        = document.getElementById('product-modal-price');
+    const modalDescription  = document.getElementById('product-modal-description');
+    const modalCloseBtn     = document.querySelector('.product-modal-close');
+
+    if (productModal) {
+      let lastOpener = null;
+      document.querySelectorAll('.view-product-btn').forEach(btn => {
+        btn.addEventListener('click', e => {
+          e.preventDefault();
+          e.stopImmediatePropagation();
+          lastOpener = btn;
+          openProductModal(btn.dataset.id);
+        });
+      });
+
+      function openProductModal(id) {
+        const data = productData[id];
+        if (!data) return;
+        modalTitle.textContent = data.title;
+        modalPrice.textContent = data.price;
+        modalDescription.innerHTML = `
+  <p>${data.details}</p>
+  <p>${data.description}</p>
+`;
+        galleryWrapper.innerHTML = '';
+        data.images.forEach(src => {
+          const slide = document.createElement('div');
+          slide.className = 'swiper-slide';
+          slide.innerHTML = `<img src="${src}" alt="${data.title}" loading="lazy">`;
+          galleryWrapper.appendChild(slide);
+        });
+
+        if (window.productGallerySwiper) {
+          window.productGallerySwiper.update();
+          window.productGallerySwiper.slideTo(0);
+        } else if (typeof Swiper !== 'undefined') {
+          window.productGallerySwiper = new Swiper('.product-gallery', {
+            pagination: { el: '.product-gallery .swiper-pagination', clickable: true },
+            navigation: {
+              nextEl: '.product-gallery .swiper-button-next',
+              prevEl: '.product-gallery .swiper-button-prev'
+            },
+            loop: true
+          });
+        }
+
+        productModal.classList.add('show');
+        productModal.setAttribute('aria-hidden','false');
+        const previouslyFocused = document.activeElement;
+        productModal.dataset.prevFocus = previouslyFocused && previouslyFocused instanceof HTMLElement ? (previouslyFocused.className || previouslyFocused.id || previouslyFocused.tagName) : '';
+        const focusableSelectors = 'a[href], button:not([disabled]), textarea, input, select, [tabindex]:not([tabindex="-1"])';
+        const focusables = productModal.querySelectorAll(focusableSelectors);
+        const firstFocusable = focusables[0];
+        if (firstFocusable) firstFocusable.focus();
+
+        const trap = (e) => {
+          if (!productModal.classList.contains('show') || e.key !== 'Tab') return;
+          const focusable = productModal.querySelectorAll(focusableSelectors);
+          if (!focusable.length) return;
+          const first = focusable[0];
+          const last  = focusable[focusable.length - 1];
+          if (e.shiftKey && document.activeElement === first) {
+            e.preventDefault(); last.focus();
+          } else if (!e.shiftKey && document.activeElement === last) {
+            e.preventDefault(); first.focus();
+          }
+        };
+        productModal._trapFocus = trap;
+        productModal.addEventListener('keydown', trap);
+        productModal.dataset.trap = '1';
+      }
+
+      function closeProductModal() {
+        if (productModal.dataset.trap && productModal._trapFocus) {
+          productModal.removeEventListener('keydown', productModal._trapFocus);
+          delete productModal._trapFocus;
+          delete productModal.dataset.trap;
+        }
+        productModal.classList.remove('show');
+        productModal.setAttribute('aria-hidden','true');
+        // Restaurar foco si fuera necesario
+      }
+
+      modalCloseBtn?.addEventListener('click', closeProductModal);
+      productModal.addEventListener('click', e => { if (e.target === productModal) closeProductModal(); });
+      document.addEventListener('keydown', e => { if (e.key === 'Escape' && productModal.classList.contains('show')) closeProductModal(); });
+    }
+
+    /* ===========================
+       7) SCROLL LISTENERS OPTIMIZADOS (passive:true)
+       =========================== */
+
+    // BACK TO TOP
+    const backToTop = document.getElementById('back-to-top');
+    if (backToTop) {
+      window.addEventListener('scroll', throttle(() => {
+        backToTop.style.display = window.scrollY > 300 ? 'block' : 'none';
+      }, 200), { passive: true });
+      backToTop.addEventListener('click', () => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      });
+    }
+
+    // Header shadow on scroll
+    const siteHeader = document.querySelector('.site-header');
+    if (siteHeader) {
+      window.addEventListener('scroll', throttle(() => {
+        siteHeader.classList.toggle('scrolled', window.scrollY > 50);
+      }, 100), { passive: true });
+    }
+
+    // LAZY ANIMATIONS
+    const animItems = document.querySelectorAll('.animate-on-scroll');
+    if (animItems.length) {
+      const observer = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('animated');
+            observer.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.1 });
+      animItems.forEach(item => observer.observe(item));
+    }
+
+    // SCROLLSPY
+    const sections = document.querySelectorAll('section[id]');
+    if (sections.length) {
+      const spyObserver = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+          const link = document.querySelector(`.nav-list a[href="#${entry.target.id}"]`);
+          if (link) {
+            link.classList.toggle('active', entry.isIntersecting);
+          }
+        });
+      }, { rootMargin: '-50% 0px -50% 0px', threshold: 0 });
+      sections.forEach(sec => spyObserver.observe(sec));
+    }
+
+    // SWIPER CAROUSELS (sin cambios)
+    if (typeof Swiper !== 'undefined') {
+      new Swiper('.swiper-hero .swiper-container', {
+        loop: true, speed: 800, effect: 'fade',
+        autoplay: { delay: 5000, disableOnInteraction: false },
+        pagination: { el: '.swiper-hero .swiper-pagination', clickable: true },
+        navigation: {
+          nextEl: '.swiper-hero .swiper-button-next',
+          prevEl: '.swiper-hero .swiper-button-prev'
+        }
+      });
+      document.querySelectorAll('.swiper-container').forEach(container => {
+        if (container.closest('.swiper-hero')) return;
+        const config = { loop: true, speed: 600,
+          pagination: { el: container.querySelector('.swiper-pagination'), clickable: true }
+        };
+        if (container.classList.contains('swiper-novedades') || container.classList.contains('swiper-featured')) {
+          config.navigation = {
+            nextEl: container.querySelector('.swiper-button-next'),
+            prevEl: container.querySelector('.swiper-button-prev')
+          };
+        }
+        if (container.classList.contains('swiper-testimonios')) {
+          config.autoplay = { delay: 5000 };
+        }
+        new Swiper(container, config);
+      });
+    }
+
+    // CONTACT FORM (igual)
+    const contactForm = document.getElementById('form-contacto');
+    const contactResp = document.getElementById('form-respuesta');
+    if (contactForm && contactResp) {
+      contactForm.addEventListener('submit', e => {
+        e.preventDefault();
+        const { nombre, email, asunto, mensaje } = contactForm;
+        if (!nombre.value.trim() || !email.value.trim() || !asunto.value.trim() || !mensaje.value.trim()) {
+          contactResp.textContent = 'Por favor completa todos los campos.';
+          contactResp.style.color = 'red';
+        } else {
+          contactResp.textContent = `¡Gracias, ${nombre.value.trim()}! Hemos recibido tu mensaje.`;
+          contactResp.style.color = 'green';
+          contactForm.reset();
+        }
+      });
+    }
+
+    // NEWSLETTER FORM (igual)
+    const newsletterForm = document.getElementById('form-newsletter');
+    const newsletterResp = document.getElementById('newsletter-response');
+    if (newsletterForm && newsletterResp) {
+      newsletterForm.addEventListener('submit', e => {
+        e.preventDefault();
+        const emailVal = newsletterForm['email-newsletter'].value.trim();
+        const valid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailVal);
+        if (!valid) {
+          newsletterResp.textContent = 'Ingresa un correo válido.';
+          newsletterResp.style.color = 'red';
+        } else {
+          newsletterResp.textContent = '¡Suscripción exitosa! Gracias.';
+          newsletterResp.style.color = 'green';
+          newsletterForm.reset();
+        }
+      });
+    }
+
+    /* ===========================
+       10) PRODUCTS FILTERING & SORTING + recordar selección
+       =========================== */
+    const allProductItems = Array.from(document.querySelectorAll('.producto-item'));
+    const filterTipo  = document.getElementById('filter-tipo');
+    const filterTalle = document.getElementById('filter-talle');
+    const sortBy      = document.getElementById('sort-by');
+
+    const categorySections = Array.from(document.querySelectorAll('.product-category'));
+    const productosMain = document.querySelector('.productos-main');
+    let emptyStateEl;
+
+    const LS_KEYS = {
+      tipo:  'bera:filters:tipo',
+      talle: 'bera:filters:talle',
+      sort:  'bera:filters:sort'
+    };
+
+    // Restaurar selección guardada
+    try {
+      const t = localStorage.getItem(LS_KEYS.tipo);
+      const l = localStorage.getItem(LS_KEYS.talle);
+      const s = localStorage.getItem(LS_KEYS.sort);
+      if (filterTipo && t)  filterTipo.value = t;
+      if (filterTalle && l) filterTalle.value = l;
+      if (sortBy && s)      sortBy.value = s;
+    } catch(_) {}
+
+    const typeToSection = {
+      remera: 'remeras',
+      top: 'tops',
+      camisa: 'camisas',
+      short: 'shorts',
+      pantalon: 'pantalones',
+      buzo: 'buzos',
+      set: 'sets',
+      abrigo: 'abrigos',
+      vestido: 'vestidos'
+    };
+
+    function applySorting() {
+      if (!sortBy) return;
+      const sortVal = sortBy.value;
+      if (sortVal === 'precio-asc' || sortVal === 'precio-desc') {
+        document.querySelectorAll('.grid-products').forEach(grid => {
+          const visible = Array.from(grid.children).filter(
+            c => c.classList.contains('producto-item') && c.style.display !== 'none'
+          );
+          visible.sort((a, b) => {
+            const pa = parseFloat(a.dataset.price) || 0;
+            const pb = parseFloat(b.dataset.price) || 0;
+            return sortVal === 'precio-asc' ? pa - pb : pb - pa;
+          });
+          visible.forEach(el => grid.appendChild(el));
+        });
+      }
+    }
+
+    function applyFilters() {
+      const tipoVal  = filterTipo ? filterTipo.value : '';
+      const talleVal = filterTalle ? filterTalle.value : '';
+
+      allProductItems.forEach(item => {
+        const match =
+          (!tipoVal  || item.dataset.tipo  === tipoVal) &&
+          (!talleVal || item.dataset.talle === talleVal);
+        item.style.display = match ? '' : 'none';
+      });
+
+      applySorting();
+
+      categorySections.forEach(sec => {
+        const visibles = Array
+          .from(sec.querySelectorAll('.producto-item'))
+          .filter(el => el.style.display !== 'none').length;
+        sec.classList.toggle('is-hidden', visibles === 0);
+      });
+
+      const anyVisible = allProductItems.some(el => el.style.display !== 'none');
+      if (!anyVisible) {
+        if (!emptyStateEl) {
+          emptyStateEl = document.createElement('p');
+          emptyStateEl.className = 'empty-state';
+          emptyStateEl.textContent = 'No encontramos productos con esos filtros.';
+          productosMain?.prepend(emptyStateEl);
+        }
+      } else if (emptyStateEl) {
+        emptyStateEl.remove();
+        emptyStateEl = null;
+      }
+
+      if (tipoVal && typeToSection[tipoVal]) {
+        const targetSec = document.getElementById(typeToSection[tipoVal]);
+        if (targetSec && !targetSec.classList.contains('is-hidden')) {
+          window.scrollTo({ top: computeOffsetTop(targetSec), behavior: 'smooth' });
+        }
+      }
+    }
+
+    // Guardar cambios en LS
+    [filterTipo, filterTalle].forEach(sel => {
+      if (sel) sel.addEventListener('change', () => {
+        try {
+          if (sel === filterTipo)  localStorage.setItem(LS_KEYS.tipo, sel.value);
+          if (sel === filterTalle) localStorage.setItem(LS_KEYS.talle, sel.value);
+        } catch(_) {}
+        applyFilters();
+      });
+    });
+    if (sortBy) sortBy.addEventListener('change', () => {
+      try { localStorage.setItem(LS_KEYS.sort, sortBy.value); } catch(_) {}
+      applySorting();
+    });
+
+    // Primera corrida
+    applyFilters();
+
+    /* ===========================
+       8) TOAST DEL CARRITO SIN STACKING
+       =========================== */
+    function showCartToast(msg = 'Producto agregado al carrito') {
+      const prev = document.querySelector('.cart-toast');
+      if (prev) prev.remove();
+      const t = document.createElement('div');
+      t.className = 'cart-toast';
+      t.textContent = msg;
+      document.body.appendChild(t);
+      setTimeout(() => t.classList.add('hide'), 1400);
+      setTimeout(() => t.remove(), 1800);
+    }
+
+    /* ===========================
+       SHOPPING CART & MODAL (con delegación para add-to-cart)
+       =========================== */
+    let cart = [];
+    try {
+      const raw = localStorage.getItem('cart');
+      cart = raw ? JSON.parse(raw) : [];
+      if (!Array.isArray(cart)) cart = [];
+    } catch (_) {
+      cart = [];
+    }
+    const cartCount = document.querySelector('.cart-count');
+    const saveCart = () => localStorage.setItem('cart', JSON.stringify(cart));
+    const updateCartCount = () => {
+      const totalItems = cart.reduce((sum,i) => sum + i.qty, 0);
+      const totalPrice = cart.reduce((sum,i) => sum + i.qty * i.price, 0);
+
+      if (cartCount) cartCount.textContent = totalItems;
+
+      const cartFab          = document.getElementById('cart-fab');
+      const cartCounterFab   = cartFab?.querySelector('[data-count]');
+      const cartTotalFab     = cartFab?.querySelector('[data-total]');
+      if (cartCounterFab) cartCounterFab.textContent = totalItems;
+      if (cartTotalFab) cartTotalFab.textContent = '$' + totalPrice.toLocaleString('es-AR');
+
+      document.querySelectorAll('[data-total-final]').forEach(el => {
+        el.textContent = '$' + totalPrice.toLocaleString('es-AR');
+      });
+
+      if (document.getElementById('cart-panel')?.classList.contains('show')) renderCartPanel();
+    };
+    const addToCart = prod => {
+      const ex = cart.find(i => i.id === prod.id);
+      if (ex) {
+        ex.qty = Math.min(ex.qty + 1, 10);
+      } else {
+        cart.push({ ...prod, qty: 1 });
+      }
+      saveCart(); updateCartCount();
+    };
+
+    // 9) DELEGACIÓN: clicks en .add-to-cart-icon (soporta productos dinámicos)
+    document.body.addEventListener('click', (ev) => {
+      const btn = ev.target.closest('.add-to-cart-icon');
+      if (!btn) return;
+
+      // Read price from data attribute
+      let price = Number(btn.dataset.price);
+      const priceEl = btn.closest('.producto-item')?.querySelector('.price') ||
+                      btn.closest('.product-item')?.querySelector('.price');
+      if (priceEl) {
+        let text = priceEl.textContent.trim();
+        text = text.replace(/[^0-9.,]/g, '').replace(/\./g, '').replace(/,/g, '.');
+        const domPrice = parseFloat(text) || 0;
+        if (isNaN(price) || price !== domPrice) price = domPrice;
+      }
+
+      const product = {
+        id: btn.dataset.id,
+        name: btn.dataset.name,
+        price: price || 0
+      };
+      addToCart(product);
+      showCartToast();
+      openCartPanel?.();
+    });
+
+    /* -------- Floating Cart references -------- */
+    const cartFab          = document.getElementById('cart-fab');
+    const cartCounterFab   = cartFab?.querySelector('[data-count]');
+    const cartTotalFab     = cartFab?.querySelector('[data-total]');
+    const cartPanelElm     = document.getElementById('cart-panel');
+    const cartOverlayElm   = document.getElementById('cart-overlay');
+    const cartItemsList    = cartPanelElm?.querySelector('[data-items]');
+    const cartTotalFinalEl = document.getElementById('cart-total') 
+                          || cartPanelElm?.querySelector('[data-total-final]');
+    const cartCloseFab     = cartPanelElm?.querySelector('.cart-close');
+
+    const lockScrollCart   = () => { document.body.style.overflow = 'hidden'; };
+    const unlockScrollCart = () => { document.body.style.overflow = '';       };
+
+    function renderCartPanel() {
+      if (!cartItemsList) return;
+      cartItemsList.innerHTML = '';
+      cart.forEach(item => {
+        const li = document.createElement('li');
+        li.className = 'cart-item';
+        li.dataset.id = item.id;
+        li.innerHTML = `
+  <span class="name">${item.name}</span>
+  <div class="qty-stepper">
+    <button class="qty-dec" aria-label="Menos">−</button>
+    <input type="number" class="qty" min="1" max="10" value="${item.qty}" data-qty>
+    <button class="qty-inc" aria-label="Más">+</button>
+  </div>
+  <span class="price" data-price>$${(item.price * item.qty).toLocaleString('es-AR')}</span>
+  <button class="remove" aria-label="Quitar">×</button>
+`;
+        cartItemsList.appendChild(li);
+      });
+
+      cartItemsList.querySelectorAll('[data-qty]').forEach(input => {
+        input.addEventListener('change', () => {
+          const id  = input.closest('.cart-item').dataset.id;
+          const raw = parseInt(input.value, 10) || 1;
+          const qty = Math.max(1, Math.min(10, raw));
+          input.value = qty;
+          updateItemQty(id, qty);
+          refreshStepperState();
+        });
+      });
+      cartItemsList.querySelectorAll('.qty-inc').forEach(btn => {
+        btn.addEventListener('click', () => changeQty(btn.closest('.cart-item').dataset.id, +1));
+      });
+      cartItemsList.querySelectorAll('.qty-dec').forEach(btn => {
+        btn.addEventListener('click', () => changeQty(btn.closest('.cart-item').dataset.id, -1));
+      });
+      function refreshStepperState() {
+        cartItemsList.querySelectorAll('.cart-item').forEach(li => {
+          const item = cart.find(i => i.id === li.dataset.id);
+          if (!item) return;
+          li.querySelector('.qty-dec').disabled = item.qty <= 1;
+          li.querySelector('.qty-inc').disabled = item.qty >= 10;
+        });
+      }
+      refreshStepperState();
+      cartItemsList.querySelectorAll('.remove').forEach(btn => {
+        btn.addEventListener('click', () => removeItem(btn.closest('.cart-item').dataset.id));
+      });
+    }
+    function changeQty(id, delta) {
+      const item = cart.find(i => i.id === id);
+      if (!item) return;
+      const newQty = Math.max(1, Math.min(10, item.qty + delta));
+      if (newQty !== item.qty) {
+        item.qty = newQty;
+        saveCart(); updateCartCount();
+      }
+    }
+    function updateItemQty(id, qty) {
+      qty = Math.max(1, Math.min(10, qty));
+      const item = cart.find(i => i.id === id);
+      if (!item) return;
+      item.qty = qty;
+      saveCart(); updateCartCount();
+    }
+    function removeItem(id) {
+      cart = cart.filter(i => i.id !== id);
+      saveCart(); updateCartCount();
+    }
+    function openCartPanel() {
+      if (!cartPanelElm) return;
+      renderCartPanel();
+      cartPanelElm.classList.remove('hidden');
+      cartPanelElm.classList.add('show');
+      cartOverlayElm?.classList.remove('hidden');
+      cartOverlayElm?.classList.add('show');
+      lockScrollCart();
+      updateCartCount();
+    }
+    function closeCartPanel() {
+      if (!cartPanelElm) return;
+      cartPanelElm.classList.add('hidden');
+      cartPanelElm.classList.remove('show');
+      cartOverlayElm?.classList.add('hidden');
+      cartOverlayElm?.classList.remove('show');
+      unlockScrollCart();
+    }
+    window.openCartPanel = openCartPanel; // opcional, por si lo llamás desde otros lados
+
+    cartFab?.addEventListener('click', openCartPanel);
+    cartCloseFab?.addEventListener('click', closeCartPanel);
+    cartOverlayElm?.addEventListener('click', closeCartPanel);
+    document.addEventListener('keydown', e => {
+      if (e.key === 'Escape' && cartPanelElm?.classList.contains('show')) closeCartPanel();
+    });
+    let startXCart;
+    cartPanelElm?.addEventListener('touchstart', e => { startXCart = e.touches[0].clientX; }, {passive:true});
+    cartPanelElm?.addEventListener('touchend',   e => {
+      if (startXCart !== undefined && e.changedTouches[0].clientX - startXCart < -60) closeCartPanel();
+      startXCart = undefined;
+    }, {passive:true});
+
+    // Cart modal (igual que tenías)
+    const cartToggleBtn = document.querySelector('.cart-toggle');
+    const cartModalElm = document.getElementById('cart-modal');
+    const closeCartBtn  = document.getElementById('close-cart');
+    const cartItemsContainer = document.getElementById('cart-items');
+    const cartTotalEl = document.getElementById('cart-total');
+    if (cartToggleBtn && cartModalElm && closeCartBtn) {
+      cartToggleBtn.addEventListener('click', e => {
+        e.preventDefault();
+        renderCartPage();
+        cartModalElm.classList.remove('hidden');
+        cartToggleBtn.classList.add('open');
+      });
+      closeCartBtn.addEventListener('click', () => {
+        cartModalElm.classList.add('hidden');
+        cartToggleBtn.classList.remove('open');
+      });
+      cartModalElm.addEventListener('click', e => {
+        if (e.target === cartModalElm) {
+          cartModalElm.classList.add('hidden');
+          cartToggleBtn.classList.remove('open');
+        }
+      });
+      const checkoutBtn = document.getElementById('checkout-btn');
+      if (checkoutBtn) {
+        checkoutBtn.addEventListener('click', () => {
+          cartModalElm.classList.add('hidden');
+          cartToggleBtn.classList.remove('open');
+          window.location.href = 'finalizarcompra.html';
+        });
+      }
+    }
+    function renderCartPage() {
+      if (!cartItemsContainer) return;
+      cartItemsContainer.innerHTML = '';
+      let total = 0;
+      cart.forEach(item => {
+        const line = item.price * item.qty;
+        total += line;
+        const row = document.createElement('div');
+        row.className = 'cart-item';
+        row.innerHTML = `
+        <div class="cart-item-info">
+          <span>${item.name} x${item.qty}</span>
+          <span>$${line.toFixed(2)}</span>
+        </div>
+        <button class="remove-item" data-id="${item.id}" aria-label="Eliminar ${item.name}">&times;</button>
+      `;
+        cartItemsContainer.appendChild(row);
+      });
+      if (cartTotalEl) cartTotalEl.textContent = `$${total.toFixed(2)}`;
+      cartItemsContainer.querySelectorAll('.remove-item').forEach(btn =>
+        btn.addEventListener('click', () => {
+          cart = cart.filter(i=>i.id!==btn.dataset.id);
+          saveCart(); updateCartCount(); renderCartPage();
+        })
+      );
+    }
+
+    // Inicializa contadores
+    updateCartCount();
+
+  }); // DOMContentLoaded end
+} // boot guard
+
+/* ===========================
+   11) setActiveNav más robusto (fuera de DOMContentLoaded para ejecutar siempre)
+   - Ignora hash (#...) y query (?...)
+   =========================== */
+(function setActiveNav() {
+  // Normaliza path actual sin query ni hash
+  const url = new URL(window.location.href);
+  let current = url.pathname.split('/').pop() || 'index.html';
+  // normalizaciones
+  const lc = current.toLowerCase();
+  if (lc === '' || lc === '/') current = 'index.html';
+  if (lc.includes('newst')) current = 'newsletter.html';
+
+  document.querySelectorAll('#primary-navigation a, .collection-menu a').forEach(a => {
+    a.classList.remove('active');
+    const hrefRaw = a.getAttribute('href') || '';
+    // Quita query/hash del href del link
+    const hrefUrl = new URL(hrefRaw, window.location.origin);
+    const hrefFile = hrefUrl.pathname.split('/').pop() || 'index.html';
+    if (hrefFile === current) a.classList.add('active');
+  });
+})();
