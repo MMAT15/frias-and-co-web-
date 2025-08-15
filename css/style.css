@@ -3138,3 +3138,29 @@ img {
 /* El header baja mientras el cartel esté activo (y anima el cambio) */
 .site-header{ transition: top .35s ease, background var(--transition), box-shadow var(--transition); }
 html.has-ann .site-header{ top: var(--ann-h); }
+/* === Sticky announcement bar (override) === */
+:root{ --ann-h: 36px; }
+@media (max-width:420px){ :root{ --ann-h: 34px; } }
+
+/* hace sticky el cartel */
+.announcement-bar{
+  position: -webkit-sticky !important; /* iOS */
+  position: sticky !important;
+  top: 0;
+  z-index: 1400;                       /* > header (1100) */
+  height: var(--ann-h) !important;
+  max-height: var(--ann-h);
+  transition: max-height .25s ease, opacity .2s ease;
+}
+
+/* animación al cerrar */
+.announcement-bar.closing{
+  max-height: 0;
+  opacity: 0;
+  overflow: hidden;
+}
+
+/* empuja el header hacia abajo mientras el cartel esté visible */
+html.has-ann .site-header{
+  top: var(--ann-h) !important;
+}
