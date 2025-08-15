@@ -3393,7 +3393,7 @@ main > :first-child {
 .main-nav{
   position: fixed;                           /* no depende del ancho del header */
   left: 0; right: 0;
-  top: calc(var(--ann-h, 0px) + 64px);       /* 64px ≈ alto del header; ajustá si tu header es más alto */
+  top: calc(var(--ann-h, 0px) + var(--hdr-h, 0px)); /* <<< AHORA DINÁMICO *//* 64px ≈ alto del header; ajustá si tu header es más alto */
   width: min(700px, calc(100% - 24px));      /* centrado con respiración lateral */
   margin: 0 auto;
   z-index: 400;                               /* por encima del slider/paginación */
