@@ -7,6 +7,8 @@ body {
   padding: 0;
   color: var(--color-text);
   background-color: var(--color-bg);
+  /* Reserva espacio y evita saltos al hacer sticky */
+  padding-top: calc(var(--ann-h) + var(--hdr-h));
 }
 /* --------------------------------------------------
    Utility Classes & Base Enhancements
@@ -49,6 +51,9 @@ textarea:focus {
   --color-fondo: #ffffff;              /* page background */
   --color-acento: #e91e63;             /* primary accent */
   --color-acento-sec: #757575;         /* secondary accent */
+  /* Layout vars for stable header/announcement heights */
+  --ann-h: 0px;  /* JS la ajusta si hay barra de anuncio */
+  --hdr-h: 56px; /* JS coloca la altura real del header */
 
   /* Additional aliases used in legacy rules */
   --color-text: var(--color-principal);
@@ -447,10 +452,11 @@ img {
   .producto-item img,
   .featured-card img,
   .offer-item img {
-    width: 100%;
-    height: 180px !important;   /* alto consistente sin tapar el texto */
-    object-fit: cover;
-  }
+     width: 100%;
+  aspect-ratio: 3 / 4;  /* proporción estable para prendas */
+    height: auto !important;   /* respeta aspect-ratio */
+  object-fit: cover;
+}
 }
 
 /* --------------------------------------------------
@@ -671,6 +677,13 @@ img {
   grid-template-columns: repeat(auto-fit,minmax(200px,1fr));
   gap: 2rem;
 }
+/* Performance: permite saltear pintura off-screen */
+.grid-productos,
+.grid-products,
+.grid-featured {
+  content-visibility: auto;
+  contain-intrinsic-size: 800px; /* altura virtual p/evitar saltos al entrar en viewport */
+}
 .producto-item {
   text-align: center;
   border-radius: var(--border-radius);
@@ -684,7 +697,8 @@ img {
 }
 .producto-item img {
   width: 100%;
-  height: 250px;
+  aspect-ratio: 3 / 4;  /* proporción estable para prendas */
+  height: auto;
   object-fit: cover;
 }
 .producto-item h3 {
@@ -715,7 +729,8 @@ img {
 }
 .offer-item img {
   width: 100%;
-  height: 250px;
+  aspect-ratio: 3 / 4;  /* consistente con productos */
+  height: auto;
   object-fit: cover;
 }
 .offer-item .badge {
@@ -903,7 +918,8 @@ img {
 }
 .featured-card img {
   width: 100%;
-  height: 200px;
+  aspect-ratio: 4 / 3;  /* destacados más panorámicos */
+  height: auto;
   object-fit: cover;
   display: block;
 }
@@ -3339,17 +3355,10 @@ main > :first-child {
   }
 }
 .producto-item img {
-  object-fit: contain;
-  background: #fff;
-}
-/* Aplica a productos.html y al index */
-.producto-item img,
-.card.featured-card img {
   width: 100%;
-  height: 300px; /* altura consistente, ajusta si quieres más/menos */
-  object-fit: contain; /* para que no recorte la prenda */
-  background-color: #fff; /* relleno de fondo */
-  border-radius: 8px; /* opcional, por estética */
+  aspect-ratio: 3 / 4;  /* prendas suelen verse bien 3:4 */
+  height: auto;
+  object-fit: cover;
 }
 /* === Main nav centrado y sobre el slider === */
 .main-nav{
@@ -3428,8 +3437,19 @@ main > :first-child {
     margin-top: 2px; /* o 1px si querés algo mínimo */
   }
 }
-@media (max-width: 768px) {
-  .logo {
-    margin-top: 2px; /* si quieres aún menos, usa 1px */
-  }
+/* style.css */
+@media (max-width: 768px){
+  .logo-wrap { margin-top: 2px; }           /* ~1–2 px visuales */
+  /* alternativa subpixel: */
+  /* .logo-wrap { transform: translateY(1px); } */
+}
+/* style.css */
+:root { --ann-h: 0px; --hdr-h: 56px; }
+
+body {
+  padding-top: calc(var(--ann-h) + var(--hdr-h));
+}
+/* Micro-ajuste fino del logo en mobile */
+@media (max-width: 768px){
+  .logo-wrap{ margin-top: 1px !important; }
 }

@@ -85,7 +85,12 @@ if (window.__beraBooted) {
         }
       };
     };
-
+// === Helper para bloquear el foco del contenido principal cuando hay modales ===
+function setAppInert(on){
+  const main = document.getElementById('main-content') || document.querySelector('main');
+  if (!main) return;
+  if (on) main.setAttribute('inert',''); else main.removeAttribute('inert');
+}
     /* ===========================
        NAVIGATION TOGGLE (accesible) + lock/unlock scroll + cierres
        =========================== */
@@ -595,7 +600,7 @@ if (window.__beraBooted) {
             loop: true
           });
         }
-
+setAppInert(true);
         productModal.classList.add('show');
         productModal.setAttribute('aria-hidden','false');
         const previouslyFocused = document.activeElement;
@@ -628,6 +633,7 @@ if (window.__beraBooted) {
           delete productModal._trapFocus;
           delete productModal.dataset.trap;
         }
+        setAppInert(false);
         productModal.classList.remove('show');
         productModal.setAttribute('aria-hidden','true');
         // Restaurar foco si fuera necesario
@@ -789,7 +795,16 @@ try {
   if (filterTalle && l) filterTalle.value = l;
   if (sortBy && s)      sortBy.value = s;
 } catch(_) {}
-
+// Lee query params (prioriza URL > localStorage)
+try {
+  const usp = new URLSearchParams(location.search);
+  const qpTipo  = usp.get('tipo');
+  const qpTalle = usp.get('talle');
+  const qpSort  = usp.get('sort');
+  if (filterTipo && qpTipo !== null)   filterTipo.value  = qpTipo;
+  if (filterTalle && qpTalle !== null) filterTalle.value = qpTalle;
+  if (sortBy && qpSort !== null)       sortBy.value      = qpSort;
+} catch(_) {}
 const typeToSection = {
   remera: 'remeras',
   top: 'tops',
@@ -801,7 +816,17 @@ const typeToSection = {
   abrigo: 'abrigos',
   vestido: 'vestidos'
 };
-
+function updateURLParams() {
+  try {
+    const usp = new URLSearchParams(location.search);
+    if (filterTipo && filterTipo.value)   usp.set('tipo',  filterTipo.value); else usp.delete('tipo');
+    if (filterTalle && filterTalle.value) usp.set('talle', filterTalle.value); else usp.delete('talle');
+    if (sortBy && sortBy.value)           usp.set('sort',  sortBy.value);     else usp.delete('sort');
+    const q = usp.toString();
+    const url = window.location.pathname + (q ? '?' + q : '') + window.location.hash;
+    history.replaceState(null, '', url);
+  } catch(_) {}
+}
 function applySorting() {
   if (!sortBy) return;
   const sortVal = sortBy.value;
@@ -818,6 +843,7 @@ function applySorting() {
       visible.forEach(el => grid.appendChild(el));
     });
   }
+  updateURLParams();
 }
 
 function applyFilters() {
@@ -868,6 +894,7 @@ function applyFilters() {
       window.scrollTo({ top: computeOffsetTop(targetSec), behavior: 'smooth' });
     }
   }
+  updateURLParams();
 }
 
 /* ---------- Loader helpers (envoltorios) ---------- */
@@ -892,15 +919,19 @@ function applySortingWrapped() { withLoader(productsShell, () => applySorting())
       if (sel === filterTalle) localStorage.setItem(LS_KEYS.talle, sel.value);
     } catch(_) {}
     applyFiltersWrapped();
+    updateURLParams();
   });
 });
 if (sortBy) sortBy.addEventListener('change', () => {
   try { localStorage.setItem(LS_KEYS.sort, sortBy.value); } catch(_) {}
   applySortingWrapped();
+  updateURLParams();
 });
 
 /* ---------- Primera corrida (con loader) ---------- */
 applyFiltersWrapped();
+applySortingWrapped();
+updateURLParams();
 // Crear botón y contador si existen filtros
 if (productosMain && (filterTipo || filterTalle)) {
   const bar = document.createElement('div');
@@ -922,6 +953,7 @@ if (productosMain && (filterTipo || filterTalle)) {
       localStorage.removeItem('bera:filters:talle');
     } catch(_) {}
     applyFiltersWrapped();
+    updateURLParams();
   });
 
   // Hook en applyFilters para actualizar contador
@@ -1113,8 +1145,9 @@ if (productosMain && (filterTipo || filterTalle)) {
       cartPanelElm.classList.add('show');
       cartOverlayElm?.classList.remove('hidden');
       cartOverlayElm?.classList.add('show');
-      lockScrollCart();
-      updateCartCount();
+     lockScrollCart();
+setAppInert(true);
+updateCartCount();
     }
     function closeCartPanel() {
       if (!cartPanelElm) return;
@@ -1123,6 +1156,7 @@ if (productosMain && (filterTipo || filterTalle)) {
       cartOverlayElm?.classList.add('hidden');
       cartOverlayElm?.classList.remove('show');
       unlockScrollCart();
+      setAppInert(false);
     }
     window.openCartPanel = openCartPanel; // opcional, por si lo llamás desde otros lados
 
@@ -1150,17 +1184,20 @@ if (productosMain && (filterTipo || filterTalle)) {
         e.preventDefault();
         renderCartPage();
         cartModalElm.classList.remove('hidden');
+        setAppInert(true);
         cartToggleBtn.classList.add('open');
       });
       closeCartBtn.addEventListener('click', () => {
-        cartModalElm.classList.add('hidden');
-        cartToggleBtn.classList.remove('open');
-      });
+  setAppInert(false);
+  cartModalElm.classList.add('hidden');
+  cartToggleBtn.classList.remove('open');
+});
       cartModalElm.addEventListener('click', e => {
-        if (e.target === cartModalElm) {
-          cartModalElm.classList.add('hidden');
-          cartToggleBtn.classList.remove('open');
-        }
+       if (e.target === cartModalElm) {
+  setAppInert(false);
+  cartModalElm.classList.add('hidden');
+  cartToggleBtn.classList.remove('open');
+}
       });
       const checkoutBtn = document.getElementById('checkout-btn');
       if (checkoutBtn) {
