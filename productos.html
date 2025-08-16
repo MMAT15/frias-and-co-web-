@@ -43,7 +43,7 @@
   <!-- HEADER -->
   <header class="site-header" role="banner">
     <div class="container header-inner">
-   <button class="collection-toggle"
+   <button class="collection-toggle" type="button"
         aria-label="Abrir menú Catálogo"
         aria-expanded="false"
         aria-controls="collection-menu">
@@ -55,14 +55,14 @@
   </svg>
 </button>
 <!-- Botón lupita (desktop) -->
-<button class="header-search-toggle" aria-label="Abrir búsqueda">
+<button class="header-search-toggle" type="button" aria-label="Abrir búsqueda">
   <svg viewBox="0 0 24 24" aria-hidden="true">
     <path d="M11 18a7 7 0 1 1 4.95-2.05L21 21l-1.5 1.5-5.05-5.05A6.96 6.96 0 0 1 11 18z" fill="currentColor"/>
   </svg>
 </button>
 
 <!-- Campo que se despliega desde la lupita (desktop) -->
-<form class="header-search header-search-desktop" role="search" aria-label="Buscar (desktop)">
+<form class="header-search header-search-desktop" role="search" aria-label="Buscar (desktop)" action="productos.html" method="get">
   <input class="header-search-input" name="q" type="search" placeholder="Buscar prendas…" autocomplete="off" />
   <button class="header-search-btn" aria-label="Buscar">
     <svg viewBox="0 0 24 24" aria-hidden="true">
@@ -73,7 +73,7 @@
     <div class="site-branding">
   <a href="index.html" class="logo-link" aria-label="Inicio">
     <div class="logo-wrap">
-      <img src="assets/images/logoo.jpeg" alt="Logo BERA clothing" class="logo" />
+      <img src="assets/images/logoo.jpeg" alt="Logo BERA clothing" class="logo" decoding="async" />
     </div>
   </a>
   <div class="site-title" aria-label="BERA CLOTHING">
@@ -83,7 +83,7 @@
   <span class="site-tagline">BY FRIAS</span>
 </div>
 
-      <button class="nav-toggle"
+      <button class="nav-toggle" type="button"
               aria-controls="primary-navigation"
               aria-expanded="false"
               aria-label="Abrir menú">
@@ -199,7 +199,7 @@
       <h2 id="title-remeras" class="category-title">Remeras</h2>
       <div class="grid-products">
         <div class="producto-item" data-tipo="remera" data-talle="s" data-price="15400">
-          <img src="assets/images/Gorra.png" alt="Remera Shift" width="800" height="1000">
+          <img src="assets/images/Gorra.png" alt="Remera Shift" width="800" height="1000" loading="lazy" decoding="async">
           <h3>Remera Shift</h3>
           <p class="price">$15.400</p>
           <button type="button" class="add-to-cart-btn view-product-btn btn btn-secondary"
@@ -208,7 +208,7 @@
                   data-price="15400"
                   data-images="assets/images/Gorra.png">Ver producto</button>
                   <div class="add-to-cart-wrapper">
-          <button class="add-to-cart-icon"
+          <button class="add-to-cart-icon" type="button"
                   data-id="remera-shift"
                   aria-label="Añadir al carrito"
                   data-price="15400"
@@ -217,7 +217,7 @@
         </div>
 </div>
         <div class="producto-item" data-tipo="remera" data-talle="m" data-price="21200">
-          <img src="assets/images/Gorroinv.png" alt="Remera Dibujo" width="800" height="1000">
+          <img src="assets/images/Gorroinv.png" alt="Remera Dibujo" width="800" height="1000" loading="lazy" decoding="async">
           <h3>Remera Dibujo</h3>
           <p class="price">$21.200</p>
           <button type="button" class="add-to-cart-btn view-product-btn btn btn-secondary"
@@ -225,7 +225,7 @@
                   data-name="Remera Dibujo"
                   data-price="21200"
                   data-images="assets/images/Gorroinv.png">Ver producto</button>
-          <button class="add-to-cart-icon"
+          <button class="add-to-cart-icon" type="button"
                   data-id="remera-dibujo"
                   aria-label="Añadir al carrito"
                   data-price="21200"
@@ -240,7 +240,7 @@
       <h2 id="title-buzos" class="category-title">Buzos y Sweaters</h2>
       <div class="grid-products">
         <div class="producto-item" data-tipo="buzo" data-talle="xl" data-price="58200">
-          <img src="assets/images/Buzoxl.png" alt="Buzo Gris" width="800" height="1000">
+          <img src="assets/images/Buzoxl.png" alt="Buzo Gris" width="800" height="1000" loading="lazy" decoding="async">
           <h3>Buzo Gris</h3>
           <p class="price">$58.200</p>
           <button type="button" class="add-to-cart-btn view-product-btn btn btn-secondary"
@@ -248,7 +248,7 @@
                   data-name="Buzo Gris"
                   data-price="58200"
                   data-images="assets/images/Buzoxl.png">Ver producto</button>
-          <button class="add-to-cart-icon"
+          <button class="add-to-cart-icon" type="button"
                   data-id="buzo-gris"
                   aria-label="Añadir al carrito"
                   data-price="58200"
@@ -257,7 +257,7 @@
         </div>
 
         <div class="producto-item" data-tipo="buzo" data-talle="l" data-price="34500">
-          <img src="assets/images/RemeraL.png" alt="Buzo Over" width="800" height="1000">
+          <img src="assets/images/RemeraL.png" alt="Buzo Over" width="800" height="1000" loading="lazy" decoding="async">
           <h3>Buzo Over</h3>
           <p class="price">$34.500</p>
           <button type="button" class="add-to-cart-btn view-product-btn btn btn-secondary"
@@ -265,7 +265,7 @@
                   data-name="Buzo Over"
                   data-price="34500"
                   data-images="assets/images/RemeraL.png">Ver producto</button>
-          <button class="add-to-cart-icon"
+          <button class="add-to-cart-icon" type="button"
                   data-id="buzo-over"
                   aria-label="Añadir al carrito"
                   data-price="34500"
@@ -280,7 +280,7 @@
       <h2 id="title-pantalones" class="category-title">Pantalones</h2>
       <div class="grid-products">
         <div class="producto-item" data-tipo="pantalon" data-talle="s" data-price="45000">
-          <img src="assets/images/PantalonS.png" alt="Pantalón Rosa" width="800" height="1000">
+          <img src="assets/images/PantalonS.png" alt="Pantalón Rosa" width="800" height="1000" loading="lazy" decoding="async">
           <h3>Pantalón Rosa</h3>
           <p class="price">$45.000</p>
           <button type="button" class="add-to-cart-btn view-product-btn btn btn-secondary"
@@ -288,7 +288,7 @@
                   data-name="Pantalón Rosa"
                   data-price="45000"
                   data-images="assets/images/PantalonS.png">Ver producto</button>
-          <button class="add-to-cart-icon"
+          <button class="add-to-cart-icon" type="button"
                   data-id="pantalon-rosa"
                   aria-label="Añadir al carrito"
                   data-price="45000"
@@ -297,7 +297,7 @@
         </div>
 
         <div class="producto-item" data-tipo="pantalon" data-talle="l" data-price="50400">
-          <img src="assets/images/BuzoOver.png" alt="Pantalón Gris" width="800" height="1000">
+          <img src="assets/images/BuzoOver.png" alt="Pantalón Gris" width="800" height="1000" loading="lazy" decoding="async">
           <h3>Pantalón Gris</h3>
           <p class="price">$50.400</p>
           <button type="button" class="add-to-cart-btn view-product-btn btn btn-secondary"
@@ -305,7 +305,7 @@
                   data-name="Pantalón Gris"
                   data-price="50400"
                   data-images="assets/images/BuzoOver.png">Ver producto</button>
-          <button class="add-to-cart-icon"
+          <button class="add-to-cart-icon" type="button"
                   data-id="pantalon-gris"
                   aria-label="Añadir al carrito"
                   data-price="50400"
@@ -320,7 +320,7 @@
       <h2 id="title-shorts" class="category-title">Shorts / Minis</h2>
       <div class="grid-products">
         <div class="producto-item" data-tipo="short" data-talle="s" data-price="18000">
-          <img src="assets/images/IMG_7221.jpeg" alt="Shorts cuero negro" width="800" height="1000">
+          <img src="assets/images/IMG_7221.jpeg" alt="Shorts cuero negro" width="800" height="1000" loading="lazy" decoding="async">
           <h3>Shorts cuero negro</h3>
           <p class="price">$18.000</p>
           <button type="button" class="add-to-cart-btn view-product-btn btn btn-secondary"
@@ -328,7 +328,7 @@
                   data-name="Shorts cuero negro"
                   data-price="18000"
                   data-images="assets/images/IMG_7221.jpeg">Ver producto</button>
-          <button class="add-to-cart-icon"
+          <button class="add-to-cart-icon" type="button"
                   data-id="shorts-cuero"
                   aria-label="Añadir al carrito"
                   data-price="18000"
@@ -337,7 +337,7 @@
         </div>
 
         <div class="producto-item" data-tipo="short" data-talle="s" data-price="18500">
-          <img src="assets/images/IMG_7223.jpeg" alt="Shorts negro hebilla" width="800" height="1000">
+          <img src="assets/images/IMG_7223.jpeg" alt="Shorts negro hebilla" width="800" height="1000" loading="lazy" decoding="async">
           <h3>Shorts negro hebilla</h3>
           <p class="price">$18.500</p>
           <button type="button" class="add-to-cart-btn view-product-btn btn btn-secondary"
@@ -345,7 +345,7 @@
                   data-name="Shorts negro hebilla"
                   data-price="18500"
                   data-images="assets/images/IMG_7223.jpeg">Ver producto</button>
-          <button class="add-to-cart-icon"
+          <button class="add-to-cart-icon" type="button"
                   data-id="shorts-hebilla"
                   aria-label="Añadir al carrito"
                   data-price="18500"
@@ -354,7 +354,7 @@
         </div>
 
         <div class="producto-item" data-tipo="short" data-talle="s" data-price="35000">
-          <img src="assets/images/IMG_7227.jpeg" alt="Combo shorts marrón y negro" width="800" height="1000">
+          <img src="assets/images/IMG_7227.jpeg" alt="Combo shorts marrón y negro" width="800" height="1000" loading="lazy" decoding="async">
           <h3>Combo shorts marrón y negro</h3>
           <p class="price">$35.000</p>
           <button type="button" class="add-to-cart-btn view-product-btn btn btn-secondary"
@@ -362,7 +362,7 @@
                   data-name="Combo shorts marrón y negro"
                   data-price="35000"
                   data-images="assets/images/IMG_7227.jpeg">Ver producto</button>
-          <button class="add-to-cart-icon"
+          <button class="add-to-cart-icon" type="button"
                   data-id="combo-shorts"
                   aria-label="Añadir al carrito"
                   data-price="35000"
@@ -377,7 +377,7 @@
       <h2 id="title-tops" class="category-title">Tops / Blusas</h2>
       <div class="grid-products">
         <div class="producto-item" data-tipo="top" data-talle="u" data-price="12000">
-          <img src="assets/images/IMG_7224.jpeg" alt="Top halter negro" width="800" height="1000">
+          <img src="assets/images/IMG_7224.jpeg" alt="Top halter negro" width="800" height="1000" loading="lazy" decoding="async">
           <h3>Top halter negro</h3>
           <p class="price">$12.000</p>
           <button type="button" class="add-to-cart-btn view-product-btn btn btn-secondary"
@@ -385,7 +385,7 @@
                   data-name="Top halter negro"
                   data-price="12000"
                   data-images="assets/images/IMG_7224.jpeg">Ver producto</button>
-          <button class="add-to-cart-icon"
+          <button class="add-to-cart-icon" type="button"
                   data-id="top-halter"
                   aria-label="Añadir al carrito"
                   data-price="12000"
@@ -394,7 +394,7 @@
         </div>
 
         <div class="producto-item" data-tipo="top" data-talle="u" data-price="32000">
-          <img src="assets/images/IMG_7228.jpeg" alt="Combo blusa transparente negra + falda cuero" width="800" height="1000">
+          <img src="assets/images/IMG_7228.jpeg" alt="Combo blusa transparente negra + falda cuero" width="800" height="1000" loading="lazy" decoding="async">
           <h3>Combo blusa transparente + falda cuero</h3>
           <p class="price">$32.000</p>
           <button type="button" class="add-to-cart-btn view-product-btn btn btn-secondary"
@@ -402,7 +402,7 @@
                   data-name="Combo blusa transparente negra + falda cuero"
                   data-price="32000"
                   data-images="assets/images/IMG_7228.jpeg">Ver producto</button>
-          <button class="add-to-cart-icon"
+          <button class="add-to-cart-icon" type="button"
                   data-id="combo-blusa-falda"
                   aria-label="Añadir al carrito"
                   data-price="32000"
@@ -411,7 +411,7 @@
         </div>
 
         <div class="producto-item" data-tipo="top" data-talle="u" data-price="29500">
-          <img src="assets/images/IMG_7229.jpeg" alt="Combo top halter negro + shorts negro" width="800" height="1000">
+          <img src="assets/images/IMG_7229.jpeg" alt="Combo top halter negro + shorts negro" width="800" height="1000" loading="lazy" decoding="async">
           <h3>Combo halter + shorts</h3>
           <p class="price">$29.500</p>
           <button type="button" class="add-to-cart-btn view-product-btn btn btn-secondary"
@@ -419,7 +419,7 @@
                   data-name="Combo halter + shorts"
                   data-price="29500"
                   data-images="assets/images/IMG_7229.jpeg">Ver producto</button>
-          <button class="add-to-cart-icon"
+          <button class="add-to-cart-icon" type="button"
                   data-id="combo-halter-shorts"
                   aria-label="Añadir al carrito"
                   data-price="29500"
@@ -428,7 +428,7 @@
         </div>
 
         <div class="producto-item" data-tipo="top" data-talle="u" data-price="14000">
-          <img src="assets/images/IMG_7231.jpeg" alt="Tops manga larga animal print gris y marrón" width="800" height="1000">
+          <img src="assets/images/IMG_7231.jpeg" alt="Tops manga larga animal print gris y marrón" width="800" height="1000" loading="lazy" decoding="async">
           <h3>Tops manga larga animal print</h3>
           <p class="price">$14.000</p>
           <button type="button" class="add-to-cart-btn view-product-btn btn btn-secondary"
@@ -436,7 +436,7 @@
                   data-name="Tops manga larga animal print"
                   data-price="14000"
                   data-images="assets/images/IMG_7231.jpeg">Ver producto</button>
-          <button class="add-to-cart-icon"
+          <button class="add-to-cart-icon" type="button"
                   data-id="tops-animal"
                   aria-label="Añadir al carrito"
                   data-price="14000"
@@ -451,7 +451,7 @@
       <h2 id="title-faldas" class="category-title">Faldas</h2>
       <div class="grid-products">
         <div class="producto-item" data-tipo="falda" data-talle="s" data-price="17000">
-          <img src="assets/images/IMG_7222.jpeg" alt="Falda cuero negro" width="800" height="1000">
+          <img src="assets/images/IMG_7222.jpeg" alt="Falda cuero negro" width="800" height="1000" loading="lazy" decoding="async">
           <h3>Falda cuero negro</h3>
           <p class="price">$17.000</p>
           <button type="button" class="add-to-cart-btn view-product-btn btn btn-secondary"
@@ -459,7 +459,7 @@
                   data-name="Falda cuero negro"
                   data-price="17000"
                   data-images="assets/images/IMG_7222.jpeg">Ver producto</button>
-          <button class="add-to-cart-icon"
+          <button class="add-to-cart-icon" type="button"
                   data-id="falda-cuero"
                   aria-label="Añadir al carrito"
                   data-price="17000"
@@ -474,7 +474,7 @@
       <h2 id="title-bodys" class="category-title">Bodys</h2>
       <div class="grid-products">
         <div class="producto-item" data-tipo="body" data-talle="u" data-price="22000">
-          <img src="assets/images/IMG_7226.jpeg" alt="Combo body vino y marrón" width="800" height="1000">
+          <img src="assets/images/IMG_7226.jpeg" alt="Combo body vino y marrón" width="800" height="1000" loading="lazy" decoding="async">
           <h3>Combo body vino y marrón</h3>
           <p class="price">$22.000</p>
           <button type="button" class="add-to-cart-btn view-product-btn btn btn-secondary"
@@ -482,7 +482,7 @@
                   data-name="Combo body vino y marrón"
                   data-price="22000"
                   data-images="assets/images/IMG_7226.jpeg">Ver producto</button>
-          <button class="add-to-cart-icon"
+          <button class="add-to-cart-icon" type="button"
                   data-id="combo-body"
                   aria-label="Añadir al carrito"
                   data-price="22000"
@@ -491,7 +491,7 @@
         </div>
 
         <div class="producto-item" data-tipo="body" data-talle="u" data-price="37000">
-          <img src="assets/images/IMG_7230.jpeg" alt="Combo body vino y marrón + falda cuero negro" width="800" height="1000">
+          <img src="assets/images/IMG_7230.jpeg" alt="Combo body vino y marrón + falda cuero negro" width="800" height="1000" loading="lazy" decoding="async">
           <h3>Combo body + falda cuero</h3>
           <p class="price">$37.000</p>
           <button type="button" class="add-to-cart-btn view-product-btn btn btn-secondary"
@@ -499,7 +499,7 @@
                   data-name="Combo body + falda cuero"
                   data-price="37000"
                   data-images="assets/images/IMG_7230.jpeg">Ver producto</button>
-          <button class="add-to-cart-icon"
+          <button class="add-to-cart-icon" type="button"
                   data-id="combo-body-falda"
                   aria-label="Añadir al carrito"
                   data-price="37000"
@@ -508,7 +508,7 @@
         </div>
 
         <div class="producto-item" data-tipo="body" data-talle="u" data-price="21000">
-          <img src="assets/images/IMG_7232.jpeg" alt="Body vino con falda cuero" width="800" height="1000">
+          <img src="assets/images/IMG_7232.jpeg" alt="Body vino con falda cuero" width="800" height="1000" loading="lazy" decoding="async">
           <h3>Body vino con falda cuero</h3>
           <p class="price">$21.000</p>
           <button type="button" class="add-to-cart-btn view-product-btn btn btn-secondary"
@@ -516,7 +516,7 @@
                   data-name="Body vino con falda cuero"
                   data-price="21000"
                   data-images="assets/images/IMG_7232.jpeg">Ver producto</button>
-          <button class="add-to-cart-icon"
+          <button class="add-to-cart-icon" type="button"
                   data-id="body-vino-falda"
                   aria-label="Añadir al carrito"
                   data-price="21000"
@@ -604,6 +604,7 @@
   <!-- ---------- /PRODUCT MODAL ---------- -->
 
   <!-- SCRIPTS -->
+  <script src="https://unpkg.com/swiper/swiper-bundle.min.js" defer></script>
   <script src="js/scriptt.js" defer></script>
 
   <!-- Overlay oscurece la pantalla y cierra el menú al tocar fuera -->

@@ -10,61 +10,6 @@ if (window.__beraBooted) {
     console.log('script.js cargado');
 
     /* ===========================
-       2) ANNOUNCEMENT BAR (sticky + close con animación + compensación automática)
-       - Usa la CSS var --ann-h para desplazar header/scroll.
-       - Recuerda cierre en localStorage.
-       =========================== */
-    const annBar   = document.querySelector('.announcement-bar');
-  const annClose = document.querySelector('.ann-close');
-
-    const setAnnHeightVar = () => {
-      // Lee altura real (hasta max-height actual) y la vuelca a --ann-h
-      const h = annBar && getComputedStyle(annBar).display !== 'none'
-        ? Math.ceil(annBar.getBoundingClientRect().height)
-        : 0;
-      document.documentElement.style.setProperty('--ann-h', h + 'px');
-      document.documentElement.classList.toggle('has-ann', h > 0);
-    };
-
-    if (annBar) {
-      const DISMISSED = localStorage.getItem('annBarDismissed') === '1';
-      if (DISMISSED) {
-        annBar.style.display = 'none';
-        document.documentElement.classList.remove('has-ann');
-        document.documentElement.style.setProperty('--ann-h', '0px');
-      } else {
-        annBar.classList.remove('closing');
-        annBar.style.display = '';
-        // Asegura que el bar sea sticky vía CSS. Si no lo tenés, podés añadir:
-        // .announcement-bar{ position: sticky; top: 0; z-index: 50; }
-      }
-
-      // Ajusta var al cargar y al redimensionar
-      setAnnHeightVar();
-      window.addEventListener('resize', () => setAnnHeightVar(), { passive: true });
-  /* === Altura real del header → CSS var --hdr-h === */
-  const headerEl = document.querySelector('.site-header');
-  function setHeaderHeightVar(){
-    const h = headerEl ? Math.ceil(headerEl.getBoundingClientRect().height) : 0;
-    document.documentElement.style.setProperty('--hdr-h', h + 'px');
-  }
-  setHeaderHeightVar();
-  window.addEventListener('resize', () => setHeaderHeightVar(), { passive: true });
-      annClose?.addEventListener('click', () => {
-        // Anima plegado (usa transición de max-height + overflow:hidden en CSS)
-        annBar.classList.add('closing');
-        const onEnd = (e) => {
-          if (e.propertyName !== 'max-height') return;
-          annBar.style.display = 'none';
-          localStorage.setItem('annBarDismissed', '1');
-          setAnnHeightVar();
-          annBar.removeEventListener('transitionend', onEnd);
-        };
-        annBar.addEventListener('transitionend', onEnd);
-      });
-    }
-
-    /* ===========================
        3) THROTTLE HELPER (único en todo el archivo)
        =========================== */
     const throttle = (fn, wait = 100) => {
@@ -85,6 +30,75 @@ if (window.__beraBooted) {
         }
       };
     };
+
+    /* ===========================
+       2) ANNOUNCEMENT BAR (sticky + close con animación + compensación automática)
+       - Usa la CSS var --ann-h para desplazar header/scroll.
+       - Recuerda cierre en localStorage.
+       =========================== */
+    const annBar   = document.querySelector('.announcement-bar');
+  const annClose = document.querySelector('.ann-close');
+
+    const setAnnHeightVar = () => {
+      // Lee altura real (hasta max-height actual) y la vuelca a --ann-h
+      const h = annBar && getComputedStyle(annBar).display !== 'none'
+        ? Math.ceil(annBar.getBoundingClientRect().height)
+        : 0;
+      document.documentElement.style.setProperty('--ann-h', h + 'px');
+      document.documentElement.classList.toggle('has-ann', h > 0);
+    };
+
+    if (annBar) {
+      // Siempre visible al cargar (no persistimos cierre entre recargas)
+      annBar.classList.remove('closing');
+      annBar.style.display = '';
+      // Asegura que el bar sea sticky vía CSS. Si no lo tenés, podés añadir:
+      // .announcement-bar{ position: sticky; top: 0; z-index: 50; }
+
+      // Ajusta var al cargar y al redimensionar
+      setAnnHeightVar();
+      window.addEventListener('resize', throttle(setAnnHeightVar, 120), { passive: true });
+      if (document.fonts && document.fonts.ready) {
+        document.fonts.ready.then(() => setAnnHeightVar()).catch(()=>{});
+      }
+      if (window.visualViewport && window.visualViewport.addEventListener) {
+        window.visualViewport.addEventListener('resize', throttle(setAnnHeightVar, 120), { passive: true });
+      }
+      window.addEventListener('orientationchange', () => setAnnHeightVar(), { passive: true });
+      window.addEventListener('load', () => setAnnHeightVar(), { passive: true });
+
+      /* === Altura real del header → CSS var --hdr-h (estable en mobile) === */
+      const headerEl = document.querySelector('.site-header');
+      function setHeaderHeightVar(){
+        const h = headerEl ? Math.ceil(headerEl.getBoundingClientRect().height) : 0;
+        document.documentElement.style.setProperty('--hdr-h', h + 'px');
+      }
+      // Medición inicial + corrección tras pintura y carga de fuentes
+      setHeaderHeightVar();
+      requestAnimationFrame(() => setHeaderHeightVar());
+      if (document.fonts && document.fonts.ready) {
+        document.fonts.ready.then(() => setHeaderHeightVar()).catch(()=>{});
+      }
+      // Recalcular en cambios de viewport típicos de mobile Safari (barra de URL)
+      if (window.visualViewport && window.visualViewport.addEventListener) {
+        window.visualViewport.addEventListener('resize', throttle(setHeaderHeightVar, 120), { passive: true });
+      }
+      window.addEventListener('orientationchange', () => setHeaderHeightVar(), { passive: true });
+      window.addEventListener('load', () => setHeaderHeightVar(), { passive: true });
+      window.addEventListener('resize', throttle(() => setHeaderHeightVar(), 120), { passive: true });
+      annClose?.addEventListener('click', () => {
+        // Anima plegado (usa transición de max-height + overflow:hidden en CSS)
+        annBar.classList.add('closing');
+        const onEnd = (e) => {
+          if (e.propertyName !== 'max-height') return;
+          annBar.style.display = 'none';
+          setAnnHeightVar();
+          annBar.removeEventListener('transitionend', onEnd);
+        };
+        annBar.addEventListener('transitionend', onEnd);
+      });
+    }
+
 // === Helper para bloquear el foco del contenido principal cuando hay modales ===
 function setAppInert(on){
   const main = document.getElementById('main-content') || document.querySelector('main');
@@ -1202,6 +1216,7 @@ updateCartCount();
       const checkoutBtn = document.getElementById('checkout-btn');
       if (checkoutBtn) {
         checkoutBtn.addEventListener('click', () => {
+          setAppInert(false);
           cartModalElm.classList.add('hidden');
           cartToggleBtn.classList.remove('open');
           window.location.href = 'finalizarcompra.html';

@@ -65,7 +65,7 @@
   <!-- HEADER -->
   <header class="site-header" role="banner">
     <div class="container header-inner">
-   <button class="collection-toggle"
+   <button class="collection-toggle" type="button"
         aria-label="Abrir menú Catálogo"
         aria-expanded="false"
         aria-controls="collection-menu">
@@ -77,14 +77,14 @@
   </svg>
 </button>
 <!-- Botón lupita (desktop) -->
-<button class="header-search-toggle" aria-label="Abrir búsqueda">
+<button class="header-search-toggle" type="button" aria-label="Abrir búsqueda">
   <svg viewBox="0 0 24 24" aria-hidden="true">
     <path d="M11 18a7 7 0 1 1 4.95-2.05L21 21l-1.5 1.5-5.05-5.05A6.96 6.96 0 0 1 11 18z" fill="currentColor"/>
   </svg>
 </button>
 
 <!-- Campo que se despliega desde la lupita (desktop) -->
-<form class="header-search header-search-desktop" role="search" aria-label="Buscar (desktop)">
+<form class="header-search header-search-desktop" role="search" aria-label="Buscar (desktop)" action="productos.html" method="get">
   <input class="header-search-input" name="q" type="search" placeholder="Buscar prendas…" autocomplete="off" />
   <button class="header-search-btn" aria-label="Buscar">
     <svg viewBox="0 0 24 24" aria-hidden="true">
@@ -95,7 +95,7 @@
     <div class="site-branding">
   <a href="index.html" class="logo-link" aria-label="Inicio">
     <div class="logo-wrap">
-      <img src="assets/images/logoo.jpeg" alt="Logo BERA clothing" class="logo" />
+      <img src="assets/images/logoo.jpeg" alt="Logo BERA clothing" class="logo" decoding="async" />
     </div>
   </a>
   <div class="site-title" aria-label="BERA CLOTHING">
@@ -105,7 +105,7 @@
   <span class="site-tagline">BY FRIAS</span>
 </div>
 
-      <button class="nav-toggle"
+      <button class="nav-toggle" type="button"
               aria-controls="primary-navigation"
               aria-expanded="false"
               aria-label="Abrir menú">
@@ -235,67 +235,68 @@
         <h2 id="featured-title" class="section-title">Ofertas Destacadas</h2>
         <div class="grid-featured">
           <div class="card featured-card animate-on-scroll">
-            <img src="assets/images/IMG_7221.jpeg" alt="Gorra" loading="lazy" />
+            <img src="assets/images/IMG_7221.jpeg" alt="Gorra" decoding="async" loading="lazy" />
             <h3>Short negro Hebilla</h3>
             <p class="price">$18.500</p>
             <button class="view-product-btn btn btn-secondary"
                     data-id="featured-gris"
                     data-name="Short negro Hebilla"
-                    data-price="18.5000">
+                    data-price="18500">
               Ver producto
             </button>
           </div>
           <div class="card featured-card animate-on-scroll">
-            <img src="assets/images/IMG_7222.jpeg" alt="Buzo XL" loading="lazy" />
+            <img src="assets/images/IMG_7222.jpeg" alt="Buzo XL" decoding="async" loading="lazy" />
             <h3> Buzo Gris oscuro</h3>
             <p class="price">$58.200</p>
             <button class="view-product-btn btn btn-secondary"
             data-id="featured-gris"
-                    data-price="1200">
+                    data-name="Buzo Gris oscuro"
+                    data-price="58200">
               Ver producto
             </button>
           </div>
           <div class="card featured-card animate-on-scroll">
-            <img src="assets/images/IMG_7229.jpeg" alt="Pantalon S" loading="lazy" />
+            <img src="assets/images/IMG_7229.jpeg" alt="Pantalon S" decoding="async" loading="lazy" />
             <h3>Pantalon Over</h3>
             <p class="price">$45.500</p>
 <button class="view-product-btn btn btn-secondary"
             data-id="featured-over"
-                    data-name="Prueba Over"
-                    data-price="1300">
+                    data-name="Pantalon Over"
+                    data-price="45500">
               Ver producto
             </button>
           </div>
           <div class="card featured-card animate-on-scroll">
-            <img src="assets/images/IMG_7230.jpeg" alt="Remera L" loading="lazy" />
+            <img src="assets/images/IMG_7230.jpeg" alt="Remera L" decoding="async" loading="lazy" />
             <h3>Remera Gris claro</h3>
             <p class="price">$34.500</p>
 <button class="view-product-btn btn btn-secondary"
             data-id="featured-shift"
-                    data-name="Prueba Shift"
-                    data-price="1400">
+                    data-name="Remera Gris claro"
+                    data-price="34500">
               Ver producto
             </button>
           </div>
           <div class="card featured-card animate-on-scroll">
-            <img src="assets/images/IMG_7228.jpeg" alt="Gorro Invierno" loading="lazy" />
+            <img src="assets/images/IMG_7228.jpeg" alt="Gorro Invierno" decoding="async" loading="lazy" />
             <h3>Gorro Invierno</h3>
             <p class="price">$21.200</p>
 <button class="view-product-btn btn btn-secondary"
             data-id="featured-rosa"
-                    data-name="Prueba Rosa"
-                    data-price="1500">
+                    data-name="Gorro Invierno"
+                    data-price="21200">
               Ver producto
             </button>
           </div>
           <div class="card featured-card animate-on-scroll">
-            <img src="assets/images/IMG_7224.jpeg" alt="Buzo Oversize" loading="lazy" />
+            <img src="assets/images/IMG_7224.jpeg" alt="Buzo Oversize" decoding="async" loading="lazy" />
             <h3>Buzo gris claro</h3>
             <p class="price">$34.500</p>
 <button class="view-product-btn btn btn-secondary"
             data-id="featured-dibujo"
-                    data-name="Prueba Dibujo"
-                    data-price="1600">
+                    data-name="Buzo gris claro"
+                    data-price="34500">
               Ver producto
             </button>
           </div>
