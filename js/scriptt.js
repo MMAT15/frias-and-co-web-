@@ -395,30 +395,6 @@ function setAppInert(on){
       };
       document.querySelectorAll('form.header-search:not(.header-search-desktop)').forEach(f => handleSubmit(f, '.header-search-input'));
       document.querySelectorAll('form.menu-search').forEach(f => handleSubmit(f, '.menu-search-input'));
-
-      // Prefill en productos.html?q=...
-   // Prefill en productos.html?q=... y limpieza de filtros previos
-if (window.location.pathname.endsWith('productos.html')) {
-  const usp = new URLSearchParams(location.search);
-  const q = (usp.get('q') || '').trim();
-  if (q) {
-    document.querySelectorAll('.header-search-input, .menu-search-input')
-      .forEach(inp => inp.value = q);
-
-    // Limpiar filtros persistidos para no ocultar la búsqueda
-    if (filterTipo)  filterTipo.value = '';
-    if (filterTalle) filterTalle.value = '';
-    try {
-      localStorage.removeItem('bera:filters:tipo');
-      localStorage.removeItem('bera:filters:talle');
-    } catch (_) {}
-
-    searchQuery = q.toLowerCase();
-    applyFiltersWrapped();
-    updateURLParams();
-  }
-}
-
     })();
 
     /* ---------- PRODUCT MODAL (SIN CAMBIOS DE LÓGICA) ---------- */
@@ -856,6 +832,35 @@ if (newsletterForm) {
    10) PRODUCTS FILTERING & SORTING + recordar selección
    =========================== */
 const allProductItems = Array.from(document.querySelectorAll('.producto-item'));
+// --- Helpers búsqueda en productos: contar y hacer scroll + actualizar héroe
+function countVisibleProducts(){
+  let n = 0, first = null;
+  for (const it of allProductItems){
+    // detecta visibilidad real, no solo el style inline
+    const hidden = !it || getComputedStyle(it).display === 'none' || it.offsetParent === null;
+    if (!hidden){ n++; if (!first) first = it; }
+  }
+  return { n, first };
+}
+function scrollToCard(card){
+  if (!card) return;
+  const y = (typeof computeOffsetTop === 'function')
+    ? computeOffsetTop(card)
+    : (card.getBoundingClientRect().top + window.scrollY - 80);
+  window.scrollTo({ top: y, behavior: 'smooth' });
+}
+function setHeroResultText(q, n){
+  const h = document.getElementById('hero-title');
+  const sub = document.querySelector('.productos-hero .hero-subtitle');
+  if (!h) return;
+  if (q){
+    h.textContent = `Resultados para "${q}"`;
+    if (sub) sub.textContent = `${n} prenda${n===1?'':'s'} encontrad${n===1?'a':'as'}`;
+  } else {
+    h.textContent = 'Descubrí nuestra colección';
+    if (sub) sub.textContent = 'Prendas urbanas, cómodas y con estilo';
+  }
+}
 const filterTipo  = document.getElementById('filter-tipo');
 const filterTalle = document.getElementById('filter-talle');
 const sortBy      = document.getElementById('sort-by');
@@ -878,6 +883,7 @@ const LS_KEYS = {
 function clearSearch(reason){
   try{
     if (typeof searchQuery !== 'undefined') searchQuery = '';
+        setHeroResultText('', 0);
     // Vaciar inputs de búsqueda visibles (header y menú)
     document.querySelectorAll('.header-search-input, .menu-search-input')
       .forEach(inp => inp.value = '');
@@ -957,19 +963,60 @@ function applySorting() {
   }
   updateURLParams();
 }
-
+// --- Normalización básica (quita acentos y pasa a minúsculas)
+function norm(str){
+  return (str || '')
+    .toString()
+    .normalize('NFD')
+    .replace(/[\u0300-\u036f]/g,'')
+    .toLowerCase();
+}
+// Mapa simple de plurales ↔ singulares para categorías comunes
+const TERM_ALIASES = {
+  remeras:'remera', remera:'remera',
+  buzos:'buzo', buzo:'buzo',
+  pantalones:'pantalon', pantalon:'pantalon',
+  shorts:'short', short:'short',
+  tops:'top', top:'top',
+  camisas:'camisa', camisa:'camisa',
+  faldas:'falda', falda:'falda',
+  bodys:'body', body:'body',
+  vestidos:'vestido', vestido:'vestido',
+  abrigos:'abrigo', abrigo:'abrigo',
+  sets:'set', set:'set'
+};
 function applyFilters() {
-  const tipoVal  = filterTipo ? filterTipo.value : '';
-  const talleVal = filterTalle ? filterTalle.value : '';
-  const qVal = searchQuery; // texto de búsqueda en minúsculas
+ const tipoVal  = filterTipo ? filterTipo.value : '';
+const talleVal = filterTalle ? filterTalle.value : '';
+const qValRaw  = searchQuery || '';
+const q = norm(qValRaw);
 
-  // 1) Mostrar/ocultar según filtros
- allProductItems.forEach(item => {
-  const itemText = (item.dataset.name || item.textContent || '').toLowerCase();
-  const textOk   = !qVal || itemText.includes(qVal);
+// Construye variantes del término (singular/plural + alias de categoría)
+const variants = new Set();
+if (q) {
+  variants.add(q);
+  if (q.endsWith('es')) variants.add(q.slice(0, -2));
+  if (q.endsWith('s'))  variants.add(q.slice(0, -1));
+  if (TERM_ALIASES[q])  variants.add(TERM_ALIASES[q]);
+}
+
+// 1) Mostrar/ocultar según filtros
+allProductItems.forEach(item => {
+  const nameAttr = item.getAttribute('data-name');
+  const itemText = (nameAttr || item.dataset.name || item.querySelector('h3')?.textContent || item.textContent || '');
+  const itemNorm = norm(itemText);
+  const tipoNorm = norm(item.dataset.tipo);
+
+  let textOk = true;
+  if (q) {
+    // hace match por texto o por el tipo de prenda
+    textOk = Array.from(variants).some(v => itemNorm.includes(v) || tipoNorm === v);
+  }
+
   const match = textOk &&
     (!tipoVal  || item.dataset.tipo  === tipoVal) &&
     (!talleVal || item.dataset.talle === talleVal);
+
   item.style.display = match ? '' : 'none';
 });
 
@@ -1050,6 +1097,34 @@ if (sortBy) sortBy.addEventListener('change', () => {
 applyFiltersWrapped();
 applySortingWrapped();
 updateURLParams();
+// ---- Prefill diferido para productos.html?q=... (después de inicializar filtros) ----
+(function runSearchPrefill(){
+  if (!window.location.pathname.endsWith('productos.html')) return;
+  const usp = new URLSearchParams(location.search);
+  const q = (usp.get('q') || '').trim();
+  if (!q) { setHeroResultText('', 0); return; }
+
+  // Mostrar el término en inputs visibles
+  document.querySelectorAll('.header-search-input, .menu-search-input')
+    .forEach(inp => inp.value = q);
+
+  // Asegurar que filtros previos no oculten resultados de la búsqueda
+  if (filterTipo)  filterTipo.value = '';
+  if (filterTalle) filterTalle.value = '';
+  try {
+    localStorage.removeItem(LS_KEYS.tipo);
+    localStorage.removeItem(LS_KEYS.talle);
+  } catch (_) {}
+
+  searchQuery = q.toLowerCase();
+  // Ejecutar filtro de forma sincrónica para que el conteo sea correcto
+  applyFilters();
+
+  const { n, first } = countVisibleProducts();
+  setHeroResultText(q, n);
+  if (n > 0) scrollToCard(first);
+  updateURLParams();
+})();
 // Crear botón y contador si existen filtros
 if (productosMain && (filterTipo || filterTalle)) {
   const bar = document.createElement('div');
