@@ -1722,162 +1722,6 @@ img {
 
 
 
-/* ===== Desktop header refined alignment (≥ 769 px) ===== */
-@media (min-width: 769px) {
-  /* 0. Ocultar hamburguesa en escritorio */
-  .nav-toggle { 
-    display: none !important;
-  }
-
-  /* 1. Layout en grid: [Catálogo] [Brand centrado] [Nav derecha] */
-  .header-inner {
-    display: grid;
-    grid-template-columns: auto 1fr auto; /* izquierda, centro, derecha */
-    align-items: center;
-    padding: 0 2rem;
-    gap: 1rem;
-  }
-
-  /* 2. Botón Catálogo (o collection‑toggle) – columna 1 */
-  .catalog-btn,
-  .collection-toggle {
-    grid-column: 1;
-    margin: 0;            /* quita márgenes anteriores */
-  }
-
-  /* 3. Branding perfectamente centrado – columna 2 */
-  .site-branding {
-    grid-column: 2;
-    justify-self: center;
-    position: static;     /* anula absolute de versiones previas */
-    transform: none;
-    flex: 0 0 auto;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin: 0;
-  }
-
-  /* Mantiene visible el subtítulo “BY FRIAS” */
-  .site-tagline {
-    display: block;
-  }
-
-  /* 4. Navegación principal – columna 3 (derecha) */
-  .main-nav {
-    grid-column: 3;
-    justify-self: end;
-    background: transparent;
-    border: none;
-    box-shadow: none;
-    margin: 0;
-  }
-
-  .nav-list {
-    gap: 1.5rem;          /* separación cómoda */
-  }
-}
-/* ===== Desktop header tweaks: bigger Catálogo button & vertical centering (≥ 769 px) ===== */
-@media (min-width: 769px) {
-  /* 1. Agranda el botón Catálogo para escritorio */
-  .catalog-btn,
-  .collection-toggle {
-    width: 56px;
-    height: 56px;
-    border-width: 2px;
-  }
-  .catalog-btn svg,
-  .collection-toggle svg {
-    width: 32px;
-    height: 32px;
-  }
-
-  /* 2. Asegura que la navegación quede centrada verticalmente */
-  .main-nav {
-    align-self: center;        /* centra el bloque .main-nav en la celda */
-    display: flex;
-    align-items: center;       /* centra sus links dentro */
-  }
-
-  /* 3. Garantiza que el branding también esté centrado verticalmente */
-  .site-branding {
-    align-self: center;
-  }
-}
-/* ===== Desktop header final polish (≥ 769 px) ===== */
-@media (min-width: 769px) {
-  /* 0. Asegura contexto para posicionamiento absoluto */
-  .header-inner {
-    position: relative !important;
-    min-height: 96px;         /* altura cómoda para logo + nav */
-  }
-
-  /* 1. Branding perfectamente centrado (h & v) independiente del grid */
-  .site-branding {
-    position: absolute !important;
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%, -50%);
-    grid-column: 1 / -1;      /* cubre todo el ancho del grid */
-  }
-
-  /* 2. Agranda más el botón Catálogo para escritorio */
-  .catalog-btn,
-  .collection-toggle {
-    width: 64px !important;
-    height: 64px !important;
-    border-width: 2px;
-  }
-  .catalog-btn svg,
-  .collection-toggle svg {
-    width: 36px !important;
-    height: 36px !important;
-  }
-
-  /* 3. Centra verticalmente la navegación con fuerza */
-  .main-nav {
-    align-self: center !important;
-  }
-}
-/* ===== Desktop header final fix: nav centering & Catálogo size (≥ 769 px) ===== */
-@media (min-width: 769px) {
-  /* Botón Catálogo / collection-toggle aún más grande para desktop */
-  .catalog-btn,
-  .collection-toggle {
-    width: 90px !important;
-    height: 90px !important;
-    border-width: 2px;
-  }
-  .catalog-btn svg,
-  .collection-toggle svg {
-    width: 54px !important;
-    height: 54px !important;
-  }
-
-  /* Navegación pegada al centro vertical del header */
-  .main-nav {
-    position: static !important;   /* garantiza que no herede top de mobile */
-    align-self: center !important; /* centra dentro del grid */
-    height: 100%;                  /* ocupa toda la altura disponible */
-    display: flex !important;
-    align-items: center !important; /* alinea sus links verticalmente */
-  }
-}
-/* ===== Desktop header – final nav centering tweak (≥ 769 px) ===== */
-@media (min-width: 769px) {
-  .main-nav {
-    /* Alinea el bloque en la columna derecha y centrado verticalmente */
-    place-self: center end !important;   /* shorthand de align‑self + justify‑self */
-    align-self: center !important;
-    justify-self: end !important;
-    height: auto !important;             /* evita ocupar 100 % si desconfigura */
-  }
-
-  /* Centra los enlaces dentro del nav */
-  .nav-list {
-    align-items: center;                  /* eje transversal */
-  }
-}
 
 /* Mejoras para visualización móvil, especialmente el botón Catálogo */
 @media (max-width: 768px) {
@@ -2751,255 +2595,8 @@ img {
 
 
 
-/* ====== Desktop: catálogo + lupa alineados a la derecha, sin superponerse ====== */
-@media (min-width: 769px) {
-  :root{
-    --ctl-size: 44px;   /* diámetro de los botones redondos */
-    --ctl-gap: 10px;    /* separación entre Catálogo y Lupa */
-    --ctl-right: 16px;  /* margen al borde derecho */
-  }
-
-  /* El header sirve de referencia para posiciones absolutas */
-  .header-inner{ position: relative !important; }
-
-  /* Botón Catálogo fijo al extremo derecho */
-  .collection-toggle{
-    position: absolute !important;
-    right: var(--ctl-right) !important;
-    top: 50% !important;
-    transform: translateY(-50%) !important;
-    width: var(--ctl-size) !important;
-    height: var(--ctl-size) !important;
-    border-radius: 999px !important;
-    z-index: 2; /* encima del carrusel */
-  }
-
-  /* Lupa: a la izquierda de Catálogo (no lo tapa) */
-  .header-search-toggle{
-    position: absolute !important;
-    right: calc(var(--ctl-right) + var(--ctl-size) + var(--ctl-gap)) !important;
-    top: 50% !important;
-    transform: translateY(-50%) !important;
-    display: inline-flex !important;
-    width: var(--ctl-size) !important;
-    height: var(--ctl-size) !important;
-    border-radius: 999px !important;
-    border: 1px solid var(--color-acento-sec) !important;
-    background: var(--color-fondo) !important;
-    align-items: center; justify-content: center;
-    z-index: 2;
-  }
-
-  /* Campo de búsqueda colapsado por defecto (anclado a la lupa) */
-  .header-search-desktop{
-    position: absolute !important;
-    right: calc(var(--ctl-right) + var(--ctl-size) + var(--ctl-gap)) !important;
-    top: 50% !important;
-    transform: translateY(-50%) !important;
-    width: 0; opacity: 0; pointer-events: none; overflow: hidden;
-    background: #fff; border: 1px solid #ccc;
-    border-radius: 999px; box-shadow: 0 2px 6px rgba(0,0,0,.15);
-    transition: width .25s ease, opacity .2s ease, right .25s ease;
-  }
-  .header-search-desktop .header-search-input{ 
-    width: 420px; max-width: 46vw; height: var(--ctl-size); 
-    border: 0; outline: 0; padding: 0 .75rem; font-size: .95rem;
-  }
-  .header-search-desktop .header-search-btn{ 
-    width: var(--ctl-size); height: var(--ctl-size); background: transparent; border: 0; cursor: pointer;
-  }
-
-  /* ===== Estado ABIERTO ===== */
-  /* Al abrir: ocultamos Catálogo y corremos la lupa al borde derecho;
-     el campo se despliega desde esa posición (efecto “sale de la lupa”). */
-  .site-header.search-open .collection-toggle{
-    display: none !important;
-  }
-  .site-header.search-open .header-search-toggle{
-    right: var(--ctl-right) !important;   /* la lupa queda pegada al borde */
-  }
-  .site-header.search-open .header-search-desktop{
-    right: var(--ctl-right) !important;
-    width: min(420px, 46vw); 
-    opacity: 1; 
-    pointer-events: auto;
-  }
-
-  /* Mientras está abierta, evitamos que el menú principal reciba clics (opcional) */
-  .site-header.search-open .main-nav{ opacity: .85; pointer-events: none; }
-}
-/* ======= Desktop search/lens – overrides ======= */
-@media (min-width:769px){
-  .header-inner{ position:relative !important; }
-
-  /* Lupita fija a la derecha */
-  .header-search-toggle{
-    display:inline-flex !important;
-    position:absolute !important;
-    right:20px !important;               /* <- más a la derecha */
-    top:50% !important;
-    transform:translateY(-50%) !important;
-    margin:0 !important;
-    width:44px; height:44px; border-radius:999px;
-    border:1px solid var(--color-acento-sec);
-    background:var(--color-fondo);
-    align-items:center; justify-content:center;
-    cursor:pointer;
-    transition: background var(--transition), transform var(--transition);
-  }
-  .header-search-toggle:hover{ background:var(--color-acento); color:#fff; transform:scale(1.05); }
-  .header-search-toggle svg{ width:22px; height:22px; display:block; }
-
-  /* Campo expandible */
-  .header-search-desktop{
-    position:absolute !important;
-    right:20px !important;               /* <- acompaña a la lupita */
-    top:50% !important;
-    transform:translateY(-50%) !important;
-    width:0 !important;
-    opacity:0 !important;
-    pointer-events:none !important;
-    overflow:hidden !important;
-    background:#fff;
-    border:1px solid #ccc;
-    border-radius:999px;
-    padding:0.25rem 0.5rem;
-    box-shadow:0 2px 6px rgba(0,0,0,.15);
-    transition:width .25s ease, opacity .2s ease;
-  }
-  .header-search-desktop .header-search-input{
-    width:420px; max-width:46vw; height:44px;
-    border:0; outline:0; font-size:.9rem; padding:0 .5rem;
-  }
-  .header-search-desktop .header-search-btn{
-    width:44px; height:44px; background:none; border:0; cursor:pointer;
-  }
-
-  /* Abierto */
-  .site-header.search-open .header-search-desktop{
-    width:min(420px,46vw) !important;
-    opacity:1 !important;
-    pointer-events:auto !important;
-  }
-  .site-header.search-open .main-nav{ opacity:0 !important; pointer-events:none !important; }
-  .site-header.search-open .collection-toggle{ display:none !important; }
-
-  /* Deja aire al botón Catálogo cuando está cerrada la búsqueda */
-  .collection-toggle{ margin-right:78px !important; } /* 78px > 64px */
-}
-
-/* Asegura que el campo exista en desktop (aunque colapsado) */
-@media (min-width:769px){
-  .site-header:not(.search-open) .header-search-desktop{ display:block !important; }
-}
 
 
-/* ===== FINAL FIXES – search + header spacing (2025‑08‑14) ===== */
-
-/* 1) MOBILE: ocultar cualquier barra de búsqueda del header (la del menú queda) */
-@media (max-width: 768px){
-  .header-search,
-  .header-search-desktop{ 
-    display: none !important;   /* sólo usamos .menu-search en el menú */
-  }
-}
-
-/* 2) DESKTOP: lupa más pegada a la derecha y campo anclado a esa posición */
-@media (min-width: 769px){
-  /* lupa y campo salen desde el borde derecho */
-  .header-search-toggle{ right: 12px !important; }
-  .header-search-desktop{ right: 12px !important; }
-}
-
-/* 3) DESKTOP: más aire vertical para que el logo no toque el marquee
-      y el "BY FRIAS" no se salga del header */
-@media (min-width: 769px){
-  .site-header{ 
-    padding-top: 12px !important;   /* antes era muy justo */
-    padding-bottom: 12px !important;
-  }
-  .header-inner{ 
-    min-height: 110px !important;   /* asegura espacio para logo + tagline */
-  }
-  .site-tagline{ font-size: .8rem !important; margin-top: 2px !important; }
-}
-
-/* 4) Si existe el bloque que posiciona Catálogo y la lupa con variables,
-      empuja un poco más a la derecha reduciendo el margen final */
-@media (min-width: 769px){
-  :root{ --ctl-right: 10px; }   /* en ese bloque se usaba 16px */
-}
-/* === 2025-08-14 quick fixes: header search + spacing (final) === */
-/* 0) Kill any stray header search UI on MOBILE to avoid el "pedacito" detrás del Catálogo */
-@media (max-width:768px){
-  .header-search,
-  .header-search-desktop{
-    display:none !important; width:0 !important; height:0 !important;
-    padding:0 !important; margin:0 !important; border:0 !important; box-shadow:none !important;
-    position: static !important; overflow:hidden !important;
-  }
-}
-
-/* 1) MOBILE: más aire en las esquinas y branding centrado sin pegarse a la hamburguesa */
-@media (max-width:768px){
-  .header-inner{ min-height: 100px !important; }
-  .site-branding{ margin: 0 auto !important; }
-  .collection-toggle{ left: 14px !important; }
-  .nav-toggle{ right: 14px !important; }
-}
-
-/* 2) DESKTOP: la lupita bien pegada a la derecha y el campo anclado ahí */
-@media (min-width:769px){
-  .header-search-toggle{ right: 8px !important; }
-  .header-search-desktop{ right: 8px !important; }
-
-  /* Cuando la búsqueda está abierta, ocultamos Catálogo y mostramos el campo expandido */
-  .site-header.search-open .collection-toggle{ display:none !important; }
-  .site-header.search-open .header-search-desktop{
-    width: min(420px, 46vw) !important; opacity:1 !important; pointer-events:auto !important;
-  }
-}
-/* === 2025‑08‑14 FIX: header search + spacing === */
-
-/* (A) MOBILE: ocultar cualquier rastro del buscador del header
-   (evita el “pedacito” detrás del botón Catálogo) */
-@media (max-width:768px){
-  .header-search,
-  .header-search-desktop{
-    display:none !important; width:0 !important; height:0 !important;
-    padding:0 !important; margin:0 !important; border:0 !important; box-shadow:none !important;
-    position:static !important; overflow:hidden !important;
-  }
-}
-
-/* (B) MOBILE: más aire y branding centrado, sin pegarse a la hamburguesa */
-@media (max-width:768px){
-  .header-inner{ min-height:100px !important; }
-  .site-branding{ margin:0 auto !important; }
-  .collection-toggle{ left:14px !important; }
-  .nav-toggle{       right:14px !important; }
-}
-
-/* (C) DESKTOP: lupita y campo bien pegados a la derecha */
-@media (min-width:769px){
-  .header-search-toggle{ right:8px !important; }
-  .header-search-desktop{ right:8px !important; }
-
-  /* al abrir búsqueda se oculta Catálogo y el campo se expande */
-  .site-header.search-open .collection-toggle{ display:none !important; }
-  .site-header.search-open .header-search-desktop{
-    width:min(420px,46vw) !important;
-    opacity:1 !important;
-    pointer-events:auto !important;
-  }
-}
-
-/* (D) DESKTOP: un poco más de altura para que el logo no toque el cartel
-   y que “BY FRIAS” no se salga del header */
-@media (min-width:769px){
-  .site-header{ padding:12px 0 !important; }
-  .header-inner{ min-height:110px !important; }
-}
 /* === FINAL MOBILE HEADER + FEATURED GRID FIX (2025‑08‑14) === */
 
 /* 1) MOBILE header: centra el branding y evita que se pegue a la hamburguesa
@@ -3363,34 +2960,29 @@ main > :first-child {
   height: auto;
   object-fit: cover;
 }
-/* === Main nav centrado y sobre el slider === */
-.main-nav{
-  position: absolute;               /* si lo tenés fixed, podés dejar fixed */
-  left: 50%;
-  transform: translateX(-50%);
-  width: min(680px, calc(100% - 32px)); /* centrado y con margen lateral */
-  z-index: 200;                      /* por encima del hero */
-}
+/* === Main nav centrado y sobre el slider — MOBILE ONLY === */
+@media (max-width: 768px){
+  .main-nav{
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    width: min(680px, calc(100% - 32px));
+    z-index: 200;
+  }
 
-/* Si tu panel blanco es un contenedor interno, descomenta y usa esto también
-.main-nav > *{
-  width: 100%;
-  margin: 8px auto 0;
-  border-radius: 16px;
-}
-*/
-/* Botón hamburguesa: fondo sólido y sin blend/backdrop para que no se vea lo de atrás */
-.nav-toggle{
-  background: #fff;
-  box-shadow: 0 2px 10px rgba(0,0,0,.08);
-  -webkit-backdrop-filter: none;
-  backdrop-filter: none;
-  mix-blend-mode: normal;
-}
-.nav-toggle:hover{ background: #fff; }
-.nav-toggle.open{
-  background:#111;     /* estilo cuando está abierto (opcional) */
-  color:#fff;
+  /* Botón hamburguesa: fondo sólido y sin blend/backdrop para que no se vea lo de atrás */
+  .nav-toggle{
+    background: #fff;
+    box-shadow: 0 2px 10px rgba(0,0,0,.08);
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
+    mix-blend-mode: normal;
+  }
+  .nav-toggle:hover{ background: #fff; }
+  .nav-toggle.open{
+    background:#111;     /* estilo cuando está abierto (opcional) */
+    color:#fff;
+  }
 }
 
 /* Cuando el menú está abierto, ocultar los dots del slider que “ensucian” */
@@ -3399,42 +2991,37 @@ main > :first-child {
   pointer-events: none;
 }
 /* === Z-indexes coherentes: header bajo, menú arriba del hero === */
-.site-header{ z-index: 300; }
+@media (max-width: 768px){ .site-header{ z-index: 300; } }
 
-/* === Menú desplegable centrado y estable === */
-.main-nav{
-  position: fixed;                           /* no depende del ancho del header */
-  left: 0; right: 0;
-  top: calc(var(--ann-h, 0px) + var(--hdr-h, 0px)); /* <<< AHORA DINÁMICO *//* 64px ≈ alto del header; ajustá si tu header es más alto */
-  width: min(700px, calc(100% - 24px));      /* centrado con respiración lateral */
-  margin: 0 auto;
-  z-index: 400;                               /* por encima del slider/paginación */
-  display: none;                              /* se muestra con la clase .show (tu JS ya la pone) */
+/* === Menú desplegable centrado y estable — MOBILE ONLY === */
+@media (max-width: 768px){
+  .main-nav{
+    position: fixed;                           /* no depende del ancho del header */
+    left: 0; right: 0;
+    top: calc(var(--ann-h, 0px) + var(--hdr-h, 0px));
+    width: min(700px, calc(100% - 24px));      /* centrado con respiración lateral */
+    margin: 0 auto;
+    z-index: 400;                               /* por encima del slider/paginación */
+    display: none;                              /* se muestra con la clase .show */
+    background: #fff;
+    border-radius: 16px;
+    box-shadow: 0 10px 30px rgba(0,0,0,.12);
+    overflow: hidden;
+  }
+  .main-nav.show{ display: block; }
+  .nav-open .swiper-hero .swiper-pagination{ opacity: 0; pointer-events: none; }
 
-  /* Estilo del panel */
-  background: #fff;
-  border-radius: 16px;
-  box-shadow: 0 10px 30px rgba(0,0,0,.12);
-  overflow: hidden;
+  .nav-toggle{
+    background:#fff;
+    border:1px solid rgba(0,0,0,.06);
+    box-shadow:0 2px 10px rgba(0,0,0,.06);
+    -webkit-backdrop-filter:none; backdrop-filter:none;
+    mix-blend-mode:normal;
+    background-clip: padding-box;
+  }
+  .nav-toggle:hover{ background:#fff; }
+  .nav-toggle.open{ background:#111; color:#fff; }
 }
-
-/* Mostrar cuando está abierto */
-.main-nav.show{ display: block; }
-
-/* Evitar que dots del slider "ensucien" el botón/menú */
-.nav-open .swiper-hero .swiper-pagination{ opacity: 0; pointer-events: none; }
-
-/* Botón hamburguesa sin efecto "pac‑man" */
-.nav-toggle{
-  background:#fff;
-  border:1px solid rgba(0,0,0,.06);
-  box-shadow:0 2px 10px rgba(0,0,0,.06);
-  -webkit-backdrop-filter:none; backdrop-filter:none;
-  mix-blend-mode:normal;
-  background-clip: padding-box;              /* evita halos raros */
-}
-.nav-toggle:hover{ background:#fff; }
-.nav-toggle.open{ background:#111; color:#fff; }
 @media (max-width: 768px) {
   .site-logo {
     margin-top: 2px; /* o 1px si querés algo mínimo */
@@ -3464,4 +3051,378 @@ body { padding-top: calc(var(--ann-h) + var(--hdr-h)); }
     padding: 1rem 1.25rem;    /* más aire vertical en mobile */
     font-size: 1rem;          /* legibilidad mejorada */
   }
+}
+/* ===== DESKTOP HEADER SPACING – final authority (≥1024px) ===== */
+@media (min-width: 1024px){
+  /* despega anuncio ↔ header y evita choques con el logo */
+  .site-header{
+    padding-top: 14px;
+    padding-bottom: 12px;
+  }
+  .header-inner{
+    min-height: 112px;
+    row-gap: 10px;        /* si usás grid, agrega aire vertical */
+  }
+  .site-branding .logo-wrap{
+    margin-top: 6px;      /* baja un toque el logo */
+  }
+  /* separa nav del logo y evita heredar 'top' de mobile */
+  .main-nav{
+    margin-top: 12px;
+    position: static !important; /* por si alguna regla móvil se filtra */
+  }
+}
+/* === FINAL DESKTOP HEADER LAYOUT OVERRIDE (≥1024px) === */
+@media (min-width: 1024px){
+  /* 1) Forzar layout en una sola fila: [Catálogo] [Branding centrado] [Nav derecha] */
+  .header-inner{
+    display: grid !important;
+    grid-template-columns: auto 1fr auto !important;
+    align-items: center !important;
+    column-gap: 16px !important;
+    min-height: 112px !important;
+    position: relative !important;
+  }
+
+  /* 2) Branding centrado SIN posicionamiento absoluto */
+  .site-branding{
+    position: static !important;
+    transform: none !important;
+    grid-column: 2 !important;
+    justify-self: center !important;
+    margin: 0 !important;
+  }
+
+  /* 3) Botón Catálogo a la izquierda, Nav a la derecha; nada de margin-top */
+  .collection-toggle{ grid-column: 1 !important; }
+  .main-nav{
+    grid-column: 3 !important;
+    align-self: center !important;
+    margin-top: 0 !important;
+    position: static !important;
+  }
+
+  /* 4) Un poco de aire entre announcement y header para que el logo no "toque" */
+  .site-header{ padding-top: 14px !important; }
+}
+/* === DESKTOP HEADER: 2 filas limpias (≥1024px) === */
+@media (min-width: 1024px){
+  /* Grid con dos filas: 
+     fila 1 -> [Catálogo] [Branding] [Controles]
+     fila 2 -> [Nav centrada a lo ancho] */
+  .header-inner{
+    display: grid !important;
+    grid-template-columns: auto 1fr auto !important;
+    grid-template-rows: auto auto !important;
+    grid-template-areas:
+      "catalogo branding controles"
+      "nav     nav     nav";
+    align-items: center !important;
+    column-gap: 16px !important;
+    row-gap: 8px !important;
+    min-height: 112px !important;
+    position: relative !important;
+  }
+
+  /* Áreas explícitas */
+  .collection-toggle{ grid-area: catalogo !important; }
+  .site-branding{
+    grid-area: branding !important;
+    position: static !important;
+    transform: none !important;
+    justify-self: center !important;
+    margin: 0 !important;
+  }
+  .main-nav{
+    grid-area: nav !important;
+    position: static !important;
+    margin: 0 !important;
+    justify-self: center !important;
+    background: transparent !important;
+    border: 0 !important;
+    box-shadow: none !important;
+  }
+  .nav-list{
+    display: flex !important;
+    gap: 1.5rem !important;
+    justify-content: center !important;
+    align-items: center !important;
+  }
+
+  /* Aire entre anuncio y header para que el logo no toque */
+  .site-header{ padding-top: 14px !important; }
+
+  /* Evitar artefactos de la búsqueda colapsada en desktop */
+  .header-search-desktop{
+    border: 0 !important;
+    box-shadow: none !important;
+  }
+  .site-header:not(.search-open) .header-search-desktop{
+    display: none !important;   /* oculto cuando no está abierta */
+  }
+}
+/* === FINAL DESKTOP HEADER LAYOUT (≥1024px) — clean, 2-row, no overlap === */
+@media (min-width: 1024px){
+  /* 0) Spacing from announcement bar */
+  .site-header{ padding-top: 14px !important; padding-bottom: 12px !important; }
+
+  /* 1) Two-row grid: 
+        Row 1 -> [Catálogo] [Branding] [Lupa]
+        Row 2 -> [Nav centered]
+     This wins over any previous header layout rules. */
+  .header-inner{
+    display: grid !important;
+    grid-template-columns: auto 1fr auto !important;
+    grid-template-rows: auto auto !important;
+    grid-template-areas:
+      "catalogo branding search"
+      "nav      nav      nav" !important;
+    align-items: center !important;
+    justify-items: stretch !important;
+    column-gap: 16px !important;
+    row-gap: 10px !important;
+    min-height: 108px !important;
+    position: relative !important;
+  }
+
+  /* 2) Explicit areas */
+  .collection-toggle{ grid-area: catalogo !important; justify-self: start !important; position: static !important; margin: 0 !important; }
+  .site-branding{ grid-area: branding !important; justify-self: center !important; position: static !important; transform: none !important; margin: 0 !important; }
+  .header-search-toggle{ grid-area: search !important; justify-self: end !important; position: static !important; margin: 0 !important; }
+
+  /* 3) Nav on its own row, centered and flat (no card look) */
+  .main-nav{
+    grid-area: nav !important;
+    justify-self: center !important;
+    position: static !important;
+    background: transparent !important;
+    border: 0 !important;
+    box-shadow: none !important;
+    border-radius: 0 !important;
+    margin: 0 !important;
+  }
+  .nav-list{
+    display: flex !important;
+    gap: 1.5rem !important;
+    justify-content: center !important;
+    align-items: center !important;
+    padding: 0 !important;
+  }
+
+  /* 4) Hide the collapsible desktop search bar when closed to avoid the “pill” */
+  .header-search-desktop{ display: none !important; }
+}
+/* === FINAL DESKTOP HEADER LAYOUT (≥1024px): NAV ← | BRANDING ● | SEARCH + CATÁLOGO → === */
+@media (min-width:1024px){
+  /* Header spacing from announcement bar */
+  .site-header{ padding-top:14px !important; padding-bottom:12px !important; }
+
+  /* Grid with 4 columns: [nav] [branding] [search] [catalog] */
+  .header-inner{
+    display:grid !important;
+    grid-template-columns: auto 1fr auto auto !important;
+    align-items:center !important;
+    column-gap:16px !important;
+    row-gap:0 !important;
+    min-height:110px !important;
+    position:relative !important;
+  }
+
+  /* 1) NAV a la izquierda */
+  .main-nav{
+    grid-column:1 !important;
+    justify-self:start !important;
+    align-self:center !important;
+    position:static !important;
+    margin:0 !important;
+    background:transparent !important;
+    border:0 !important; box-shadow:none !important; border-radius:0 !important;
+  }
+  .nav-list{ display:flex !important; gap:1.5rem !important; align-items:center !important; padding:0 !important; }
+
+  /* 2) BRANDING perfectamente centrado */
+  .site-branding{
+    grid-column:2 !important;
+    justify-self:center !important;
+    align-self:center !important;
+    position:static !important;    /* anula absolute previos */
+    transform:none !important;
+    margin:0 !important;
+  }
+
+  /* 3) SEARCH (lupa y campo) en la columna 3, a la derecha del branding */
+  .header-search-toggle{
+    grid-column:3 !important;
+    justify-self:end !important;
+    position:static !important;   /* quita absolute anteriores */
+    margin:0 !important;
+  }
+  /* Campo colapsado por defecto (no ocupa espacio) */
+  .header-search-desktop{
+    grid-column:3 / span 2 !important;     /* cuando se abra, usa col 3-4 */
+    justify-self:end !important;
+    align-self:center !important;
+    position:static !important;
+    width:0 !important; opacity:0 !important; overflow:hidden !important; pointer-events:none !important;
+    background:#fff; border:1px solid #ccc; border-radius:999px; box-shadow:0 2px 6px rgba(0,0,0,.15);
+    transition: width .25s ease, opacity .2s ease !important;
+  }
+  .header-search-desktop .header-search-input{ height:44px; width:420px; max-width:46vw; border:0; outline:0; padding:0 .75rem; }
+  .header-search-desktop .header-search-btn{ width:44px; height:44px; border:0; background:none; }
+  .site-header.search-open .header-search-desktop{ width:min(420px,46vw) !important; opacity:1 !important; pointer-events:auto !important; }
+
+  /* 4) CATÁLOGO en la columna 4, pegado a la derecha */
+  .collection-toggle{
+    grid-column:4 !important;
+    justify-self:end !important;
+    align-self:center !important;
+    position:static !important;   /* NO absolute en desktop */
+    width:auto !important; height:auto !important; padding:6px 10px !important;
+    border-radius:4px !important; margin:0 !important;
+  }
+}
+/* === DESKTOP HEADER LAYOUT (≥1024px): Nav ← | Branding ● | Lupa + Catálogo → === */
+@media (min-width:1024px){
+  /* Espacio interno para que el logo no toque la announcement bar */
+  .site-header{ padding-top: 16px !important; padding-bottom: 12px !important; }
+
+  /* Grid de 4 columnas: [nav] [branding] [search] [catalog] */
+  .header-inner{
+    display: grid !important;
+    grid-template-columns: auto 1fr auto auto !important;
+    align-items: center !important;
+    column-gap: 16px !important;
+    row-gap: 0 !important;
+    min-height: 110px !important;
+    position: relative !important;
+  }
+
+  /* NAV a la izquierda, sin tarjeta/sombra en desktop */
+  .main-nav{
+    grid-column: 1 !important;
+    justify-self: start !important;
+    align-self: center !important;
+    position: static !important;
+    margin: 0 !important;
+    background: transparent !important;
+    border: 0 !important;
+    box-shadow: none !important;
+    border-radius: 0 !important;
+  }
+  .nav-list{ display: flex !important; gap: 1.5rem !important; align-items: center !important; padding: 0 !important; }
+
+  /* BRANDING centrado absoluto: NO absolute, NO transform */
+  .site-branding{
+    grid-column: 2 !important;
+    justify-self: center !important;
+    align-self: center !important;
+    position: static !important;
+    transform: none !important;
+    margin: 0 !important;
+    text-align: center !important;
+  }
+
+  /* LUPA (toggle) a la derecha del branding */
+  .header-search-toggle{
+    grid-column: 3 !important;
+    justify-self: end !important;
+    align-self: center !important;
+    display: inline-flex !important;
+    position: static !important;
+    margin: 0 !important;
+  }
+
+  /* Campo de búsqueda: por defecto oculto (lo abre .search-open del JS) */
+  .header-search-desktop{
+    grid-column: 3 / span 2 !important;
+    justify-self: end !important;
+    align-self: center !important;
+    position: static !important;
+    display: none;              /* se muestra solo con .search-open */
+    background: #fff;
+    border: 1px solid #ccc;
+    border-radius: 999px;
+    box-shadow: 0 2px 6px rgba(0,0,0,.15);
+  }
+  .site-header.search-open .header-search-desktop{ display: inline-flex; }
+
+  /* CATÁLOGO a la derecha del todo */
+  .collection-toggle{
+    grid-column: 4 !important;
+    justify-self: end !important;
+    align-self: center !important;
+    position: static !important;
+    margin-left: 12px !important;
+  }
+}
+/* === DESKTOP HARD LAYOUT (≥1024px): Nav ← | Branding ● | Catálogo | Lupa/Campo → === */
+@media (min-width:1024px){
+  .site-header{ padding-top: 14px !important; }
+  .site-header .header-inner{
+    display: grid !important;
+    grid-template-columns: auto 1fr auto auto !important; /* [nav][branding][catalog][search] */
+    align-items: center !important;
+    column-gap: 16px !important;
+  }
+  .main-nav{
+    grid-column: 1 !important;
+    display: flex !important;
+    position: static !important; top:auto !important; left:auto !important; right:auto !important; transform:none !important;
+    margin: 0 !important; padding: 0 !important; background: transparent !important; border:0 !important; box-shadow:none !important; border-radius:0 !important;
+  }
+  .nav-list{ display:flex !important; gap:1.5rem !important; margin:0 !important; padding:0 !important; }
+
+  .site-branding{
+    grid-column: 2 !important; justify-self: center !important; align-self: center !important;
+    position: static !important; transform: none !important; text-align: center !important; margin: 0 !important;
+  }
+
+  .collection-toggle{
+    grid-column: 3 !important; justify-self: end !important; align-self: center !important; position: static !important;
+    margin: 0 !important; width:auto !important; height:auto !important; padding:6px 10px !important; border-radius:4px !important; background: transparent !important; box-shadow:none !important;
+  }
+
+  .header-search-toggle{ grid-column: 4 !important; justify-self: end !important; position: static !important; margin-left: 8px !important; }
+  .header-search-desktop{
+    grid-column: 4 !important; justify-self: end !important; align-items: center !important; position: static !important;
+    display: inline-flex !important; width: auto !important; opacity: 1 !important; pointer-events: auto !important;
+    background: #fff; border: 1px solid #e0e0e0; border-radius: 999px; box-shadow: 0 2px 6px rgba(0,0,0,.08);
+  }
+}
+/* === DESKTOP HEADER: NAV ← | BRANDING ● | CATÁLOGO | LUPA→CAMPO (≥1024px) === */
+@media (min-width:1024px){
+  /* 0) Grid maestro en una fila */
+  .site-header .header-inner{
+    display:grid !important;
+    grid-template-columns:auto 1fr auto auto !important; /* nav | branding | catálogo | search */
+    grid-template-areas:"nav branding catalog search" !important;
+    align-items:center !important;
+    column-gap: 24px !important;
+    row-gap: 0 !important;
+    min-height:110px !important;
+  }
+
+  /* 1) NAV a la izquierda */
+  .main-nav{ grid-area:nav !important; display:flex !important; position:static !important; margin:0 !important; background:transparent !important; border:0 !important; box-shadow:none !important; border-radius:0 !important; }
+  .nav-list{ display:flex !important; gap:1.5rem !important; margin:0 !important; padding:0 !important; }
+
+  /* 2) BRANDING centrado real */
+  .site-branding{ grid-area:branding !important; justify-self:center !important; align-self:center !important; position:static !important; transform:none !important; text-align:center !important; margin:0 !important; }
+
+  /* 3) CATÁLOGO a la derecha del branding */
+  .collection-toggle{ grid-area:catalog !important; justify-self:end !important; align-self:center !important; position:static !important; margin:0 !important; }
+
+  /* 4) BUSCADOR: botón de lupa visible por defecto, campo al abrir */
+  .header-search-toggle{ 
+    grid-area:search !important; justify-self:end !important; align-self:center !important;
+    position:static !important; margin:0 !important;
+    width:40px; height:40px; border:1px solid #e0e0e0; border-radius:999px; background:#fff;
+    display:inline-grid; place-items:center; cursor:pointer;
+  }
+  .header-search-toggle svg{ width:20px; height:20px; display:block; }
+
+  /* Campo oculto por defecto en desktop; aparece con .search-open que agrega el JS */
+  .header-search-desktop{ grid-area:search !important; justify-self:end !important; align-self:center !important; position:static !important; display:none !important; }
+  .site-header.search-open .header-search-toggle{ display:none !important; }
+  .site-header.search-open .header-search-desktop{ display:inline-flex !important; }
 }

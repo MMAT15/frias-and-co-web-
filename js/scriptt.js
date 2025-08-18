@@ -185,21 +185,46 @@ function setAppInert(on){
 
       // Navegación hash/externa manteniendo cierre
       collectionMenu.addEventListener('click', (e) => {
-        const a = e.target.closest('a[href]');
-        if (!a) return;
-        e.preventDefault();
-        const href = a.getAttribute('href');
-        closeMenu();
-        if (href.startsWith('#')) {
-          const target = document.querySelector(href);
-          if (target) {
-            const top = computeOffsetTop(target);
-            window.scrollTo({ top, behavior: 'smooth' });
-          }
-        } else {
-          window.location.href = href;
-        }
-      });
+  const a = e.target.closest('a[href]');
+  if (!a) return;
+  e.preventDefault();
+  const href = a.getAttribute('href') || '';
+
+  // 1) El usuario cambió de categoría → la búsqueda deja de ser el driver
+  clearSearch('catalog-click');
+
+  // 2) Deducir el tipo y setear el select si existe
+  let nextTipo = '';
+  try {
+    if (href.includes('?')) {
+      const u = new URL(href, location.origin);
+      nextTipo = (u.searchParams.get('tipo') || '').trim();
+    } else if (href.startsWith('#')) {
+      const hashId = href.slice(1);
+      nextTipo = sectionToType[hashId] || '';
+    }
+  } catch (_) {}
+
+  if (nextTipo && typeof filterTipo !== 'undefined' && filterTipo) {
+    filterTipo.value = nextTipo;
+  }
+
+  // 3) Reaplicar filtros y URL en esta misma página
+  applyFiltersWrapped();
+  updateURLParams();
+
+  // 4) Navegar/scroll según destino
+  closeMenu();
+  if (href.startsWith('#')) {
+    const target = document.querySelector(href);
+    if (target) {
+      const top = computeOffsetTop(target);
+      window.scrollTo({ top, behavior: 'smooth' });
+    }
+  } else if (/^[a-z]+:\/\//i.test(href) || href.endsWith('.html') || href.startsWith('productos')) {
+    window.location.href = href;
+  }
+});
 
       document.addEventListener('keydown', e=>{
         if(e.key==='Escape' && collectionMenu.classList.contains('show')) closeMenu();
@@ -248,6 +273,36 @@ function setAppInert(on){
         window.scrollTo({ top: computeOffsetTop(target), behavior: 'smooth' });
       });
     });
+
+    // Categorías del nav superior: limpiar búsqueda y aplicar tipo
+    const topNav = document.querySelector('.nav-list');
+    if (topNav) {
+      topNav.addEventListener('click', (e) => {
+        const a = e.target.closest('a[href]');
+        if (!a) return;
+        const href = a.getAttribute('href') || '';
+
+        // Sólo actuamos si apunta a productos o a un hash de categoría
+        if (href.includes('productos') || href.startsWith('#')) {
+          clearSearch('topnav-click');
+
+          let nextTipo = '';
+          try {
+            if (href.includes('?')) {
+              const u = new URL(href, location.origin);
+              nextTipo = (u.searchParams.get('tipo') || '').trim();
+            } else if (href.startsWith('#')) {
+              nextTipo = sectionToType[href.slice(1)] || '';
+            }
+          } catch (_) {}
+
+          if (nextTipo && filterTipo) filterTipo.value = nextTipo;
+
+          applyFiltersWrapped();
+          updateURLParams();
+        }
+      });
+    }
 
     /* ===========================
        5) BÚSQUEDA DESKTOP MEJORADA
@@ -342,13 +397,28 @@ function setAppInert(on){
       document.querySelectorAll('form.menu-search').forEach(f => handleSubmit(f, '.menu-search-input'));
 
       // Prefill en productos.html?q=...
-      if (window.location.pathname.endsWith('productos.html')) {
-        const q = new URLSearchParams(location.search).get('q') || '';
-        if (q) {
-          document.querySelectorAll('.header-search-input, .menu-search-input')
-            .forEach(inp => inp.value = q);
-        }
-      }
+   // Prefill en productos.html?q=... y limpieza de filtros previos
+if (window.location.pathname.endsWith('productos.html')) {
+  const usp = new URLSearchParams(location.search);
+  const q = (usp.get('q') || '').trim();
+  if (q) {
+    document.querySelectorAll('.header-search-input, .menu-search-input')
+      .forEach(inp => inp.value = q);
+
+    // Limpiar filtros persistidos para no ocultar la búsqueda
+    if (filterTipo)  filterTipo.value = '';
+    if (filterTalle) filterTalle.value = '';
+    try {
+      localStorage.removeItem('bera:filters:tipo');
+      localStorage.removeItem('bera:filters:talle');
+    } catch (_) {}
+
+    searchQuery = q.toLowerCase();
+    applyFiltersWrapped();
+    updateURLParams();
+  }
+}
+
     })();
 
     /* ---------- PRODUCT MODAL (SIN CAMBIOS DE LÓGICA) ---------- */
@@ -789,7 +859,12 @@ const allProductItems = Array.from(document.querySelectorAll('.producto-item'));
 const filterTipo  = document.getElementById('filter-tipo');
 const filterTalle = document.getElementById('filter-talle');
 const sortBy      = document.getElementById('sort-by');
-
+// --- Query de búsqueda proveniente de la lupa (productos.html?q=...)
+let searchQuery = '';
+try {
+  const usp = new URLSearchParams(location.search);
+  searchQuery = (usp.get('q') || '').trim().toLowerCase();
+} catch (_) {}
 const categorySections = Array.from(document.querySelectorAll('.product-category'));
 const productosMain = document.querySelector('.productos-main');
 let emptyStateEl;
@@ -799,6 +874,21 @@ const LS_KEYS = {
   talle: 'bera:filters:talle',
   sort:  'bera:filters:sort'
 };
+// --- Helper: limpiar búsqueda activa (q) y campos de input
+function clearSearch(reason){
+  try{
+    if (typeof searchQuery !== 'undefined') searchQuery = '';
+    // Vaciar inputs de búsqueda visibles (header y menú)
+    document.querySelectorAll('.header-search-input, .menu-search-input')
+      .forEach(inp => inp.value = '');
+    // Quitar ?q= de la URL actual manteniendo otros filtros
+    const usp = new URLSearchParams(location.search);
+    usp.delete('q');
+    const qs = usp.toString();
+    const url = window.location.pathname + (qs ? '?' + qs : '') + window.location.hash;
+    history.replaceState(null, '', url);
+  }catch(_){}
+}
 
 // Restaurar selección guardada
 try {
@@ -830,12 +920,20 @@ const typeToSection = {
   abrigo: 'abrigos',
   vestido: 'vestidos'
 };
+const sectionToType = Object.fromEntries(
+  Object.entries(typeToSection).map(([tipo, sec]) => [sec, tipo])
+);
 function updateURLParams() {
   try {
     const usp = new URLSearchParams(location.search);
+    const qStr = (usp.get('q') || '').trim(); // preservar q
+
     if (filterTipo && filterTipo.value)   usp.set('tipo',  filterTipo.value); else usp.delete('tipo');
     if (filterTalle && filterTalle.value) usp.set('talle', filterTalle.value); else usp.delete('talle');
     if (sortBy && sortBy.value)           usp.set('sort',  sortBy.value);     else usp.delete('sort');
+
+    if (qStr) usp.set('q', qStr); else usp.delete('q');
+
     const q = usp.toString();
     const url = window.location.pathname + (q ? '?' + q : '') + window.location.hash;
     history.replaceState(null, '', url);
@@ -863,14 +961,17 @@ function applySorting() {
 function applyFilters() {
   const tipoVal  = filterTipo ? filterTipo.value : '';
   const talleVal = filterTalle ? filterTalle.value : '';
+  const qVal = searchQuery; // texto de búsqueda en minúsculas
 
   // 1) Mostrar/ocultar según filtros
-  allProductItems.forEach(item => {
-    const match =
-      (!tipoVal  || item.dataset.tipo  === tipoVal) &&
-      (!talleVal || item.dataset.talle === talleVal);
-    item.style.display = match ? '' : 'none';
-  });
+ allProductItems.forEach(item => {
+  const itemText = (item.dataset.name || item.textContent || '').toLowerCase();
+  const textOk   = !qVal || itemText.includes(qVal);
+  const match = textOk &&
+    (!tipoVal  || item.dataset.tipo  === tipoVal) &&
+    (!talleVal || item.dataset.talle === talleVal);
+  item.style.display = match ? '' : 'none';
+});
 
   // 2) Ordenar visibles
   applySorting();
@@ -932,12 +1033,15 @@ function applySortingWrapped() { withLoader(productsShell, () => applySorting())
       if (sel === filterTipo)  localStorage.setItem(LS_KEYS.tipo, sel.value);
       if (sel === filterTalle) localStorage.setItem(LS_KEYS.talle, sel.value);
     } catch(_) {}
+    // Al cambiar tipo/talle, la búsqueda deja de ser el driver
+    clearSearch('filter-change');
     applyFiltersWrapped();
     updateURLParams();
   });
 });
 if (sortBy) sortBy.addEventListener('change', () => {
   try { localStorage.setItem(LS_KEYS.sort, sortBy.value); } catch(_) {}
+  clearSearch('sort-change');
   applySortingWrapped();
   updateURLParams();
 });
@@ -966,6 +1070,7 @@ if (productosMain && (filterTipo || filterTalle)) {
       localStorage.removeItem('bera:filters:tipo');
       localStorage.removeItem('bera:filters:talle');
     } catch(_) {}
+    clearSearch('filters-clear');
     applyFiltersWrapped();
     updateURLParams();
   });
@@ -1066,7 +1171,10 @@ if (productosMain && (filterTipo || filterTalle)) {
       };
       addToCart(product);
       showCartToast();
-      openCartPanel?.();
+      // Abrir carrito automáticamente solo en escritorio; en móvil mostramos solo el toast
+      if (window.matchMedia && window.matchMedia('(min-width: 1024px)').matches) {
+        openCartPanel?.();
+      }
     });
 
     /* -------- Floating Cart references -------- */
