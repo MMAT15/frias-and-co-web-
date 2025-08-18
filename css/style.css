@@ -3425,4 +3425,43 @@ body { padding-top: calc(var(--ann-h) + var(--hdr-h)); }
   .header-search-desktop{ grid-area:search !important; justify-self:end !important; align-self:center !important; position:static !important; display:none !important; }
   .site-header.search-open .header-search-toggle{ display:none !important; }
   .site-header.search-open .header-search-desktop{ display:inline-flex !important; }
+} 
+/* === Productos: filtros en una sola línea (mobile) ===
+   Coloca "Tipo de prenda", "Talle" y "Ordenar por" en la misma fila
+   sin superponerse, manteniendo el label arriba del select en cada bloque. */
+@media (max-width: 768px){
+  /* Contenedor de filtros en 3 columnas: detecta el form que tenga los 3 selects */
+  form:has(#filter-tipo, #filter-talle, #sort-by){
+    /* usamos grid para alinear cada par label+select como un bloque */
+    display: grid !important;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 12px;                      /* respiración entre columnas */
+    align-items: end;               /* alinear los selects abajo de su label */
+  }
+
+  /* Cada par label+select se convierte en un pequeño grid vertical */
+  label[for="filter-tipo"],
+  label[for="filter-talle"],
+  label[for="sort-by"]{
+    display: block;                 /* cada label ocupa su propia celda */
+    font-size: .95rem;
+    margin: 0;                      /* quitamos márgenes grandes */
+  }
+
+  /* Asegura que el select correspondiente quede debajo del label y llene el ancho */
+  label[for="filter-tipo"] + #filter-tipo,
+  label[for="filter-talle"] + #filter-talle,
+  label[for="sort-by"] + #sort-by{
+    display: block;
+    width: 100%;
+    margin-top: .35rem;             /* pequeña separación del label */
+  }
+
+  /* Evitar que los selects crezcan más allá del contenedor */
+  #filter-tipo, #filter-talle, #sort-by{ max-width: 100%; }
+
+  /* Si existe una barra extra de filtros arriba/abajo, que no rompa el layout */
+  .filters-bar{ grid-column: 1 / -1; }  /* ocupa el ancho completo si aparece */
 }
+
+/* ≥769px (tablet/desktop) dejamos el comportamiento que ya tenías */ 
