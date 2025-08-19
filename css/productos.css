@@ -680,34 +680,70 @@
   font-weight: 600;
   color: var(--text-strong, #222);
 }
-/* --- Filtros en una sola fila (mobile) --- */
+/* --- Filtros: layout claro y compacto en mobile --- */
+.productos-filtros-bar {
+  position: sticky;
+  /* queda bajo el announcement y el header; si no hay var, usa ~64px */
+  top: calc(var(--ann-h, 0px) + var(--hdr-h, 64px));
+  z-index: 30;
+  background: #fff;
+}
+
+/* Móvil: 3 columnas, cada una con su label arriba y el select abajo */
 @media (max-width: 768px) {
   .productos-filtros-bar .filtros-selects{
-    display: flex;
-    gap: 8px;
-    align-items: center;
-    flex-wrap: nowrap;         /* todos en la misma línea */
-    overflow-x: hidden;        /* nada se desborda */
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-auto-rows: auto;
+    gap: 10px 8px;
+    align-items: end;
+    max-width: 100%;
   }
 
-  /* oculto solo la UI de los labels (sigue la accesibilidad por el for/id) */
+  /* Mostramos los labels (pequeños y claros) */
   .productos-filtros-bar .filtros-selects label{
-    position: absolute !important;
-    width: 1px; height: 1px; margin: -1px; padding: 0;
-    overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0;
+    position: static !important;
+    width: auto; height: auto; margin: 0;
+    padding: 0;
+    overflow: visible; clip: auto; white-space: normal; border: 0;
+    display: block;
+    font-size: 12px;
+    line-height: 1.1;
+    font-weight: 600;
+    color: #6b6b6b;
+    margin-left: 4px;
   }
+
+  /* Pareo explícito de cada label y select en la misma columna */
+  label[for="filter-tipo"]  { grid-column: 1; grid-row: 1; }
+  #filter-tipo              { grid-column: 1; grid-row: 2; }
+
+  label[for="filter-talle"] { grid-column: 2; grid-row: 1; }
+  #filter-talle             { grid-column: 2; grid-row: 2; }
+
+  label[for="sort-by"]      { grid-column: 3; grid-row: 1; }
+  #sort-by                  { grid-column: 3; grid-row: 2; }
 
   .productos-filtros-bar .filtros-selects select{
-    flex: 1 1 0;              /* 3 selects reparten el ancho (≈33% c/u) */
-    min-width: 0;             /* evita crecer y empujar al resto */
+    flex: 1 1 auto;
+    min-width: 0;
     max-width: 100%;
+    height: 42px;
+    padding: 0 0.75rem;
+    font-size: 15px;
+    border: 1px solid #ddd;
+    border-radius: var(--border-radius);
+    box-sizing: border-box;
   }
 }
 
-/* un poco más de “aire” en pantallas muy chicas */
+/* Pantallas muy pequeñas: texto un poco más chico pero manteniendo el layout */
 @media (max-width: 380px) {
+  .productos-filtros-bar .filtros-selects label{
+    font-size: 11px;
+  }
   .productos-filtros-bar .filtros-selects select{
     font-size: 14px;
-    padding-right: 28px;      /* deja lugar a la flechita del select */
+    padding-right: 28px; /* espacio para la flechita del select */
   }
 }
