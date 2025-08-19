@@ -680,3 +680,34 @@
   font-weight: 600;
   color: var(--text-strong, #222);
 }
+/* --- Filtros en una sola fila (mobile) --- */
+@media (max-width: 768px) {
+  .productos-filtros-bar .filtros-selects{
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    flex-wrap: nowrap;         /* todos en la misma línea */
+    overflow-x: hidden;        /* nada se desborda */
+  }
+
+  /* oculto solo la UI de los labels (sigue la accesibilidad por el for/id) */
+  .productos-filtros-bar .filtros-selects label{
+    position: absolute !important;
+    width: 1px; height: 1px; margin: -1px; padding: 0;
+    overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0;
+  }
+
+  .productos-filtros-bar .filtros-selects select{
+    flex: 1 1 0;              /* 3 selects reparten el ancho (≈33% c/u) */
+    min-width: 0;             /* evita crecer y empujar al resto */
+    max-width: 100%;
+  }
+}
+
+/* un poco más de “aire” en pantallas muy chicas */
+@media (max-width: 380px) {
+  .productos-filtros-bar .filtros-selects select{
+    font-size: 14px;
+    padding-right: 28px;      /* deja lugar a la flechita del select */
+  }
+}
