@@ -1,4 +1,5 @@
 document.addEventListener('DOMContentLoaded', () => {
+  console.log('[checkout] JS loaded');
   // ====== Carrito desde LocalStorage ======
   let cart = [];
   try {
@@ -15,6 +16,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const summaryCashDisc  = document.getElementById('summary-cash-discount'); // Descuento efectivo
   const summaryTotal     = document.getElementById('summary-total');         // Total a pagar
   const checkoutForm     = document.getElementById('checkout-form');
+  const confirmBtn       = document.getElementById('confirm-order');
 
   // Modal aviso IG DM
   const dmModal   = document.getElementById('dm-modal');
@@ -105,15 +107,25 @@ document.addEventListener('DOMContentLoaded', () => {
 
   function openIGWithText(text) {
     const url = `https://ig.me/m/${IG_USER}?text=${encodeURIComponent(text)}`;
-    window.location.href = url;
 
-    // Fallback: si no cambia de pestaña/ubicación, abrimos el perfil y dejamos el texto copiado
+    // Intento 1: misma pestaña (mejor en mobile)
+    try {
+      window.location.href = url;
+    } catch {}
+
+    // Fallback: si no cambia de visibilidad, probamos nueva pestaña
     setTimeout(() => {
       if (document.visibilityState === 'visible') {
-        window.open(`https://instagram.com/${IG_USER}`, '_blank');
-        alert('Por si IG Direct no se abrió, te dejamos el perfil en una pestaña nueva. El resumen ya está copiado, pegalo en el chat.');
+        const win = window.open(url, '_blank');
+        // Si incluso esto falla, abrimos el perfil y avisamos
+        setTimeout(() => {
+          if (!win || win.closed || document.visibilityState === 'visible') {
+            window.open(`https://instagram.com/${IG_USER}`, '_blank');
+            alert('Por si IG Direct no se abrió, te dejamos el perfil en una pestaña nueva. El resumen ya está copiado, pegalo en el chat.');
+          }
+        }, 400);
       }
-    }, 1200);
+    }, 800);
   }
 
   // ====== Render + Cálculo principal ======
@@ -179,9 +191,12 @@ document.addEventListener('DOMContentLoaded', () => {
           dmModal.classList.remove('show');
           dmModal.setAttribute('aria-hidden', 'true');
           dmAckBtn.removeEventListener('click', onAck);
+          console.log('[checkout] Opening IG DM with text length:', msg.length);
           openIGWithText(msg);
         };
-        dmAckBtn.addEventListener('click', onAck);
+        dmAckBtn.replaceWith(dmAckBtn.cloneNode(true));
+        const freshAckBtn = document.getElementById('dm-ack');
+        freshAckBtn.addEventListener('click', onAck);
 
         // Si la copia falló, avisamos explícitamente dentro del modal (si hay un contenedor)
         const helper = dmModal.querySelector('.dm-helper');
@@ -193,6 +208,18 @@ document.addEventListener('DOMContentLoaded', () => {
       } else {
         // Sin modal: redirigimos directo
         openIGWithText(msg);
+      }
+    });
+  }
+
+  if (confirmBtn) {
+    confirmBtn.addEventListener('click', (e) => {
+      // Forzamos el mismo flujo del submit
+      e.preventDefault();
+      if (checkoutForm) {
+        // Disparamos el evento submit para reutilizar la lógica existente
+        const ev = new Event('submit', { bubbles: true, cancelable: true });
+        checkoutForm.dispatchEvent(ev);
       }
     });
   }

@@ -46,14 +46,14 @@
   </svg>
 </button>
 <!-- Botón lupita (desktop) -->
-<button class="header-search-toggle" aria-label="Abrir búsqueda">
+<button class="header-search-toggle" type="button" aria-label="Abrir búsqueda">
   <svg viewBox="0 0 24 24" aria-hidden="true">
     <path d="M11 18a7 7 0 1 1 4.95-2.05L21 21l-1.5 1.5-5.05-5.05A6.96 6.96 0 0 1 11 18z" fill="currentColor"/>
   </svg>
 </button>
 
 <!-- Campo que se despliega desde la lupita (desktop) -->
-<form class="header-search header-search-desktop" role="search" aria-label="Buscar (desktop)">
+<form class="header-search header-search-desktop" role="search" aria-label="Buscar (desktop)" action="productos.html" method="get">
   <input class="header-search-input" name="q" type="search" placeholder="Buscar prendas…" autocomplete="off" />
   <button class="header-search-btn" aria-label="Buscar">
     <svg viewBox="0 0 24 24" aria-hidden="true">
@@ -234,37 +234,21 @@
         .pickup-map .map-embed{margin-top:.5rem;border-radius:8px;overflow:hidden}
         .payment-methods .option-wrapper{display:flex;gap:.5rem;align-items:center;margin:.3rem 0}
       </style>
-      <!-- ========== PRE-DM INSTAGRAM MODAL ========== -->
-      <div id="pre-dm-overlay" class="pre-dm-overlay" aria-hidden="true"></div>
-
-      <div id="pre-dm-modal"
-           class="pre-dm-modal"
-           role="dialog"
-           aria-modal="true"
-           aria-labelledby="pre-dm-title"
-           aria-describedby="pre-dm-desc"
-           aria-hidden="true"
-           tabindex="-1">
-        <div class="pre-dm-modal__content" role="document" tabindex="-1">
-          <button type="button" class="pre-dm-close" aria-label="Cerrar aviso">×</button>
-
-          <h2 id="pre-dm-title" class="pre-dm-title">¡Listo para confirmar por Instagram!</h2>
-
-          <div id="pre-dm-desc" class="pre-dm-body">
-            <p>Ahora te vamos a redirigir a nuestro DM de Instagram <strong>@beraclothingg</strong>.</p>
-            <p>Ya copiamos el resumen de tu pedido por vos. Cuando se abra el chat, simplemente <strong>pegá el mensaje</strong> (Ctrl/Cmd+V) y <strong>enviálo</strong>.</p>
-            <ul class="pre-dm-list">
-              <li>Si no se abre Instagram, te llevamos a nuestro perfil para que escribas por ahí.</li>
-              <li>Podés volver a esta página en cualquier momento.</li>
-            </ul>
-          </div>
-
+      <!-- ========== PRE-DM INSTAGRAM MODAL (simple) ========== -->
+      <div id="dm-modal" class="pre-dm-modal" role="dialog" aria-modal="true" aria-labelledby="dm-title" aria-hidden="true">
+        <div class="pre-dm-modal__content" role="document">
+          <h2 id="dm-title" class="pre-dm-title">Vamos a escribirte por Instagram</h2>
+          <p class="pre-dm-body">
+            Ahora te vamos a redirigir a nuestro chat de Instagram (<strong>@beraclothingg</strong>).
+            <br>El resumen de tu pedido ya quedó <strong>copiado</strong>: cuando se abra el chat, <strong>pegalo</strong> y tocá enviar.
+          </p>
+          <p class="dm-helper" aria-live="polite"></p>
           <div class="pre-dm-actions">
-            <button id="pre-dm-accept" type="button" class="btn btn-primary">Entendido</button>
+            <button id="dm-ack" class="btn">Entendido</button>
           </div>
         </div>
       </div>
-      <!-- ========== /PRE-DM INSTAGRAM MODAL ========== -->
+      <!-- ========== /PRE-DM INSTAGRAM MODAL (simple) ========== -->
     </main>
 
     <!-- FOOTER -->
