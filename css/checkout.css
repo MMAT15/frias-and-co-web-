@@ -13,6 +13,7 @@
   max-width: 1200px;
   margin: 0 auto;
   padding: 0 1rem;
+  align-items: flex-start;
 }
 
 /* Order summary */
@@ -118,17 +119,22 @@
 }
 .option-wrapper {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   justify-content: space-between;
   border: 1px solid #ddd;
   border-radius: var(--border-radius);
   padding: 0.75rem 1rem;
   margin-bottom: 1rem;
   transition: border-color var(--transition), background var(--transition);
+  gap: 0.75rem;
+  flex-wrap: wrap;
 }
 .option-wrapper:hover {
   border-color: var(--color-acento);
   background: #fafafa;
+}
+.option-wrapper *, .option-wrapper label {
+  overflow-wrap: anywhere;
 }
 .option-wrapper input {
   margin-right: 1rem;
@@ -137,7 +143,9 @@
 .option-detail {
   font-size: 0.9rem;
   color: var(--color-acento-sec);
-  white-space: nowrap;
+  white-space: normal;
+  flex: 1 1 auto;
+  text-align: right;
 }
 
 /* Submit button */
@@ -167,4 +175,10 @@
   .checkout-form {
     flex: 1 1 100%;
   }
+}
+
+@media (min-width: 992px) {
+  /* Put the form on the left and the summary on the right */
+  .checkout-form { order: 1; flex: 2 1 600px; }
+  .checkout-summary-panel { order: 2; flex: 1 1 360px; }
 }

@@ -15,6 +15,17 @@
   <link rel="stylesheet" href="css/newsletter.css" />
 </head>
 <body>
+  <!-- Announcement / Marquee Bar -->
+<div class="announcement-bar" role="region" aria-label="Promociones y medios de pago">
+  <button class="ann-close" aria-label="Cerrar aviso">×</button>
+  <div class="ann-track" aria-hidden="true">
+    <div class="ann-row">
+       🔥 10% de descuento pagando en efectivo 💥 • Shop Online 24/7 🖤 • Retiro en local o en punto de encuentro  • 
+      🔥 10% de descuento pagando en efectivo 💥 • Shop Online 24/7 🖤 • Retiro en local o en punto de encuentro  • 
+
+    </div>
+  </div>
+</div>    
   <!-- Skip link -->
   <a href="#main-content" class="skip-link">Saltar al contenido</a>
 
@@ -33,14 +44,14 @@
   </svg>
 </button>
 <!-- Botón lupita (desktop) -->
-<button class="header-search-toggle" aria-label="Abrir búsqueda">
+<button class="header-search-toggle" type="button" aria-label="Abrir búsqueda">
   <svg viewBox="0 0 24 24" aria-hidden="true">
     <path d="M11 18a7 7 0 1 1 4.95-2.05L21 21l-1.5 1.5-5.05-5.05A6.96 6.96 0 0 1 11 18z" fill="currentColor"/>
   </svg>
 </button>
 
 <!-- Campo que se despliega desde la lupita (desktop) -->
-<form class="header-search header-search-desktop" role="search" aria-label="Buscar (desktop)">
+<form class="header-search header-search-desktop" role="search" aria-label="Buscar (desktop)" action="productos.html" method="get">
   <input class="header-search-input" name="q" type="search" placeholder="Buscar prendas…" autocomplete="off" />
   <button class="header-search-btn" aria-label="Buscar">
     <svg viewBox="0 0 24 24" aria-hidden="true">
@@ -61,10 +72,7 @@
   <span class="site-tagline">BY FRIAS</span>
 </div>
 
-      <button class="nav-toggle"
-              aria-controls="primary-navigation"
-              aria-expanded="false"
-              aria-label="Abrir menú">
+      <button class="nav-toggle" type="button" aria-controls="primary-navigation" aria-expanded="false" aria-label="Abrir menú">
         <span class="bar"></span><span class="bar"></span><span class="bar"></span>
       </button>
 
@@ -135,7 +143,7 @@
         <a href="https://instagram.com/beraclothingg" target="_blank" rel="noopener" class="instagram-icon" aria-label="Instagram">
           <img src="assets/images/instaa.png" alt="Instagram">
         </a>
-        | Shop online 24/7 | Envíos a todo el país | Berazategui centro
+        | Shop online 24/7 | Retiro en local | Berazategui centro
       </p>
       By 
         <a href="https://instagram.com/melinaffrias" target="_blank" rel="noopener">@melinaffrias</a> <span>&</span>
@@ -154,16 +162,15 @@
   <nav class="collection-nav" role="navigation" aria-label="Categorías de ropa">
     <h2 class="collection-heading">CLOTHING ▾</h2>
     <ul class="collection-list">
-      <li><a href="productos.html">Ver todo en CLOTHING</a></li>
-      <li><a href="productos.html#remeras">Remeras</a></li>
-      <li><a href="productos.html#tops">Tops / Blusas</a></li>
-      <li><a href="productos.html#camisas">Camisas</a></li>
-      <li><a href="productos.html#shorts">Shorts / Minis</a></li>
-      <li><a href="productos.html#pantalones">Pantalones</a></li>
-      <li><a href="productos.html#buzos">Buzos y Sweaters</a></li>
-      <li><a href="productos.html#sets">Sets</a></li>
-      <li><a href="productos.html#abrigos">Abrigos</a></li>
-      <li><a href="productos.html#vestidos">Vestidos y Monos</a></li>
+         <li><a href="productos.html?tipo=remera#remeras">Remeras</a></li>
+<li><a href="productos.html?tipo=short#shorts">Shorts / Minis</a></li>
+<li><a href="productos.html?tipo=pantalon#pantalones">Pantalones</a></li>
+<li><a href="productos.html?tipo=denim#denim">Denim (Jeans)</a></li>
+<li><a href="productos.html?tipo=set#sets">Conjuntos (Sets)</a></li>
+<li><a href="productos.html?tipo=abrigo#abrigos">Abrigos</a></li>
+<li><a href="productos.html?tipo=vestido#vestidos">Vestidos y Monos</a></li>
+<li><a href="productos.html?tipo=body#bodys">Bodys</a></li>
+<li><a href="productos.html?tipo=accesorio#accesorios">Accesorios</a></li>
     </ul>
   </nav>
 </aside>

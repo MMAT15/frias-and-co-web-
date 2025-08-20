@@ -65,6 +65,11 @@ textarea:focus {
   --transition: 0.3s ease;
 }
 
+/* Offset para anclas al usar header sticky (colecciones, secciones, etc.) */
+:target {
+  scroll-margin-top: calc(var(--ann-h) + var(--hdr-h) + 12px);
+}
+
 /* Reset básico */
 *,
 *::before,

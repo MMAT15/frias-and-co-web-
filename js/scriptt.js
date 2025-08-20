@@ -183,48 +183,52 @@ function setAppInert(on){
       collectionClose?.addEventListener('click', closeMenu);
       collectionOverlay.addEventListener('click', closeMenu);
 
-      // Navegación hash/externa manteniendo cierre
+      // Navegación del menú de colecciones (misma página: solo scroll; otras páginas: navegar)
       collectionMenu.addEventListener('click', (e) => {
-  const a = e.target.closest('a[href]');
-  if (!a) return;
-  e.preventDefault();
-  const href = a.getAttribute('href') || '';
+        const a = e.target.closest('a[href]');
+        if (!a) return;
 
-  // 1) El usuario cambió de categoría → la búsqueda deja de ser el driver
-  clearSearch('catalog-click');
+        const href = a.getAttribute('href') || '';
 
-  // 2) Deducir el tipo y setear el select si existe
-  let nextTipo = '';
-  try {
-    if (href.includes('?')) {
-      const u = new URL(href, location.origin);
-      nextTipo = (u.searchParams.get('tipo') || '').trim();
-    } else if (href.startsWith('#')) {
-      const hashId = href.slice(1);
-      nextTipo = sectionToType[hashId] || '';
-    }
-  } catch (_) {}
+        // Caso 1: ancla dentro de la misma página ("#seccion"): no filtrar, solo mostrar todo y scrollear
+        if (href.startsWith('#')) {
+          e.preventDefault();
 
-  if (nextTipo && typeof filterTipo !== 'undefined' && filterTipo) {
-    filterTipo.value = nextTipo;
-  }
+          // Resetear búsqueda y filtros para que no desaparezcan secciones
+          clearSearch('catalog-hash');
+          if (typeof filterTipo  !== 'undefined' && filterTipo)  filterTipo.value  = '';
+          if (typeof filterTalle !== 'undefined' && filterTalle) filterTalle.value = '';
+          try {
+            localStorage.removeItem(LS_KEYS.tipo);
+            localStorage.removeItem(LS_KEYS.talle);
+          } catch(_) {}
 
-  // 3) Reaplicar filtros y URL en esta misma página
-  applyFiltersWrapped();
-  updateURLParams();
+          // Reaplicar mostrando todo y actualizar URL (sin ?tipo/?talle)
+          applyFiltersWrapped();
+          updateURLParams();
 
-  // 4) Navegar/scroll según destino
-  closeMenu();
-  if (href.startsWith('#')) {
-    const target = document.querySelector(href);
-    if (target) {
-      const top = computeOffsetTop(target);
-      window.scrollTo({ top, behavior: 'smooth' });
-    }
-  } else if (/^[a-z]+:\/\//i.test(href) || href.endsWith('.html') || href.startsWith('productos')) {
-    window.location.href = href;
-  }
-});
+          // Cerrar panel y hacer scroll a la sección
+          closeMenu();
+          const target = document.querySelector(href);
+          if (target) {
+            const top = typeof computeOffsetTop === 'function' ? computeOffsetTop(target) : (target.getBoundingClientRect().top + window.scrollY - 60);
+            window.scrollTo({ top, behavior: 'smooth' });
+          }
+          return;
+        }
+
+        // Caso 2: enlaces que van a productos.html (desde otras páginas) → cerrar y permitir la navegación por defecto
+        if (href.includes('productos.html') || href.startsWith('productos')) {
+          closeMenu();
+          return; // no preventDefault → el navegador navega
+        }
+
+        // Caso 3: cualquier otra página/URL absoluta → cerrar y permitir navegación
+        if (/^[a-z]+:\/\//i.test(href) || href.endsWith('.html')) {
+          closeMenu();
+          return;
+        }
+      });
 
       document.addEventListener('keydown', e=>{
         if(e.key==='Escape' && collectionMenu.classList.contains('show')) closeMenu();
@@ -1057,6 +1061,14 @@ allProductItems.forEach(item => {
     }
   }
   updateURLParams();
+  // --- Actualizar contador de resultados (si existe barra de filtros)
+  try {
+    const countHost = document.querySelector('.filters-bar .results-count');
+    if (countHost) {
+      const visibles = allProductItems.filter(el => el.style.display !== 'none').length;
+      countHost.textContent = `${visibles} producto${visibles===1?'':'s'} encontrado${visibles===1?'':'s'}.`;
+    }
+  } catch(_) {}
 }
 
 /* ---------- Loader helpers (envoltorios) ---------- */
@@ -1150,13 +1162,11 @@ if (productosMain && (filterTipo || filterTalle)) {
     updateURLParams();
   });
 
-  // Hook en applyFilters para actualizar contador
-  const _applyFilters = applyFilters;
-  window.applyFilters = function() {
-    _applyFilters();
-    const visibles = allProductItems.filter(el => el.style.display !== 'none').length;
-    countEl.textContent = `${visibles} producto${visibles===1?'':'s'} encontrado${visibles===1?'':'s'}.`;
-  };
+  // Inicializa el contador con el estado actual
+  (function initResultsCount(){
+    const visiblesNow = allProductItems.filter(el => el.style.display !== 'none').length;
+    countEl.textContent = `${visiblesNow} producto${visiblesNow===1?'':'s'} encontrado${visiblesNow===1?'':'s'}.`;
+  })();
 }
     /* ===========================
        8) TOAST DEL CARRITO SIN STACKING
@@ -1455,6 +1465,8 @@ updateCartCount();
   document.querySelectorAll('#primary-navigation a, .collection-menu a').forEach(a => {
     a.classList.remove('active');
     const hrefRaw = a.getAttribute('href') || '';
+    // Ignorar anchors internos (hash) para no marcarlos como activos por filename
+    if (hrefRaw.startsWith('#')) return;
     // Quita query/hash del href del link
     const hrefUrl = new URL(hrefRaw, window.location.origin);
     const hrefFile = hrefUrl.pathname.split('/').pop() || 'index.html';

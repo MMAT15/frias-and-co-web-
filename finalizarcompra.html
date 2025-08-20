@@ -10,7 +10,7 @@
     <title>BERA Clothing | Finalizar compra</title>
     <meta
       name="description"
-      content="Finalizá tu compra en BERA Clothing: revisá tu pedido, elegí envío y pagá de forma segura con Mercado Pago o retiro en local."
+      content="Finalizá tu compra en BERA Clothing: revisá tu pedido y pagá con Mercado Pago o efectivo (10% de descuento). Retiro en local o punto de encuentro."
     />
     <meta name="theme-color" content="#e91e63" />
     <link rel="icon" href="assets/images/favicon.ico" />
@@ -124,16 +124,9 @@
         <div class="container">
           <h1 id="hero-title" class="section-title">Finalizar compra</h1>
           <p class="hero-subtitle">
-            Confirmá tu pedido y pagá de forma segura con Mercado Pago. Podés usar dinero en tu cuenta de Mercado Pago o tus tarjetas de débito y crédito guardadas.
+            Confirmá tu pedido. Pagá con Mercado Pago o en efectivo con 10% de descuento. Retiro en local o punto de encuentro (a coordinar).
           </p>
         </div>
-        <button
-              id="cancel-checkout"
-              type="button"
-              class="btn btn-secondary btn-block"
-            >
-              ¿Te arrepentiste? Volver al inicio
-            </button>
       </section>
 
       <!-- Checkout -->
@@ -149,26 +142,25 @@
               <!-- JS inyecta productos aquí -->
             </ul>
 
-            <dl class="summary-totals" aria-live="polite">
+            <dl class="summary-totals" aria-live="polite" id="summary-totals">
               <div class="summary-row">
-                <dt>Subtotal</dt>
+                <dt>Subtotal (precio final con IVA)</dt>
                 <dd id="summary-subtotal">$0</dd>
               </div>
               <div class="summary-row">
-                <dt>Impuestos (21&nbsp;%)</dt>
-                <dd id="summary-tax">$0</dd>
+                <dt>Precio sin impuestos (−21% IVA)</dt>
+                <dd id="summary-net">$0</dd>
               </div>
               <div class="summary-row">
-                <dt>Envío</dt>
-                <dd id="summary-shipping">$0</dd>
+                <dt>Descuento en efectivo (10%)</dt>
+                <dd id="summary-cash-discount">−$0</dd>
               </div>
               <div class="summary-row total">
-                <dt>Total</dt>
+                <dt>Total a pagar</dt>
                 <dd id="summary-total">$0</dd>
               </div>
             </dl>
-
-  
+            <p class="summary-note">El descuento del 10% aplica solo pagando en efectivo. Con Mercado Pago se abona el precio final sin descuento.</p>
           </aside>
 
           <!-- Formulario -->
@@ -182,77 +174,32 @@
             <fieldset class="form-group" aria-labelledby="legend-shipping-data">
               <legend id="legend-shipping-data">Datos de envío</legend>
 
-              <!-- Código postal -->
-              <div class="form-group">
-                <label for="zip-input"
-                  >Código postal <span aria-hidden="true">*</span></label
-                >
-                <input
-                  type="text"
-                  id="zip-input"
-                  name="zip"
-                  inputmode="numeric"
-                  pattern="[0-9]{4}"
-                  maxlength="4"
-                  placeholder="Ej. 1900"
-                  required
-                  aria-describedby="zip-help"
-                />
-                <small id="zip-help" class="zip-help">
-                  ¿No sabés tu código postal?
-                  <a
-                    href="https://www.correoargentino.com.ar/formularios/cpa"
-                    target="_blank"
-                    rel="noopener"
-                    >Buscalo acá</a
-                  >.
-                </small>
-              </div>
-
-              <!-- Método de envío -->
-              <fieldset
-                class="form-group"
-                aria-labelledby="legend-shipping-method"
-              >
-                <legend id="legend-shipping-method">Método de envío</legend>
-
-                <div id="shipping-methods" class="shipping-methods">
-                  <!-- Cada label envuelve su input para mayor área clickeable -->
+              <fieldset class="form-group" aria-labelledby="legend-delivery-method">
+                <legend id="legend-delivery-method">Entrega</legend>
+                <div class="shipping-methods">
                   <label class="option-wrapper">
-                    <input
-                      type="radio"
-                      name="shipping"
-                      value="standard"
-                      data-cost="800"
-                      checked
-                    />
-                    <span class="option-label">Estándar</span>
-                    <span class="option-detail">3–5 días – $800</span>
-                  </label>
-
-                  <label class="option-wrapper">
-                    <input
-                      type="radio"
-                      name="shipping"
-                      value="express"
-                      data-cost="1200"
-                    />
-                    <span class="option-label">Express</span>
-                    <span class="option-detail">1–2 días – $1200</span>
-                  </label>
-
-                  <label class="option-wrapper">
-                    <input
-                      type="radio"
-                      name="shipping"
-                      value="pickup"
-                      data-cost="0"
-                    />
+                    <input type="radio" name="delivery" value="pickup" checked />
                     <span class="option-label">Retiro en local</span>
                     <span class="option-detail">Gratis</span>
                   </label>
+                  <label class="option-wrapper">
+                    <input type="radio" name="delivery" value="meetup" />
+                    <span class="option-label">Punto de encuentro</span>
+                    <span class="option-detail">A coordinar </span>
+                  </label>
                 </div>
               </fieldset>
+
+              <div class="pickup-map" role="region" aria-label="Mapa del punto de retiro">
+                <h3 class="panel-subtitle">Retiro en local</h3>
+                <p>Calle 10 N° 4629, Berazategui, Buenos Aires</p>
+                <div class="map-embed">
+                  <iframe
+                    src="https://www.google.com/maps?q=Calle+10+4629+Berazategui+Buenos+Aires&output=embed"
+                    width="100%" height="220" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade">
+                  </iframe>
+                </div>
+              </div>
             </fieldset>
 
             <!-- Método de pago -->
@@ -261,30 +208,32 @@
 
               <div class="payment-methods">
                 <label class="option-wrapper">
-                  <input type="radio" name="payment" value="mercadopago" checked />
-                  <span>Mercado Pago (redirige a entorno seguro)</span>
+                  <input type="radio" name="payment" value="cash" checked />
+                  <span>Efectivo (10% de descuento)</span>
+                </label>
+                <label class="option-wrapper">
+                  <input type="radio" name="payment" value="mercadopago" />
+                  <span>Mercado Pago (precio final)</span>
                 </label>
                 <p class="payment-help" aria-live="polite">
-                  Mercado Pago procesa el cobro y ofrece múltiples medios: dinero en cuenta de Mercado Pago y tarjetas de débito/crédito guardadas. No almacenamos datos de tarjeta en este sitio.
+                  Con efectivo aplicamos 10% de descuento sobre el precio final. Con Mercado Pago abonás el precio final sin descuento.
                 </p>
               </div>
             </fieldset>
 
-            <!-- Botón Mercado Pago (se injecta vía JS) -->
-            <div id="mp-button-container"></div>
-            <small class="mp-note">Al continuar, te llevamos al checkout seguro de Mercado Pago para finalizar el pago.</small>
-
             <!-- Confirmación -->
-            <button
-              type="submit"
-              id="confirm-order"
-              class="btn btn-primary btn-block"
-            >
-              Confirmar y pagar con Mercado Pago
+            <button type="submit" id="confirm-order" class="btn btn-primary btn-block">
+              Confirmar pedido
             </button>
           </form>
         </div>
       </section>
+      <style>
+        .summary-note{font-size:.9rem;color:#666;margin-top:.5rem}
+        .panel-subtitle{margin:.5rem 0 .25rem;font-weight:600}
+        .pickup-map .map-embed{margin-top:.5rem;border-radius:8px;overflow:hidden}
+        .payment-methods .option-wrapper{display:flex;gap:.5rem;align-items:center;margin:.3rem 0}
+      </style>
     </main>
 
     <!-- FOOTER -->
@@ -300,6 +249,99 @@
       // Reemplazá por tu clave de producción cuando pases a live
       window.MP_PUBLIC_KEY = 'TU_PUBLIC_KEY_AQUÍ';
     </script>
-    <script src="js/mp-checkout.js" defer></script>
+    <script>
+(() => {
+  const IG_USER = 'beraclothingg'; // sin @
+
+  function readCart() {
+    try {
+      const raw = localStorage.getItem('cart');
+      const cart = raw ? JSON.parse(raw) : [];
+      return Array.isArray(cart) ? cart : [];
+    } catch { return []; }
+  }
+
+  function money(n){ return '$' + (n||0).toLocaleString('es-AR'); }
+
+  function selectedPayment() {
+    const r = document.querySelector('input[name="payment"]:checked');
+    // normalizamos a los valores usados más abajo en buildMessage()
+    return r ? (r.value === 'cash' ? 'efectivo' : 'mp') : 'efectivo';
+  }
+
+  function selectedPickup() {
+    const r = document.querySelector('input[name="delivery"]:checked');
+    // normalizamos a 'local' | 'punto' para el mensaje DM
+    return r ? (r.value === 'pickup' ? 'local' : 'punto') : 'local';
+  }
+
+  function customerData() {
+    const get = sel => (document.querySelector(sel)?.value || '').trim();
+    return {
+      nombre: get('#nombre') || get('[name="nombre"]'),
+      email: get('#email') || get('[name="email"]'),
+      telefono: get('#telefono') || get('[name="telefono"]'),
+      notas: get('#notas') || get('[name="notas"]')
+    };
+  }
+
+  function buildMessage() {
+    const cart = readCart();
+    const pay  = selectedPayment();
+    const pick = selectedPickup();
+    const data = customerData();
+
+    const total = cart.reduce((s,i)=> s + (i.price||0) * (i.qty||1), 0);
+    const totalEfectivo = Math.round(total * 0.9); // 10% off
+    const iva = Math.round(total / 1.21);          // precio sin IVA (aprox. 21%)
+
+    const lines = [];
+    lines.push('¡Hola! Quiero confirmar mi pedido:');
+    if (cart.length === 0) lines.push('— (Carrito vacío)');
+    cart.forEach(i => {
+      lines.push(`• ${i.name} x${i.qty} — ${money(i.price*i.qty)}`);
+    });
+    lines.push('');
+    lines.push(`Total: ${money(total)}`);
+    lines.push(`Precio sin impuestos (ref.): ${money(iva)}`);
+    if (pay === 'efectivo') {
+      lines.push(`Método de pago: Efectivo (10% OFF) → ${money(totalEfectivo)}`);
+    } else {
+      lines.push('Método de pago: Mercado Pago (precio final).');
+    }
+    lines.push(`Retiro: ${pick === 'local' ? 'Local' : 'Punto de encuentro (a coordinar)'}`);
+    if (pick === 'local') lines.push('Dirección: Calle 10 N° 4629, Berazategui');
+
+    if (data.nombre)   lines.push(`Nombre: ${data.nombre}`);
+    if (data.telefono) lines.push(`Teléfono: ${data.telefono}`);
+    if (data.email)    lines.push(`Email: ${data.email}`);
+    if (data.notas)    lines.push(`Notas: ${data.notas}`);
+
+    return lines.join('\n');
+  }
+
+  function openInstagramDM(text) {
+    const url = `https://ig.me/m/${IG_USER}?text=${encodeURIComponent(text)}`;
+    // Abrimos en la misma pestaña para que el usuario vuelva con "atrás"
+    window.location.href = url;
+
+    // Fallback: si no abre (p.ej. bloqueadores/escritorio sin login), mostramos perfil
+    setTimeout(() => {
+      if (document.visibilityState === 'visible') {
+        // como reserva: copiamos texto y abrimos perfil
+        navigator.clipboard?.writeText(text).catch(()=>{});
+        window.open(`https://instagram.com/${IG_USER}`, '_blank');
+        alert('Te abrimos el perfil por si IG Direct no se abrió. El resumen quedó copiado al portapapeles 👍');
+      }
+    }, 1200);
+  }
+
+  document.getElementById('confirm-order')?.addEventListener('click', (e) => {
+    e.preventDefault();
+    const msg = buildMessage();
+    openInstagramDM(msg);
+  });
+})();
+</script>
   </body>
 </html>
