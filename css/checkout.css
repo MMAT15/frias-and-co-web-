@@ -186,44 +186,25 @@
 /* --------------------------------------------------
    Pre-DM Instagram Modal
 -------------------------------------------------- */
-.pre-dm-overlay {
-  position: fixed;
-  inset: 0;
-  background: rgba(0,0,0,0.5);
-  z-index: 1000;
-  opacity: 0;
-  pointer-events: none;
-  transition: opacity 0.3s ease;
-}
-
-.pre-dm-overlay.active {
-  opacity: 1;
-  pointer-events: auto;
-}
-
 .pre-dm-modal {
   position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%) scale(0.95);
+  inset: 0;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0,0,0,0.55);
+  z-index: 10000;
+}
+.pre-dm-modal.active {
+  display: flex;
+}
+
+.pre-dm-modal__content {
   background: #fff;
   border-radius: var(--border-radius);
   box-shadow: 0 6px 20px rgba(0,0,0,0.2);
   width: 90%;
   max-width: 480px;
-  z-index: 1001;
-  opacity: 0;
-  pointer-events: none;
-  transition: opacity 0.3s ease, transform 0.3s ease;
-}
-
-.pre-dm-modal.active {
-  opacity: 1;
-  pointer-events: auto;
-  transform: translate(-50%, -50%) scale(1);
-}
-
-.pre-dm-modal__content {
   padding: 1.5rem;
   font-family: var(--fuente-base);
 }
@@ -265,15 +246,4 @@
 
 .pre-dm-actions .btn:hover {
   background: #c2185b;
-}
-
-.pre-dm-close {
-  position: absolute;
-  top: 0.5rem;
-  right: 0.75rem;
-  background: transparent;
-  border: none;
-  font-size: 1.5rem;
-  cursor: pointer;
-  color: #333;
 }

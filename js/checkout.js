@@ -170,25 +170,18 @@ document.addEventListener('DOMContentLoaded', () => {
     checkoutForm.addEventListener('submit', async (e) => {
       e.preventDefault();
 
-      const method = currentPayment();
-      if (method === 'mercadopago') {
-        alert('Redirigiendo a Mercado Pago…');
-        // Aquí iniciarías tu flujo real de MP.
-        return;
-      }
-
       const msg = buildIGMessage();
       const copied = await copyToClipboard(msg);
 
       // Si hay modal, mostrarlo; si no, redirigir directo
       if (dmModal && dmAckBtn) {
-        dmModal.classList.add('show');
+        dmModal.classList.add('active');
         dmModal.setAttribute('aria-hidden', 'false');
         try { dmAckBtn.focus(); } catch {}
 
         // Click en "Entendido" ⇒ ir a IG con el texto
         const onAck = () => {
-          dmModal.classList.remove('show');
+          dmModal.classList.remove('active');
           dmModal.setAttribute('aria-hidden', 'true');
           dmAckBtn.removeEventListener('click', onAck);
           console.log('[checkout] Opening IG DM with text length:', msg.length);
