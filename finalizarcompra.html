@@ -321,25 +321,43 @@
   }
 
   function openInstagramDM(text) {
-    const url = `https://ig.me/m/${IG_USER}?text=${encodeURIComponent(text)}`;
-    // Abrimos en la misma pestaña para que el usuario vuelva con "atrás"
-    window.location.href = url;
+    // 1) Copiamos siempre el resumen al portapapeles (para pegar rápido en IG)
+    navigator.clipboard?.writeText(text).catch(()=>{});
 
-    // Fallback: si no abre (p.ej. bloqueadores/escritorio sin login), mostramos perfil
+    // 2) Intento 1: abrir la app nativa de Instagram con deep link (algunos navegadores lo soportan)
+    // Nota: Instagram no documenta un parámetro oficial para pre-llenar el texto del DM,
+    // por eso siempre copiamos el mensaje como respaldo.
+    const appUrl = `instagram://direct`;
+    let appTried = false;
+    try {
+      appTried = !!window.open(appUrl, '_self');
+    } catch (_) {}
+
+    // 3) Intento 2 (fallback web): abrir el chat/perfil via ig.me
+    // En web IG no acepta texto pre-rellenado, por lo que el usuario deberá pegar (Ctrl/Cmd+V).
+    setTimeout(() => {
+      // si seguimos visibles, asumimos que no se abrió la app nativa
+      if (document.visibilityState === 'visible') {
+        window.location.href = `https://ig.me/m/${IG_USER}`;
+      }
+    }, 700);
+
+    // 4) Aviso claro al usuario
     setTimeout(() => {
       if (document.visibilityState === 'visible') {
-        // como reserva: copiamos texto y abrimos perfil
-        navigator.clipboard?.writeText(text).catch(()=>{});
-        window.open(`https://instagram.com/${IG_USER}`, '_blank');
-        alert('Te abrimos el perfil por si IG Direct no se abrió. El resumen quedó copiado al portapapeles 👍');
+        alert('Te abrí Instagram. Si el mensaje no aparece escrito, pegalo con Ctrl/Cmd+V. Ya copié el resumen por vos 👍');
       }
     }, 1200);
   }
 
-  document.getElementById('confirm-order')?.addEventListener('click', (e) => {
+  const confirmBtn = document.getElementById('confirm-order');
+  confirmBtn?.addEventListener('click', (e) => {
     e.preventDefault();
+    confirmBtn.disabled = true;
     const msg = buildMessage();
     openInstagramDM(msg);
+    // reactivar por si el usuario vuelve atrás
+    setTimeout(() => { confirmBtn.disabled = false; }, 3000);
   });
 })();
 </script>
