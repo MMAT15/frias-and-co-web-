@@ -1,5 +1,14 @@
 document.addEventListener('DOMContentLoaded', () => {
   console.log('[checkout] JS loaded');
+  // Global guard to avoid double IG launches
+  if (!window.__igLaunch) window.__igLaunch = { inProgress: false, timer: null };
+
+  // Kill any pre-existing autolaunch anchors/buttons that might trigger IG immediately
+  const strayAuto = document.getElementById('ig-autolaunch') || document.querySelector('.ig-autolaunch');
+  if (strayAuto) {
+    strayAuto.addEventListener('click', (e)=> e.preventDefault(), { passive: false });
+    strayAuto.style.display = 'none';
+  }
   // ====== Carrito desde LocalStorage ======
   let cart = [];
   try {
@@ -106,7 +115,17 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   function openIGWithText(text) {
+    if (window.__igLaunch.inProgress) {
+      console.warn('[checkout] IG launch already in progress — skip');
+      return;
+    }
+    window.__igLaunch.inProgress = true;
+
     const url = `https://ig.me/m/${IG_USER}?text=${encodeURIComponent(text)}`;
+
+    // Remove modal/open state if present
+    try { document.body.classList.remove('dm-open'); } catch {}
+    try { dmModal?.classList.remove('active'); dmModal?.setAttribute('aria-hidden','true'); } catch {}
 
     // Intento 1: misma pestaña (mejor en mobile)
     try {
@@ -170,47 +189,51 @@ document.addEventListener('DOMContentLoaded', () => {
     checkoutForm.addEventListener('submit', async (e) => {
       e.preventDefault();
 
+      // Reset launch state and clear old timers
+      window.__igLaunch.inProgress = false;
+      if (window.__igLaunch.timer) { clearInterval(window.__igLaunch.timer); window.__igLaunch.timer = null; }
+
       const msg = buildIGMessage();
       const copied = await copyToClipboard(msg);
 
       // Si hay modal, mostrarlo; si no, redirigir directo
       if (dmModal && dmAckBtn) {
-        // Reset countdown and clear any existing intervals
-        let countdown;
-        if (typeof window.dmCountdownInterval !== 'undefined') {
-          clearInterval(window.dmCountdownInterval);
-        }
         let seconds = 15;
         dmModal.classList.add('active');
         dmModal.setAttribute('aria-hidden', 'false');
+        try { document.body.classList.add('dm-open'); } catch {}
         const timerEl = dmModal.querySelector('#dm-timer');
         if (timerEl) timerEl.textContent = seconds;
-        countdown = setInterval(() => {
+
+        // Clear any previous countdown
+        if (window.__igLaunch.timer) { clearInterval(window.__igLaunch.timer); window.__igLaunch.timer = null; }
+
+        window.__igLaunch.timer = setInterval(() => {
           seconds--;
-          if (timerEl) timerEl.textContent = seconds;
+          if (timerEl) timerEl.textContent = Math.max(0, seconds);
           if (seconds <= 0) {
-            clearInterval(countdown);
+            clearInterval(window.__igLaunch.timer);
+            window.__igLaunch.timer = null;
+            // Close modal and body lock, then open IG (single-run guarded)
+            try { document.body.classList.remove('dm-open'); } catch {}
             dmModal.classList.remove('active');
             dmModal.setAttribute('aria-hidden', 'true');
             openIGWithText(msg);
           }
         }, 1000);
-        window.dmCountdownInterval = countdown;
 
         try { dmAckBtn.focus(); } catch {}
 
         // Click en "Entendido" ⇒ ir a IG con el texto
         const onAck = () => {
-          clearInterval(countdown);
+          if (window.__igLaunch.timer) { clearInterval(window.__igLaunch.timer); window.__igLaunch.timer = null; }
+          try { document.body.classList.remove('dm-open'); } catch {}
           dmModal.classList.remove('active');
           dmModal.setAttribute('aria-hidden', 'true');
-          dmAckBtn.removeEventListener('click', onAck);
           console.log('[checkout] Opening IG DM with text length:', msg.length);
           openIGWithText(msg);
         };
-        dmAckBtn.replaceWith(dmAckBtn.cloneNode(true));
-        const freshAckBtn = document.getElementById('dm-ack');
-        freshAckBtn.addEventListener('click', onAck);
+        dmAckBtn.addEventListener('click', onAck, { once: true });
 
         // Si la copia falló, avisamos explícitamente dentro del modal (si hay un contenedor)
         const helper = dmModal.querySelector('.dm-helper');
@@ -219,8 +242,14 @@ document.addEventListener('DOMContentLoaded', () => {
             ? 'Ya copiamos el resumen. En el chat, solo pegá y enviá.'
             : 'No pudimos copiar automáticamente. Al abrir el chat, pegá manualmente el resumen que verás en pantalla.';
         }
+        if (helper && typeof seconds === 'number') {
+          helper.setAttribute('data-seconds', String(seconds));
+        }
       } else {
         // Sin modal: redirigimos directo
+        // Ensure we don't have an active timer and not already launched
+        if (window.__igLaunch.timer) { clearInterval(window.__igLaunch.timer); window.__igLaunch.timer = null; }
+        window.__igLaunch.inProgress = false;
         openIGWithText(msg);
       }
     });
@@ -246,4 +275,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // ====== Inicializar ======
   calculateCheckout();
+
+  document.addEventListener('visibilitychange', () => {
+    // If the page becomes visible again, allow a fresh launch on next submit
+    if (document.visibilityState === 'visible') {
+      window.__igLaunch.inProgress = false;
+      if (window.__igLaunch.timer) { clearInterval(window.__igLaunch.timer); window.__igLaunch.timer = null; }
+    }
+  });
 });

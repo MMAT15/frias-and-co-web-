@@ -193,10 +193,21 @@
   align-items: center;
   justify-content: center;
   background: rgba(0,0,0,0.55);
-  z-index: 10000;
+  z-index: 2147483647;
 }
 .pre-dm-modal.active {
   display: flex;
+}
+
+/* Prevent background scroll while modal is open */
+body.dm-open {
+  overflow: hidden;
+}
+
+/* Ensure any hidden autolaunch helper stays invisible */
+.ig-autolaunch, #ig-autolaunch {
+  display: none !important;
+  visibility: hidden !important;
 }
 
 .pre-dm-modal__content {
@@ -207,6 +218,8 @@
   max-width: 480px;
   padding: 1.5rem;
   font-family: var(--fuente-base);
+  max-height: 85vh;
+  overflow: auto;
 }
 
 .pre-dm-title {
@@ -258,4 +271,14 @@
 
 .pre-dm-actions .btn:hover {
   background: #c2185b;
+}
+
+/* Utility: visually-hidden for polite announcements */
+.visually-hidden {
+  position: absolute !important;
+  width: 1px; height: 1px;
+  padding: 0; margin: -1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap; border: 0;
 }

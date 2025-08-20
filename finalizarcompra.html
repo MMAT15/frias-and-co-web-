@@ -242,6 +242,9 @@
           </p>
           <!-- Nuevo aviso con contador (solo se debe ver antes de abrir IG) -->
           <p class="dm-countdown">Te vamos a redirigir en <span id="dm-timer">15</span> segundos…</p>
+          <p id="dm-redirecting" class="dm-redirecting" hidden>
+            Redirigiendo a Instagram…
+          </p>
           <p class="dm-helper" aria-live="polite"></p>
           <div class="pre-dm-actions">
             <button id="dm-ack" class="btn">Entendido</button>
@@ -366,11 +369,39 @@
   }
 
   const confirmBtn = document.getElementById('confirm-order');
+  const dmModal = document.getElementById('dm-modal');
+  const dmTimer = document.getElementById('dm-timer');
+  const dmRedirecting = document.getElementById('dm-redirecting');
+  let countdownInterval;
   confirmBtn?.addEventListener('click', (e) => {
     e.preventDefault();
     confirmBtn.disabled = true;
     const msg = buildMessage();
-    openInstagramDM(msg);
+    // Show modal and start countdown
+    if (dmModal) {
+      dmModal.classList.add('active');
+      dmModal.setAttribute('aria-hidden', 'false');
+      // Hide redirecting message if shown previously
+      if (dmRedirecting) dmRedirecting.hidden = true;
+      // Reset timer to 15
+      let seconds = 15;
+      if (dmTimer) dmTimer.textContent = seconds;
+      // Clear any previous interval
+      if (countdownInterval) clearInterval(countdownInterval);
+      countdownInterval = setInterval(() => {
+        seconds--;
+        if (dmTimer) dmTimer.textContent = seconds;
+        if (seconds <= 0) {
+          clearInterval(countdownInterval);
+          // Show redirecting message
+          if (dmRedirecting) dmRedirecting.hidden = false;
+          openInstagramDM(msg);
+        }
+      }, 1000);
+    } else {
+      // fallback if modal not found
+      openInstagramDM(msg);
+    }
     // reactivar por si el usuario vuelve atrás
     setTimeout(() => { confirmBtn.disabled = false; }, 3000);
   });
