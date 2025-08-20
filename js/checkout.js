@@ -175,12 +175,33 @@ document.addEventListener('DOMContentLoaded', () => {
 
       // Si hay modal, mostrarlo; si no, redirigir directo
       if (dmModal && dmAckBtn) {
+        // Reset countdown and clear any existing intervals
+        let countdown;
+        if (typeof window.dmCountdownInterval !== 'undefined') {
+          clearInterval(window.dmCountdownInterval);
+        }
+        let seconds = 15;
         dmModal.classList.add('active');
         dmModal.setAttribute('aria-hidden', 'false');
+        const timerEl = dmModal.querySelector('#dm-timer');
+        if (timerEl) timerEl.textContent = seconds;
+        countdown = setInterval(() => {
+          seconds--;
+          if (timerEl) timerEl.textContent = seconds;
+          if (seconds <= 0) {
+            clearInterval(countdown);
+            dmModal.classList.remove('active');
+            dmModal.setAttribute('aria-hidden', 'true');
+            openIGWithText(msg);
+          }
+        }, 1000);
+        window.dmCountdownInterval = countdown;
+
         try { dmAckBtn.focus(); } catch {}
 
         // Click en "Entendido" ⇒ ir a IG con el texto
         const onAck = () => {
+          clearInterval(countdown);
           dmModal.classList.remove('active');
           dmModal.setAttribute('aria-hidden', 'true');
           dmAckBtn.removeEventListener('click', onAck);

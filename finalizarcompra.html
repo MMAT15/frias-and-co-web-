@@ -220,7 +220,7 @@
             </fieldset>
 
             <!-- Confirmación -->
-            <button type="submit" id="confirm-order" class="btn btn-primary btn-block">
+            <button type="button" id="confirm-order" class="btn btn-primary btn-block" aria-describedby="dm-title dm-instructions">
               Confirmar pedido
             </button>
           </form>
@@ -236,10 +236,12 @@
       <div id="dm-modal" class="pre-dm-modal" role="dialog" aria-modal="true" aria-labelledby="dm-title" aria-hidden="true">
         <div class="pre-dm-modal__content" role="document">
           <h2 id="dm-title" class="pre-dm-title">Vamos a escribirte por Instagram</h2>
-          <p class="pre-dm-body">
+          <p id="dm-instructions" class="pre-dm-body">
             Ahora te vamos a redirigir a nuestro chat de Instagram (<strong>@beraclothingg</strong>).
             <br>El resumen de tu pedido ya quedó <strong>copiado</strong>: cuando se abra el chat, <strong>pegalo</strong> y tocá enviar.
           </p>
+          <!-- Nuevo aviso con contador (solo se debe ver antes de abrir IG) -->
+          <p class="dm-countdown">Te vamos a redirigir en <span id="dm-timer">15</span> segundos…</p>
           <p class="dm-helper" aria-live="polite"></p>
           <div class="pre-dm-actions">
             <button id="dm-ack" class="btn">Entendido</button>
