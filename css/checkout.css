@@ -182,3 +182,98 @@
   .checkout-form { order: 1; flex: 2 1 600px; }
   .checkout-summary-panel { order: 2; flex: 1 1 360px; }
 }
+
+/* --------------------------------------------------
+   Pre-DM Instagram Modal
+-------------------------------------------------- */
+.pre-dm-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.5);
+  z-index: 1000;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+
+.pre-dm-overlay.active {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.pre-dm-modal {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0.95);
+  background: #fff;
+  border-radius: var(--border-radius);
+  box-shadow: 0 6px 20px rgba(0,0,0,0.2);
+  width: 90%;
+  max-width: 480px;
+  z-index: 1001;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.pre-dm-modal.active {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translate(-50%, -50%) scale(1);
+}
+
+.pre-dm-modal__content {
+  padding: 1.5rem;
+  font-family: var(--fuente-base);
+}
+
+.pre-dm-title {
+  margin-top: 0;
+  font-size: 1.3rem;
+  margin-bottom: 1rem;
+  font-weight: 600;
+}
+
+.pre-dm-body p {
+  margin: 0.5rem 0;
+}
+
+.pre-dm-list {
+  margin: 0.5rem 0 0;
+  padding-left: 1.2rem;
+  font-size: 0.9rem;
+  color: #555;
+}
+
+.pre-dm-actions {
+  margin-top: 1.5rem;
+  text-align: right;
+}
+
+.pre-dm-actions .btn {
+  background: var(--color-acento, #e91e63);
+  color: #fff;
+  padding: 0.6rem 1.2rem;
+  border: none;
+  border-radius: var(--border-radius);
+  cursor: pointer;
+  font-size: 1rem;
+  font-weight: 600;
+  transition: background 0.2s;
+}
+
+.pre-dm-actions .btn:hover {
+  background: #c2185b;
+}
+
+.pre-dm-close {
+  position: absolute;
+  top: 0.5rem;
+  right: 0.75rem;
+  background: transparent;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+  color: #333;
+}

@@ -234,6 +234,37 @@
         .pickup-map .map-embed{margin-top:.5rem;border-radius:8px;overflow:hidden}
         .payment-methods .option-wrapper{display:flex;gap:.5rem;align-items:center;margin:.3rem 0}
       </style>
+      <!-- ========== PRE-DM INSTAGRAM MODAL ========== -->
+      <div id="pre-dm-overlay" class="pre-dm-overlay" aria-hidden="true"></div>
+
+      <div id="pre-dm-modal"
+           class="pre-dm-modal"
+           role="dialog"
+           aria-modal="true"
+           aria-labelledby="pre-dm-title"
+           aria-describedby="pre-dm-desc"
+           aria-hidden="true"
+           tabindex="-1">
+        <div class="pre-dm-modal__content" role="document" tabindex="-1">
+          <button type="button" class="pre-dm-close" aria-label="Cerrar aviso">×</button>
+
+          <h2 id="pre-dm-title" class="pre-dm-title">¡Listo para confirmar por Instagram!</h2>
+
+          <div id="pre-dm-desc" class="pre-dm-body">
+            <p>Ahora te vamos a redirigir a nuestro DM de Instagram <strong>@beraclothingg</strong>.</p>
+            <p>Ya copiamos el resumen de tu pedido por vos. Cuando se abra el chat, simplemente <strong>pegá el mensaje</strong> (Ctrl/Cmd+V) y <strong>enviálo</strong>.</p>
+            <ul class="pre-dm-list">
+              <li>Si no se abre Instagram, te llevamos a nuestro perfil para que escribas por ahí.</li>
+              <li>Podés volver a esta página en cualquier momento.</li>
+            </ul>
+          </div>
+
+          <div class="pre-dm-actions">
+            <button id="pre-dm-accept" type="button" class="btn btn-primary">Entendido</button>
+          </div>
+        </div>
+      </div>
+      <!-- ========== /PRE-DM INSTAGRAM MODAL ========== -->
     </main>
 
     <!-- FOOTER -->
