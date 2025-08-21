@@ -36,6 +36,24 @@ document.addEventListener('DOMContentLoaded', () => {
   const CASH_OFF = 0.10; // 10% descuento en efectivo
   const IG_USER  = 'beraclothingg'; // sin @
 
+  // ====== Device / browser helpers ======
+  function isIOS() {
+    const ua = navigator.userAgent || navigator.vendor || window.opera;
+    return /iPad|iPhone|iPod/.test(ua);
+  }
+  function isSafari() {
+    const ua = navigator.userAgent;
+    return /^((?!chrome|android).)*safari/i.test(ua);
+  }
+  function isInAppBrowser() {
+    const ua = navigator.userAgent.toLowerCase();
+    // Heuristics for in-app webviews that often block auto-deeplinks
+    return (
+      ua.includes('fbav') || ua.includes('instagram') || ua.includes('line') ||
+      ua.includes('twitter') || ua.includes('wv') || ua.includes('gsa')
+    );
+  }
+
   // ====== Helpers ======
   const money = (n) => {
     const val = Number.isFinite(n) ? n : 0;
@@ -121,28 +139,63 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     window.__igLaunch.inProgress = true;
 
-    const url = `https://ig.me/m/${IG_USER}?text=${encodeURIComponent(text)}`;
+    // Prefer deep links first when available (iOS requires a user gesture to succeed)
+    const dmDeepLink = `instagram://direct/new?text=${encodeURIComponent(text)}`; // may not work on all builds
+    const userDeepLink = `instagram://user?username=${IG_USER}`;
+    const igMe = `https://ig.me/m/${IG_USER}?text=${encodeURIComponent(text)}`;
+    const igProfile = `https://instagram.com/${IG_USER}`;
 
-    // Remove modal/open state if present
+    // Close modal state if visible
     try { document.body.classList.remove('dm-open'); } catch {}
     try { dmModal?.classList.remove('active'); dmModal?.setAttribute('aria-hidden','true'); } catch {}
 
-    // Intento 1: misma pestaña (mejor en mobile)
-    try {
-      window.location.href = url;
-    } catch {}
+    const tryNavigate = (url, target) => {
+      try {
+        if (target === '_blank') {
+          const w = window.open(url, '_blank');
+          return !!w;
+        }
+        window.location.href = url;
+        return true;
+      } catch {
+        return false;
+      }
+    };
 
-    // Fallback: si no cambia de visibilidad, probamos nueva pestaña
+    const onFailAll = () => {
+      // Last resort: open profile and inform user
+      const ok = tryNavigate(igProfile, '_blank');
+      if (!ok) {
+        alert('No pudimos abrir Instagram automáticamente. Abrí Instagram y buscá @' + IG_USER + '. Ya copiamos tu mensaje para que lo pegues.');
+      }
+    };
+
+    // STRATEGY
+    // 1) On iOS: custom schemes often need a *direct tap*. We'll still try in the current tab.
+    if (isIOS()) {
+      // First try the DM deep link, then the profile deep link, then ig.me as web fallback
+      const ok1 = tryNavigate(dmDeepLink);
+      // If we are still visible shortly after, chain the fallback attempts
+      setTimeout(() => {
+        if (document.visibilityState === 'visible') {
+          const ok2 = tryNavigate(userDeepLink);
+          setTimeout(() => {
+            if (document.visibilityState === 'visible') {
+              const ok3 = tryNavigate(igMe);
+              setTimeout(() => { if (document.visibilityState === 'visible') onFailAll(); }, 500);
+            }
+          }, 500);
+        }
+      }, 600);
+      return;
+    }
+
+    // 2) Non‑iOS: try web universal link first, then app links
+    const okWeb = tryNavigate(igMe);
     setTimeout(() => {
       if (document.visibilityState === 'visible') {
-        const win = window.open(url, '_blank');
-        // Si incluso esto falla, abrimos el perfil y avisamos
-        setTimeout(() => {
-          if (!win || win.closed || document.visibilityState === 'visible') {
-            window.open(`https://instagram.com/${IG_USER}`, '_blank');
-            alert('Por si IG Direct no se abrió, te dejamos el perfil en una pestaña nueva. El resumen ya está copiado, pegalo en el chat.');
-          }
-        }, 400);
+        const okApp = tryNavigate(userDeepLink);
+        setTimeout(() => { if (document.visibilityState === 'visible') onFailAll(); }, 500);
       }
     }, 800);
   }
@@ -214,11 +267,22 @@ document.addEventListener('DOMContentLoaded', () => {
           if (seconds <= 0) {
             clearInterval(window.__igLaunch.timer);
             window.__igLaunch.timer = null;
-            // Close modal and body lock, then open IG (single-run guarded)
-            try { document.body.classList.remove('dm-open'); } catch {}
-            dmModal.classList.remove('active');
-            dmModal.setAttribute('aria-hidden', 'true');
-            openIGWithText(msg);
+
+            const helper = dmModal.querySelector('.dm-helper');
+            // On iOS (and many in‑app browsers), auto‑open is unreliable unless triggered by a tap.
+            if (isIOS() || isInAppBrowser() || isSafari()) {
+              // Keep the modal open and ask for a tap
+              if (helper) helper.textContent = 'En iPhone, para abrir Instagram tocá “Abrir Instagram” y se pegará el resumen.';
+              // Turn the ACK button into an explicit opener
+              if (dmAckBtn) dmAckBtn.textContent = 'Abrir Instagram';
+              try { dmAckBtn.focus(); } catch {}
+            } else {
+              // Close modal and auto‑open on desktop / Android browsers
+              try { document.body.classList.remove('dm-open'); } catch {}
+              dmModal.classList.remove('active');
+              dmModal.setAttribute('aria-hidden', 'true');
+              openIGWithText(msg);
+            }
           }
         }, 1000);
 
@@ -244,6 +308,10 @@ document.addEventListener('DOMContentLoaded', () => {
         }
         if (helper && typeof seconds === 'number') {
           helper.setAttribute('data-seconds', String(seconds));
+        }
+        // If already on iOS, hint right away
+        if ((isIOS() || isInAppBrowser() || isSafari()) && dmAckBtn) {
+          dmAckBtn.textContent = 'Abrir Instagram';
         }
       } else {
         // Sin modal: redirigimos directo
