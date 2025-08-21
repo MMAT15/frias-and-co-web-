@@ -288,7 +288,7 @@ document.addEventListener('DOMContentLoaded', () => {
               try { document.body.classList.remove('dm-open'); } catch {}
               dmModal.classList.remove('active');
               dmModal.setAttribute('aria-hidden', 'true');
-              openIGWithText(msg);
+              window.location.href = `https://instagram.com/${IG_USER}`;
             }
           }
         }, 1000);
@@ -302,7 +302,7 @@ document.addEventListener('DOMContentLoaded', () => {
           dmModal.classList.remove('active');
           dmModal.setAttribute('aria-hidden', 'true');
           console.log('[checkout] Opening IG DM with text length:', msg.length);
-          openIGWithText(msg);
+          window.location.href = `https://instagram.com/${IG_USER}`;
         };
         dmAckBtn.addEventListener('click', onAck, { once: true });
 
