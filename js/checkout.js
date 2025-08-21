@@ -39,11 +39,13 @@ document.addEventListener('DOMContentLoaded', () => {
   // ====== Device / browser helpers ======
   function isIOS() {
     const ua = navigator.userAgent || navigator.vendor || window.opera;
-    return /iPad|iPhone|iPod/.test(ua);
+    return /iPad|iPhone|iPod/.test(ua) || /Macintosh/.test(ua) && 'ontouchend' in document;
   }
   function isSafari() {
     const ua = navigator.userAgent;
-    return /^((?!chrome|android).)*safari/i.test(ua);
+    // Detect Mobile & Desktop Safari (avoid Chrome/Edge on iOS which include "Safari" too)
+    const isSafariLike = /^((?!chrome|crios|fxios|edgios|android).)*safari/i.test(ua);
+    return isSafariLike;
   }
   function isInAppBrowser() {
     const ua = navigator.userAgent.toLowerCase();
@@ -139,11 +141,12 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     window.__igLaunch.inProgress = true;
 
-    // Prefer deep links first when available (iOS requires a user gesture to succeed)
-    const dmDeepLink = `instagram://direct/new?text=${encodeURIComponent(text)}`; // may not work on all builds
-    const userDeepLink = `instagram://user?username=${IG_USER}`;
-    const igMe = `https://ig.me/m/${IG_USER}?text=${encodeURIComponent(text)}`;
-    const igProfile = `https://instagram.com/${IG_USER}`;
+    // Prefer universal web link (ig.me) — it should open the DM thread in the app on most platforms.
+    const igMe       = `https://ig.me/m/${IG_USER}?text=${encodeURIComponent(text)}`;
+    const userDeep   = `instagram://user?username=${IG_USER}`;
+    const dmDeep     = `instagram://direct/new?text=${encodeURIComponent(text)}`; // not guaranteed
+    const igProfile  = `https://instagram.com/${IG_USER}`;
+    const igProfileU = `https://instagram.com/_u/${IG_USER}`;
 
     // Close modal state if visible
     try { document.body.classList.remove('dm-open'); } catch {}
@@ -164,38 +167,41 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const onFailAll = () => {
       // Last resort: open profile and inform user
-      const ok = tryNavigate(igProfile, '_blank');
+      const ok = tryNavigate(igProfileU, '_blank') || tryNavigate(igProfile, '_blank');
       if (!ok) {
         alert('No pudimos abrir Instagram automáticamente. Abrí Instagram y buscá @' + IG_USER + '. Ya copiamos tu mensaje para que lo pegues.');
       }
     };
 
-    // STRATEGY
-    // 1) On iOS: custom schemes often need a *direct tap*. We'll still try in the current tab.
-    if (isIOS()) {
-      // First try the DM deep link, then the profile deep link, then ig.me as web fallback
-      const ok1 = tryNavigate(dmDeepLink);
-      // If we are still visible shortly after, chain the fallback attempts
-      setTimeout(() => {
-        if (document.visibilityState === 'visible') {
-          const ok2 = tryNavigate(userDeepLink);
-          setTimeout(() => {
-            if (document.visibilityState === 'visible') {
-              const ok3 = tryNavigate(igMe);
-              setTimeout(() => { if (document.visibilityState === 'visible') onFailAll(); }, 500);
-            }
-          }, 500);
-        }
-      }, 600);
-      return;
-    }
+    // iOS/Safari/WebViews can be picky. Strategy:
+    // 1) Try ig.me universal link first (best chance to open DM thread).
+    // 2) If still visible, try app user deep link.
+    // 3) If still visible, as a last resort try DM deep link.
+    // 4) Finally, open profile page.
+    const isiOS = isIOS();
+    const inApp = isInAppBrowser();
+    const safari = isSafari();
 
-    // 2) Non‑iOS: try web universal link first, then app links
-    const okWeb = tryNavigate(igMe);
+    // Always start with ig.me
+    tryNavigate(igMe);
+
+    // Chain fallbacks only if the page remains visible
     setTimeout(() => {
       if (document.visibilityState === 'visible') {
-        const okApp = tryNavigate(userDeepLink);
-        setTimeout(() => { if (document.visibilityState === 'visible') onFailAll(); }, 500);
+        // on iOS / Safari / In-app we prefer app user deep link first
+        if (isiOS || safari || inApp) {
+          tryNavigate(userDeep);
+          setTimeout(() => {
+            if (document.visibilityState === 'visible') {
+              tryNavigate(dmDeep);
+              setTimeout(() => { if (document.visibilityState === 'visible') onFailAll(); }, 600);
+            }
+          }, 700);
+        } else {
+          // Desktop/Android: try user deep link then fall back
+          tryNavigate(userDeep);
+          setTimeout(() => { if (document.visibilityState === 'visible') onFailAll(); }, 800);
+        }
       }
     }, 800);
   }
@@ -242,6 +248,8 @@ document.addEventListener('DOMContentLoaded', () => {
     checkoutForm.addEventListener('submit', async (e) => {
       e.preventDefault();
 
+      try { document.activeElement && document.activeElement.blur && document.activeElement.blur(); } catch {}
+
       // Reset launch state and clear old timers
       window.__igLaunch.inProgress = false;
       if (window.__igLaunch.timer) { clearInterval(window.__igLaunch.timer); window.__igLaunch.timer = null; }
@@ -272,8 +280,7 @@ document.addEventListener('DOMContentLoaded', () => {
             // On iOS (and many in‑app browsers), auto‑open is unreliable unless triggered by a tap.
             if (isIOS() || isInAppBrowser() || isSafari()) {
               // Keep the modal open and ask for a tap
-              if (helper) helper.textContent = 'En iPhone, para abrir Instagram tocá “Abrir Instagram” y se pegará el resumen.';
-              // Turn the ACK button into an explicit opener
+              if (helper) helper.textContent = 'En iPhone, tocá “Abrir Instagram”. Se abrirá el chat y ya podés pegar el resumen.';
               if (dmAckBtn) dmAckBtn.textContent = 'Abrir Instagram';
               try { dmAckBtn.focus(); } catch {}
             } else {
