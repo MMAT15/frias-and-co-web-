@@ -12,13 +12,12 @@
 </script>
   <meta charset="UTF-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>BERA clothing – Novedades</title>
-  <meta name="description" content="Suscribite al newsletter de BERA clothing para enterarte de las últimas novedades, ofertas y lanzamientos." />
-  <meta name="theme-color" content="#e91e63" />
-  <link rel="icon" href="assets/images/favicon.ico" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <meta name="color-scheme" content="light dark" />
+  <meta name="format-detection" content="telephone=no" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="preconnect" href="https://unpkg.com" />
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="css/style.css" />
   <link rel="stylesheet" href="css/newsletter.css" />
@@ -71,7 +70,7 @@
     <div class="site-branding">
   <a href="index.html" class="logo-link" aria-label="Inicio">
     <div class="logo-wrap">
-      <img src="assets/images/logoo.jpeg" alt="Logo BERA clothing" class="logo" />
+      <img src="assets/images/logoo.jpeg" alt="Logo BERA clothing" class="logo" width="60" height="60" decoding="async" fetchpriority="high" />
     </div>
   </a>
   <div class="site-title" aria-label="BERA CLOTHING">
@@ -150,7 +149,7 @@
     <div class="container footer-inner">
       <p>
         <a href="https://instagram.com/beraclothingg" target="_blank" rel="noopener" class="instagram-icon" aria-label="Instagram">
-          <img src="assets/images/instaa.png" alt="Instagram">
+          <img src="assets/images/instaa.png" alt="Instagram" width="28" height="28" loading="lazy" decoding="async">
         </a>
         | Shop online 24/7 | Retiro en local | Berazategui centro
       </p>
@@ -185,5 +184,10 @@
 </aside>
 <!-- Capa oscura que cubre la página cuando el catálogo está abierto -->
 <div id="collection-overlay" class="collection-overlay" aria-hidden="true"></div>
+<noscript>
+  <div style="background:#111;color:#fff;padding:1rem;text-align:center;">
+    Esta página funciona mejor con JavaScript habilitado. Podés ver nuestros productos en <a href="https://instagram.com/beraclothingg" style="color:#e91e63;">Instagram</a>.
+  </div>
+</noscript>
 </body>
 </html>

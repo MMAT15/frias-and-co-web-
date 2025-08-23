@@ -10,15 +10,12 @@
 
   gtag('config', 'AW-11497289170');
 </script>
-<!-- Event snippet for Contacto conversion page -->
-<script>
-  gtag('event', 'conversion', {'send_to': 'AW-11497289170/1miXCLjn64obENLrquoq'});
-</script>
+<!-- Nota: conversiones se disparan SOLO en gracias.html; acá solo signals (begin_checkout) -->
 
     <!-- General -->
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
 
     <!-- SEO & Social -->
     <title>BERA Clothing | Finalizar compra</title>
@@ -27,6 +24,9 @@
       content="Finalizá tu compra en BERA Clothing: revisá tu pedido y pagá con Mercado Pago o efectivo (10% de descuento). Retiro en local o punto de encuentro."
     />
     <meta name="theme-color" content="#e91e63" />
+    <link rel="canonical" href="https://www.beraclothing.store/finalizarcompra.html" />
+    <meta name="color-scheme" content="dark light" />
+    <meta name="format-detection" content="telephone=no, email=no, address=no" />
     <link rel="icon" href="assets/images/favicon.ico" />
 
     <!-- Typography -->
@@ -41,6 +41,14 @@
     <link rel="stylesheet" href="css/checkout.css" />
     <link rel="stylesheet" href="css/style.css" />
 
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "CheckoutPage",
+      "name": "Finalizar compra – BERA Clothing",
+      "url": "https://www.beraclothing.store/finalizarcompra.html"
+    }
+    </script>
   </head>
 <body>
     <!-- HEADER -->
@@ -76,7 +84,7 @@
     <div class="site-branding">
   <a href="index.html" class="logo-link" aria-label="Inicio">
     <div class="logo-wrap">
-      <img src="assets/images/logoo.jpeg" alt="Logo BERA clothing" class="logo" />
+      <img src="assets/images/logoo.jpeg" alt="Logo BERA clothing" class="logo" width="64" height="64" decoding="async" fetchpriority="high" />
     </div>
   </a>
   <div class="site-title" aria-label="BERA CLOTHING">
@@ -245,6 +253,10 @@
         .panel-subtitle{margin:.5rem 0 .25rem;font-weight:600}
         .pickup-map .map-embed{margin-top:.5rem;border-radius:8px;overflow:hidden}
         .payment-methods .option-wrapper{display:flex;gap:.5rem;align-items:center;margin:.3rem 0}
+      .pre-dm-modal{position:fixed;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,.6);backdrop-filter:saturate(140%) blur(4px);}
+      .pre-dm-modal[hidden]{display:none}
+      .pre-dm-modal__content{background:#111;color:#fff;border:1px solid rgba(255,255,255,.08);border-radius:12px;max-width:560px;width:min(92vw,560px);padding:20px}
+      @media (prefers-reduced-motion: reduce){.dm-countdown{display:none}}
       </style>
       <!-- ========== PRE-DM INSTAGRAM MODAL (simple) ========== -->
       <div id="dm-modal" class="pre-dm-modal" role="dialog" aria-modal="true" aria-labelledby="dm-title" aria-hidden="true" hidden>
@@ -261,11 +273,17 @@
           </p>
           <p class="dm-helper" aria-live="polite"></p>
           <div class="pre-dm-actions">
-            <button id="dm-ack" class="btn">Entendido</button>
+            <button id="dm-ack" class="btn">Abrir ahora</button>
+            <button id="dm-cancel" class="btn btn-ghost" type="button">Cancelar</button>
           </div>
         </div>
       </div>
       <!-- ========== /PRE-DM INSTAGRAM MODAL (simple) ========== -->
+    <noscript>
+      <div role="status" style="padding:12px; margin:12px auto; max-width:900px; border:1px solid #ddd; border-radius:8px; background:#fafafa; color:#333">
+        Para finalizar tu compra, escribinos por Instagram a <a href="https://ig.me/m/beraclothingg" rel="noopener" target="_blank">@beraclothingg</a> y contanos los productos de tu carrito.
+      </div>
+    </noscript>
     </main>
 
     <!-- FOOTER -->
@@ -289,6 +307,12 @@
   }
 
   function money(n){ return '$' + (n||0).toLocaleString('es-AR'); }
+
+  function calcTotals(){
+    const cart = readCart();
+    const total = cart.reduce((s,i)=> s + (i.price||0) * (i.qty||1), 0);
+    return { cart, total };
+  }
 
   function selectedPayment() {
     const r = document.querySelector('input[name="payment"]:checked');
@@ -381,7 +405,34 @@
   const dmModal = document.getElementById('dm-modal');
   const dmTimer = document.getElementById('dm-timer');
   const dmRedirecting = document.getElementById('dm-redirecting');
+  try {
+    const { total } = calcTotals();
+    if (typeof gtag === 'function') {
+      gtag('event','begin_checkout', {
+        currency: 'ARS',
+        value: total || 0
+      });
+    }
+  } catch(_) {}
   let countdownInterval;
+  const dmAck = document.getElementById('dm-ack');
+  const dmCancel = document.getElementById('dm-cancel');
+  if (dmAck) {
+    dmAck.addEventListener('click', () => {
+      // abrir de inmediato y cancelar el countdown
+      const msg = buildMessage();
+      if (countdownInterval) clearInterval(countdownInterval);
+      if (dmRedirecting) dmRedirecting.hidden = false;
+      openInstagramDM(msg);
+    });
+  }
+  if (dmCancel) {
+    dmCancel.addEventListener('click', () => {
+      if (countdownInterval) clearInterval(countdownInterval);
+      dmModal.setAttribute('aria-hidden','true');
+      dmModal.classList.remove('active');
+    });
+  }
   confirmBtn?.addEventListener('click', (e) => {
     e.preventDefault();
     confirmBtn.disabled = true;
@@ -390,6 +441,7 @@
     if (dmModal) {
       dmModal.classList.add('active');
       dmModal.setAttribute('aria-hidden', 'false');
+      dmModal.removeAttribute('hidden');
       // Hide redirecting message if shown previously
       if (dmRedirecting) dmRedirecting.hidden = true;
       // Reset timer to 15

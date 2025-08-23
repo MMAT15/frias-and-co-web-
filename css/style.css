@@ -2062,7 +2062,7 @@ img {
   }
 
   /* Dos filas: 
-     fila 1 -> botones; fila 2 -> branding centrado */
+     fila 1 -> botones; fila 2 -> branding centrado a lo ancho */
   .header-inner{
     display: grid !important;
     grid-template-columns: 1fr auto;   /* izq: catálogo, der: hamburguesa */
@@ -2320,6 +2320,7 @@ img {
   border-radius: 2px;
 }
 /* Asegurar jerarquía de capas */
+
 .site-header { position: relative; z-index: 1100; }
 
 /* El panel y su overlay siempre por arriba del hero */
@@ -2376,10 +2377,6 @@ img {
   inset: 0 !important;
   z-index: 3500 !important;     /* debajo del panel */
   pointer-events: auto !important;
-}
-#collection-overlay::before,
-.collection-overlay::before {
-  pointer-events: none !important; /* que el pseudo no capture taps */
 }
 
 .collection-menu {
@@ -3117,7 +3114,7 @@ body { padding-top: calc(var(--ann-h) + var(--hdr-h)); }
      fila 2 -> [Nav centrada a lo ancho] */
   .header-inner{
     display: grid !important;
-    grid-template-columns: auto 1fr auto !important;
+    grid-template-columns: auto 1fr auto auto !important;
     grid-template-rows: auto auto !important;
     grid-template-areas:
       "catalogo branding controles"
@@ -3177,7 +3174,7 @@ body { padding-top: calc(var(--ann-h) + var(--hdr-h)); }
      This wins over any previous header layout rules. */
   .header-inner{
     display: grid !important;
-    grid-template-columns: auto 1fr auto !important;
+    grid-template-columns: auto 1fr auto auto !important;
     grid-template-rows: auto auto !important;
     grid-template-areas:
       "catalogo branding search"
@@ -3224,182 +3221,8 @@ body { padding-top: calc(var(--ann-h) + var(--hdr-h)); }
 
   /* Grid with 4 columns: [nav] [branding] [search] [catalog] */
   .header-inner{
-    display:grid !important;
-    grid-template-columns: auto 1fr auto auto !important;
-    align-items:center !important;
-    column-gap:16px !important;
-    row-gap:0 !important;
-    min-height:110px !important;
-    position:relative !important;
-  }
-
-  /* 1) NAV a la izquierda */
-  .main-nav{
-    grid-column:1 !important;
-    justify-self:start !important;
-    align-self:center !important;
-    position:static !important;
-    margin:0 !important;
-    background:transparent !important;
-    border:0 !important; box-shadow:none !important; border-radius:0 !important;
-  }
-  .nav-list{ display:flex !important; gap:1.5rem !important; align-items:center !important; padding:0 !important; }
-
-  /* 2) BRANDING perfectamente centrado */
-  .site-branding{
-    grid-column:2 !important;
-    justify-self:center !important;
-    align-self:center !important;
-    position:static !important;    /* anula absolute previos */
-    transform:none !important;
-    margin:0 !important;
-  }
-
-  /* 3) SEARCH (lupa y campo) en la columna 3, a la derecha del branding */
-  .header-search-toggle{
-    grid-column:3 !important;
-    justify-self:end !important;
-    position:static !important;   /* quita absolute anteriores */
-    margin:0 !important;
-  }
-  /* Campo colapsado por defecto (no ocupa espacio) */
-  .header-search-desktop{
-    grid-column:3 / span 2 !important;     /* cuando se abra, usa col 3-4 */
-    justify-self:end !important;
-    align-self:center !important;
-    position:static !important;
-    width:0 !important; opacity:0 !important; overflow:hidden !important; pointer-events:none !important;
-    background:#fff; border:1px solid #ccc; border-radius:999px; box-shadow:0 2px 6px rgba(0,0,0,.15);
-    transition: width .25s ease, opacity .2s ease !important;
-  }
-  .header-search-desktop .header-search-input{ height:44px; width:420px; max-width:46vw; border:0; outline:0; padding:0 .75rem; }
-  .header-search-desktop .header-search-btn{ width:44px; height:44px; border:0; background:none; }
-  .site-header.search-open .header-search-desktop{ width:min(420px,46vw) !important; opacity:1 !important; pointer-events:auto !important; }
-
-  /* 4) CATÁLOGO en la columna 4, pegado a la derecha */
-  .collection-toggle{
-    grid-column:4 !important;
-    justify-self:end !important;
-    align-self:center !important;
-    position:static !important;   /* NO absolute en desktop */
-    width:auto !important; height:auto !important; padding:6px 10px !important;
-    border-radius:4px !important; margin:0 !important;
-  }
-}
-/* === DESKTOP HEADER LAYOUT (≥1024px): Nav ← | Branding ● | Lupa + Catálogo → === */
-@media (min-width:1024px){
-  /* Espacio interno para que el logo no toque la announcement bar */
-  .site-header{ padding-top: 16px !important; padding-bottom: 12px !important; }
-
-  /* Grid de 4 columnas: [nav] [branding] [search] [catalog] */
-  .header-inner{
     display: grid !important;
     grid-template-columns: auto 1fr auto auto !important;
-    align-items: center !important;
-    column-gap: 16px !important;
-    row-gap: 0 !important;
-    min-height: 110px !important;
-    position: relative !important;
-  }
-
-  /* NAV a la izquierda, sin tarjeta/sombra en desktop */
-  .main-nav{
-    grid-column: 1 !important;
-    justify-self: start !important;
-    align-self: center !important;
-    position: static !important;
-    margin: 0 !important;
-    background: transparent !important;
-    border: 0 !important;
-    box-shadow: none !important;
-    border-radius: 0 !important;
-  }
-  .nav-list{ display: flex !important; gap: 1.5rem !important; align-items: center !important; padding: 0 !important; }
-
-  /* BRANDING centrado absoluto: NO absolute, NO transform */
-  .site-branding{
-    grid-column: 2 !important;
-    justify-self: center !important;
-    align-self: center !important;
-    position: static !important;
-    transform: none !important;
-    margin: 0 !important;
-    text-align: center !important;
-  }
-
-  /* LUPA (toggle) a la derecha del branding */
-  .header-search-toggle{
-    grid-column: 3 !important;
-    justify-self: end !important;
-    align-self: center !important;
-    display: inline-flex !important;
-    position: static !important;
-    margin: 0 !important;
-  }
-
-  /* Campo de búsqueda: por defecto oculto (lo abre .search-open del JS) */
-  .header-search-desktop{
-    grid-column: 3 / span 2 !important;
-    justify-self: end !important;
-    align-self: center !important;
-    position: static !important;
-    display: none;              /* se muestra solo con .search-open */
-    background: #fff;
-    border: 1px solid #ccc;
-    border-radius: 999px;
-    box-shadow: 0 2px 6px rgba(0,0,0,.15);
-  }
-  .site-header.search-open .header-search-desktop{ display: inline-flex; }
-
-  /* CATÁLOGO a la derecha del todo */
-  .collection-toggle{
-    grid-column: 4 !important;
-    justify-self: end !important;
-    align-self: center !important;
-    position: static !important;
-    margin-left: 12px !important;
-  }
-}
-/* === DESKTOP HARD LAYOUT (≥1024px): Nav ← | Branding ● | Catálogo | Lupa/Campo → === */
-@media (min-width:1024px){
-  .site-header{ padding-top: 14px !important; }
-  .site-header .header-inner{
-    display: grid !important;
-    grid-template-columns: auto 1fr auto auto !important; /* [nav][branding][catalog][search] */
-    align-items: center !important;
-    column-gap: 16px !important;
-  }
-  .main-nav{
-    grid-column: 1 !important;
-    display: flex !important;
-    position: static !important; top:auto !important; left:auto !important; right:auto !important; transform:none !important;
-    margin: 0 !important; padding: 0 !important; background: transparent !important; border:0 !important; box-shadow:none !important; border-radius:0 !important;
-  }
-  .nav-list{ display:flex !important; gap:1.5rem !important; margin:0 !important; padding:0 !important; }
-
-  .site-branding{
-    grid-column: 2 !important; justify-self: center !important; align-self: center !important;
-    position: static !important; transform: none !important; text-align: center !important; margin: 0 !important;
-  }
-
-  .collection-toggle{
-    grid-column: 3 !important; justify-self: end !important; align-self: center !important; position: static !important;
-    margin: 0 !important; width:auto !important; height:auto !important; padding:6px 10px !important; border-radius:4px !important; background: transparent !important; box-shadow:none !important;
-  }
-
-  .header-search-toggle{ grid-column: 4 !important; justify-self: end !important; position: static !important; margin-left: 8px !important; }
-  .header-search-desktop{
-    grid-column: 4 !important; justify-self: end !important; align-items: center !important; position: static !important;
-    display: inline-flex !important; width: auto !important; opacity: 1 !important; pointer-events: auto !important;
-    background: #fff; border: 1px solid #e0e0e0; border-radius: 999px; box-shadow: 0 2px 6px rgba(0,0,0,.08);
-  }
-}
-/* === DESKTOP HEADER: NAV ← | BRANDING ● | CATÁLOGO | LUPA→CAMPO (≥1024px) === */
-@media (min-width:1024px){
-  /* 0) Grid maestro en una fila */
-  .site-header .header-inner{
-    display:grid !important;
-    grid-template-columns:auto 1fr auto auto !important; /* nav | branding | catálogo | search */
     grid-template-areas:"nav branding catalog search" !important;
     align-items:center !important;
     column-gap: 24px !important;
@@ -3409,17 +3232,16 @@ body { padding-top: calc(var(--ann-h) + var(--hdr-h)); }
 
   /* 1) NAV a la izquierda */
   .main-nav{ grid-area:nav !important; display:flex !important; position:static !important; margin:0 !important; background:transparent !important; border:0 !important; box-shadow:none !important; border-radius:0 !important; }
-  .nav-list{ display:flex !important; gap:1.5rem !important; margin:0 !important; padding:0 !important; }
+  .nav-list{ display:flex !important; gap:1.5rem !important; align-items:center !important; padding:0 !important; }
 
   /* 2) BRANDING centrado real */
   .site-branding{ grid-area:branding !important; justify-self:center !important; align-self:center !important; position:static !important; transform:none !important; text-align:center !important; margin:0 !important; }
 
-  /* 3) CATÁLOGO a la derecha del branding */
-  .collection-toggle{ grid-area:catalog !important; justify-self:end !important; align-self:center !important; position:static !important; margin:0 !important; }
-
-  /* 4) BUSCADOR: botón de lupa visible por defecto, campo al abrir */
-  .header-search-toggle{ 
-    grid-area:search !important; justify-self:end !important; align-self:center !important;
+  /* 3) SEARCH (lupa y campo) en la columna 3, a la derecha del branding */
+  .header-search-toggle{
+    grid-column:3 !important;
+    justify-self:end !important;
+    align-self:center !important;
     position:static !important; margin:0 !important;
     width:40px; height:40px; border:1px solid #e0e0e0; border-radius:999px; background:#fff;
     display:inline-grid; place-items:center; cursor:pointer;
@@ -3470,3 +3292,189 @@ body { padding-top: calc(var(--ann-h) + var(--hdr-h)); }
 }
 
 /* ≥769px (tablet/desktop) dejamos el comportamiento que ya tenías */ 
+/* Botón flotante Instagram */
+.ig-fab {
+  position: fixed;
+  right: 16px;
+  bottom: 16px;
+  width: 56px;
+  height: 56px;
+  border-radius: 999px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: #000;          /* fondo neutro, contrasta en claro/oscuro */
+  color: #fff;
+  box-shadow: 0 8px 20px rgba(0,0,0,.25);
+  z-index: 9999;
+  text-decoration: none;
+  -webkit-tap-highlight-color: transparent;
+}
+.ig-fab:focus-visible { outline: 3px solid #e91e63; outline-offset: 3px; }
+.ig-fab__icon { width: 28px; height: 28px; display: block; }
+
+@media (min-width: 768px) {
+  .ig-fab { right: 24px; bottom: 24px; }
+}
+
+/* Evitar solaparse con el botón "back-to-top" si existe */
+.back-to-top { bottom: 84px; } /* ajustá si tu back-to-top está muy cerca */
+/* === CONSOLIDADO FINAL — HEADER + NAV + ANUNCIO === */
+
+/* Vars canónicas (una sola vez) */
+:root{
+  --hdr-h: 56px;
+  --ann-h: 0px;                 /* JS puede actualizarla si hay anuncio */
+}
+
+/* Body compensado UNA sola vez */
+body{ padding-top: calc(var(--ann-h) + var(--hdr-h)); }
+
+/* Anuncio sticky compacto (1 sola versión) */
+.announcement-bar{
+  position: sticky;
+  top: env(safe-area-inset-top,0);
+  z-index: 1400;
+  max-height: 44px;
+  padding: 8px max(12px,env(safe-area-inset-left)) 8px max(12px,env(safe-area-inset-right));
+  font-size: 14px;
+  line-height: 1.2;
+  overflow: hidden;
+  transition: max-height .28s ease, opacity .2s ease;
+}
+.announcement-bar.closing{ max-height: 0; opacity: 0; }
+
+/* Header siempre sticky y sin márgenes extras */
+.site-header{
+  position: sticky;
+  top: var(--ann-h);
+  z-index: 1100;
+  padding: 12px 0;
+  background: #fff;
+  min-height: var(--hdr-h);
+}
+
+/* --- Layout header: grid maestro --- */
+.site-header .header-inner{
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: 8px;
+  min-height: var(--hdr-h);
+}
+
+/* Botón Catálogo: versión ÚNICA (icono + hit-area) */
+.collection-toggle{
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  width: auto;
+  height: auto;
+  padding: 6px 10px;
+  border-radius: 6px;
+  background: transparent;
+  border: 1px solid #e0e0e0;
+  color: inherit;
+  transition: background .25s, color .25s, transform .2s;
+}
+.collection-toggle .icon-hanger{ width: 18px; height: 18px; display:block; }
+.collection-toggle:hover{ background:#f7f7f7; transform: translateY(-1px); }
+
+/* Branding centrado y sin subrayado global */
+.site-branding{ justify-self: center; text-align: center; }
+.site-branding .site-title::after{ display:none; } /* evita doble barra */
+
+/* Nav base (desktop plano) */
+.main-nav{
+  grid-column: 3;
+  position: static;
+  background: transparent;
+  border: 0;
+  box-shadow: none;
+}
+
+/* ===== MOBILE (≤768px) ===== */
+@media (max-width:768px){
+  /* Rejilla 3 columnas: [Catálogo][Branding][Hamburguesa] */
+  .site-header .header-inner{
+    grid-template-columns: auto 1fr auto;
+    min-height: 88px;
+  }
+  .site-branding{ justify-self: center; }
+
+  /* Menú móvil: card centrada y estable */
+  .main-nav{
+    position: fixed;
+    left: 0; right: 0;
+    top: calc(var(--ann-h) + var(--hdr-h));
+    width: min(700px, calc(100% - 24px));
+    margin: 0 auto;
+    display: none;
+    background:#fff;
+    border-radius: 16px;
+    box-shadow: 0 10px 30px rgba(0,0,0,.12);
+    z-index: 2000;
+    overflow: hidden;
+  }
+  .main-nav.show{ display:block; }
+
+  .nav-list{
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    padding: .5rem;
+  }
+  .nav-list a{
+    display:block;
+    padding: 14px;
+    border-radius: 10px;
+    font-weight: 600;
+  }
+  .nav-list a:hover{ background:#f6f6f7; }
+
+  /* Buscador dentro del menú (si existe) */
+  .menu-search{ display:flex; gap:.5rem; padding:.75rem; border-bottom:1px solid #eee; }
+
+  /* Botones laterales tamaño coherente */
+  .collection-toggle, .nav-toggle{
+    padding: 0 10px;
+    height: 40px;
+    border-radius: 999px;
+  }
+}
+
+/* ===== DESKTOP (≥1024px) ===== */
+@media (min-width:1024px){
+  /* 2 filas: fila 2 nav centrado a lo ancho */
+  .site-header .header-inner{
+    grid-template-columns: auto 1fr auto;
+    grid-template-rows: auto auto;
+    grid-template-areas:
+      "catalogo branding search"
+      "nav     nav     nav";
+    row-gap: 10px;
+    min-height: 112px;
+    position: relative;
+  }
+  .collection-toggle{ grid-area: catalogo; justify-self:start; }
+  .site-branding{ grid-area: branding; }
+  .main-nav{
+    grid-area: nav;
+    justify-self: center;
+  }
+}
+
+/* Z-index consistentes para catálogo off‑canvas */
+.collection-overlay{ z-index: 3500; }
+.collection-menu{ z-index: 4000; }
+
+/* ...elimina todas las otras variantes de header, header-inner, main-nav, collection-toggle, z-index, etc... */
+
+/* Unifica la regla de producto-item img con aspect-ratio */
+.producto-item img {
+  width: 100%;
+  aspect-ratio: 3 / 4;  /* prendas suelen verse bien 3:4 */
+  height: auto;
+  object-fit: cover;
+}

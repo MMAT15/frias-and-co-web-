@@ -10,17 +10,16 @@
 
   gtag('config', 'AW-11497289170');
 </script>
-<!-- Event snippet for Contacto conversion page -->
-<script>
-  gtag('event', 'conversion', {'send_to': 'AW-11497289170/1miXCLjn64obENLrquoq'});
-</script>
 
   <meta charset="UTF-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
   <title>BERA clothing – Contacto</title>
   <meta name="description" content="Contactate con BERA clothing: moda urbana para jóvenes. Envíos a todo el país desde Berazategui centro." />
   <meta name="theme-color" content="#e91e63">
+  <link rel="canonical" href="https://www.beraclothing.store/contacto.html" />
+  <meta name="color-scheme" content="light dark" />
+  <meta name="format-detection" content="telephone=no,address=no,email=no" />
   <link rel="icon" href="assets/images/favicon.ico" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -31,6 +30,7 @@
 
 </head>
 <body>
+  <!-- Nota: la conversión de Google Ads se dispara SOLO en la página de gracias (gracias.html), no aquí. -->
   <!-- Announcement / Marquee Bar -->
 <div class="announcement-bar" role="region" aria-label="Promociones y medios de pago">
   <button class="ann-close" aria-label="Cerrar aviso">×</button>
@@ -78,7 +78,7 @@
     <div class="site-branding">
   <a href="index.html" class="logo-link" aria-label="Inicio">
     <div class="logo-wrap">
-      <img src="assets/images/logoo.jpeg" alt="Logo BERA clothing" class="logo" />
+      <img src="assets/images/logoo.jpeg" alt="Logo BERA clothing" class="logo" width="60" height="60" decoding="async" fetchpriority="high" />
     </div>
   </a>
   <div class="site-title" aria-label="BERA CLOTHING">
@@ -142,19 +142,23 @@
               <legend class="visually-hidden">Formulario de contacto</legend>
               <div class="form-group">
                 <label for="nombre">Nombre completo</label>
-                <input type="text" id="nombre" name="nombre" placeholder="Tu nombre" required />
+                <input type="text" id="nombre" name="nombre" placeholder="Tu nombre" autocomplete="name" required />
               </div>
               <div class="form-group">
                 <label for="email">Correo electrónico</label>
-                <input type="email" id="email" name="email" placeholder="tucorreo@ejemplo.com" required />
+                <input type="email" id="email" name="email" placeholder="tucorreo@ejemplo.com" autocomplete="email" inputmode="email" required />
               </div>
               <div class="form-group">
                 <label for="asunto">Asunto</label>
-                <input type="text" id="asunto" name="asunto" placeholder="Motivo de tu mensaje" required />
+                <input type="text" id="asunto" name="asunto" placeholder="Motivo de tu mensaje" autocomplete="subject" required />
               </div>
               <div class="form-group">
                 <label for="mensaje">Mensaje</label>
-                <textarea id="mensaje" name="mensaje" rows="5" placeholder="Escribe tu mensaje..." required></textarea>
+                <textarea id="mensaje" name="mensaje" rows="5" placeholder="Escribe tu mensaje..." autocomplete="off" required></textarea>
+              </div>
+              <div class="visually-hidden" aria-hidden="true">
+                <label for="website">Dejar en blanco</label>
+                <input type="text" id="website" name="website" tabindex="-1" autocomplete="off">
               </div>
               <button type="submit" class="btn btn-primary">Enviar mensaje</button>
             </fieldset>
@@ -185,6 +189,7 @@
           <div class="map-container">
             <iframe
               src="https://www.google.com/maps?q=Calle+10+N+4629+Berazategui+Buenos+Aires&output=embed"
+              title="Mapa: BERA clothing en Berazategui"
               width="100%" height="200" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
           </div>
         </aside>
@@ -200,7 +205,7 @@
     <div class="container footer-inner">
       <p>
         <a href="https://instagram.com/beraclothingg" target="_blank" rel="noopener" class="instagram-icon" aria-label="Instagram">
-          <img src="assets/images/instaa.png" alt="Instagram">
+          <img src="assets/images/instaa.png" alt="Instagram" width="28" height="28" loading="lazy">
         </a>
         | Shop online 24/7 | Envíos a todo el país | Berazategui centro
       </p>
@@ -237,5 +242,12 @@
   </ul>
   </nav>
 </aside>
+<noscript>
+  <div style="margin:1rem; padding:.75rem 1rem; border:1px solid #e0e0e0; border-radius:8px;">
+    Para una mejor experiencia en BERA clothing habilitá JavaScript. Igual podés escribirnos a
+    <a href="mailto:info@beraclothing.com">info@beraclothing.com</a> o al
+    <a href="tel:+5491123456789">+54 9 11 2345-6789</a>.
+  </div>
+</noscript>
 </body>
 </html>

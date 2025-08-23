@@ -1473,3 +1473,53 @@ updateCartCount();
     if (hrefFile === current) a.classList.add('active');
   });
 })();
+// === CTA flotante a Instagram + tracking GA ===
+(function () {
+  const IG_URL = 'https://instagram.com/beraclothingg';
+
+  // Crea el botón flotante si no existe
+  function ensureIGFab() {
+    if (document.getElementById('ig-fab')) return;
+
+    const a = document.createElement('a');
+    a.id = 'ig-fab';
+    a.className = 'ig-fab';
+    a.href = IG_URL;
+    a.target = '_blank';
+    a.rel = 'noopener';
+    a.setAttribute('aria-label', 'Abrir Instagram de BERA clothing');
+
+    // Ícono SVG liviano
+    a.innerHTML = `
+      <svg class="ig-fab__icon" viewBox="0 0 24 24" aria-hidden="true">
+        <path fill="currentColor" d="M7 2h10a5 5 0 0 1 5 5v10a5 5 0 0 1-5 5H7a5 5 0 0 1-5-5V7a5 5 0 0 1 5-5zm0 2a3 3 0 0 0-3 3v10a3 3 0 0 0 3 3h10a3 3 0 0 0 3-3V7a3 3 0 0 0-3-3H7zm5 3.5a5.5 5.5 0 1 1 0 11a5.5 5.5 0 0 1 0-11zm0 2a3.5 3.5 0 1 0 0 7a3.5 3.5 0 0 0 0-7zM18 6.25a1.25 1.25 0 1 1 0 2.5a1.25 1.25 0 0 1 0-2.5z"/>
+      </svg>
+    `;
+    document.body.appendChild(a);
+  }
+
+  // Tracking: cuenta cualquier click hacia IG (botón flotante o links del sitio)
+  function setupIGClickTracking() {
+    document.addEventListener('click', function (ev) {
+      const a = ev.target.closest('a[href*="instagram.com/beraclothingg"]');
+      if (!a) return;
+      try {
+        window.gtag && gtag('event', 'instagram_click', {
+          event_category: 'outbound',
+          event_label: location.pathname + location.search
+        });
+      } catch (e) { /* silencioso */ }
+    }, { capture: true });
+  }
+
+  // Init cuando el DOM está listo
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', () => {
+      ensureIGFab();
+      setupIGClickTracking();
+    });
+  } else {
+    ensureIGFab();
+    setupIGClickTracking();
+  }
+})();

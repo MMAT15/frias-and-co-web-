@@ -16,10 +16,20 @@
 </script>
 
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>BERA Clothing — Próximamente</title>
   <meta name="description" content="Estamos cargando la nueva colección en la web. Mientras tanto, mirá todos los productos en Instagram y escribinos por DM." />
+  <meta property="og:site_name" content="BERA Clothing" />
+  <meta property="og:title" content="BERA Clothing — Próximamente" />
+  <meta property="og:description" content="Estamos cargando la nueva colección en la web. Mientras tanto, mirá todos los productos en Instagram y escribinos por DM." />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="assets/images/logoo.jpeg" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="BERA Clothing — Próximamente" />
+  <meta name="twitter:description" content="Estamos cargando la nueva colección en la web. Mientras tanto, mirá todos los productos en Instagram y escribinos por DM." />
+  <meta name="twitter:image" content="assets/images/logoo.jpeg" />
+  <meta name="color-scheme" content="dark light" />
   <meta name="theme-color" content="#e91e63" />
   <link rel="icon" href="assets/images/favicon.ico" />
   <!-- Tipos: reutilizamos Poppins si ya la tenés en el sitio -->
@@ -37,6 +47,7 @@
       --card:#16161a;
       --border:rgba(255,255,255,.08);
     }
+    .visually-hidden{ position:absolute !important; width:1px !important; height:1px !important; padding:0 !important; margin:-1px !important; overflow:hidden !important; clip:rect(0,0,0,0) !important; white-space:nowrap !important; border:0 !important; }
     *{box-sizing:border-box}
     html,body{height:100%}
     body{
@@ -79,19 +90,24 @@
     @media (max-width:560px){
       .cards{grid-template-columns:1fr}
     }
+
+    :focus-visible { outline: 3px solid var(--rosa); outline-offset: 3px; }
+    @media (prefers-reduced-motion: reduce){ * { animation: none !important; transition: none !important; scroll-behavior: auto !important; } }
   </style>
 </head>
 <body>
+<a href="#main" class="visually-hidden">Saltar al contenido</a>
+<noscript><div style="background:#b00020;color:#fff;padding:8px 12px;text-align:center">La página funciona mejor con JavaScript activado.</div></noscript>
   <header>
     <div class="container">
       <a class="brand" href="index.html" aria-label="Volver al inicio">
-        <img src="assets/images/logoo.jpeg" alt="BERA logo" />
+        <img src="assets/images/logoo.jpeg" alt="BERA logo" width="40" height="40" decoding="async" fetchpriority="high" />
         <span class="t1">BERA clothing</span>
       </a>
     </div>
   </header>
 
-  <div class="wrap">
+  <main class="wrap" id="main">
     <div class="container">
       <section class="hero" aria-labelledby="proxi-title">
         <div>
@@ -106,7 +122,7 @@
             <span class="badge">DM para consultas</span>
           </div>
           <div class="cta">
-            <a class="btn btn-primary" href="https://instagram.com/beraclothingg" target="_blank" rel="noopener">Ver catálogo completo en Instagram
+            <a class="btn btn-primary" href="https://instagram.com/beraclothingg" target="_blank" rel="noopener noreferrer">Ver catálogo completo en Instagram
               <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M14 3h7v7h-2V6.41l-9.29 9.3-1.42-1.42 9.3-9.29H14V3z"/></svg>
             </a>
             <a class="btn btn-ghost" href="index.html">Volver al inicio</a>
@@ -115,22 +131,22 @@
         <div>
           <div class="cards" aria-label="Ejemplos de productos">
             <article class="card">
-              <img src="assets/images/IMG_7230.jpeg" alt="Producto ejemplo 1" loading="lazy" />
+              <img src="assets/images/IMG_7230.jpeg" alt="Producto ejemplo 1" loading="lazy" decoding="async" />
             </article>
             <article class="card">
-              <img src="assets/images/IMG_7232.jpeg" alt="Producto ejemplo 2" loading="lazy" />
+              <img src="assets/images/IMG_7232.jpeg" alt="Producto ejemplo 2" loading="lazy" decoding="async" />
             </article>
             <article class="card">
-              <img src="assets/images/IMG_7239.PNG" alt="Producto ejemplo 3" loading="lazy" />
+              <img src="assets/images/IMG_7239.PNG" alt="Producto ejemplo 3" loading="lazy" decoding="async" />
             </article>
             <article class="card">
-              <img src="assets/images/IMG_7223.jpeg" alt="Producto ejemplo 4" loading="lazy" />
+              <img src="assets/images/IMG_7223.jpeg" alt="Producto ejemplo 4" loading="lazy" decoding="async" />
             </article>
             <article class="card">
-              <img src="assets/images/IMG_7227.jpeg" alt="Producto ejemplo 5" loading="lazy" />
+              <img src="assets/images/IMG_7227.jpeg" alt="Producto ejemplo 5" loading="lazy" decoding="async" />
             </article>
             <article class="card">
-              <img src="assets/images/IMG_7240.PNG" alt="Producto ejemplo 6" loading="lazy" />
+              <img src="assets/images/IMG_7240.PNG" alt="Producto ejemplo 6" loading="lazy" decoding="async" />
             </article>
           </div>
         </div>
@@ -138,10 +154,10 @@
 
       <section aria-labelledby="ig-title" style="margin:28px 0 8px">
         <h2 id="ig-title" style="font-size:18px; margin:0 0 8px">Seguinos para ver lanzamientos y promos</h2>
-        <a class="btn btn-ghost" href="https://instagram.com/beraclothingg" target="_blank" rel="noopener">@beraclothingg</a>
+        <a class="btn btn-ghost" href="https://instagram.com/beraclothingg" target="_blank" rel="noopener noreferrer">@beraclothingg</a>
       </section>
     </div>
-  </div>
+  </main>
 
   <footer>
     <div class="container">
