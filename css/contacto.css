@@ -228,3 +228,66 @@
   height: 24px;
   display: inline-block;
 }
+/* 1) Hover seguro en táctiles + foco visible */
+@media (hover:hover) {
+  .contact-form button[type="submit"]:hover { filter: brightness(.9); transform: translateY(-2px); }
+}
+.contact-form button[type="submit"]:focus-visible,
+.contact-form input:focus-visible,
+.contact-form textarea:focus-visible,
+.contact-info a:focus-visible {
+  outline: 2px solid var(--color-acento);
+  outline-offset: 2px;
+}
+
+/* 2) Estados de validación y disabled */
+.contact-form input:invalid,
+.contact-form textarea:invalid { border-color: #e57373; }
+.contact-form input:user-valid,
+.contact-form textarea:user-valid { border-color: #66bb6a; }
+.contact-form button[type="submit"]:disabled {
+  opacity: .6; cursor: not-allowed; transform: none;
+}
+
+/* 3) Autofill (que no “pinte” raro) */
+input:-webkit-autofill,
+textarea:-webkit-autofill {
+  transition: background-color 9999s, color 9999s;
+}
+
+/* 4) Evitar que íconos colapsen en mobile y permitir wrap en texto largo */
+.contact-list li { align-items: center; }
+.contact-list li > span, 
+.contact-list li > a { overflow-wrap: anywhere; }
+
+/* 5) Evitar duplicación de reglas y asegurar jerarquía */
+.contact-info ul { margin-bottom: 1.25rem; }
+.contact-info ul li { margin-bottom: .75rem; } /* (conserva el spacing) */
+
+/* 6) Botones y links con área táctil cómoda */
+.contact-form button[type="submit"],
+.contact-info a { min-height: 44px; }
+
+/* 7) Map container con altura adaptable en pantallas chicas */
+@media (max-width: 480px) {
+  .map-container iframe { height: 200px; }
+}
+
+/* 8) Reduce motion: sacar animaciones no esenciales */
+@media (prefers-reduced-motion: reduce) {
+  * { transition: none !important; animation: none !important; }
+}
+
+/* 9) Tema oscuro (opcional si usás prefers-color-scheme) */
+@media (prefers-color-scheme: dark) {
+  .section-contacto { background-color: #0e0e10; }
+  .contact-form, .contact-info { background: #16161a; box-shadow: none; }
+  .contact-form input, .contact-form textarea { background:#111; border-color:#333; color:#eee; }
+  .contact-info a { color: var(--color-acento); }
+}
+
+/* 10) Micro‑tipografía y alturas en mobile */
+@media (max-width: 768px) {
+  .section-contacto .section-title { font-size: 1.75rem; }
+  .contact-form, .contact-info { padding: 1.25rem; }
+}

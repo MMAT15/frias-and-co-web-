@@ -40,10 +40,10 @@
 }
 .producto-item img {
   width: 100%;
-  height: auto;                 /* altura fluida */
-  aspect-ratio: 4 / 5;          /* proporción estable (prendas) */
-  object-fit: cover;            /* recorte agradable sin deformar */
-  background: #fff;             /* fallback */
+  height: auto;
+  aspect-ratio: 4 / 5;
+  object-fit: cover;
+  background: #fff;
 }
 
 .producto-item h3 {
@@ -396,12 +396,7 @@
 }
 
 /* Reutiliza el layout moderno para cada grid de categoría */
-.grid-products {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-  grid-auto-rows: 1fr;
-  gap: 1.5rem;
-}
+/* 🔥 Elimina la definición anterior de .grid-products con auto-fit/minmax(240px,1fr) */
 
 /* Performance: permite saltear pintura off-screen */
 .grid-products,
@@ -501,249 +496,32 @@
   .producto-item img,
   .modern-grid .producto-item img {
     width: 100%;
-    height: auto !important;   /* evita recortes verticales */
+    height: auto !important;
     max-height: none !important;
-    object-fit: cover;         /* llena la tarjeta sin bordes blancos */
-    aspect-ratio: 4 / 5;       /* proporción 4:5 uniforme */
+    object-fit: cover;
+    aspect-ratio: 4 / 5;
   }
 }
 
-/* Las nuevas imágenes y combos usan las mismas reglas de .producto-item y grid-products */
-
-/* ======= MOBILE POLISH (PRODUCTOS) ======= */
-
-/* Cards más “shop” */
-.producto-item{
-  background:#fff;
-  border-radius:16px;
-  box-shadow:0 6px 18px rgba(0,0,0,.06);
-  padding:14px;
-  overflow:hidden;
-  transition:transform .15s ease, box-shadow .15s ease;
-}
-.producto-item:active{ transform:scale(.99); }
-.producto-item h3{
-  font-size:1.05rem;
-  line-height:1.2;
-  margin:10px 0 6px;
-}
-.producto-item .price{
-  color:#e91e63;
-  font-weight:700;
-  font-size:1.05rem;
-  margin-bottom:10px;
-  display:block;
+/* A11y: foco visible en controles de compra */
+.add-to-cart-btn:focus-visible,
+.add-to-cart-icon:focus-visible {
+  outline: 2px solid var(--color-acento);
+  outline-offset: 2px;
 }
 
-/* IMAGEN CONSISTENTE EN CELU
-   – alto fluido entre 260 y 420, recorte elegante */
-.producto-item img{
-  width:100%;
-  height:clamp(260px, 62vw, 420px);
-  object-fit:cover;
-  border-radius:12px;
-  display:block;
-  background:#f4f5f7; /* evita parpadeo al cargar */
+/* Respeta preferencias de movimiento reducido */
+@media (prefers-reduced-motion: reduce) {
+  .producto-item,
+  .producto-item img,
+  .add-to-cart-btn {
+    transition: none !important;
+  }
 }
 
-/* Botón principal full-width */
-.producto-item .btn{
-  width:100%;
-  border-radius:12px;
-  padding:14px 16px;
-  font-weight:600;
-}
-
-/* Grid respirando en móvil */
-.grid-products{
-  display:grid;
-  grid-template-columns:1fr;
-  gap:18px;
-  padding-bottom:84px; /* espacio para que el FAB no tape botones */
-}
-
-/* 2 columnas cuando hay ancho */
-@media (min-width:560px){
-  .grid-products{ grid-template-columns:repeat(2,1fr); gap:20px; }
-}
-@media (min-width:900px){
-  .grid-products{ grid-template-columns:repeat(3,1fr); gap:22px; }
-}
-
-/* Título de categoría más compacto en móvil */
-.category-title{
-  margin:18px 0 12px;
-}
-
-/* FAB: que no invada contenidos y respete safe-area iOS */
+/* FAB: respeta safe-area iOS */
 .cart-fab{
   right:16px;
   bottom:calc(env(safe-area-inset-bottom, 0) + 16px);
   z-index:50;
-}
-/* === FIX visualización mobile === */
-
-/* 1) Grilla: 2 tarjetas por fila en celulares chicos */
-.grid-products {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
-  gap: 12px !important;
-}
-
-/* 2) Escalonar cantidad de columnas según ancho */
-@media (min-width: 560px) {
-  .grid-products { grid-template-columns: repeat(3, 1fr) !important; }
-}
-@media (min-width: 900px) {
-  .grid-products { grid-template-columns: repeat(4, 1fr) !important; }
-}
-
-/* 3) Imágenes: altura controlada por relación de aspecto, sin “clamp” alto */
-.producto-item img,
-.grid-products .producto-item img {
-  width: 100%;
-  height: auto !important;      /* anulamos alturas previas */
-  aspect-ratio: 4 / 5;          /* alto proporcionado al ancho */
-  object-fit: cover;
-  max-height: none !important;  /* evita otros topes */
-  border-radius: 12px;
-}
-
-/* 4) Tarjeta un poco más compacta en mobile */
-.producto-item h3 { font-size: 1rem; }
-.producto-item .price { margin-bottom: 0.5rem; }
-.producto-item .btn { padding: 12px; }
-/* Oculta secciones sin resultados */
-.product-category.is-hidden { display: none; }
-
-/* Mensaje de "sin resultados" */
-.empty-state {
-  margin: 2rem 0;
-  text-align: center;
-  color: var(--color-acento-sec);
-  font-weight: 500;
-}
-.search-empty {
-  display: none;
-  text-align: center;
-  margin: 2.5rem 0 1rem;
-}
-.search-empty p {
-  margin: .25rem 0;
-  font-size: 1.05rem;
-}
-.search-empty .hint {
-  color: #777;
-  font-size: .95rem;
-}
-/* base (en todas las páginas) */
-.back-to-top{
-  position: fixed;
-  right: 12px;
-  bottom: max(12px, env(safe-area-inset-bottom));
-  z-index: 60; /* por detrás del FAB si este tiene >60 */
-}
-
-/* en productos.html, levantalo para que no se tape con el FAB */
-.productos-page .back-to-top{
-  /* si tu FAB mide ~64px y tiene 16px de margen, despejá ~80px */
-  bottom: calc(max(12px, env(safe-area-inset-bottom)) + 80px);
-}
-/* Contenedor del botón + texto */
-.producto-item .add-to-cart-wrapper{
-  display: inline-flex;
-  align-items: center;
-  gap: .45rem;
-  margin-top: .5rem;
-  white-space: nowrap;          /* que no se corte en dos líneas */
-}
-
-/* El botón con el + (mejor área táctil) */
-.producto-item .add-to-cart-icon{
-  display: inline-flex;
-  justify-content: center;
-  align-items: center;
-  width: 36px;
-  height: 36px;
-  border-radius: 50%;
-  border: 2px solid var(--accent, #111);
-  background: #fff;
-  line-height: 1;
-  font-size: 20px;
-  cursor: pointer;
-  touch-action: manipulation;    /* mejora taps en mobile */
-}
-
-/* El texto al lado */
-.producto-item .add-to-cart-label{
-  font-size: .95rem;
-  font-weight: 600;
-  color: var(--text-strong, #222);
-}
-/* --- Filtros: layout claro y compacto en mobile --- */
-.productos-filtros-bar {
-  position: sticky;
-  /* queda bajo el announcement y el header; si no hay var, usa ~64px */
-  top: calc(var(--ann-h, 0px) + var(--hdr-h, 64px));
-  z-index: 30;
-  background: #fff;
-}
-
-/* Móvil: 3 columnas, cada una con su label arriba y el select abajo */
-@media (max-width: 768px) {
-  .productos-filtros-bar .filtros-selects{
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    grid-auto-rows: auto;
-    gap: 10px 8px;
-    align-items: end;
-    max-width: 100%;
-  }
-
-  /* Mostramos los labels (pequeños y claros) */
-  .productos-filtros-bar .filtros-selects label{
-    position: static !important;
-    width: auto; height: auto; margin: 0;
-    padding: 0;
-    overflow: visible; clip: auto; white-space: normal; border: 0;
-    display: block;
-    font-size: 12px;
-    line-height: 1.1;
-    font-weight: 600;
-    color: #6b6b6b;
-    margin-left: 4px;
-  }
-
-  /* Pareo explícito de cada label y select en la misma columna */
-  label[for="filter-tipo"]  { grid-column: 1; grid-row: 1; }
-  #filter-tipo              { grid-column: 1; grid-row: 2; }
-
-  label[for="filter-talle"] { grid-column: 2; grid-row: 1; }
-  #filter-talle             { grid-column: 2; grid-row: 2; }
-
-  label[for="sort-by"]      { grid-column: 3; grid-row: 1; }
-  #sort-by                  { grid-column: 3; grid-row: 2; }
-
-  .productos-filtros-bar .filtros-selects select{
-    flex: 1 1 auto;
-    min-width: 0;
-    max-width: 100%;
-    height: 42px;
-    padding: 0 0.75rem;
-    font-size: 15px;
-    border: 1px solid #ddd;
-    border-radius: var(--border-radius);
-    box-sizing: border-box;
-  }
-}
-
-/* Pantallas muy pequeñas: texto un poco más chico pero manteniendo el layout */
-@media (max-width: 380px) {
-  .productos-filtros-bar .filtros-selects label{
-    font-size: 11px;
-  }
-  .productos-filtros-bar .filtros-selects select{
-    font-size: 14px;
-    padding-right: 28px; /* espacio para la flechita del select */
-  }
 }

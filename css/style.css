@@ -3478,3 +3478,150 @@ body{ padding-top: calc(var(--ann-h) + var(--hdr-h)); }
   height: auto;
   object-fit: cover;
 }
+/* =========================================================
+   CONSOLIDATED FINAL OVERRIDES — 2025‑08‑23
+   (Fuente de verdad para layout del header, anuncio, y nav)
+   ========================================================= */
+
+/* 0) Variables de altura base: JS puede actualizar --ann-h */
+:root{
+  --hdr-h: 56px !important;
+  --ann-h: 0px !important;   /* valor por defecto; el JS lo ajusta si hay anuncio */
+}
+
+/* 1) Compensaciones globales coherentes */
+html, body { overflow-x: hidden; }
+body{
+  padding-top: calc(var(--ann-h) + var(--hdr-h)) !important;
+}
+.site-header{
+  position: sticky !important;
+  top: var(--ann-h) !important;
+  z-index: 1100 !important;
+  background: #fff;
+}
+
+/* 2) Announcement bar: una sola versión (sticky, altura compacta).
+      Si tenías variantes 'fixed' o múltiples definiciones, esto manda. */
+.announcement-bar{
+  position: sticky !important;
+  top: 0 !important;
+  z-index: 1400 !important;     /* por encima del header */
+  height: auto;
+  max-height: none;
+  padding: 8px max(12px, env(safe-area-inset-left)) 8px max(12px, env(safe-area-inset-right));
+  font-size: 14px;
+  line-height: 1.2;
+}
+.announcement-bar.closing{
+  max-height: 0 !important;
+  opacity: 0 !important;
+  overflow: hidden !important;
+}
+
+/* 3) Header layout — Desktop: [Catálogo] [Branding] [Nav] en 1 fila */
+@media (min-width: 1024px){
+  .site-header .header-inner{
+    display: grid !important;
+    grid-template-columns: auto 1fr auto !important;
+    align-items: center !important;
+    column-gap: 16px !important;
+    min-height: 96px !important;
+    padding: 0 16px !important;
+  }
+  .site-branding{ justify-self: center !important; text-align: center !important; }
+  .main-nav{ position: static !important; display: flex !important; }
+}
+
+/* 4) Header layout — Mobile:
+      Botones laterales iguales y branding centrado, sin absolutos. */
+@media (max-width: 768px){
+  .site-header .header-inner{
+    display: grid !important;
+    grid-template-columns: auto 1fr auto !important;
+    align-items: center !important;
+    gap: 8px !important;
+    min-height: 88px !important;
+    padding: 0 12px !important;
+  }
+  .site-branding{
+    grid-column: 2 !important;
+    justify-self: center !important;
+    text-align: center !important;
+    min-width: 0 !important;
+  }
+  /* Botón Catálogo y Hamburguesa: mismo tamaño, circulares */
+  .collection-toggle,
+  .nav-toggle{
+    position: static !important;
+    width: 56px !important;
+    height: 56px !important;
+    border-radius: 999px !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    margin: 0 !important;
+  }
+  /* En mobile ocultamos el texto del botón Catálogo si lo hubiera */
+  .collection-toggle .collection-label{ display: none !important; }
+}
+
+/* 5) Navegación principal — una sola versión mobile (panel centrado). */
+@media (max-width: 768px){
+  .main-nav{
+    position: fixed !important;
+    left: 0; right: 0;
+    top: calc(var(--ann-h) + var(--hdr-h)) !important;
+    width: min(700px, calc(100% - 24px)) !important;
+    margin: 0 auto !important;
+    display: none !important;   /* se muestra con .show */
+    background: #fff;
+    border-radius: 16px;
+    box-shadow: 0 10px 30px rgba(0,0,0,.12);
+    overflow: hidden;
+    z-index: 2000 !important;
+  }
+  .main-nav.show{ display: block !important; }
+}
+
+/* 6) Z‑index coherente con el hero/Swiper (botones debajo del menú) */
+.swiper-hero .swiper-button-prev,
+.swiper-hero .swiper-button-next,
+.swiper-hero .swiper-pagination{
+  z-index: 100 !important;
+}
+
+/* 7) Botón Catálogo: tamaño normal en desktop para evitar “saltos” */
+@media (min-width: 769px){
+  .collection-toggle{
+    width: auto !important;
+    height: auto !important;
+    padding: 6px 10px !important;
+    border-radius: 4px !important;
+    background: transparent !important;
+    box-shadow: none !important;
+  }
+  .collection-toggle .icon-hanger{ width: 16px !important; height: 16px !important; }
+}
+
+/* 8) Evitar estilos heredados de subrayado global en el header */
+.site-branding .site-title::after{ display: none !important; }
+
+/* 9) Focus visible consistente (seguro si hay reglas previas conflictivas) */
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible{
+  outline: 3px solid var(--color-acento) !important;
+  outline-offset: 2px !important;
+}
+
+/* 10) Respeta reduce‑motion: blindaje final */
+@media (prefers-reduced-motion: reduce){
+  *{
+    animation: none !important;
+    transition: none !important;
+    scroll-behavior: auto !important;
+  }
+}

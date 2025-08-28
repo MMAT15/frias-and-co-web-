@@ -1204,7 +1204,9 @@ if (productosMain && (filterTipo || filterTalle)) {
       cart = [];
     }
     const cartCount = document.querySelector('.cart-count');
-    const saveCart = () => localStorage.setItem('cart', JSON.stringify(cart));
+    const saveCart = () => {
+      try { localStorage.setItem('cart', JSON.stringify(cart)); } catch (_) {}
+    };
     const updateCartCount = () => {
       const totalItems = cart.reduce((sum,i) => sum + i.qty, 0);
       const totalPrice = cart.reduce((sum,i) => sum + i.qty * i.price, 0);
@@ -1223,6 +1225,21 @@ if (productosMain && (filterTipo || filterTalle)) {
 
       if (document.getElementById('cart-panel')?.classList.contains('show')) renderCartPanel();
     };
+    // Mantener el contador del carrito sincronizado entre pestañas/páginas
+    window.addEventListener('storage', (e) => {
+      if (e.key !== 'cart') return;
+      try {
+        const next = e.newValue ? JSON.parse(e.newValue) : [];
+        if (Array.isArray(next)) {
+          cart = next;
+          updateCartCount();
+          // Si el panel está abierto, re-renderizamos para reflejar cambios externos
+          if (document.getElementById('cart-panel')?.classList.contains('show')) {
+            renderCartPanel?.();
+          }
+        }
+      } catch (_) { /* noop */ }
+    });
     const addToCart = prod => {
       const ex = cart.find(i => i.id === prod.id);
       if (ex) {
@@ -1235,7 +1252,7 @@ if (productosMain && (filterTipo || filterTalle)) {
 
     // 9) DELEGACIÓN: clicks en .add-to-cart-icon (soporta productos dinámicos)
     document.body.addEventListener('click', (ev) => {
-      const btn = ev.target.closest('.add-to-cart-icon');
+      const btn = ev.target.closest('.add-to-cart-icon, .add-to-cart-btn');
       if (!btn) return;
 
       // Read price from data attribute
@@ -1251,8 +1268,8 @@ if (productosMain && (filterTipo || filterTalle)) {
 
       const product = {
         id: btn.dataset.id,
-        name: btn.dataset.name,
-        price: price || 0
+        name: btn.dataset.name || btn.closest('.producto-item')?.querySelector('h3')?.textContent?.trim() || 'Producto',
+        price: Number.isFinite(price) ? price : 0
       };
       addToCart(product);
       showCartToast();

@@ -212,9 +212,11 @@ document.addEventListener('DOMContentLoaded', () => {
     if (orderList) {
       orderList.innerHTML = '';
       cart.forEach(item => {
-        const line = (item.price || 0) * (item.qty || 1);
+        const qty = Math.max(1, Number(item.qty) || 1);
+        const price = Math.max(0, Number(item.price) || 0);
+        const line = price * qty;
         const li = document.createElement('li');
-        li.textContent = `${item.name} x${item.qty} — ${money(line)}`;
+        li.textContent = `${item.name} x${qty} — ${money(line)}`;
         orderList.appendChild(li);
       });
     }
@@ -233,8 +235,15 @@ document.addEventListener('DOMContentLoaded', () => {
     // 5) Pintar
     if (summarySubtotal) summarySubtotal.textContent = money(grossTotal);
     if (summaryNet)      summaryNet.textContent      = money(netTotal);
-    if (summaryCashDisc) summaryCashDisc.textContent = (isCash ? '− ' : '') + money(cashDiscount);
+    if (summaryCashDisc) summaryCashDisc.textContent = isCash ? ('− ' + money(cashDiscount)) : '—';
     if (summaryTotal)    summaryTotal.textContent    = money(toPay);
+
+    // Disable confirm button if cart is empty
+    if (typeof confirmBtn !== 'undefined' && confirmBtn) {
+      const empty = cart.length === 0;
+      confirmBtn.disabled = empty;
+      confirmBtn.setAttribute('aria-disabled', empty ? 'true' : 'false');
+    }
   }
 
   // ====== Eventos ======
@@ -288,7 +297,7 @@ document.addEventListener('DOMContentLoaded', () => {
               try { document.body.classList.remove('dm-open'); } catch {}
               dmModal.classList.remove('active');
               dmModal.setAttribute('aria-hidden', 'true');
-              window.location.href = `https://instagram.com/${IG_USER}`;
+              openIGWithText(msg);
             }
           }
         }, 1000);
@@ -302,7 +311,7 @@ document.addEventListener('DOMContentLoaded', () => {
           dmModal.classList.remove('active');
           dmModal.setAttribute('aria-hidden', 'true');
           console.log('[checkout] Opening IG DM with text length:', msg.length);
-          window.location.href = `https://instagram.com/${IG_USER}`;
+          openIGWithText(msg);
         };
         dmAckBtn.addEventListener('click', onAck, { once: true });
 
@@ -356,6 +365,19 @@ document.addEventListener('DOMContentLoaded', () => {
     if (document.visibilityState === 'visible') {
       window.__igLaunch.inProgress = false;
       if (window.__igLaunch.timer) { clearInterval(window.__igLaunch.timer); window.__igLaunch.timer = null; }
+    }
+  });
+
+  // Mantener sincronizado si cambia el carrito en otra pestaña
+  window.addEventListener('storage', (e) => {
+    if (e.key === 'cart') {
+      try {
+        const next = JSON.parse(e.newValue || '[]');
+        cart = Array.isArray(next) ? next : [];
+      } catch {
+        cart = [];
+      }
+      calculateCheckout();
     }
   });
 });

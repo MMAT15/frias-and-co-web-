@@ -153,17 +153,25 @@
   display: block;
   width: 100%;
   padding: 0.85rem;
- background-color: rgb(3, 126, 3);
+  background: var(--color-ok, rgb(3,126,3));
   color: #fff;
   border: none;
   border-radius: var(--border-radius);
   font-size: 1rem;
   cursor: pointer;
-  transition: opacity var(--transition), transform var(--transition);
+  transition: opacity var(--transition), transform var(--transition), background 0.2s;
 }
-#confirm-order:hover {
-  opacity: 0.9;
-  transform: translateY(-2px);
+@media (hover: hover) {
+  #confirm-order:hover {
+    background: var(--color-ok-hover, #065f06);
+    opacity: 0.9;
+    transform: translateY(-2px);
+  }
+}
+#cancel-checkout:focus-visible,
+#confirm-order:focus-visible {
+  outline: 2px solid var(--color-acento);
+  outline-offset: 2px;
 }
 
 /* Responsive */
@@ -224,11 +232,16 @@ body.dm-open {
   max-height: 85vh;
   overflow: auto;
   transform: scale(0.95);
-  transition: transform 0.25s ease;
+  opacity: 0;
+  transition: transform 0.25s ease, opacity 0.25s ease;
 }
 .pre-dm-modal.active .pre-dm-modal__content {
   transform: scale(1);
+  opacity: 1;
 }
+
+/* Foco inicial en modal (si lo manejás con JS) */
+.pre-dm-modal [tabindex="-1"]:focus { outline: none; }
 
 .pre-dm-title {
   margin-top: 0;
@@ -290,3 +303,61 @@ body.dm-open {
   clip: rect(0 0 0 0);
   white-space: nowrap; border: 0;
 }
+/* 1) Hover seguro en táctiles para el botón cancelar */
+@media (hover: hover) {
+  #cancel-checkout:hover { background: #cf4646; }
+}
+
+/* 2) Estado :disabled para botón principal (evita doble submit) */
+#confirm-order:disabled {
+  opacity: .6;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* 3) Resaltar opción seleccionada (fallback + :has si está disponible) */
+.option-wrapper input:checked + span,
+.option-wrapper input:checked ~ .option-label {
+  /* fallback mínimo si el input va primero y hay texto luego */
+  font-weight: 600;
+}
+@supports selector(:has(*)) {
+  .option-wrapper:has(input:checked) {
+    border-color: var(--color-acento);
+    background: #fff8fb;
+  }
+}
+
+/* 4) Inputs con estados y autofill */
+.checkout-form input:invalid,
+.checkout-form select:invalid {
+  border-color: #e57373;
+}
+.checkout-form input:user-valid,
+.checkout-form select:user-valid {
+  border-color: #66bb6a;
+}
+input:-webkit-autofill {
+  transition: background-color 9999s, color 9999s;
+}
+
+/* 5) Mobile: detalles de entrega/price alineados y legibles */
+@media (max-width: 560px) {
+  .option-detail { text-align: left; width: 100%; }
+  .order-items li { gap: .5rem; }
+}
+
+/* 6) Reduce-motion: quita animaciones/transformes “no esenciales” */
+@media (prefers-reduced-motion: reduce) {
+  * { transition: none !important; animation: none !important; }
+  .pre-dm-modal__content { transform: none !important; }
+}
+
+/* 7) Modal: blur suave si hay soporte */
+@supports (backdrop-filter: blur(6px)) {
+  .pre-dm-modal { backdrop-filter: blur(6px); }
+}
+
+/* 8) Micro-accesibilidad en fieldsets/legend */
+.option-group legend { line-height: 1.2; }
+.checkout-form fieldset { min-inline-size: auto; border: 0; padding: 0; }
