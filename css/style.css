@@ -3625,3 +3625,54 @@ textarea:focus-visible{
     scroll-behavior: auto !important;
   }
 }
+/* ===== HOTFIX 2025‑08‑28 — Header móvil compacto y ordenado ===== */
+@media (max-width:768px){
+  :root{ --hdr-h: 64px !important; }
+
+  /* Header compacto y sin saltos */
+  .site-header{ padding: 8px 0 !important; min-height: var(--hdr-h) !important; }
+  .site-header .header-inner{
+    display: grid !important;
+    grid-template-columns: auto 1fr auto !important;
+    align-items: center !important;
+    gap: 8px !important;
+    min-height: var(--hdr-h) !important;
+    padding: 0 12px !important;
+  }
+
+  /* Botones laterales iguales; sin posicionamiento absoluto */
+  .collection-toggle,
+  .nav-toggle{
+    position: static !important;
+    width: 44px !important;
+    height: 44px !important;
+    border-radius: 999px !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    box-shadow: none !important;
+  }
+  .collection-toggle .collection-label{ display:none !important; }
+
+  /* Branding centrado y en una línea */
+  .site-branding{ grid-column: 2 !important; justify-self: center !important; text-align:center !important; min-width:0 !important; margin:0 !important; }
+  .logo-wrap{ width: 40px !important; height: 40px !important; margin: 0 !important; transform:none !important; }
+  .site-title{ font-size: 1rem !important; line-height:1 !important; white-space: nowrap !important; letter-spacing: .08em !important; margin: 0 !important; transform:none !important; }
+  .site-title::after{ display: none !important; }
+  .site-tagline{ font-size: .7rem !important; margin-top: 2px !important; transform:none !important; }
+
+  /* Menú móvil como tarjeta centrada (coherente con el padding‑top del body) */
+  .main-nav{
+    position: fixed !important;
+    left: 0; right: 0;
+    top: calc(var(--ann-h) + var(--hdr-h)) !important;
+    width: min(700px, calc(100% - 24px)) !important;
+    margin: 0 auto !important;
+    border-radius: 14px !important;
+    background: #fff !important;
+    box-shadow: 0 10px 30px rgba(0,0,0,.12) !important;
+    display: none !important;
+    overflow: hidden !important;
+    z-index: 2000 !important;
+  }
+  .main-nav.show{ display:block !important; }
+}
