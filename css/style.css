@@ -3819,3 +3819,37 @@ textarea:focus-visible{
   .main-nav{ display: none; }
   .main-nav.show{ display: block !important; }
 }
+/* ==== BERA — FIX: menú móvil pegado al header + borde rosa en ambos botones ==== */
+@media (max-width: 768px){
+  /* 1) El header actúa como contenedor de referencia */
+  .site-header{ position: sticky; z-index: 1200; overflow: visible; }
+  .site-header .header-inner{ position: relative; }
+
+  /* 2) Menú móvil SIEMPRE debajo del header (pegado) */
+  .main-nav{
+    position: absolute !important;   /* anclado al header */
+    top: 100% !important;            /* justo debajo del header */
+    left: 0 !important;               
+    right: 0 !important;
+    margin: 0 !important;            /* sin separación arriba */
+    width: 100% !important;          /* mismo ancho que el header */
+    border-radius: 0 0 14px 14px !important;  /* esquinas inferiores redondeadas */
+    z-index: 1300 !important;        /* por encima del hero, debajo de overlays */
+  }
+
+  /* 3) Botones circulares con delineado rosa en Catálogo y Hamburguesa */
+  .collection-toggle,
+  .nav-toggle{
+    width: 56px !important;
+    height: 56px !important;
+    border-radius: 999px !important;
+    background: #fff !important;
+    border: 2px solid var(--color-acento) !important; /* círculo rosa */
+    display: inline-flex !important; align-items: center !important; justify-content: center !important;
+  }
+  .collection-toggle .collection-label{ display:none !important; }  /* sólo ícono en mobile */
+  .collection-toggle .icon-hanger{ width:22px !important; height:22px !important; }
+
+  /* 4) Evitar que el carrusel tape cosas cuando el menú está abierto */
+  .nav-open .swiper-hero .swiper-pagination{ opacity:0; pointer-events:none; }
+}
