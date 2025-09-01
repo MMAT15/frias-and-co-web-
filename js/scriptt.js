@@ -133,9 +133,10 @@ function setAppInert(on){
       };
       const applyMobileNavOffset = () => {
         const top = getAnnH() + getHdrH();
-        mainNav.style.top = top + 'px';
+        // Fuerza la prioridad para ganar a cualquier CSS previo con !important
+        mainNav.style.setProperty('top', top + 'px', 'important');
         // Evita que el panel tape el header y limita su alto en viewport móvil
-        mainNav.style.maxHeight = `calc(100vh - ${top}px)`;
+        mainNav.style.setProperty('max-height', `calc(100vh - ${top}px)`, 'important');
       };
 
       const lock   = () => document.body.style.overflow = 'hidden';
@@ -154,8 +155,9 @@ function setAppInert(on){
         navToggle.classList.remove('open');
         navToggle.setAttribute('aria-expanded', 'false');
         unlock();
-        mainNav.style.top = '';
-        mainNav.style.maxHeight = '';
+        // Limpia estilos en línea para no dejar residuos
+        mainNav.style.removeProperty('top');
+        mainNav.style.removeProperty('max-height');
       };
 
       navToggle.addEventListener('click', () => {
