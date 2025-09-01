@@ -3692,3 +3692,70 @@ textarea:focus-visible{
   background: rgba(233,30,99,0.08);
   transform: scale(1.05);
 }
+/******************************
+   FINAL MOBILE HEADER FIXES — alignment + nav under header (2025‑09‑01)
+*******************************/
+
+/* === FINAL MOBILE HEADER FIXES — alignment + nav under header (2025‑09‑01) === */
+
+/* 0) Base header height variable already set; ensure header sits above nav */
+.site-header{ z-index: 500 !important; }
+
+@media (max-width:768px){
+  /* 1) Header layout: 3 columnas [Catálogo] [Branding] [Hamburguesa] */
+  .header-inner{
+    display: grid !important;
+    grid-template-columns: 56px 1fr 56px !important;
+    align-items: center !important;
+    gap: 8px !important;
+    min-height: var(--hdr-h) !important; /* usa 56px por defecto */
+    padding: 0 !important;
+  }
+
+  /* 2) Botones laterales: mismos tamaños y delineado rosa */
+  .collection-toggle,
+  .nav-toggle{
+    position: static !important;
+    width: 56px !important;
+    height: 56px !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    border: 2px solid var(--color-acento) !important;  /* círculo rosa */
+    border-radius: 999px !important;
+    background: #fff !important;
+    box-shadow: 0 2px 10px rgba(0,0,0,.06) !important;
+    margin: 0 !important;
+  }
+  /* barras de la hamburguesa legibles sobre fondo blanco */
+  .nav-toggle span{ background-color: var(--color-principal) !important; }
+
+  /* 3) Branding perfectamente centrado y sin transformaciones previas */
+  .site-branding{
+    grid-column: 2 !important;
+    justify-self: center !important;
+    text-align: center !important;
+    margin: 0 !important;
+    transform: none !important;
+    min-width: 0 !important;
+  }
+  .logo-wrap{ width: 44px !important; height: 44px !important; margin: 0 !important; transform: none !important; }
+  .site-title, .site-tagline{ transform: none !important; }
+
+  /* 4) Menú móvil: fijo y APARECE DEBAJO del header (no lo tapa) */
+  .main-nav{
+    position: fixed !important;
+    left: 0 !important; right: 0 !important;
+    top: calc(var(--ann-h) + var(--hdr-h)) !important; /* debajo del header */
+    width: min(700px, calc(100% - 24px)) !important;
+    margin: 0 auto !important;
+    z-index: 400 !important; /* menor que el header */
+    border-radius: 16px !important;
+    box-shadow: 0 10px 30px rgba(0,0,0,.12) !important;
+    overflow: hidden !important;
+  }
+  .main-nav.show{ display: block !important; }
+
+  /* 5) Ícono percha del Catálogo centrado dentro del círculo */
+  .collection-toggle .icon-hanger{ width: 22px !important; height: 22px !important; display: block !important; }
+}
