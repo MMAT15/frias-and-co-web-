@@ -3759,3 +3759,39 @@ textarea:focus-visible{
   /* 5) Ícono percha del Catálogo centrado dentro del círculo */
   .collection-toggle .icon-hanger{ width: 22px !important; height: 22px !important; display: block !important; }
 }
+/* === FINAL MOBILE HEADER + MENU & OUTLINE FIX (2025‑09‑01) === */
+@media (max-width:768px){
+  /* 1) Centrado REAL del branding: columnas simétricas */
+  .header-inner{
+    display: grid !important;
+    grid-template-columns: 1fr auto 1fr !important; /* lados iguales → centro perfecto */
+    align-items: center !important;
+    gap: 8px !important;
+    min-height: 88px !important;
+  }
+  .collection-toggle{ grid-column: 1; justify-self: start; }
+  .site-branding{ grid-column: 2; justify-self: center !important; text-align: center !important; }
+  .nav-toggle{ grid-column: 3; justify-self: end; }
+
+  /* 2) El menú móvil NO tapa el header: baja unos px y queda por debajo */
+  .site-header{ z-index: 1100 !important; }
+  .main-nav{
+    position: fixed !important;
+    left: 0; right: 0;
+    top: calc(var(--ann-h, 0px) + var(--hdr-h, 56px) + 6px) !important; /* debajo del header */
+    margin-top: 0 !important;
+    z-index: 1000 !important; /* menor que header, mayor que contenido */
+  }
+
+  /* 3) Aros/fundas rosa en Catálogo y Hamburguesa (mismo look) */
+  .collection-toggle,
+  .nav-toggle{
+    width: 56px !important; height: 56px !important;
+    border-radius: 999px !important;
+    background: #fff !important;
+    border: 2px solid var(--color-acento) !important; /* mismo rosa que el subrayado */
+    box-shadow: 0 2px 10px rgba(0,0,0,.06) !important;
+  }
+  .collection-toggle .icon-hanger{ width: 22px !important; height: 22px !important; }
+  .nav-toggle span{ background-color: currentColor; }
+}
