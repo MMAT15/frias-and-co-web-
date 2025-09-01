@@ -415,28 +415,14 @@ img {
     font-size: 0.75rem;
   }
   .main-nav {
-    position: absolute;
-    top: 100%;
-    left: 0;
-    width: 100%;
-    background: rgba(255, 255, 255, 0.97);  /* coincide con desktop */
+    /* Estética del dropdown; el posicionamiento real lo maneja el override final/JS */
+    background: rgba(255, 255, 255, 0.97);
     backdrop-filter: blur(6px);
     box-shadow: 0 6px 12px rgba(0,0,0,0.12);
     border: 1px solid #eaeaea;
     border-top: none;
     border-radius: 0 0 8px 8px;
-    display: none;
     flex-direction: column;
-    animation: slideDown 0.35s ease forwards;
-  }
-
-  @keyframes slideDown {
-    from { opacity: 0; transform: translateY(-8px); }
-    to   { opacity: 1; transform: translateY(0);  }
-  }
-
-  .main-nav.show {
-    display: flex;
   }
   .nav-list {
     padding-top: 0.5rem;      /* pequeño espacio superior */
@@ -2974,30 +2960,7 @@ main > :first-child {
   height: auto;
   object-fit: cover;
 }
-/* === Main nav centrado y sobre el slider — MOBILE ONLY === */
-@media (max-width: 768px){
-  .main-nav{
-    position: absolute;
-    left: 50%;
-    transform: translateX(-50%);
-    width: min(680px, calc(100% - 32px));
-    z-index: 200;
-  }
-
-  /* Botón hamburguesa: fondo sólido y sin blend/backdrop para que no se vea lo de atrás */
-  .nav-toggle{
-    background: #fff;
-    box-shadow: 0 2px 10px rgba(0,0,0,.08);
-    -webkit-backdrop-filter: none;
-    backdrop-filter: none;
-    mix-blend-mode: normal;
-  }
-  .nav-toggle:hover{ background: #fff; }
-  .nav-toggle.open{
-    background:#111;     /* estilo cuando está abierto (opcional) */
-    color:#fff;
-  }
-}
+/* (removed conflicting mobile absolute-centering rules for .main-nav) */
 
 /* Cuando el menú está abierto, ocultar los dots del slider que “ensucian” */
 .nav-open .swiper-hero .swiper-pagination{
@@ -3007,35 +2970,7 @@ main > :first-child {
 /* === Z-indexes coherentes: header bajo, menú arriba del hero === */
 @media (max-width: 768px){ .site-header{ z-index: 300; } }
 
-/* === Menú desplegable centrado y estable — MOBILE ONLY === */
-@media (max-width: 768px){
-  .main-nav{
-    position: fixed;                           /* no depende del ancho del header */
-    left: 50%;
-    transform: translateX(-50%);
-    top: calc(var(--ann-h, 0px) + var(--hdr-h, 0px));
-    width: min(700px, calc(100% - 24px));      /* centrado con respiración lateral */
-    z-index: 400;                               /* por encima del slider/paginación */
-    display: none;                              /* se muestra con la clase .show */
-    background: #fff;
-    border-radius: 16px;
-    box-shadow: 0 10px 30px rgba(0,0,0,.12);
-    overflow: hidden;
-  }
-  .main-nav.show{ display: block; }
-  .nav-open .swiper-hero .swiper-pagination{ opacity: 0; pointer-events: none; }
-
-  .nav-toggle{
-    background:#fff;
-    border:1px solid rgba(0,0,0,.06);
-    box-shadow:0 2px 10px rgba(0,0,0,.06);
-    -webkit-backdrop-filter:none; backdrop-filter:none;
-    mix-blend-mode:normal;
-    background-clip: padding-box;
-  }
-  .nav-toggle:hover{ background:#fff; }
-  .nav-toggle.open{ background:#111; color:#fff; }
-}
+/* (removed conflicting mobile fixed-centering rules for .main-nav) */
 @media (max-width: 768px) {
   .site-logo {
     margin-top: 2px; /* o 1px si querés algo mínimo */
@@ -3578,23 +3513,7 @@ body{
   .collection-toggle .collection-label{ display: none !important; }
 }
 
-/* 5) Navegación principal — una sola versión mobile (panel centrado). */
-@media (max-width: 768px){
-  .main-nav{
-    position: fixed !important;
-    left: 0; right: 0;
-    top: calc(var(--ann-h) + var(--hdr-h)) !important;
-    width: min(700px, calc(100% - 24px)) !important;
-    margin: 0 auto !important;
-    display: none !important;   /* se muestra con .show */
-    background: #fff;
-    border-radius: 16px;
-    box-shadow: 0 10px 30px rgba(0,0,0,.12);
-    overflow: hidden;
-    z-index: 2000 !important;
-  }
-  .main-nav.show{ display: block !important; }
-}
+/* 5) (Consolidated en override final al final del archivo) */
 
 /* 6) Z‑index coherente con el hero/Swiper (botones debajo del menú) */
 .swiper-hero .swiper-button-prev,
@@ -3771,137 +3690,45 @@ textarea:focus-visible{
   /* 5) Ícono percha del Catálogo centrado dentro del círculo */
   .collection-toggle .icon-hanger{ width: 22px !important; height: 22px !important; display: block !important; }
 }
-/* === FINAL MOBILE HEADER + MENU & OUTLINE FIX (2025‑09‑01) === */
+/* === Unified Mobile Header/Nav (clean, minimal !important) === */
 @media (max-width:768px){
-  /* 1) Centrado REAL del branding: columnas simétricas */
+  .site-header{ z-index: 1200; }
   .header-inner{
-    display: grid !important;
-    grid-template-columns: 1fr auto 1fr !important; /* lados iguales → centro perfecto */
-    align-items: center !important;
-    gap: 8px !important;
-    min-height: 88px !important;
+    display: grid;
+    grid-template-columns: auto 1fr auto; /* [Catálogo] [Branding] [Hamburguesa] */
+    align-items: center;
+    gap: 8px;
+    min-height: 88px;
+    padding: 0 12px;
   }
-  .collection-toggle{ grid-column: 1; justify-self: start; }
-  .site-branding{ grid-column: 2; justify-self: center !important; text-align: center !important; }
-  .nav-toggle{ grid-column: 3; justify-self: end; }
+  .site-branding{ justify-self: center; text-align: center; }
 
-  /* 2) El menú móvil NO tapa el header: baja unos px y queda por debajo */
-  .site-header{ z-index: 1100 !important; }
-  .main-nav{
-    position: fixed !important;
-    left: 0; right: 0;
-    top: calc(var(--ann-h, 0px) + var(--hdr-h, 56px) + 6px) !important; /* debajo del header */
-    margin-top: 0 !important;
-    z-index: 1000 !important; /* menor que header, mayor que contenido */
-  }
-
-  /* 3) Aros/fundas rosa en Catálogo y Hamburguesa (mismo look) */
+  /* Botones laterales iguales; sin exagerar !important */
   .collection-toggle,
   .nav-toggle{
-    width: 56px !important; height: 56px !important;
-    border-radius: 999px !important;
-    background: #fff !important;
-    border: 2px solid var(--color-acento) !important; /* mismo rosa que el subrayado */
-    box-shadow: 0 2px 10px rgba(0,0,0,.06) !important;
+    width: 56px; height: 56px;
+    border-radius: 999px;
+    display: inline-flex; align-items: center; justify-content: center;
+    margin: 0;
+    background: #fff;
+    border: 2px solid var(--color-acento);
+    box-shadow: 0 2px 10px rgba(0,0,0,.06);
   }
-  .collection-toggle .icon-hanger{ width: 22px !important; height: 22px !important; }
-  .nav-toggle span{ background-color: currentColor; }
-}
-/* === FINAL OVERRIDE: Mobile nav glued under header (no overlap) === */
-@media (max-width: 768px){
-  /* Keep header above the nav card */
-  .site-header{ z-index: 3200 !important; }
+  .collection-toggle .collection-label{ display: none; }
 
-  /* The dropdown menu becomes a fixed card positioned just under
-     the announcement bar + header height. This overrides any earlier
-     'position:absolute; top:100%' rules. */
+  /* Dropdown mobile: card centrada; top real lo ajusta el JS (inline) */
   .main-nav{
-    position: fixed !important;
+    position: fixed;
     left: 0; right: 0;
-    top: calc(var(--ann-h, 0px) + var(--hdr-h, 56px)) !important;
+    top: calc(var(--ann-h) + var(--hdr-h));
     width: min(700px, calc(100% - 24px));
     margin: 0 auto;
-    z-index: 3100 !important;          /* below header, above page */
+    display: none; /* visibilidad por .show */
+    background: #fff;
     border-radius: 16px;
     box-shadow: 0 10px 30px rgba(0,0,0,.12);
     overflow: hidden;
+    z-index: 2000;
   }
-
-  /* Ensure visibility toggle still works */
-  .main-nav{ display: none; }
-  .main-nav.show{ display: block !important; }
-}
-/* ==== BERA — FIX: menú móvil pegado al header + borde rosa en ambos botones ==== */
-@media (max-width: 768px){
-  /* 1) El header actúa como contenedor de referencia */
-  .site-header{ position: sticky; z-index: 1200; overflow: visible; }
-  .site-header .header-inner{ position: relative; }
-
-  /* 2) Menú móvil SIEMPRE debajo del header (pegado) */
-  .main-nav{
-    position: absolute !important;   /* anclado al header */
-    top: 100% !important;            /* justo debajo del header */
-    left: 0 !important;               
-    right: 0 !important;
-    margin: 0 !important;            /* sin separación arriba */
-    width: 100% !important;          /* mismo ancho que el header */
-    border-radius: 0 0 14px 14px !important;  /* esquinas inferiores redondeadas */
-    z-index: 1300 !important;        /* por encima del hero, debajo de overlays */
-  }
-
-  /* 3) Botones circulares con delineado rosa en Catálogo y Hamburguesa */
-  .collection-toggle,
-  .nav-toggle{
-    width: 56px !important;
-    height: 56px !important;
-    border-radius: 999px !important;
-    background: #fff !important;
-    border: 2px solid var(--color-acento) !important; /* círculo rosa */
-    display: inline-flex !important; align-items: center !important; justify-content: center !important;
-  }
-  .collection-toggle .collection-label{ display:none !important; }  /* sólo ícono en mobile */
-  .collection-toggle .icon-hanger{ width:22px !important; height:22px !important; }
-
-/* 4) Evitar que el carrusel tape cosas cuando el menú está abierto */
-  .nav-open .swiper-hero .swiper-pagination{ opacity:0; pointer-events:none; }
-}
-
-/* === FIX FINAL: menú hamburguesa debajo del header (mobile) === */
-@media (max-width: 768px){
-  /* El header actúa como contexto para posicionar el dropdown */
-  .site-header{ position: sticky; z-index: 3200; }
-  .site-header .header-inner{ position: relative; }
-
-  /* Forzamos el menú a ocupar el ancho del header, pegado debajo */
-  .main-nav{
-    position: absolute !important;
-    top: 100% !important;          /* justo debajo del header */
-    left: 0 !important;
-    right: 0 !important;
-    width: 100% !important;
-    transform: none !important;    /* neutraliza cualquier translateX previo */
-    margin: 0 !important;
-    z-index: 3100 !important;      /* debajo del header, encima del contenido */
-    display: none;                  /* se muestra con .show */
-  }
-  .main-nav.show{ display: block !important; }
-}
-
-/* === ULTIMO OVERRIDE — Mobile: menú fijo, full‑width y debajo del header === */
-@media (max-width: 768px){
-  .site-header{ z-index: 3200 !important; }
-  .main-nav{
-    position: fixed !important;
-    left: 0 !important;
-    right: 0 !important;
-    top: calc(var(--ann-h, 0px) + var(--hdr-h, 56px)) !important; /* debajo del header */
-    width: 100% !important;
-    max-width: none !important;
-    transform: none !important;     /* anula cualquier translate para centrar */
-    margin: 0 !important;
-    z-index: 3100 !important;       /* debajo del header, encima del contenido */
-    border-radius: 0 0 14px 14px;    /* look de dropdown */
-    display: none;                   /* toggle por clase */
-  }
-  .main-nav.show{ display: block !important; }
+  .main-nav.show{ display: block; }
 }

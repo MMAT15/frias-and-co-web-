@@ -1,11 +1,20 @@
 /* --------------------------------------------------
-   Contact Page Styles
+   Contact Page Styles (contrast-safe)
 -------------------------------------------------- */
 /* Section layout */
 .section-contacto {
   padding: 4rem 0;
-  background-color: #fafafa;
+  /* Alto contraste por defecto (modo claro) */
+  background-color: #ffffff;
+  color: #111111;
 }
+
+/* Asegurar contraste de texto y enlaces dentro de la sección */
+.section-contacto :where(h1,h2,h3,h4,h5,h6,p,li,label,small){
+  color: #111111;
+}
+.section-contacto a{ color: var(--color-acento); }
+.section-contacto a:hover{ text-decoration: underline; }
 
 /* Container grid */
 /*
@@ -59,11 +68,15 @@
 .contact-form textarea {
   width: 100%;
   padding: 0.75rem;
-  border: 1px solid #ccc;
+  border: 1px solid #bdbdbd;     /* mejor contraste de borde */
   border-radius: var(--border-radius);
   font-family: var(--fuente-base);
-  transition: border-color var(--transition), box-shadow var(--transition);
+  background: #ffffff;            /* fondo claro consistente */
+  color: #111111;                 /* texto oscuro legible */
+  transition: border-color var(--transition), box-shadow var(--transition), background var(--transition);
 }
+.contact-form input::placeholder,
+.contact-form textarea::placeholder{ color:#666666; }
 .contact-form input:focus,
 .contact-form textarea:focus {
   border-color: var(--color-acento);
@@ -116,6 +129,7 @@
   color: var(--color-acento);
   text-decoration: none;
 }
+.contact-info ul li a:hover{ text-decoration: underline; }
 
 /* Map styling */
 .map-container {
@@ -197,6 +211,35 @@
   width: 24px;
   height: 24px;
   display: inline-block;
+}
+/* Los paths heredan el color del texto para buen contraste */
+.contact-list .icon path{ fill: currentColor; }
+
+/* --------------------------------------------------
+   Dark mode (prefers-color-scheme) — alto contraste
+-------------------------------------------------- */
+@media (prefers-color-scheme: dark){
+  .section-contacto{
+    background: #0f0f10;   /* casi negro, sin puro #000 para evitar deslumbrar */
+    color: #f1f1f1;
+  }
+  .section-contacto :where(h1,h2,h3,h4,h5,h6,p,li,label,small){ color:#f1f1f1; }
+  .contact-form,
+  .contact-info{
+    background: #161618;   /* tarjetas oscuras */
+    color: #f1f1f1;
+    box-shadow: 0 8px 22px rgba(0,0,0,.35);
+    border: 1px solid #2a2a2d;
+  }
+  .contact-form input,
+  .contact-form textarea{
+    background: #0f0f10;
+    color: #f1f1f1;
+    border-color: #3a3a3d;
+  }
+  .contact-form input::placeholder,
+  .contact-form textarea::placeholder{ color:#9ea0a6; }
+  .contact-list .icon path{ fill: currentColor; }
 }
 
 /* If using inline SVGs, ensure SVGs fill the container */
