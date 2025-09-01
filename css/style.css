@@ -2628,6 +2628,18 @@ img {
   }
 }
 
+/* === Ajuste alineación botones header en mobile: bordes laterales === */
+@media (max-width: 768px){
+  .collection-toggle{ 
+    justify-self: start !important;
+    margin-left: 8px !important;
+  }
+  .nav-toggle{ 
+    justify-self: end !important;
+    margin-right: 8px !important;
+  }
+}
+
 /* 2) MOBILE: Featured en 2 columnas como productos.html */
 @media (max-width:768px){
   .grid-featured{
