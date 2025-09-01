@@ -93,6 +93,8 @@ if (window.__beraBooted) {
           if (e.propertyName !== 'max-height') return;
           annBar.style.display = 'none';
           setAnnHeightVar();
+          // Fuerza a que componentes dependientes del layout (ej: menú mobile) actualicen offset
+          window.dispatchEvent(new Event('resize'));
           annBar.removeEventListener('transitionend', onEnd);
         };
         annBar.addEventListener('transitionend', onEnd);
@@ -119,20 +121,41 @@ function setAppInert(on){
       }
       navToggle.setAttribute('aria-expanded', 'false');
 
+      // === Alinear el off‑canvas por debajo del header (iOS Safari friendly)
+      const getAnnH = () => {
+        const v = getComputedStyle(document.documentElement).getPropertyValue('--ann-h').trim();
+        const n = parseInt(v, 10);
+        return isNaN(n) ? 0 : n;
+      };
+      const getHdrH = () => {
+        const hEl = document.querySelector('.site-header');
+        return hEl ? Math.ceil(hEl.getBoundingClientRect().height) : 0;
+      };
+      const applyMobileNavOffset = () => {
+        const top = getAnnH() + getHdrH();
+        mainNav.style.top = top + 'px';
+        // Evita que el panel tape el header y limita su alto en viewport móvil
+        mainNav.style.maxHeight = `calc(100vh - ${top}px)`;
+      };
+
       const lock   = () => document.body.style.overflow = 'hidden';
       const unlock = () => document.body.style.overflow = '';
 
       const openMenu = () => {
+        applyMobileNavOffset();
         mainNav.classList.add('show');
         navToggle.classList.add('open');
         navToggle.setAttribute('aria-expanded', 'true');
         lock();
+        requestAnimationFrame(applyMobileNavOffset);
       };
       const closeMenu = () => {
         mainNav.classList.remove('show');
         navToggle.classList.remove('open');
         navToggle.setAttribute('aria-expanded', 'false');
         unlock();
+        mainNav.style.top = '';
+        mainNav.style.maxHeight = '';
       };
 
       navToggle.addEventListener('click', () => {
@@ -150,6 +173,17 @@ function setAppInert(on){
       document.addEventListener('keydown', (e) => {
         if (e.key === 'Escape' && mainNav.classList.contains('show')) closeMenu();
       });
+
+      // Recalcular cuando cambia el viewport (iOS Safari, orientación, fuentes)
+      window.addEventListener('resize', throttle(applyMobileNavOffset, 120), { passive: true });
+      if (window.visualViewport && window.visualViewport.addEventListener) {
+        window.visualViewport.addEventListener('resize', throttle(applyMobileNavOffset, 120), { passive: true });
+      }
+      window.addEventListener('orientationchange', () => applyMobileNavOffset(), { passive: true });
+      window.addEventListener('load', () => applyMobileNavOffset(), { passive: true });
+      if (document.fonts && document.fonts.ready) {
+        document.fonts.ready.then(() => applyMobileNavOffset()).catch(() => {});
+      }
     }
 
     /* ===========================
