@@ -3862,6 +3862,27 @@ textarea:focus-visible{
   .collection-toggle .collection-label{ display:none !important; }  /* sólo ícono en mobile */
   .collection-toggle .icon-hanger{ width:22px !important; height:22px !important; }
 
-  /* 4) Evitar que el carrusel tape cosas cuando el menú está abierto */
+/* 4) Evitar que el carrusel tape cosas cuando el menú está abierto */
   .nav-open .swiper-hero .swiper-pagination{ opacity:0; pointer-events:none; }
+}
+
+/* === FIX FINAL: menú hamburguesa debajo del header (mobile) === */
+@media (max-width: 768px){
+  /* El header actúa como contexto para posicionar el dropdown */
+  .site-header{ position: sticky; z-index: 3200; }
+  .site-header .header-inner{ position: relative; }
+
+  /* Forzamos el menú a ocupar el ancho del header, pegado debajo */
+  .main-nav{
+    position: absolute !important;
+    top: 100% !important;          /* justo debajo del header */
+    left: 0 !important;
+    right: 0 !important;
+    width: 100% !important;
+    transform: none !important;    /* neutraliza cualquier translateX previo */
+    margin: 0 !important;
+    z-index: 3100 !important;      /* debajo del header, encima del contenido */
+    display: none;                  /* se muestra con .show */
+  }
+  .main-nav.show{ display: block !important; }
 }
