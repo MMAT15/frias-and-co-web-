@@ -3695,13 +3695,19 @@ textarea:focus-visible{
   .site-header{ z-index: 1200; }
   .header-inner{
     display: grid;
-    grid-template-columns: auto 1fr auto; /* [Catálogo] [Branding] [Hamburguesa] */
+    grid-template-columns: 1fr auto 1fr; /* lados iguales → centro perfecto */
     align-items: center;
     gap: 8px;
     min-height: 88px;
     padding: 0 12px;
+    position: relative;
   }
-  .site-branding{ justify-self: center; text-align: center; }
+  /* Posiciones explícitas para simetría */
+  .collection-toggle{ grid-column: 1; justify-self: start; }
+  .site-branding{ grid-column: 2; justify-self: center; text-align: center; margin:0 !important; transform:none !important; }
+  .nav-toggle{ grid-column: 3; justify-self: end; }
+  /* Neutraliza cualquier ajuste previo que desplace elementos */
+  .logo-wrap, .site-title, .site-tagline{ margin:0 !important; transform:none !important; }
 
   /* Botones laterales iguales; sin exagerar !important */
   .collection-toggle,
