@@ -472,8 +472,8 @@ img {
 }
 .swiper-hero .swiper-slide {
   position: relative;
-  background-size: cover;        /* desktop por defecto */
-  background-position: center 22%;
+  background-size: cover;        /* llena sin deformar */
+  background-position: center 20%;
   background-repeat: no-repeat;
 }
 .swiper-hero .hero-overlay {
@@ -722,8 +722,7 @@ img {
   width: 100%;
   aspect-ratio: 3 / 4;  /* consistente con productos */
   height: auto;
-  object-fit: contain;      /* evita recortes */
-  background: #fff;
+  object-fit: cover;
 }
 .offer-item .badge {
   position: absolute;
@@ -912,8 +911,7 @@ img {
   width: 100%;
   aspect-ratio: 4 / 3;  /* destacados más panorámicos */
   height: auto;
-  object-fit: contain;       /* evita recortes */
-  background: #fff;
+  object-fit: cover;
   display: block;
 }
 .featured-card h3 {
@@ -962,7 +960,7 @@ img {
 }
 .producto-item:hover img,
 .featured-card:hover img {
-  transform: scale(1.03);
+  transform: scale(1.05);
 }
 
 /* Instagram icon en footer */
@@ -3252,10 +3250,9 @@ body { padding-top: calc(var(--ann-h) + var(--hdr-h)); }
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  background: #fff;          /* mismo look que catálogo/hamburguesa */
-  color: var(--color-principal);
-  border: 2px solid var(--color-acento);
-  box-shadow: 0 8px 20px rgba(0,0,0,.12);
+  background: #000;          /* fondo neutro, contrasta en claro/oscuro */
+  color: #fff;
+  box-shadow: 0 8px 20px rgba(0,0,0,.25);
   z-index: 9999;
   text-decoration: none;
   -webkit-tap-highlight-color: transparent;
@@ -3426,8 +3423,7 @@ body{ padding-top: calc(var(--ann-h) + var(--hdr-h)); }
   width: 100%;
   aspect-ratio: 3 / 4;  /* prendas suelen verse bien 3:4 */
   height: auto;
-  object-fit: contain;        /* evita recortes */
-  background: #fff;           /* relleno neutro si sobran bandas */
+  object-fit: cover;
 }
 /* =========================================================
    CONSOLIDATED FINAL OVERRIDES — 2025‑08‑23
@@ -3550,14 +3546,6 @@ select:focus-visible,
 textarea:focus-visible{
   outline: 3px solid var(--color-acento) !important;
   outline-offset: 2px !important;
-}
-
-/* === FINAL IMAGE FIT OVERRIDE — evita recortes en tarjetas === */
-.producto-item img,
-.featured-card img,
-.offer-item img{
-  object-fit: contain !important;
-  background: #fff !important;
 }
 
 /* 10) Respeta reduce‑motion: blindaje final */
@@ -3749,12 +3737,4 @@ textarea:focus-visible{
     z-index: 2000;
   }
   .main-nav.show{ display: block; }
-}
-/* Hero: mostrar imagen completa en mobile/tablet para evitar recortes fuertes */
-@media (max-width: 1024px){
-  .swiper-hero .swiper-slide{
-    background-size: contain !important;
-    background-position: center center !important;
-    background-color: #000; /* relleno sutil tras overlay */
-  }
 }
