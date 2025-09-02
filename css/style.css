@@ -3434,6 +3434,7 @@ body{ padding-top: calc(var(--ann-h) + var(--hdr-h)); }
 :root{
   --hdr-h: 56px !important;
   --ann-h: 0px !important;   /* valor por defecto; el JS lo ajusta si hay anuncio */
+  --nav-gap: 8px;            /* pequeño despeje bajo el header en mobile */
 }
 
 /* 1) Compensaciones globales coherentes */
@@ -3726,7 +3727,7 @@ textarea:focus-visible{
   .main-nav{
     position: fixed;
     left: 0; right: 0;
-    top: calc(var(--ann-h) + var(--hdr-h));
+    top: calc(var(--ann-h) + var(--hdr-h) + var(--nav-gap, 8px));
     width: min(700px, calc(100% - 24px));
     margin: 0 auto;
     display: none; /* visibilidad por .show */

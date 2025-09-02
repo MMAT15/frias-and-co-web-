@@ -131,8 +131,13 @@ function setAppInert(on){
         const hEl = document.querySelector('.site-header');
         return hEl ? Math.ceil(hEl.getBoundingClientRect().height) : 0;
       };
+      const getNavGap = () => {
+        const v = getComputedStyle(document.documentElement).getPropertyValue('--nav-gap').trim();
+        const n = parseInt(v, 10);
+        return isNaN(n) ? 0 : n;
+      };
       const applyMobileNavOffset = () => {
-        const top = getAnnH() + getHdrH();
+        const top = getAnnH() + getHdrH() + getNavGap();
         // Fuerza la prioridad para ganar a cualquier CSS previo con !important
         mainNav.style.setProperty('top', top + 'px', 'important');
         // Evita que el panel tape el header y limita su alto en viewport móvil
