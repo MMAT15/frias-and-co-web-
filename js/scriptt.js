@@ -1574,7 +1574,7 @@ updateCartCount();
   const shouldShowFab = () => {
     try {
       const file = (location.pathname.split('/').pop() || '').toLowerCase();
-      return file !== 'productos.html';
+      return file !== 'productos.html' && file !== 'finalizarcompra.html';
     } catch { return true; }
   };
 

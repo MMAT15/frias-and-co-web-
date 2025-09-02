@@ -241,6 +241,27 @@
               </div>
             </fieldset>
 
+            <!-- Datos de contacto (opcional, ayuda a armar el DM) -->
+            <fieldset class="form-group" aria-labelledby="legend-contact-data">
+              <legend id="legend-contact-data">Datos de contacto (opcional)</legend>
+              <div class="form-group">
+                <label for="ck-nombre">Nombre</label>
+                <input type="text" id="ck-nombre" name="nombre" placeholder="Tu nombre" autocomplete="name">
+              </div>
+              <div class="form-group">
+                <label for="ck-telefono">Teléfono</label>
+                <input type="text" id="ck-telefono" name="telefono" placeholder="Tu celular" autocomplete="tel">
+              </div>
+              <div class="form-group">
+                <label for="ck-email">Email</label>
+                <input type="email" id="ck-email" name="email" placeholder="tucorreo@ejemplo.com" autocomplete="email">
+              </div>
+              <div class="form-group">
+                <label for="ck-notas">Notas para el pedido</label>
+                <textarea id="ck-notas" name="notas" rows="3" placeholder="Talle, color, horario, etc."></textarea>
+              </div>
+            </fieldset>
+
             <!-- Confirmación -->
             <button type="button" id="confirm-order" class="btn btn-primary btn-block" aria-describedby="dm-title dm-instructions">
               Confirmar pedido
@@ -266,6 +287,13 @@
             Ahora te vamos a redirigir a nuestro perfil de Instagram (<strong>@beraclothingg</strong>).
             <br>El resumen de tu pedido ya quedó <strong>copiado</strong>: cuando se abra Instagram, <strong>pegalo</strong> en un DM y tocá enviar.
           </p>
+          <div class="dm-preview-wrap">
+            <label for="dm-preview" class="visually-hidden">Resumen</label>
+            <textarea id="dm-preview" class="dm-preview" rows="8" readonly></textarea>
+            <div class="dm-preview-actions">
+              <button id="dm-copy" type="button" class="btn">Copiar resumen</button>
+            </div>
+          </div>
           <!-- Nuevo aviso con contador (solo se debe ver antes de abrir IG) -->
           <p class="dm-countdown">Te redirigimos en <span id="dm-timer">15</span> segundos…</p>
           <p id="dm-redirecting" class="dm-redirecting" hidden>

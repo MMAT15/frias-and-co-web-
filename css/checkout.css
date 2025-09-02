@@ -254,6 +254,12 @@ body.dm-open {
   margin: 0.5rem 0;
 }
 
+.dm-preview-wrap{ margin:.5rem 0 1rem; }
+.dm-preview{ width:100%; min-height: 160px; resize: vertical; font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace; font-size:.9rem; padding:.75rem; border:1px solid #e0e0e0; border-radius:8px; background:#fafafa; color:#333; }
+.dm-preview[readonly]{ background:#f7f7f7; }
+.dm-preview-actions{ display:flex; gap:.5rem; justify-content:flex-end; margin-top:.5rem; }
+.dm-preview-actions .btn{ background: var(--color-acento, #e91e63); color:#fff; border:none; border-radius:8px; padding:.5rem .9rem; cursor:pointer; }
+
 .dm-countdown {
   font-size: 0.95rem;
   color: #333;

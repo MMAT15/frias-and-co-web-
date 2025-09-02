@@ -73,6 +73,32 @@ document.addEventListener('DOMContentLoaded', () => {
     return r ? r.value : 'pickup'; // 'pickup' | 'meetup'
   };
 
+  // Datos de contacto opcionales (persistentes)
+  function readContact() {
+    const g = (sel) => (document.querySelector(sel)?.value || '').trim();
+    const data = {
+      nombre: g('#ck-nombre'),
+      telefono: g('#ck-telefono'),
+      email: g('#ck-email'),
+      notas: g('#ck-notas')
+    };
+    try { localStorage.setItem('checkout_customer', JSON.stringify(data)); } catch {}
+    return data;
+  }
+  function restoreContact() {
+    try {
+      const raw = localStorage.getItem('checkout_customer');
+      if (!raw) return;
+      const data = JSON.parse(raw);
+      if (data && typeof data === 'object') {
+        if (data.nombre)   document.querySelector('#ck-nombre')?.setAttribute('value', data.nombre);
+        if (data.telefono) document.querySelector('#ck-telefono')?.setAttribute('value', data.telefono);
+        if (data.email)    document.querySelector('#ck-email')?.setAttribute('value', data.email);
+        if (data.notas)    document.querySelector('#ck-notas')?.append(document.createTextNode(data.notas));
+      }
+    } catch {}
+  }
+
   // Arma el texto para IG DM
   function buildIGMessage() {
     const grossTotal = cart.reduce((s,i) => s + (i.price || 0) * (i.qty || 1), 0);
@@ -80,6 +106,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const isCash     = currentPayment() === 'cash';
     const cashDisc   = isCash ? grossTotal * CASH_OFF : 0;
     const toPay      = Math.max(0, grossTotal - cashDisc);
+    const contact    = readContact();
 
     const lines = [];
     lines.push('¡Hola! Quiero confirmar mi pedido:');
@@ -107,6 +134,12 @@ document.addEventListener('DOMContentLoaded', () => {
     } else {
       lines.push('Entrega: Punto de encuentro (a coordinar)');
     }
+
+    // Datos de contacto (si se cargaron)
+    if (contact.nombre)   lines.push(`Nombre: ${contact.nombre}`);
+    if (contact.telefono) lines.push(`Teléfono: ${contact.telefono}`);
+    if (contact.email)    lines.push(`Email: ${contact.email}`);
+    if (contact.notas)    lines.push(`Notas: ${contact.notas}`);
 
     return lines.join('\n');
   }
@@ -275,6 +308,30 @@ document.addEventListener('DOMContentLoaded', () => {
         const timerEl = dmModal.querySelector('#dm-timer');
         if (timerEl) timerEl.textContent = seconds;
 
+        // Mostrar preview del mensaje
+        const preview = dmModal.querySelector('#dm-preview');
+        if (preview) {
+          preview.value = msg;
+        }
+        // Copiar desde botón
+        const copyBtn = dmModal.querySelector('#dm-copy');
+        if (copyBtn) {
+          copyBtn.onclick = async () => { await copyToClipboard(preview?.value || msg); };
+        }
+
+        // Focus trap básico dentro del modal
+        const focusTrap = (ev) => {
+          if (ev.key !== 'Tab') return;
+          const nodes = Array.from(dmModal.querySelectorAll('button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'))
+            .filter(el => !el.hasAttribute('disabled'));
+          if (!nodes.length) return;
+          const first = nodes[0];
+          const last = nodes[nodes.length - 1];
+          if (ev.shiftKey && document.activeElement === first) { last.focus(); ev.preventDefault(); }
+          else if (!ev.shiftKey && document.activeElement === last) { first.focus(); ev.preventDefault(); }
+        };
+        dmModal.addEventListener('keydown', focusTrap);
+
         // Clear any previous countdown
         if (window.__igLaunch.timer) { clearInterval(window.__igLaunch.timer); window.__igLaunch.timer = null; }
 
@@ -297,6 +354,7 @@ document.addEventListener('DOMContentLoaded', () => {
               try { document.body.classList.remove('dm-open'); } catch {}
               dmModal.classList.remove('active');
               dmModal.setAttribute('aria-hidden', 'true');
+              dmModal.removeEventListener('keydown', focusTrap);
               openIGWithText(msg);
             }
           }
@@ -310,6 +368,7 @@ document.addEventListener('DOMContentLoaded', () => {
           try { document.body.classList.remove('dm-open'); } catch {}
           dmModal.classList.remove('active');
           dmModal.setAttribute('aria-hidden', 'true');
+          dmModal.removeEventListener('keydown', focusTrap);
           console.log('[checkout] Opening IG DM with text length:', msg.length);
           openIGWithText(msg);
         };
@@ -347,6 +406,10 @@ document.addEventListener('DOMContentLoaded', () => {
         // Disparamos el evento submit para reutilizar la lógica existente
         const ev = new Event('submit', { bubbles: true, cancelable: true });
         checkoutForm.dispatchEvent(ev);
+      } else {
+        // Fallback absoluto si por alguna razón el form no está
+        const msg = buildIGMessage();
+        openIGWithText(msg);
       }
     });
   }
@@ -358,6 +421,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // ====== Inicializar ======
+  restoreContact();
   calculateCheckout();
 
   document.addEventListener('visibilitychange', () => {
