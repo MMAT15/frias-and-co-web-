@@ -1570,14 +1570,22 @@ updateCartCount();
     }, { capture: true });
   }
 
-  // Init cuando el DOM está listo
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', () => {
-      ensureIGFab();
-      setupIGClickTracking();
-    });
-  } else {
-    ensureIGFab();
+  // Init cuando el DOM está listo (excepto en productos.html donde lo ocultamos)
+  const shouldShowFab = () => {
+    try {
+      const file = (location.pathname.split('/').pop() || '').toLowerCase();
+      return file !== 'productos.html';
+    } catch { return true; }
+  };
+
+  const initIG = () => {
+    if (shouldShowFab()) ensureIGFab();
     setupIGClickTracking();
+  };
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initIG);
+  } else {
+    initIG();
   }
 })();

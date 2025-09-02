@@ -238,11 +238,11 @@ document.addEventListener('DOMContentLoaded', () => {
     if (summaryCashDisc) summaryCashDisc.textContent = isCash ? ('− ' + money(cashDiscount)) : '—';
     if (summaryTotal)    summaryTotal.textContent    = money(toPay);
 
-    // Disable confirm button if cart is empty
+    // Mantener habilitado el botón aunque el carrito esté vacío
+    // (permitimos que el usuario consulte por DM de todos modos)
     if (typeof confirmBtn !== 'undefined' && confirmBtn) {
-      const empty = cart.length === 0;
-      confirmBtn.disabled = empty;
-      confirmBtn.setAttribute('aria-disabled', empty ? 'true' : 'false');
+      confirmBtn.disabled = false;
+      confirmBtn.setAttribute('aria-disabled', 'false');
     }
   }
 
