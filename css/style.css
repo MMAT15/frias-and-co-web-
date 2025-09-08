@@ -3163,6 +3163,13 @@ body { padding-top: calc(var(--ann-h) + var(--hdr-h)); }
 }
 /* === FINAL DESKTOP HEADER LAYOUT (≥1024px): NAV ← | BRANDING ● | SEARCH + CATÁLOGO → === */
 @media (min-width:1024px){
+  /* When open, keep same 3-column shell so branding stays centered */
+  .site-header.search-open .header-inner{
+    grid-template-columns: 1fr auto 1fr !important;
+    grid-template-areas:
+      "catalogo branding right"
+      "nav      nav      nav" !important;
+  }
   /* Header spacing from announcement bar */
   .site-header{ padding-top:14px !important; padding-bottom:12px !important; }
 
@@ -3739,4 +3746,142 @@ textarea:focus-visible{
     z-index: 2000;
   }
   .main-nav.show{ display: block; }
+}
+
+/* === Desktop Search Fix: visible icon + no layout shift (≥1024px) === */
+@media (min-width: 1024px){
+  /* Ensure search icon button is always visible and styled */
+  .header-search-toggle{
+    width: 40px !important;
+    height: 40px !important;
+    border: 1px solid #e0e0e0 !important;
+    border-radius: 999px !important;
+    background: #fff !important;
+    color: var(--color-principal) !important; /* icon uses currentColor */
+    display: inline-grid !important;
+    place-items: center !important;
+    cursor: pointer !important;
+  }
+  .header-search-toggle svg{ width: 20px !important; height: 20px !important; display: block !important; }
+  .header-search-toggle:hover{
+    background: var(--color-acento) !important;
+    color: #fff !important;
+    border-color: var(--color-acento) !important;
+  }
+
+  /* Prevent branding from moving when search opens */
+  .header-inner{ position: relative !important; }
+  .site-header:not(.search-open) .header-search-desktop{ display: none !important; }
+  .site-header.search-open .header-search-toggle{ display: none !important; }
+  .site-header.search-open .header-search-desktop{
+    position: absolute !important;
+    right: 12px !important;   /* inside container padding */
+    top: 50% !important;
+    transform: translateY(-50%);
+    display: inline-flex !important;
+    z-index: 5;
+  }
+  .site-header.search-open .header-search-input{ width: min(44vw, 420px) !important; }
+}
+
+/* === Desktop Search: own row when open (no overlap, no branding shift) === */
+@media (min-width: 1024px){
+  .site-header.search-open .header-inner{
+    /* Two rows; when open, reserve a 4th column for the toggle */
+    display: grid !important;
+    grid-template-columns: auto 1fr auto auto !important; /* catalogo | branding | search field | toggle */
+    grid-template-rows: auto auto !important;
+    row-gap: 10px !important;
+  }
+  .site-header.search-open .collection-toggle{
+    grid-area: unset !important;
+    grid-column: 1 !important;
+    justify-self: start !important;
+    align-self: center !important;
+  }
+  .site-header.search-open .site-branding{
+    grid-area: unset !important;
+    grid-column: 2 !important;
+    justify-self: center !important;
+    align-self: center !important;
+  }
+  .site-header.search-open .main-nav{
+    grid-area: unset !important;
+    grid-row: 2 / 3 !important;
+    grid-column: 1 / -1 !important; /* span full width under header row */
+    justify-self: center !important;
+  }
+  /* Show search as a dropdown under the header, aligned right, without moving layout */
+  .site-header.search-open form.header-search-desktop{
+    position: absolute !important;
+    right: 12px !important;
+    top: calc(100% + 8px) !important;  /* below header */
+    transform: none !important;
+    display: inline-flex !important;
+    z-index: 2000 !important;
+  }
+  .site-header.search-open .header-search-input{ width: min(44vw, 420px) !important; }
+}
+
+/* === Desktop Search – final override (kept right, vertically centered; does not cover nav) === */
+@media (min-width: 1024px){
+  /* Reduce lateral padding in header container so search sits closer to edge */
+  .site-header .header-inner{ padding-right: 8px !important; padding-left: 12px !important; }
+
+  .site-header.search-open form.header-search-desktop{
+    grid-area: unset !important;
+    grid-column: 3 !important;   /* third column: search field */
+    position: static !important;
+    top: auto !important; right: auto !important; left: auto !important; transform: none !important;
+    justify-self: end !important;
+    align-self: center !important;
+    display: inline-flex !important;
+    z-index: auto !important;
+  }
+  .site-header.search-open .header-search-input{
+    width: clamp(280px, 32vw, 380px) !important; /* compact to avoid touching branding */
+  }
+  /* Keep the toggle visible at the far right when open */
+  .site-header.search-open .header-search-toggle{
+    display: inline-grid !important;
+    grid-area: unset !important;
+    grid-column: 4 !important;   /* fourth column: toggle */
+    justify-self: end !important;
+    align-self: center !important;
+  }
+  /* Ensure the submit icon is always visible */
+  .header-search-btn svg{ width: 18px !important; height: 18px !important; display: block !important; }
+  .header-search-btn{ color: var(--color-principal) !important; }
+}
+
+/* === FINAL DESKTOP HEADER (≥1024px): branding centered; search right; toggle hidden when open === */
+@media (min-width:1024px){
+  .header-inner{
+    display:grid !important;
+    grid-template-columns: 1fr auto 1fr !important;
+    grid-template-rows: auto auto !important;
+    grid-template-areas:
+      "catalogo branding right"
+      "nav      nav      nav" !important;
+    column-gap:16px !important;
+    row-gap:10px !important;
+    padding-right:0 !important;
+  }
+  .collection-toggle{ grid-area:catalogo !important; justify-self:start !important; }
+  .site-branding{ grid-area:branding !important; justify-self:center !important; }
+  .main-nav{ grid-area:nav !important; justify-self:center !important; }
+
+  /* Closed */
+  .site-header:not(.search-open) .header-search-toggle{ grid-area:right !important; justify-self:end !important; display:inline-grid !important; }
+  .site-header:not(.search-open) .header-search-desktop{ display:none !important; }
+
+  /* Open */
+  .site-header.search-open .header-search-toggle{ display:none !important; }
+  .site-header.search-open form.header-search-desktop{ grid-area:right !important; position:static !important; justify-self:end !important; align-self:center !important; display:inline-flex !important; }
+  .site-header.search-open .header-search-input{ width: clamp(320px,36vw,460px) !important; }
+
+  /* Ensure icon visibility inside submit */
+  .header-search-btn{ color: var(--color-principal) !important; }
+  .header-search-btn svg{ width:18px !important; height:18px !important; display:block !important; }
+  .header-search-btn svg path{ fill: currentColor !important; }
 }
