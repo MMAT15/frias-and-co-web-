@@ -39,9 +39,9 @@
   box-shadow: 0 12px 30px rgba(0,0,0,0.15);
 }
 .producto-item img {
-  width: 100%;
-  height: auto;
-  aspect-ratio: 4 / 5;
+  width: 100% !important;
+  height: auto !important;
+  aspect-ratio: 4 / 5 !important; /* asegurar proporción consistente */
   object-fit: cover;
   background: #fff;
 }
@@ -84,6 +84,22 @@
   max-width: 1200px;
   margin: 0 auto;
   padding: 0 1rem;
+}
+
+/* Asegurar layout de grilla estable para productos (evita 1 columna gigante) */
+.product-category .grid-products {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1.25rem;
+  max-width: 1200px;   /* evita que se estire de lado a lado en pantallas grandes */
+  margin: 0 auto;      /* centra el grid */
+}
+
+/* Limitar altura visual de imágenes en desktop grandes (evita efecto “gigante”) */
+@media (min-width: 1024px){
+  .product-category .producto-item img{
+    max-height: 460px;
+  }
 }
 
 /* Responsive adjustments */
