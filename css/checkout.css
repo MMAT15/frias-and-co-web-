@@ -359,6 +359,40 @@ input:-webkit-autofill {
   .pre-dm-modal__content { transform: none !important; }
 }
 
+/* ----- Dark page variant (keeps header white) ----- */
+body.dark-page .section-hero { background: #0f0f10; color: #f1f1f1; }
+body.dark-page .section-hero .section-title { color: #f1f1f1; }
+body.dark-page .section-checkout { background: #0f0f10; }
+body.dark-page .checkout-summary-panel,
+body.dark-page .checkout-form {
+  background: #16161a;
+  color: #f1f1f1;
+  box-shadow: none;
+  border: 1px solid #2a2a2d;
+}
+body.dark-page .checkout-form label { color: #f1f1f1; }
+body.dark-page .checkout-form input[type="text"],
+body.dark-page .checkout-form input[type="email"],
+body.dark-page .checkout-form input[type="number"],
+body.dark-page .checkout-form select {
+  background: #0f0f10;
+  color: #eee;
+  border-color: #3a3a3d;
+}
+body.dark-page .option-wrapper {
+  border-color: #333;
+  background: #111;
+}
+body.dark-page .option-wrapper:hover { background: #16161a; }
+@supports selector(:has(*)) {
+  body.dark-page .option-wrapper:has(input:checked) {
+    border-color: var(--color-acento);
+    background: #16161a;
+  }
+}
+body.dark-page .dm-preview { background:#111; color:#eee; border-color:#333; }
+body.dark-page .dm-countdown { color: #ddd; }
+
 /* 7) Modal: blur suave si hay soporte */
 @supports (backdrop-filter: blur(6px)) {
   .pre-dm-modal { backdrop-filter: blur(6px); }

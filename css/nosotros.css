@@ -71,3 +71,10 @@
   margin: 0 auto;
   padding: 0 1rem;
 }
+
+/* ----- Dark page variant (keeps header white) ----- */
+body.dark-page .section-about {
+  background: #0f0f10;
+  color: #f1f1f1;
+}
+body.dark-page .section-about :where(h1,h2,h3,h4,h5,h6,p,li) { color: #f1f1f1; }

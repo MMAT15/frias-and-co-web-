@@ -87,6 +87,19 @@ body {
   background-color: var(--color-fondo);
   color: var(--color-principal);
 }
+
+/* Dark page wrapper: keep header white, darken the rest */
+body.dark-page {
+  background-color: #0f0f10;
+}
+body.dark-page main {
+  background-color: #0f0f10;
+}
+/* Index featured section on dark pages */
+body.dark-page .section-featured {
+  background-color: #0f0f10;
+}
+body.dark-page .section-featured .section-title { color: #f1f1f1; }
 img {
   display: block;
   max-width: 100%;

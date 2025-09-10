@@ -424,6 +424,37 @@
   transition: background var(--transition), transform var(--transition), color var(--transition);
   margin-top: 0.75rem;
 }
+/* ----- Dark page variant (keeps header white) ----- */
+body.dark-page .product-category {
+  background: #0f0f10;
+  color: #f1f1f1;
+}
+body.dark-page .product-category .category-title { color: #f1f1f1; }
+body.dark-page .productos-filtros-bar { background: #16161a; color: #f1f1f1; box-shadow: none; }
+body.dark-page .filtros-selects select {
+  background: #0f0f10;
+  color: #eee;
+  border-color: #333;
+}
+body.dark-page .product-filters {
+  background: #16161a;
+  color: #f1f1f1;
+  box-shadow: none;
+  border: 1px solid #2a2a2d;
+}
+body.dark-page .producto-item,
+body.dark-page .modern-grid .producto-item {
+  background: #16161a;
+  color: #f1f1f1;
+  box-shadow: none;
+  border: 1px solid #2a2a2d;
+}
+body.dark-page .producto-item .price { color: var(--color-acento); }
+body.dark-page .add-to-cart-icon {
+  background: #111;
+  color: #eee;
+  border-color: #333;
+}
 .add-to-cart-icon:hover {
   background: var(--color-principal);
   color: #fff;

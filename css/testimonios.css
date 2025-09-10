@@ -116,3 +116,20 @@
   width: 0.75rem;
   height: 0.75rem;
 }
+
+/* ----- Dark page variant (keeps header white) ----- */
+body.dark-page .section-testimonios {
+  background: #0f0f10;
+  color: #f1f1f1;
+}
+body.dark-page .section-testimonios .section-title { color: #f1f1f1; }
+body.dark-page .swiper-testimonios .swiper-slide {
+  background: #16161a;
+  color: #eee;
+  box-shadow: none;
+  border: 1px solid #2a2a2d;
+}
+body.dark-page .swiper-testimonios blockquote { color: #eee; }
+body.dark-page .swiper-testimonios cite { color: #bbb; }
+body.dark-page .swiper-testimonios .swiper-button-prev,
+body.dark-page .swiper-testimonios .swiper-button-next { color: #f1f1f1; opacity: 0.9; }

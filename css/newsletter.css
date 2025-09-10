@@ -98,3 +98,17 @@
     transition: none;
   }
 }
+
+/* ----- Dark page variant (keeps header white) ----- */
+body.dark-page .novedades-hero,
+body.dark-page .section-newsletter {
+  background: #0f0f10;
+  color: #f1f1f1;
+}
+body.dark-page .section-newsletter .section-title,
+body.dark-page .novedades-hero .section-title { color: #f1f1f1; }
+body.dark-page .newsletter-form input[type="email"] {
+  background: #111;
+  color: #eee;
+  border-color: #333;
+}
