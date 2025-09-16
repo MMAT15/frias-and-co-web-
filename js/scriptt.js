@@ -1046,14 +1046,15 @@ try {
 syncQuickFilters();
 const typeToSection = {
   remera: 'remeras',
-  top: 'tops',
-  camisa: 'camisas',
-  short: 'shorts',
+  denim: 'denim',
   pantalon: 'pantalones',
-  buzo: 'buzos',
+  short: 'shorts',
+  top: 'tops',
+  body: 'bodys',
   set: 'sets',
   abrigo: 'abrigos',
-  vestido: 'vestidos'
+  vestido: 'vestidos',
+  accesorio: 'accesorios'
 };
 const sectionToType = Object.fromEntries(
   Object.entries(typeToSection).map(([tipo, sec]) => [sec, tipo])

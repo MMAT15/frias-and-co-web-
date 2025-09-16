@@ -91,10 +91,20 @@
 /* Asegurar layout de grilla estable para productos (evita 1 columna gigante) */
 .product-category .grid-products {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  gap: 1.25rem;
-  max-width: 1200px;   /* evita que se estire de lado a lado en pantallas grandes */
-  margin: 0 auto;      /* centra el grid */
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: clamp(1rem, 2vw, 1.75rem);
+  max-width: 1280px;
+  margin: 0 auto;
+}
+@media (min-width: 1024px) {
+  .product-category .grid-products {
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  }
+}
+@media (min-width: 1440px) {
+  .product-category .grid-products {
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  }
 }
 
 /* Limitar altura visual de imágenes en desktop grandes (evita efecto “gigante”) */
@@ -482,6 +492,9 @@
   display: flex;
   flex-direction: column;
   gap: clamp(2.5rem, 6vw, 4.5rem);
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 1rem 3rem;
 }
 
 @media (max-width: 900px) {
@@ -670,19 +683,19 @@ body:not(.dark-page) .empty-state {
   margin-top: auto;
   width: 100%;
   display: grid;
-  grid-template-columns: 1fr auto;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 0.75rem;
-  align-items: center;
+  align-items: stretch;
 }
-.product-actions .view-product-btn {
+.product-actions .view-product-btn,
+.product-actions .add-to-cart-btn {
   width: 100%;
-  margin: 0;
 }
 .product-actions .add-to-cart-icon {
-  width: 52px;
-  height: 52px;
-  border-radius: 16px;
-  font-size: 1.4rem;
+  width: 46px;
+  height: 46px;
+  border-radius: 14px;
+  font-size: 1.25rem;
   margin-top: 0;
 }
 .product-actions .add-to-cart-label {
@@ -692,6 +705,11 @@ body:not(.dark-page) .empty-state {
   letter-spacing: 0.12em;
   text-align: center;
   color: rgba(255, 255, 255, 0.55);
+}
+@media (max-width: 640px) {
+  .product-actions {
+    grid-template-columns: 1fr;
+  }
 }
 
 /* Action button reveal (if you add one later) */
@@ -726,12 +744,12 @@ body:not(.dark-page) .empty-state {
   padding: 3rem 0;
 }
 .product-category .category-title {
-  text-align: center;
-  font-size: 2rem;
-  margin-bottom: 2rem;
+  text-align: left;
+  font-size: clamp(1.4rem, 2.8vw, 1.85rem);
+  margin: 0 0 1.5rem;
   position: relative;
   text-transform: uppercase;
-  letter-spacing: 0.18em;
+  letter-spacing: 0.2em;
 }
 .product-category .category-title::after {
   content: '';
