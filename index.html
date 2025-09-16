@@ -16,7 +16,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
   <title>BERA clothing – Inicio</title>
-  <meta name="description" content="BERA clothing: moda urbana para jóvenes. Envíos a todo el país desde Berazategui centro." />
+  <meta name="description" content="BERA clothing: moda urbana contemporánea con envíos a todo el país. Descubrí drops semanales directos desde Berazategui." />
   <meta name="theme-color" content="#e91e63">
   <meta name="color-scheme" content="light dark" />
   <meta name="format-detection" content="telephone=no" />
@@ -27,7 +27,6 @@
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
   <link rel="stylesheet" href="css/style.css" />
-  <!-- Eliminado en home para performance: <link rel="stylesheet" href="css/productos.css" /> -->
   <link rel="canonical" href="https://www.beraclothing.store/" />
 
   <!-- Open Graph -->
@@ -44,8 +43,8 @@
   <meta name="twitter:image" content="https://www.beraclothing.store/assets/og/bera-cover.jpg">
 
   <!-- Preload hero para LCP -->
-  <link rel="preload" as="image" href="assets/images/IMG_7238.PNG" fetchpriority="high">
-  <link rel="preload" as="image" href="assets/images/IMG_7239.PNG">
+  <link rel="preload" as="image" href="assets/images/IMG_7236.jpeg" fetchpriority="high">
+  <link rel="preload" as="image" href="assets/images/IMG_7229.jpeg">
 
   <!-- JSON-LD Organización -->
   <script type="application/ld+json">
@@ -73,21 +72,22 @@
   }
   </script>
 </head>
-<body class="dark-page">
+<body class="dark-page home-page">
   <noscript>
     <div style="padding:12px;text-align:center;background:#111;color:#fff;font-family:Poppins,system-ui,Segoe UI,Roboto,Arial,sans-serif;">
       Para una mejor experiencia, activá JavaScript. Igual podés navegar el contenido principal.
     </div>
   </noscript>
+
   <!-- Announcement / Marquee Bar -->
   <div class="announcement-bar" role="region" aria-label="Promociones y medios de pago">
     <div class="ann-track" aria-hidden="true">
       <div class="ann-row">
-        🔥 10% de descuento pagando en efectivo 💥 • Shop Online 24/7 🖤 • Retiro en local o en punto de encuentro  • 
-        🔥 10% de descuento pagando en efectivo 💥 • Shop Online 24/7 🖤 • Retiro en local o en punto de encuentro  • 
+        🔥 10% de descuento pagando en efectivo 💥 • Shop Online 24/7 🖤 • Retiro en local o en punto de encuentro • Drops nuevos todos los viernes •
       </div>
     </div>
-  </div>    
+    <button type="button" class="ann-close" aria-label="Cerrar mensaje">&times;</button>
+  </div>
 
   <!-- Skip link -->
   <a href="#main-content" class="skip-link">Saltar al contenido</a>
@@ -107,14 +107,12 @@
         </svg>
       </button>
 
-      <!-- Botón lupita (desktop) -->
       <button class="header-search-toggle" type="button" aria-label="Abrir búsqueda">
         <svg viewBox="0 0 24 24" aria-hidden="true">
           <path d="M11 18a7 7 0 1 1 4.95-2.05L21 21l-1.5 1.5-5.05-5.05A6.96 6.96 0 0 1 11 18z" fill="currentColor"/>
         </svg>
       </button>
 
-      <!-- Campo que se despliega desde la lupita (desktop) -->
       <form class="header-search header-search-desktop" role="search" aria-label="Buscar (desktop)" action="productos.html" method="get">
         <input class="header-search-input" name="q" type="search" placeholder="Buscar prendas…" autocomplete="off" />
         <button class="header-search-btn" aria-label="Buscar">
@@ -145,7 +143,6 @@
       </button>
 
       <nav id="primary-navigation" class="main-nav" role="navigation" aria-label="Menú principal">
-        <!-- Buscador dentro del menú (mobile) -->
         <form class="menu-search" action="productos.html" method="get" role="search" aria-label="Buscar prendas">
           <label class="visually-hidden" for="menu-search-input">Buscar</label>
           <input id="menu-search-input" type="search" name="q" class="menu-search-input" placeholder="Buscar prendas..." autocomplete="off" aria-label="Buscar" />
@@ -160,104 +157,174 @@
         <ul class="nav-list">
           <li><a href="index.html" class="active" aria-current="page">Inicio</a></li>
           <li><a href="newsletter.html">Novedades</a></li>
-          <li><a href="proximamente.html">Productos</a></li>
+          <li><a href="productos.html">Productos</a></li>
           <li><a href="contacto.html">Contacto</a></li>
         </ul>
       </nav>
     </div>
   </header>
-       
-  <!-- HERO -->
-  <h1 class="visually-hidden">BERA clothing – Moda urbana 24/7</h1>
-  <section id="hero" class="hero swiper-hero" role="region" aria-label="Hero carousel">
-    <div class="swiper-container">
-      <div class="swiper-wrapper">
-        <!-- Slides -->
-        <div class="swiper-slide" style="background-image: url('assets/images/IMG_7238.PNG');">
-          <div class="hero-overlay"></div>
-          <div class="container hero-content">
-            <h2 class="hero-title">Bienvenido a <span class="hero-bera">BERA</span> CLOTHING</h2>
-            <p class="hero-subtitle">Tu destino de moda urbana, 24/7</p>
-            <a href="proximamente.html" class="btn btn-primary">Ver Productos</a>
+
+  <div class="cart-banner">
+    <div class="container cart-banner-inner">
+      <span class="cart-banner-text">¿Querés ver lo que fuiste guardando?</span>
+      <button type="button" class="cart-banner-btn" data-open-cart>Revisar carrito</button>
+    </div>
+  </div>
+
+  <main id="main-content" role="main">
+    <section id="hero" class="page-hero" role="region" aria-labelledby="home-hero-title">
+      <div class="container hero-shell">
+        <div class="hero-content">
+          <span class="hero-eyebrow">Drop SS25</span>
+          <h1 id="home-hero-title" class="hero-title">Moda urbana diseñada para moverte sin perder estilo</h1>
+          <p class="hero-lead">Armamos drops cápsula con prendas versátiles, materiales de calidad y fit pensado para la calle. Pedila online, retirala en el día o recibila en todo el país.</p>
+          <div class="hero-badges">
+            <span class="hero-badge">Drops semanales</span>
+            <span class="hero-badge">Envíos 24/48 hs</span>
+            <span class="hero-badge">Rewards para la crew</span>
           </div>
-        </div>
-        <div class="swiper-slide" style="background-image: url('assets/images/IMG_7239.PNG');">
-          <div class="hero-overlay"></div>
-          <div class="container hero-content">
-            <h2 class="hero-title">Bienvenido a <span class="hero-bera">BERA</span> CLOTHING</h2>
-            <p class="hero-subtitle">Tu destino de moda urbana, 24/7</p>
-            <a href="proximamente.html" class="btn btn-primary">Ver Productos</a>
+          <div class="hero-actions">
+            <a class="btn btn-primary" href="productos.html">Ver catálogo completo</a>
+            <a class="btn btn-secondary" data-scroll="#categorias" href="#categorias">Explorar categorías</a>
           </div>
+          <dl class="hero-metrics">
+            <div class="metric-card">
+              <dt>Clientes felices</dt>
+              <dd>+3.4K reseñas</dd>
+            </div>
+            <div class="metric-card">
+              <dt>Pick-up express</dt>
+              <dd>Retiro en 2 hs</dd>
+            </div>
+            <div class="metric-card">
+              <dt>Atención</dt>
+              <dd>DM al instante</dd>
+            </div>
+          </dl>
         </div>
-        <div class="swiper-slide" style="background-image: url('assets/images/IMG_7240.PNG');">
-          <div class="hero-overlay"></div>
-          <div class="container hero-content">
-            <h2 class="hero-title">Bienvenido a <span class="hero-bera">BERA</span> CLOTHING</h2>
-            <p class="hero-subtitle">Tu destino de moda urbana, 24/7</p>
-            <a href="proximamente.html" class="btn btn-primary">Ver Productos</a>
+        <figure class="hero-media">
+          <img src="assets/images/IMG_7229.jpeg" alt="Editorial BERA con outfit oversize" loading="eager" decoding="async" />
+        </figure>
+      </div>
+    </section>
+
+    <section id="destacados" class="section surface-muted home-intro" role="region" aria-labelledby="destacados-title">
+      <div class="container">
+        <div class="content-split">
+          <div>
+            <span class="badge-inline">Why BERA</span>
+            <h2 id="destacados-title" class="section-title" style="text-align:left;">Capsule wardrobe listo para usar</h2>
+            <p>Trabajamos colecciones reducidas que combinan entre sí para que armes looks completos sin esfuerzo. Materiales comfy, colores sobrios y detalles con actitud street.</p>
+            <ul class="list-check">
+              <li>Renovamos drops semanales con piezas limitadas</li>
+              <li>Looks resueltos para tu salida sin pensar demasiado</li>
+              <li>Packaging eco y retiro rápido en Berazategui</li>
+            </ul>
           </div>
-        </div>
-        <div class="swiper-slide" style="background-image: url('assets/images/IMG_7232.jpeg');">
-          <div class="hero-overlay"></div>
-          <div class="container hero-content">
-            <h2 class="hero-title">Bienvenido a <span class="hero-bera">BERA</span> CLOTHING</h2>
-            <p class="hero-subtitle">Tu destino de moda urbana, 24/7</p>
-            <a href="proximamente.html" class="btn btn-primary">Ver Productos</a>
-          </div>
-        </div>
-        <div class="swiper-slide" style="background-image: url('assets/images/IMG_7223.jpeg');">
-          <div class="hero-overlay"></div>
-          <div class="container hero-content">
-            <h2 class="hero-title">Bienvenido a <span class="hero-bera">BERA</span> CLOTHING</h2>
-            <p class="hero-subtitle">Tu destino de moda urbana, 24/7</p>
-            <a href="proximamente.html" class="btn btn-primary">Ver Productos</a>
-          </div>
-        </div>
-        <div class="swiper-slide" style="background-image: url('assets/images/IMG_7231.jpeg');">
-          <div class="hero-overlay"></div>
-          <div class="container hero-content">
-            <h2 class="hero-title">Bienvenido a <span class="hero-bera">BERA</span> CLOTHING</h2>
-            <p class="hero-subtitle">Tu destino de moda urbana, 24/7</p>
-            <a href="proximamente.html" class="btn btn-primary">Ver Productos</a>
+          <div class="stat-grid">
+            <div class="stat-card">
+              <strong>72h</strong>
+              <span>Entrega estándar en AMBA</span>
+            </div>
+            <div class="stat-card">
+              <strong>10%</strong>
+              <span>OFF abonando en efectivo</span>
+            </div>
+            <div class="stat-card">
+              <strong>3 cuotas</strong>
+              <span>Sin interés con MP</span>
+            </div>
           </div>
         </div>
       </div>
+    </section>
 
-      <!-- Paginación y navegación -->
-      <div class="swiper-pagination"></div>
-      <div class="swiper-button-prev" aria-label="Anterior slide"></div>
-      <div class="swiper-button-next" aria-label="Siguiente slide"></div>
-    </div>
-  </section>
-
-  <!-- MAIN CONTENT -->
-  <main id="main-content" role="main">
-    <!-- FEATURED DEALS -->
-    <section id="featured" class="section section-featured" role="region" aria-labelledby="featured-title">
+    <section id="categorias" class="section surface-light home-collections" role="region" aria-labelledby="categorias-title">
       <div class="container">
-        <h2 id="featured-title" class="section-title">Ofertas Destacadas</h2>
-        <div class="grid-featured">
-          <div class="card featured-card animate-on-scroll">
-            <img src="assets/images/IMG_7221.jpeg" alt="Gorra" decoding="async" loading="lazy" width="800" height="1000" />
-          </div>
-          <div class="card featured-card animate-on-scroll">
-            <img src="assets/images/IMG_7222.jpeg" alt="Buzo XL" decoding="async" loading="lazy" width="800" height="1000" />
-          </div>
-          <div class="card featured-card animate-on-scroll">
-            <img src="assets/images/IMG_7229.jpeg" alt="Pantalon S" decoding="async" loading="lazy" width="800" height="1000" />
-          </div>
-          <div class="card featured-card animate-on-scroll">
-            <img src="assets/images/IMG_7230.jpeg" alt="Remera L" decoding="async" loading="lazy" width="800" height="1000" />
-          </div>
-          <div class="card featured-card animate-on-scroll">
-            <img src="assets/images/IMG_7228.jpeg" alt="Gorro Invierno" decoding="async" loading="lazy" width="800" height="1000" />
-          </div>
-          <div class="card featured-card animate-on-scroll">
-            <img src="assets/images/IMG_7224.jpeg" alt="Buzo Oversize" decoding="async" loading="lazy" width="800" height="1000" />
-          </div>
+        <h2 id="categorias-title" class="section-title">Elegí tu próximo drop</h2>
+        <div class="category-grid">
+          <a class="category-card" href="productos.html?tipo=remera#remeras" style="--category-bg:url('assets/images/IMG_7238.PNG');">
+            <div>
+              <h3>Remeras premium</h3>
+              <span>Fit relaxed</span>
+            </div>
+          </a>
+          <a class="category-card" href="productos.html?tipo=denim#denim" style="--category-bg:url('assets/images/PantalonS.png');">
+            <div>
+              <h3>Denim essential</h3>
+              <span>Mom &amp; wide leg</span>
+            </div>
+          </a>
+          <a class="category-card" href="productos.html?tipo=abrigo#abrigos" style="--category-bg:url('assets/images/BuzoOver.png');">
+            <div>
+              <h3>Abrigos statement</h3>
+              <span>Soft touch</span>
+            </div>
+          </a>
+          <a class="category-card" href="productos.html?tipo=accesorio#accesorios" style="--category-bg:url('assets/images/Gorra.png');">
+            <div>
+              <h3>Accesorios BERA</h3>
+              <span>Completa el look</span>
+            </div>
+          </a>
         </div>
-        <div class="text-center" style="margin-top:1rem;">
-          <a href="proximamente.html" class="btn btn-primary">Ver todas las ofertas</a>
+      </div>
+    </section>
+
+    <section id="lookbook" class="section surface-muted home-lookbook" role="region" aria-labelledby="lookbook-title">
+      <div class="container">
+        <h2 id="lookbook-title" class="section-title">Lookbook editorial</h2>
+        <div class="lookbook-grid">
+          <figure class="lookbook-card">
+            <img src="assets/images/IMG_7230.jpeg" alt="Conjunto urbano con falda eco cuero" loading="lazy" decoding="async" />
+            <span>Cápsula night</span>
+          </figure>
+          <figure class="lookbook-card">
+            <img src="assets/images/IMG_7224.jpeg" alt="Top halter negro" loading="lazy" decoding="async" />
+            <span>Essential tops</span>
+          </figure>
+          <figure class="lookbook-card">
+            <img src="assets/images/IMG_7232.jpeg" alt="Outfit denim con campera oversized" loading="lazy" decoding="async" />
+            <span>Denim drop</span>
+          </figure>
+          <figure class="lookbook-card">
+            <img src="assets/images/IMG_7221.jpeg" alt="Gorra BERA edición limitada" loading="lazy" decoding="async" />
+            <span>Accesorios</span>
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <section id="testimonios-home" class="section surface-light home-testimonios" role="region" aria-labelledby="testimonios-home-title">
+      <div class="container container-narrow">
+        <h2 id="testimonios-home-title" class="section-title">Lo que dice la crew</h2>
+        <div class="testimonial-grid">
+          <article class="testimonial-card">
+            <blockquote>“La atención es increíble. Me sugirieron combos para la noche y el pedido llegó impecable, con packaging hermoso.”</blockquote>
+            <cite>— Agus F.</cite>
+          </article>
+          <article class="testimonial-card">
+            <blockquote>“Las prendas son súper cómodas y combinan todas entre sí. Se nota el estilo que manejan. Mi marca favorita.”</blockquote>
+            <cite>— Cami R.</cite>
+          </article>
+          <article class="testimonial-card">
+            <blockquote>“Retiré en Berazategui el mismo día. La calidad y terminaciones son nivel showroom premium.”</blockquote>
+            <cite>— Joaco M.</cite>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="club" class="section surface-muted" role="region" aria-labelledby="club-title">
+      <div class="container">
+        <div class="home-cta">
+        <span class="ribbon">BERA Nights</span>
+          <h3 id="club-title">Sumate al newsletter y accedé a drops exclusivos antes que nadie</h3>
+          <p>Te avisamos por mail y WhatsApp cuando subimos nuevas cápsulas, promos relámpago y re-stock de tus básicos favoritos.</p>
+          <div class="cta-actions">
+            <a class="btn btn-primary" href="newsletter.html">Quiero recibir las novedades</a>
+            <a class="btn btn-secondary" href="https://instagram.com/beraclothingg" target="_blank" rel="noopener noreferrer">Seguinos en Instagram</a>
+          </div>
         </div>
       </div>
     </section>
@@ -276,41 +343,48 @@
         </a>
         | Shop online 24/7 | Envíos a todo el país | Berazategui centro
       </p>
-      By 
-      <a href="https://instagram.com/melinaffrias" target="_blank" rel="noopener noreferrer">@melinaffrias</a> <span>&amp;</span>
+      By
+      <a href="https://instagram.com/melinaffrias" target="_blank" rel="noopener noreferrer">@melinaffrias</a>
+      <span>&amp;</span>
       <a href="https://instagram.com/candelaffrias" target="_blank" rel="noopener noreferrer">@candelaffrias</a>
       <p>© 2025 BERA clothing. Todos los derechos reservados.</p>
     </div>
   </footer>
 
-  <!-- Overlay -->
+  <!-- Overlay oscurece la pantalla y cierra el menú al tocar fuera -->
   <div id="collection-overlay" class="collection-overlay" aria-hidden="true"></div>
 
-  <!-- Off-canvas con las categorías (INDEX) -->
+  <!-- Off-canvas con las categorías -->
   <aside id="collection-menu" class="collection-menu" aria-hidden="true" aria-labelledby="collection-heading">
-    <button id="collection-close" class="collection-close" type="button" aria-label="Cerrar menú">×</button>
+    <button id="collection-close" class="collection-close" aria-label="Cerrar menú">×</button>
+
     <nav class="collection-nav" role="navigation" aria-label="Categorías de ropa">
       <h2 id="collection-heading" class="collection-heading">CLOTHING ▾</h2>
       <ul class="collection-list">
-        <li><a href="proximamente.html">Remeras</a></li>
-        <li><a href="proximamente.html">Shorts / Minis</a></li>
-        <li><a href="proximamente.html">Pantalones</a></li>
-        <li><a href="proximamente.html">Denim (Jeans)</a></li>
-        <li><a href="proximamente.html">Conjuntos (Sets)</a></li>
-        <li><a href="proximamente.html">Abrigos</a></li>
-        <li><a href="proximamente.html">Vestidos y Monos</a></li>
-        <li><a href="proximamente.html">Bodys</a></li>
-        <li><a href="proximamente.html">Accesorios</a></li>
+        <li><a href="productos.html?tipo=remera#remeras">Remeras</a></li>
+        <li><a href="productos.html?tipo=short#shorts">Shorts / Minis</a></li>
+        <li><a href="productos.html?tipo=pantalon#pantalones">Pantalones</a></li>
+        <li><a href="productos.html?tipo=denim#denim">Denim (Jeans)</a></li>
+        <li><a href="productos.html?tipo=set#sets">Conjuntos (Sets)</a></li>
+        <li><a href="productos.html?tipo=abrigo#abrigos">Abrigos</a></li>
+        <li><a href="productos.html?tipo=vestido#vestidos">Vestidos y Monos</a></li>
+        <li><a href="productos.html?tipo=body#bodys">Bodys</a></li>
+        <li><a href="productos.html?tipo=accesorio#accesorios">Accesorios</a></li>
       </ul>
     </nav>
   </aside>
-  
-  <!-- PRODUCT MODAL accesible -->
-  <div id="product-modal" class="product-modal" role="dialog" aria-modal="true"
-       aria-labelledby="product-modal-title" aria-describedby="product-modal-description"
-       aria-hidden="true" tabindex="-1">
+
+  <!-- PRODUCT MODAL (opcional) -->
+  <div id="product-modal"
+       class="product-modal"
+       role="dialog"
+       aria-modal="true"
+       aria-labelledby="product-modal-title"
+       aria-describedby="product-modal-description"
+       aria-hidden="true"
+       tabindex="-1">
     <div class="product-modal-content" tabindex="-1">
-      <button class="product-modal-close" type="button" aria-label="Cerrar">×</button>
+      <button class="product-modal-close" aria-label="Cerrar">×</button>
 
       <div class="product-gallery swiper">
         <div class="swiper-wrapper" id="product-gallery-wrapper"></div>
@@ -326,6 +400,31 @@
       </div>
     </div>
   </div>
+
+  <!-- Botón flotante del carrito -->
+  <button id="cart-fab" class="cart-fab" aria-label="Abrir carrito">
+    <svg class="cart-icon" viewBox="0 0 24 24" aria-hidden="true">
+      <path d="M6 6h15l-1.5 9h-12z" fill="none" stroke="currentColor" stroke-width="2"></path>
+      <circle cx="9" cy="20" r="1.5"></circle>
+      <circle cx="18" cy="20" r="1.5"></circle>
+    </svg>
+    <span class="cart-counter" data-count>0</span>
+    <span class="cart-total" data-total>$0</span>
+  </button>
+
+  <aside id="cart-panel" class="cart-panel hidden" aria-hidden="true" aria-labelledby="cart-panel-title">
+    <div class="cart-panel-header">
+      <h2 id="cart-panel-title">Mi Carrito</h2>
+      <button class="cart-close" aria-label="Cerrar carrito">×</button>
+    </div>
+    <ul class="cart-items" data-items></ul>
+    <div class="cart-summary">
+      <span>Total</span>
+      <strong data-total-final>$0</strong>
+    </div>
+    <button class="btn btn-primary btn-checkout" onclick="location.href='finalizarcompra.html'">Finalizar compra</button>
+  </aside>
+  <div id="cart-overlay" class="cart-overlay hidden" aria-hidden="true"></div>
 
   <!-- SCRIPTS -->
   <script src="https://unpkg.com/swiper/swiper-bundle.min.js" defer></script>

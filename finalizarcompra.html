@@ -50,7 +50,13 @@
     }
     </script>
   </head>
-<body class="dark-page">
+<body class="dark-page checkout-page">
+  <div class="announcement-bar" role="region" aria-label="Promociones y medios de pago">
+    <div class="ann-track" aria-hidden="true">
+      <div class="ann-row">🔥 10% OFF en efectivo • 3 cuotas sin interés con MP • Retiro express en Berazategui •</div>
+    </div>
+    <button type="button" class="ann-close" aria-label="Cerrar mensaje">&times;</button>
+  </div>
     <!-- HEADER -->
   <header class="site-header" role="banner">
     <div class="container header-inner">
@@ -137,24 +143,40 @@
     </div>
   </header>
 
+  <div class="cart-banner">
+    <div class="container cart-banner-inner">
+      <span class="cart-banner-text">Tu carrito está listo para confirmar.</span>
+      <button type="button" class="cart-banner-btn" data-open-cart>Ver resumen</button>
+    </div>
+  </div>
+
     <!-- MAIN CONTENT -->
     <main id="main-content" tabindex="-1">
       <!-- Hero -->
-      <section class="section section-hero" aria-labelledby="hero-title">
-        <div class="container">
-          <h1 id="hero-title" class="section-title">Finalizar compra</h1>
-          <p class="hero-subtitle">
-            Confirmá tu pedido. Pagá con efectivo (10% de descuento) o con Mercado Pago. Al confirmar te llevamos a nuestro perfil de Instagram (@beraclothingg) y ya dejamos el resumen copiado para que lo pegues y nos escribas por DM. Retiro en local o punto de encuentro (a coordinar).
-          </p>
+      <section class="page-hero page-hero--compact" aria-labelledby="hero-title">
+        <div class="container hero-shell">
+          <div class="hero-content">
+            <span class="hero-eyebrow">Checkout seguro</span>
+            <h1 id="hero-title" class="hero-title">Listo para cerrar tu pedido BERA</h1>
+            <p class="hero-lead">Revisá el resumen, elegí la forma de entrega y confirmá. Te redirigimos a Instagram con el mensaje prearmado para coordinar pago y retiro.</p>
+            <div class="hero-badges">
+              <span class="hero-badge">10% OFF efectivo</span>
+              <span class="hero-badge">3 cuotas MP</span>
+              <span class="hero-badge">Retiro 2 hs</span>
+            </div>
+          </div>
+          <figure class="hero-media">
+            <img src="assets/images/IMG_7224.jpeg" alt="Caja BERA lista para entregar" loading="lazy" decoding="async" />
+          </figure>
         </div>
       </section>
 
       <!-- Checkout -->
-      <section class="section section-checkout">
+      <section class="section section-checkout surface-light">
         <div class="container checkout-container">
           <!-- Resumen -->
           <aside
-            class="checkout-summary-panel"
+            class="checkout-summary-panel glass-card"
             aria-labelledby="summary-title"
           >
             <h2 id="summary-title" class="panel-title">Resumen de tu pedido</h2>
@@ -186,7 +208,7 @@
           <!-- Formulario -->
           <form
             id="checkout-form"
-            class="checkout-form"
+            class="checkout-form glass-card"
             autocomplete="on"
             novalidate
           >
@@ -316,8 +338,43 @@
 
     <!-- FOOTER -->
     <footer class="site-footer" role="contentinfo">
-      <!-- (aquí va tu mismo footer de siempre) -->
+      <div class="container footer-inner">
+        <p>
+          <a href="https://instagram.com/beraclothingg" target="_blank" rel="noopener" class="instagram-icon" aria-label="Instagram">
+            <img src="assets/images/instaa.png" alt="Instagram" width="28" height="28" loading="lazy" decoding="async">
+          </a>
+          | Shop online 24/7 | Envíos a todo el país | Berazategui centro
+        </p>
+        By
+          <a href="https://instagram.com/melinaffrias" target="_blank" rel="noopener">@melinaffrias</a> <span>&amp;</span>
+          <a href="https://instagram.com/candelaffrias" target="_blank" rel="noopener">@candelaffrias</a>
+        <p>© 2025 BERA clothing. Todos los derechos reservados.</p>
+      </div>
     </footer>
+
+    <button id="cart-fab" class="cart-fab" aria-label="Abrir carrito">
+      <svg class="cart-icon" viewBox="0 0 24 24" aria-hidden="true">
+        <path d="M6 6h15l-1.5 9h-12z" fill="none" stroke="currentColor" stroke-width="2"></path>
+        <circle cx="9" cy="20" r="1.5"></circle>
+        <circle cx="18" cy="20" r="1.5"></circle>
+      </svg>
+      <span class="cart-counter" data-count>0</span>
+      <span class="cart-total" data-total>$0</span>
+    </button>
+
+    <aside id="cart-panel" class="cart-panel hidden" aria-hidden="true" aria-labelledby="cart-panel-title">
+      <div class="cart-panel-header">
+        <h2 id="cart-panel-title">Mi Carrito</h2>
+        <button class="cart-close" aria-label="Cerrar carrito">×</button>
+      </div>
+      <ul class="cart-items" data-items></ul>
+      <div class="cart-summary">
+        <span>Total</span>
+        <strong data-total-final>$0</strong>
+      </div>
+      <button class="btn btn-primary btn-checkout" onclick="location.href='finalizarcompra.html'">Finalizar compra</button>
+    </aside>
+    <div id="cart-overlay" class="cart-overlay hidden" aria-hidden="true"></div>
 
     <!-- Scripts -->
     <script src="js/scriptt.js" defer></script>

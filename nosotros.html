@@ -4,88 +4,172 @@
   <meta charset="UTF-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>BERA clothing – Nosotros</title>
-  <meta name="description" content="Conoce más sobre BERA clothing: moda urbana para jóvenes. Envíos a todo el país desde Berazategui centro." />
+  <title>BERA clothing – Sobre nosotras</title>
+  <meta name="description" content="Conocé a Melina y Candela Frías, la dupla detrás de BERA clothing. Moda urbana desde Berazategui para todo el país." />
   <meta name="theme-color" content="#e91e63">
   <link rel="icon" href="assets/images/favicon.ico" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
   <link rel="stylesheet" href="css/style.css" />
   <link rel="stylesheet" href="css/nosotros.css" />
-
 </head>
-<body class="dark-page">
-  <!-- Skip link -->
+<body class="dark-page about-page">
   <a href="#main-content" class="skip-link">Saltar al contenido</a>
 
-  <!-- HEADER -->
   <header class="site-header" role="banner">
     <div class="container header-inner">
+      <button class="collection-toggle" type="button"
+              aria-label="Abrir menú Catálogo"
+              aria-expanded="false"
+              aria-controls="collection-menu">
+        <span class="collection-label">Catálogo</span>
+        <svg class="icon-hanger" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+          <path d="M12 7.5c0-.8-.6-1.5-1.4-1.5S9 6.7 9 7.5c0 .9.7 1.3 1.5 1.8.6.4 1.1.7 1.1 1.2 0 .5-.4.9-1 .9H10" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+          <path d="M3 16.5l9-6 9 6" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </button>
+
+      <button class="header-search-toggle" type="button" aria-label="Abrir búsqueda">
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M11 18a7 7 0 1 1 4.95-2.05L21 21l-1.5 1.5-5.05-5.05A6.96 6.96 0 0 1 11 18z" fill="currentColor"/>
+        </svg>
+      </button>
+
+      <form class="header-search header-search-desktop" role="search" aria-label="Buscar (desktop)" action="productos.html" method="get">
+        <input class="header-search-input" name="q" type="search" placeholder="Buscar prendas…" autocomplete="off" />
+        <button class="header-search-btn" aria-label="Buscar">
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M11 18a7 7 0 1 1 4.95-2.05L21 21l-1.5 1.5-5.05-5.05A6.96 6.96 0 0 1 11 18z" fill="currentColor"/>
+          </svg>
+        </button>
+      </form>
+
       <div class="site-branding">
         <a href="index.html" class="logo-link" aria-label="Inicio">
           <div class="logo-wrap">
-            <img src="assets/images/logoo.jpeg" alt="Logo BERA clothing" class="logo" />
+            <img src="assets/images/logoo.jpeg" alt="Logo BERA clothing" class="logo" width="60" height="60" decoding="async" />
           </div>
         </a>
-        <h1 class="site-title">BERA clothing</h1>
-       <span class="site-tagline">By FRIAS</span>
+        <div class="site-title" aria-label="BERA CLOTHING">
+          <span class="title-bera">BERA</span>
+          <span class="title-clothing">CLOTHING</span>
+        </div>
+        <span class="site-tagline">BY FRIAS</span>
       </div>
-      <button class="nav-toggle"
-              aria-controls="primary-navigation"
-              aria-expanded="false"
-              aria-label="Abrir menú">
+
+      <button class="nav-toggle" type="button" aria-controls="primary-navigation" aria-expanded="false" aria-label="Abrir menú">
         <span class="bar"></span><span class="bar"></span><span class="bar"></span>
       </button>
-      <nav id="primary-navigation" class="main-nav"
-           role="navigation"
-           aria-label="Menú principal">
+
+      <nav id="primary-navigation" class="main-nav" role="navigation" aria-label="Menú principal">
+        <form class="menu-search" action="productos.html" method="get" role="search" aria-label="Buscar prendas">
+          <label class="visually-hidden" for="menu-search-input">Buscar</label>
+          <input id="menu-search-input" type="search" name="q" class="menu-search-input" placeholder="Buscar prendas..." autocomplete="off" aria-label="Buscar" />
+          <button class="menu-search-btn" type="submit" aria-label="Buscar">
+            <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" focusable="false">
+              <circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="2" fill="none"></circle>
+              <line x1="16.5" y1="16.5" x2="21" y2="21" stroke="currentColor" stroke-width="2" stroke-linecap="round"></line>
+            </svg>
+          </button>
+        </form>
         <ul class="nav-list">
-          <li><a href="index.html" class="active">Inicio</a></li>
+          <li><a href="index.html">Inicio</a></li>
           <li><a href="newsletter.html">Novedades</a></li>
           <li><a href="productos.html">Productos</a></li>
           <li><a href="contacto.html">Contacto</a></li>
         </ul>
       </nav>
-      <!-- Carrito de compras -->
-      <a href="cart.html" class="cart-toggle" aria-label="Ver carrito">
-        <img src="assets/images/carrito.jpg" alt="Carrito de compras" class="cart-icon">
-        <span class="cart-count" aria-live="polite">0</span>
-      </a>
     </div>
   </header>
 
-  <!-- MAIN CONTENT -->
-  <main id="main-content">
-    <section id="about" class="section section-about" role="region" aria-labelledby="about-title">
-      <div class="container">
-        <h2 id="about-title" class="section-title">Sobre Nosotros</h2>
-        <div class="about-content">
-          <figure class="about-image">
-            <img src="assets/images/about.jpg" alt="Melina y Candela Frías" loading="lazy" />
-          </figure>
-          <div class="about-text">
-            <p><strong>BERA clothing</strong> nació en 2024 de la visión de dos hermanas, <strong>Melina</strong> y <strong>Candela Frías</strong>, unidas por su pasión por la moda urbana. Con sede en Berazategui, creamos prendas que combinan estilo, comodidad y personalidad.</p>
-            <p><strong>Nuestra misión:</strong> ofrecer moda exclusiva y accesible para jóvenes que buscan expresarse con confianza, respaldada por calidad y diseño innovador.</p>
-            <p><strong>Valores:</strong> 
-              <ul>
-                <li>Calidad en cada costura</li>
-                <li>Sostenibilidad en materiales</li>
-                <li>Compromiso con la comunidad</li>
-              </ul>
-            </p>
-            <p>¡Gracias por ser parte de nuestra familia BERA!</p>
+  <div class="cart-banner">
+    <div class="container cart-banner-inner">
+      <span class="cart-banner-text">Tu carrito te espera con las últimas prendas.</span>
+      <button type="button" class="cart-banner-btn" data-open-cart>Ver carrito</button>
+    </div>
+  </div>
+
+  <main id="main-content" role="main">
+    <section class="page-hero" role="region" aria-labelledby="about-hero-title">
+      <div class="container hero-shell">
+        <div class="hero-content">
+          <span class="hero-eyebrow">Nuestra historia</span>
+          <h1 id="about-hero-title" class="hero-title">Somos Melina y Candela Frías, dos hermanas obsesionadas con el streetwear</h1>
+          <p class="hero-lead">BERA nació en 2024 como un showroom casero en Berazategui y hoy es un proyecto omnicanal con drops limitados, colaboraciones con artistas locales y comunidad digital.</p>
+          <div class="hero-badges">
+            <span class="hero-badge">Women-led brand</span>
+            <span class="hero-badge">Producción consciente</span>
+            <span class="hero-badge">Envíos nacionales</span>
           </div>
+        </div>
+        <figure class="hero-media">
+          <img src="assets/images/about.jpg" alt="Melina y Candela Frías" loading="lazy" decoding="async" />
+        </figure>
+      </div>
+    </section>
+
+    <section class="section surface-light about-section" role="region" aria-labelledby="mision-title">
+      <div class="container content-split">
+        <div>
+          <span class="badge-inline">Manifiesto</span>
+          <h2 id="mision-title" class="section-title" style="text-align:left;">Moda urbana con nombre propio</h2>
+          <p>Diseñamos prendas que abrazan el movimiento: oversize con caída perfecta, textiles suaves y una paleta que rota por cápsulas. Queremos que el closet de cada clienta se sienta pensado, versátil y auténtico.</p>
+          <ul class="list-check">
+            <li>Series cortas para evitar stock muerto y producir responsablemente</li>
+            <li>Asesoría personalizada por DM para asegurar el fit ideal</li>
+            <li>Packaging eco y entregas coordinadas en el día en Berazategui</li>
+          </ul>
+        </div>
+        <div class="feature-grid about-values">
+          <article class="feature-card">
+            <h3>Calidad</h3>
+            <p>Materiales premium seleccionados con proveedores locales y triple control antes del empaque.</p>
+          </article>
+          <article class="feature-card">
+            <h3>Comunidad</h3>
+            <p>Escuchamos a la crew: votan nuevos drops, colores y restocks en encuestas privadas.</p>
+          </article>
+          <article class="feature-card">
+            <h3>Innovación</h3>
+            <p>Cápsulas colaborativas con artistas, playlists seleccionadas y experiencias IRL en nuestro showroom.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section surface-muted timeline-section" role="region" aria-labelledby="timeline-title">
+      <div class="container">
+        <h2 id="timeline-title" class="section-title">Timeline BERA</h2>
+        <div class="timeline">
+          <article class="timeline-item">
+            <span class="timeline-bullet">2024</span>
+            <div>
+              <h3>Launch &amp; primera cápsula</h3>
+              <p>Arrancamos con 30 prendas hechas en taller familiar y las agotamos en dos semanas vía Instagram.</p>
+            </div>
+          </article>
+          <article class="timeline-item">
+            <span class="timeline-bullet">2024 Q3</span>
+            <div>
+              <h3>Showroom en Berazategui</h3>
+              <p>Abrimos espacio físico con agenda por turnos y servicio de styling personalizado.</p>
+            </div>
+          </article>
+          <article class="timeline-item">
+            <span class="timeline-bullet">2025</span>
+            <div>
+              <h3>Ecommerce full y drops limitados</h3>
+              <p>Sumamos shop online propio, drops relámpago y beneficios para la crew que nos sigue en redes.</p>
+            </div>
+          </article>
         </div>
       </div>
     </section>
   </main>
 
-  <!-- BACK TO TOP BUTTON -->
   <button id="back-to-top" class="back-to-top" aria-label="Volver arriba">↑</button>
 
-  <!-- FOOTER -->
   <footer class="site-footer" role="contentinfo">
     <div class="container footer-inner">
       <p>
@@ -94,15 +178,56 @@
         </a>
         | Shop online 24/7 | Envíos a todo el país | Berazategui centro
       </p>
-      By 
-        <a href="https://instagram.com/melinaffrias" target="_blank" rel="noopener">@melinaffrias</a> <span>&</span>
-        <a href="https://instagram.com/candelaffrias" target="_blank" rel="noopener">@candelaffrias</a> 
+      By
+        <a href="https://instagram.com/melinaffrias" target="_blank" rel="noopener">@melinaffrias</a> <span>&amp;</span>
+        <a href="https://instagram.com/candelaffrias" target="_blank" rel="noopener">@candelaffrias</a>
       <p>© 2025 BERA clothing. Todos los derechos reservados.</p>
     </div>
   </footer>
 
-  <!-- SCRIPTS -->
-  <script src="https://unpkg.com/swiper/swiper-bundle.min.js" defer></script>
-  <script src="js/script.js" defer></script>
+  <div id="collection-overlay" class="collection-overlay" aria-hidden="true"></div>
+  <aside id="collection-menu" class="collection-menu" aria-hidden="true" aria-labelledby="collection-heading">
+    <button id="collection-close" class="collection-close" aria-label="Cerrar menú">×</button>
+    <nav class="collection-nav" role="navigation" aria-label="Categorías de ropa">
+      <h2 id="collection-heading" class="collection-heading">CLOTHING ▾</h2>
+      <ul class="collection-list">
+        <li><a href="productos.html?tipo=remera#remeras">Remeras</a></li>
+        <li><a href="productos.html?tipo=short#shorts">Shorts / Minis</a></li>
+        <li><a href="productos.html?tipo=pantalon#pantalones">Pantalones</a></li>
+        <li><a href="productos.html?tipo=denim#denim">Denim (Jeans)</a></li>
+        <li><a href="productos.html?tipo=set#sets">Conjuntos (Sets)</a></li>
+        <li><a href="productos.html?tipo=abrigo#abrigos">Abrigos</a></li>
+        <li><a href="productos.html?tipo=vestido#vestidos">Vestidos y Monos</a></li>
+        <li><a href="productos.html?tipo=body#bodys">Bodys</a></li>
+        <li><a href="productos.html?tipo=accesorio#accesorios">Accesorios</a></li>
+      </ul>
+    </nav>
+  </aside>
+
+  <button id="cart-fab" class="cart-fab" aria-label="Abrir carrito">
+    <svg class="cart-icon" viewBox="0 0 24 24" aria-hidden="true">
+      <path d="M6 6h15l-1.5 9h-12z" fill="none" stroke="currentColor" stroke-width="2"></path>
+      <circle cx="9" cy="20" r="1.5"></circle>
+      <circle cx="18" cy="20" r="1.5"></circle>
+    </svg>
+    <span class="cart-counter" data-count>0</span>
+    <span class="cart-total" data-total>$0</span>
+  </button>
+
+  <aside id="cart-panel" class="cart-panel hidden" aria-hidden="true" aria-labelledby="cart-panel-title">
+    <div class="cart-panel-header">
+      <h2 id="cart-panel-title">Mi Carrito</h2>
+      <button class="cart-close" aria-label="Cerrar carrito">×</button>
+    </div>
+    <ul class="cart-items" data-items></ul>
+    <div class="cart-summary">
+      <span>Total</span>
+      <strong data-total-final>$0</strong>
+    </div>
+    <button class="btn btn-primary btn-checkout" onclick="location.href='finalizarcompra.html'">Finalizar compra</button>
+  </aside>
+  <div id="cart-overlay" class="cart-overlay hidden" aria-hidden="true"></div>
+
+  <script src="js/scriptt.js" defer></script>
 </body>
 </html>

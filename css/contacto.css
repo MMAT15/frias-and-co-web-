@@ -1,336 +1,133 @@
 /* --------------------------------------------------
-   Contact Page Styles (contrast-safe)
+   Contacto 2025 Refresh
 -------------------------------------------------- */
-/* Section layout */
-.section-contacto {
-  padding: 4rem 0;
-  /* Alto contraste por defecto (modo claro) */
-  background-color: #ffffff;
-  color: #111111;
+.contact-section {
+  padding: clamp(3rem, 6vw, 4.5rem) 0;
 }
 
-/* Asegurar contraste de texto y enlaces dentro de la sección */
-.section-contacto :where(h1,h2,h3,h4,h5,h6,p,li,label,small){
-  color: #111111;
-}
-.section-contacto a{ color: var(--color-acento); }
-.section-contacto a:hover{ text-decoration: underline; }
-
-/* Container grid */
-/*
-.contacto-layout {
+.contact-layout {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 2rem;
-  align-items: start;
-}
-@media (max-width: 768px) {
-  .contacto-layout {
-    grid-template-columns: 1fr;
-  }
-}
-*/
-
-/* Main content wrapper */
-.contacto-content {
-  display: flex;
-  gap: 2rem;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: clamp(1.75rem, 4vw, 3rem);
   align-items: flex-start;
 }
-@media (max-width: 768px) {
-  .contacto-content {
-    flex-direction: column;
-  }
+
+.contact-card,
+.contact-info {
+  position: relative;
 }
 
-/* Form and info columns */
-.contacto-content > .contact-form-wrap,
-.contacto-content > .contact-info {
-  flex: 1 1 300px;
-}
-
-/* Contact form styling */
 .contact-form {
-  background: #fff;
-  padding: 2rem;
-  border-radius: var(--border-radius);
-  box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+  display: grid;
+  gap: 1.25rem;
 }
 .contact-form .form-group {
-  margin-bottom: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
 }
 .contact-form label {
-  display: block;
-  margin-bottom: 0.5rem;
   font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  font-size: 0.8rem;
+  color: rgba(255, 255, 255, 0.72);
 }
 .contact-form input,
 .contact-form textarea {
   width: 100%;
-  padding: 0.75rem;
-  border: 1px solid #bdbdbd;     /* mejor contraste de borde */
-  border-radius: var(--border-radius);
+  padding: 0.85rem 1rem;
+  border-radius: 14px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  background: rgba(11, 11, 15, 0.85);
+  color: #fff;
   font-family: var(--fuente-base);
-  background: #ffffff;            /* fondo claro consistente */
-  color: #111111;                 /* texto oscuro legible */
-  transition: border-color var(--transition), box-shadow var(--transition), background var(--transition);
+  transition: border-color var(--transition), box-shadow var(--transition);
 }
 .contact-form input::placeholder,
-.contact-form textarea::placeholder{ color:#666666; }
+.contact-form textarea::placeholder {
+  color: rgba(255, 255, 255, 0.45);
+}
 .contact-form input:focus,
 .contact-form textarea:focus {
-  border-color: var(--color-acento);
-  box-shadow: 0 0 5px rgba(0,0,0,0.1);
+  border-color: rgba(233, 30, 99, 0.75);
+  box-shadow: 0 0 0 3px rgba(233, 30, 99, 0.2);
   outline: none;
 }
 .contact-form button[type="submit"] {
-  background-color: var(--color-acento);
-  color: #fff;
-  padding: 0.75rem 2rem;
-  border: none;
-  border-radius: var(--border-radius);
-  cursor: pointer;
-  transition: filter var(--transition), transform var(--transition);
-}
-.contact-form button[type="submit"]:hover {
-  filter: brightness(0.9);
-  transform: translateY(-2px);
+  margin-top: 0.5rem;
+  align-self: flex-start;
+  padding-inline: 2rem;
+  border-radius: 999px;
 }
 
-/* Response message */
-.form-response {
-  margin-top: 1rem;
-  text-align: center;
-  font-style: italic;
-  min-height: 1.2em;
-}
-
-/* Contact info styles */
 .contact-info {
-  background: #fff;
-  padding: 2rem;
-  border-radius: var(--border-radius);
-  box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+  display: grid;
+  gap: 1.5rem;
+  color: rgba(255, 255, 255, 0.85);
 }
-.contact-info h3 {
-  margin-top: 0;
-  margin-bottom: 1rem;
-  font-size: 1.25rem;
+.contact-info .section-title {
+  margin: 0;
 }
-.contact-info ul {
-  list-style: none;
-  padding: 0;
-  margin: 0 0 1rem;
-}
-.contact-info ul li {
-  margin-bottom: 0.75rem;
-}
-.contact-info ul li a {
-  color: var(--color-acento);
-  text-decoration: none;
-}
-.contact-info ul li a:hover{ text-decoration: underline; }
-
-/* Map styling */
-.map-container {
-  margin-top: 1rem;
-  border-radius: var(--border-radius);
-  overflow: hidden;
-}
-
-/* --------------------------------------------------
-   Contact Page Improvements
--------------------------------------------------- */
-/* Section title and intro */
-.section-contacto .section-title {
-  text-align: center;
-  font-size: 2rem;
-  margin-bottom: 2rem;
-  position: relative;
-}
-.section-contacto .intro-text {
-  text-align: center;
-  color: var(--color-acento-sec);
-  margin-bottom: 2rem;
-}
-
-/* Form and info wrappers */
-.contact-form-wrap,
-.contact-info {
-  width: 100%;
-}
-.contact-form-wrap {
-  max-width: 600px;
-  margin: 0 auto;
-}
-
-/* Contact info list spacing */
-.contact-info ul li {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-}
-.contact-info ul li strong {
-  flex-shrink: 0;
-  width: 6rem;
-}
-
-/* Adjust map to fill width */
-.map-container iframe {
-  width: 100%;
-  height: 250px;
-  border-radius: var(--border-radius);
-  border: 0;
-}
-
-/* Responsive tweaks */
-@media (max-width: 768px) {
-  .contact-form-wrap {
-    padding: 1rem 0;
-  }
-  .contact-info {
-    margin-top: 2rem;
-  }
-}
-
-/* Contact info list with icons */
 .contact-list {
   list-style: none;
   padding: 0;
-  margin: 0 0 2rem;
+  margin: 0;
+  display: grid;
+  gap: 1rem;
 }
 .contact-list li {
   display: flex;
+  gap: 0.85rem;
   align-items: flex-start;
-  gap: 1rem;
-  margin-bottom: 1rem;
 }
-/* Contact list icons */
 .contact-list .icon {
+  width: 26px;
+  height: 26px;
   flex-shrink: 0;
-  width: 24px;
-  height: 24px;
-  display: inline-block;
+  fill: none;
+  stroke: rgba(233, 30, 99, 0.8);
+  stroke-width: 1.5;
 }
-/* Los paths heredan el color del texto para buen contraste */
-.contact-list .icon path{ fill: currentColor; }
-
-/* --------------------------------------------------
-   Dark mode (prefers-color-scheme) — alto contraste
--------------------------------------------------- */
-@media (prefers-color-scheme: dark){
-  .section-contacto{
-    background: #0f0f10;   /* casi negro, sin puro #000 para evitar deslumbrar */
-    color: #f1f1f1;
-  }
-  .section-contacto :where(h1,h2,h3,h4,h5,h6,p,li,label,small){ color:#f1f1f1; }
-  .contact-form,
-  .contact-info{
-    background: #161618;   /* tarjetas oscuras */
-    color: #f1f1f1;
-    box-shadow: 0 8px 22px rgba(0,0,0,.35);
-    border: 1px solid #2a2a2d;
-  }
-  .contact-form input,
-  .contact-form textarea{
-    background: #0f0f10;
-    color: #f1f1f1;
-    border-color: #3a3a3d;
-  }
-  .contact-form input::placeholder,
-  .contact-form textarea::placeholder{ color:#9ea0a6; }
-  .contact-list .icon path{ fill: currentColor; }
-}
-
-/* If using inline SVGs, ensure SVGs fill the container */
-.contact-list .icon svg {
-  width: 100%;
-  height: 100%;
-}
-
-/* Remove these if using inline SVGs:
-.icon-location { background-image: url("../assets/icons/location.svg"); }
-.icon-phone    { background-image: url("../assets/icons/phone.svg"); }
-.icon-mail     { background-image: url("../assets/icons/mail.svg"); }
-.icon-clock    { background-image: url("../assets/icons/clock.svg"); }
-*/
 .contact-list strong {
   display: block;
-  font-weight: 600;
+  font-size: 0.85rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.65);
   margin-bottom: 0.25rem;
 }
-.contact-list p {
-  margin: 0;
-  font-size: 0.9rem;
+.contact-list a {
+  color: #fff;
+  text-decoration: none;
 }
-/* Ensure inline SVG icons are correctly sized */
-.contact-list .icon,
-.contact-list svg.icon {
-  flex-shrink: 0;
-  width: 24px;
-  height: 24px;
-  display: inline-block;
-}
-/* 1) Hover seguro en táctiles + foco visible */
-@media (hover:hover) {
-  .contact-form button[type="submit"]:hover { filter: brightness(.9); transform: translateY(-2px); }
-}
-.contact-form button[type="submit"]:focus-visible,
-.contact-form input:focus-visible,
-.contact-form textarea:focus-visible,
-.contact-info a:focus-visible {
-  outline: 2px solid var(--color-acento);
-  outline-offset: 2px;
+.contact-list a:hover {
+  text-decoration: underline;
 }
 
-/* 2) Estados de validación y disabled */
-.contact-form input:invalid,
-.contact-form textarea:invalid { border-color: #e57373; }
-.contact-form input:user-valid,
-.contact-form textarea:user-valid { border-color: #66bb6a; }
-.contact-form button[type="submit"]:disabled {
-  opacity: .6; cursor: not-allowed; transform: none;
+.map-container {
+  border-radius: 18px;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  box-shadow: 0 18px 35px rgba(0, 0, 0, 0.35);
+}
+.map-container iframe {
+  display: block;
+  width: 100%;
+  height: clamp(220px, 40vw, 280px);
+  border: 0;
 }
 
-/* 3) Autofill (que no “pinte” raro) */
-input:-webkit-autofill,
-textarea:-webkit-autofill {
-  transition: background-color 9999s, color 9999s;
+.form-response {
+  margin-top: 1rem;
+  min-height: 1.2em;
+  font-style: italic;
+  color: rgba(255, 255, 255, 0.75);
 }
 
-/* 4) Evitar que íconos colapsen en mobile y permitir wrap en texto largo */
-.contact-list li { align-items: center; }
-.contact-list li > span, 
-.contact-list li > a { overflow-wrap: anywhere; }
-
-/* 5) Evitar duplicación de reglas y asegurar jerarquía */
-.contact-info ul { margin-bottom: 1.25rem; }
-.contact-info ul li { margin-bottom: .75rem; } /* (conserva el spacing) */
-
-/* 6) Botones y links con área táctil cómoda */
-.contact-form button[type="submit"],
-.contact-info a { min-height: 44px; }
-
-/* 7) Map container con altura adaptable en pantallas chicas */
-@media (max-width: 480px) {
-  .map-container iframe { height: 200px; }
-}
-
-/* 8) Reduce motion: sacar animaciones no esenciales */
-@media (prefers-reduced-motion: reduce) {
-  * { transition: none !important; animation: none !important; }
-}
-
-/* 9) Tema oscuro (opcional si usás prefers-color-scheme) */
-@media (prefers-color-scheme: dark) {
-  .section-contacto { background-color: #0e0e10; }
-  .contact-form, .contact-info { background: #16161a; box-shadow: none; }
-  .contact-form input, .contact-form textarea { background:#111; border-color:#333; color:#eee; }
-  .contact-info a { color: var(--color-acento); }
-}
-
-/* 10) Micro‑tipografía y alturas en mobile */
 @media (max-width: 768px) {
-  .section-contacto .section-title { font-size: 1.75rem; }
-  .contact-form, .contact-info { padding: 1.25rem; }
+  .contact-form button[type="submit"] {
+    width: 100%;
+    justify-content: center;
+  }
 }

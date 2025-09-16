@@ -107,6 +107,47 @@ function setAppInert(on){
   if (!main) return;
   if (on) main.setAttribute('inert',''); else main.removeAttribute('inert');
 }
+
+    const heroSubtitleEl = document.querySelector('.productos-hero .hero-subtitle');
+    const heroCopyEl = document.querySelector('.productos-hero .hero-copy');
+    const heroPhrases = heroCopyEl?.dataset.phrases
+      ? heroCopyEl.dataset.phrases.split('|').map(str => str.trim()).filter(Boolean)
+      : [];
+    let heroRotationTimer;
+    let heroRotationIndex = 0;
+    if (heroSubtitleEl) {
+      const base = heroSubtitleEl.textContent.trim();
+      heroSubtitleEl.dataset.base = base || (heroPhrases[0] || '');
+      heroSubtitleEl.dataset.frozen = 'false';
+      if (heroPhrases.length) {
+        heroSubtitleEl.textContent = heroPhrases[0];
+        startHeroRotation();
+      }
+    }
+    function startHeroRotation() {
+      if (!heroSubtitleEl || heroPhrases.length < 2) return;
+      clearInterval(heroRotationTimer);
+      heroRotationIndex = 0;
+      heroRotationTimer = window.setInterval(() => {
+        if (heroSubtitleEl.dataset.frozen === 'true') return;
+        heroRotationIndex = (heroRotationIndex + 1) % heroPhrases.length;
+        heroSubtitleEl.textContent = heroPhrases[heroRotationIndex];
+      }, 4500);
+    }
+
+    document.querySelectorAll('[data-scroll]').forEach(ctrl => {
+      ctrl.addEventListener('click', e => {
+        const targetSel = ctrl.getAttribute('data-scroll');
+        if (!targetSel) return;
+        const target = document.querySelector(targetSel);
+        if (!target) return;
+        e.preventDefault();
+        const top = typeof computeOffsetTop === 'function'
+          ? computeOffsetTop(target)
+          : (target.getBoundingClientRect().top + window.scrollY - 80);
+        window.scrollTo({ top, behavior: 'smooth' });
+      }, { passive: false });
+    });
     /* ===========================
        NAVIGATION TOGGLE (accesible) + lock/unlock scroll + cierres
        =========================== */
@@ -444,216 +485,89 @@ function setAppInert(on){
 
     /* ---------- PRODUCT MODAL (SIN CAMBIOS DE LÓGICA) ---------- */
     const productData = {
-      'featured-gris': {
-        title: 'Prueba Gris',
-        price: '$15.400',
-        details: 'Talle: Único<br>Tela: Algodón 100%<br>Color: Gris',
-        description: 'Gorra color gris de ala curva ideal para looks urbanos.',
-        images: [
-          'assets/images/Gorra.png',
-          'assets/images/Gorra.png',
-          'assets/images/Gorra.png'
-        ]
-      },
-      'featured-buzo': {
-        title: 'Prueba Buzo',
-        price: '$58.200',
-        details: 'Talle: S‑XL<br>Tela: Frisa premium 320 g<br>Corte: Oversize',
-        description: 'Buzo unisex oversize de frisa suave, ideal para días fríos y estilo urbano.',
-        images: [
-          'assets/images/Buzoxl.png',
-          'assets/images/Buzoxl.png',
-          'assets/images/Buzoxl.png'
-        ]
-      },
-      'featured-over': {
-        title: 'Prueba Over',
-        price: '$45.500',
-        details: 'Talle: 38‑44<br>Tela: Gabardina stretch<br>Bolsillos: Cargo laterales',
-        description: 'Pantalón cargo oversize de gabardina elástica con múltiples bolsillos.',
-        images: [
-          'assets/images/PantalonS.png',
-          'assets/images/PantalonS.png',
-          'assets/images/PantalonS.png'
-        ]
-      },
-      'featured-shift': {
-        title: 'Prueba Shift',
-        price: '$34.500',
-        details: 'Talle: S‑XL<br>Tela: Algodón peinado 24/1<br>Estampa: Serigrafía eco‑friendly',
-        description: 'Remera de algodón premium con estampa frontal, corte regular y costuras reforzadas.',
-        images: [
-          'assets/images/RemeraL.png',
-          'assets/images/RemeraL.png',
-          'assets/images/RemeraL.png'
-        ]
-      },
-      'featured-rosa': {
-        title: 'Prueba Rosa',
-        price: '$21.200',
-        details: 'Talle: Único<br>Tela: Acrílico hipoalergénico<br>Tejido: Punto inglés',
-        description: 'Gorro tejido color gris, suave y abrigado, perfecto para el invierno.',
-        images: [
-          'assets/images/Gorroinv.png',
-          'assets/images/Gorroinv.png',
-          'assets/images/Gorroinv.png'
-        ]
-      },
-      'featured-dibujo': {
-        title: 'Prueba Dibujo',
-        price: '$34.500',
-        details: 'Talle: S‑L<br>Tela: Frisa liviana<br>Ilustración: DTG edición limitada',
-        description: 'Buzo oversize con ilustración exclusiva impresa mediante DTG de alta calidad.',
-        images: [
-          'assets/images/BuzoOver.png',
-          'assets/images/BuzoOver.png',
-          'assets/images/BuzoOver.png'
-        ]
-      },
-
-      'remera-shift': {
-        title: 'Remera Shift',
-        price: '$15.400',
-        details: 'Talle: ‑ <br>Tela: Algodón peinado 24/1<br>Color: gris con letras blancas',
-        description: 'Gorra con estampa “BeraClothing”.',
-        images: [
-          'assets/images/Gorra.png',
-          'assets/images/Gorra.png',
-          'assets/images/Gorra.png'
-        ]
-      },
-      'remera-dibujo': {
-        title: 'Gorro Invierno',
-        price: '$21.200',
-        details: 'Talle: S‑XL<br>Tela: Algodón 100%<br>Estampa: BeraClothing',
-        description: 'Gorro de invierno de algodon con estampa BeraClothing.',
-        images: [
-          'assets/images/Gorroinv.png',
-          'assets/images/Gorroinv.png',
-          'assets/images/Gorroinv.png'
-        ]
-      },
-      'buzo-gris': {
-        title: 'Buzo Gris oscuro',
-        price: '$58.200',
-        details: 'Talle: XL<br>Tela: Frisa premium 320 g<br>Corte: Oversize',
-        description: 'Buzo unisex oversize color gris oscuro, interior súper suave para días fríos.',
-        images: [
-          'assets/images/Buzoxl.png',
-          'assets/images/Buzoxl.png',
-          'assets/images/Buzoxl.png'
-        ]
-      },
-      'buzo-over': {
-        title: 'Remera Gris s',
-        price: '$34.500',
-        details: 'Talle: L<br>Tela: French Terry<br>Fit: Oversize relajado',
-        description: 'Remera gris S con Estampa.',
-        images: [
-          'assets/images/RemeraL.png',
-          'assets/images/RemeraL.png',
-          'assets/images/RemeraL.png'
-        ]
-      },
-      'pantalon-rosa': {
-        title: 'Pantalon Over negro',
-        price: '$45.000',
-        details: 'Talle: S<br>Tela: Gabardina stretch<br>Corte: Cargo slim',
-        description: 'Pantalón cargo negro con bolsillos laterales y cintura elástica.',
-        images: [
-          'assets/images/PantalonS.png',
-          'assets/images/PantalonS.png',
-          'assets/images/PantalonS.png'
-        ]
-      },
-      'pantalon-gris': {
-        title: 'Pantalón Gris',
-        price: '$50.400',
-        details: 'Talle: L<br>Tela: Gabardina premium<br>Corte: Recto',
-        description: 'Pantalón gris de gabardina con bolsillos profundos y ajuste cómodo.',
-        images: [
-          'assets/images/BuzoOver.png',
-          'assets/images/BuzoOver.png',
-          'assets/images/BuzoOver.png'
-        ]
-      },
-      // Shorts y combos nuevos
-      'shorts-cuero': {
-        title: 'Shorts cuero negro',
-        price: '$18.000',
-        details: 'Talle: S<br>Tela: Símil cuero<br>Color: Negro',
-        description: 'Shorts de símil cuero negro, tiro alto, ideal para looks urbanos y nocturnos.',
+      'remera-night-glow': {
+        title: 'Remera Night Glow',
+        price: '$18.500',
+        details: 'Medida: Único<br>Textura: algodón suave<br>Vibe: after office',
+        description: 'Remera negra con brillo sutil y fit relajado para salir cómoda pero con onda.',
         images: ['assets/images/IMG_7221.jpeg']
       },
-      'falda-cuero': {
-        title: 'Falda cuero negro',
-        price: '$17.000',
-        details: 'Talle: S<br>Tela: Símil cuero<br>Color: Negro',
-        description: 'Falda corta de símil cuero negro, corte clásico, perfecta para combinar.',
+      'remera-neon-wave': {
+        title: 'Remera Neon Wave',
+        price: '$19.200',
+        details: 'Medida: Único<br>Estilo: crop relajado<br>Detalle: print holográfico',
+        description: 'Remera crop con estampa neón inspirada en las luces de la city.',
         images: ['assets/images/IMG_7222.jpeg']
       },
-      'shorts-hebilla': {
-        title: 'Shorts negro hebilla',
-        price: '$18.500',
-        details: 'Talle: S<br>Tela: Símil cuero<br>Detalle: Hebilla metálica',
-        description: 'Shorts negro con hebilla decorativa, estilo moderno y versátil.',
+      'remera-after-party': {
+        title: 'Remera After Party',
+        price: '$20.500',
+        details: 'Medida: Único<br>Textura: algodón soft<br>Color: gris humo',
+        description: 'Remera oversized gris diseñada para acompañarte en el after sin perder estilo.',
         images: ['assets/images/IMG_7223.jpeg']
       },
-      'top-halter': {
-        title: 'Top halter negro',
-        price: '$12.000',
-        details: 'Talle: Único<br>Tela: Lycra<br>Color: Negro',
-        description: 'Top halter negro, espalda descubierta, ideal para salidas y fiestas.',
-        images: ['assets/images/IMG_7224.jpeg']
-      },
-      'combo-body': {
-        title: 'Combo body vino y marrón',
-        price: '$22.000',
-        details: 'Talle: Único<br>Incluye: Body color vino y body color marrón',
-        description: 'Combo de dos bodys: uno color vino y otro marrón, ambos de lycra suave.',
-        images: ['assets/images/IMG_7226.jpeg']
-      },
-      'combo-shorts': {
-        title: 'Combo shorts marrón y negro',
-        price: '$35.000',
-        details: 'Talle: S<br>Incluye: Shorts marrón y shorts negro',
-        description: 'Combo de dos shorts: uno marrón y uno negro, ambos en símil cuero.',
-        images: ['assets/images/IMG_7227.jpeg']
-      },
-      'combo-blusa-falda': {
-        title: 'Combo blusa transparente negra + falda cuero',
-        price: '$32.000',
-        details: 'Talle: Único<br>Incluye: Blusa transparente negra y falda de cuero negro',
-        description: 'Combo elegante para noche: blusa transparente negra y falda de cuero.',
-        images: ['assets/images/IMG_7228.jpeg']
-      },
-      'combo-halter-shorts': {
-        title: 'Combo top halter negro + shorts negro (dos modelos)',
-        price: '$29.500',
-        details: 'Talle: Único<br>Incluye: Top halter negro y dos modelos de shorts negro',
-        description: 'Combo de top halter negro y shorts negro, dos estilos para combinar.',
-        images: ['assets/images/IMG_7229.jpeg']
-      },
-      'combo-body-falda': {
-        title: 'Combo body vino y marrón + falda cuero negro',
-        price: '$37.000',
-        details: 'Talle: Único<br>Incluye: Body vino, body marrón y falda cuero negro',
-        description: 'Combo completo: dos bodys y una falda de cuero negro.',
-        images: ['assets/images/IMG_7230.jpeg']
-      },
-      'tops-animal': {
-        title: 'Tops manga larga animal print gris y marrón',
-        price: '$14.000',
-        details: 'Talle: Único<br>Incluye: Top gris y top marrón animal print',
-        description: 'Tops manga larga con estampado animal print, colores gris y marrón.',
+      'jean-mom-fit': {
+        title: 'Jean Mom Fit',
+        price: '$52.000',
+        details: 'Medida: Único<br>Corte: mom fit<br>Lavado: blue night',
+        description: 'Jean tiro alto con calce relajado y lavado profundo para combinar con cualquier top.',
         images: ['assets/images/IMG_7231.jpeg']
       },
-      'body-vino-falda': {
-        title: 'Body vino con falda cuero negro',
-        price: '$21.000',
-        details: 'Talle: Único<br>Incluye: Body color vino y falda cuero negro',
-        description: 'Body color vino combinado con falda de cuero negro.',
+      'cargo-fucsia': {
+        title: 'Cargo Fucsia',
+        price: '$47.000',
+        details: 'Medida: Único<br>Material: gabardina con spandex<br>Extras: bolsillos cargo',
+        description: 'Cargo fucsia con cintura elasticada y bolsillos amplios para salir con actitud.',
+        images: ['assets/images/IMG_7229.jpeg']
+      },
+      'skort-satin': {
+        title: 'Mini Skort Satin',
+        price: '$22.000',
+        details: 'Medida: Único<br>Material: satén stretch<br>Ideal para: noches de verano',
+        description: 'Mini skort satinada que mezcla comodidad de short y vibra de falda.',
+        images: ['assets/images/IMG_7230.jpeg']
+      },
+      'top-halter-black': {
+        title: 'Top Halter Black',
+        price: '$16.000',
+        details: 'Medida: Único<br>Escote: halter regulable<br>Acabado: mate',
+        description: 'Top halter negro ajustable perfecto para un look de noche sin complicaciones.',
+        images: ['assets/images/IMG_7224.jpeg']
+      },
+      'body-lace-midnight': {
+        title: 'Body Lace Midnight',
+        price: '$23.000',
+        details: 'Medida: Único<br>Material: encaje + powernet<br>Detalle: espalda abierta',
+        description: 'Body de encaje negro con espaldas abiertas para sumar drama a tu outfit.',
+        images: ['assets/images/IMG_7226.jpeg']
+      },
+      'set-velvet-night': {
+        title: 'Set Velvet Night',
+        price: '$39.000',
+        details: 'Medida: Único<br>Incluye: top + pantalón<br>Textura: terciopelo soft',
+        description: 'Conjunto de terciopelo elástico listo para la noche, cómodo y glam a la vez.',
+        images: ['assets/images/IMG_7228.jpeg']
+      },
+      'buzo-oversize-cherry': {
+        title: 'Buzo Oversize Cherry',
+        price: '$65.000',
+        details: 'Medida: Único<br>Interior: frisa premium<br>Corte: oversized',
+        description: 'Buzo oversize color cherry con frisa ultra suave para cubrirte después de la fiesta.',
+        images: ['assets/images/IMG_7227.jpeg']
+      },
+      'vestido-midnight': {
+        title: 'Vestido Midnight Spark',
+        price: '$45.000',
+        details: 'Medida: Único<br>Fit: ajustado con caída<br>Brillo: destello sutil',
+        description: 'Vestido negro con destellos metálicos pensado para noches eternas.',
         images: ['assets/images/IMG_7232.jpeg']
+      },
+      'clutch-mirror': {
+        title: 'Clutch Mirror',
+        price: '$12.000',
+        details: 'Medida: Único<br>Textura: vinilo espejado<br>Cierre: imán oculto',
+        description: 'Clutch espejado para llevar lo básico y sumar luz a tu outfit.',
+        images: ['assets/images/IMG_7238.PNG']
       }
     };
 
@@ -848,35 +762,94 @@ setAppInert(true);
     }
 
     // NEWSLETTER FORM (validación en español + mensajes propios)
-const newsletterForm = document.getElementById('form-newsletter');
-const newsletterResp = document.getElementById('newsletter-response');
-if (newsletterForm) {
-  const emailInput = newsletterForm.querySelector('input[type="email"], #email-newsletter, [name="email-newsletter"]');
-  newsletterForm.setAttribute('novalidate', 'novalidate');
+[{ formId: 'form-newsletter', responseId: 'newsletter-response' },
+ { formId: 'form-prelaunch', responseId: 'prelaunch-response' }]
+ .forEach(({ formId, responseId }) => {
+   const formEl = document.getElementById(formId);
+   const respEl = responseId ? document.getElementById(responseId) : null;
+   if (!formEl) return;
+   const emailInput = formEl.querySelector('input[type="email"], [name="email-newsletter"], [name="email-prelaunch"]');
+   formEl.setAttribute('novalidate', 'novalidate');
 
-  const setMsg = (msg, ok=false) => {
-    if (!newsletterResp) return;
-    newsletterResp.textContent = msg;
-    newsletterResp.style.color = ok ? 'green' : 'red';
-  };
+   const setMsg = (msg, ok = false) => {
+     if (!respEl) return;
+     respEl.textContent = msg;
+     respEl.style.color = ok ? 'var(--color-acento)' : '#f66';
+   };
 
-  emailInput?.addEventListener('input', () => { emailInput.setCustomValidity(''); });
+   emailInput?.addEventListener('input', () => { emailInput.setCustomValidity(''); });
 
-  newsletterForm.addEventListener('submit', (e) => {
-    e.preventDefault();
-    const email = (emailInput?.value || '').trim();
-    const valid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
-    if (!email) { setMsg('Ingresá tu correo electrónico.'); emailInput?.focus(); return; }
-    if (!valid) { setMsg('El formato de correo no es válido. Ejemplo: nombre@dominio.com'); emailInput?.focus(); return; }
-    setMsg('¡Suscripción exitosa! Gracias.', true);
-    newsletterForm.reset();
-  });
-}
+   formEl.addEventListener('submit', (e) => {
+     e.preventDefault();
+     const email = (emailInput?.value || '').trim();
+     const valid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+     if (!email) { setMsg('Ingresá tu correo electrónico.'); emailInput?.focus(); return; }
+     if (!valid) { setMsg('Formato inválido. Ejemplo: nombre@dominio.com'); emailInput?.focus(); return; }
+     setMsg('¡Gracias! Te avisamos cuando se active el drop.', true);
+     formEl.reset();
+   });
+ });
 
     /* ===========================
-   10) PRODUCTS FILTERING & SORTING + recordar selección
-   =========================== */
-const allProductItems = Array.from(document.querySelectorAll('.producto-item'));
+       Modernización de grilla de productos (acciones, datos auxiliares)
+       =========================== */
+    const productCards = Array.from(document.querySelectorAll('.producto-item'));
+    productCards.forEach(card => {
+      const viewBtn = card.querySelector('.view-product-btn');
+      const addWrapper = card.querySelector('.add-to-cart-wrapper');
+      const addBtn = card.querySelector('.add-to-cart-icon');
+      const addLabel = card.querySelector('.add-to-cart-label');
+
+      if (!viewBtn || !addBtn) return;
+
+      // Asegura data-name consistente para filtros y accesibilidad
+      if (!card.dataset.name) {
+        const nameFromHeading = card.querySelector('h3')?.textContent?.trim();
+        if (nameFromHeading) card.dataset.name = nameFromHeading;
+      }
+
+      let actions = card.querySelector('.product-actions');
+      if (!actions) {
+        actions = document.createElement('div');
+        actions.className = 'product-actions';
+        viewBtn.parentElement !== actions && actions.appendChild(viewBtn);
+
+        if (addWrapper) {
+          actions.appendChild(addBtn);
+          if (addLabel) actions.appendChild(addLabel);
+          addWrapper.remove();
+        } else {
+          actions.appendChild(addBtn);
+          if (addLabel) actions.appendChild(addLabel);
+        }
+
+        card.appendChild(actions);
+      }
+    });
+
+    const tallaSelect = document.getElementById('filter-talle');
+    if (tallaSelect) {
+      const tallaLabels = { u: 'Único', xs: 'XS', s: 'S', m: 'M', l: 'L', xl: 'XL', xxl: 'XXL', xxxl: 'XXXL' };
+      const talles = Array.from(new Set(productCards
+        .map(card => (card.dataset.talle || '').toLowerCase())
+        .filter(Boolean)));
+      const order = ['u', 'xs', 's', 'm', 'l', 'xl', 'xxl', 'xxxl'];
+      talles.sort((a, b) => {
+        const ia = order.indexOf(a);
+        const ib = order.indexOf(b);
+        if (ia === -1 && ib === -1) return a.localeCompare(b);
+        if (ia === -1) return 1;
+        if (ib === -1) return -1;
+        return ia - ib;
+      });
+      tallaSelect.innerHTML = '<option value="">Todas las opciones</option>' +
+        talles.map(t => `<option value="${t}">${tallaLabels[t] || t.toUpperCase()}</option>`).join('');
+    }
+
+    /* ===========================
+       10) PRODUCTS FILTERING & SORTING + recordar selección
+       =========================== */
+const allProductItems = productCards;
 // --- Helpers búsqueda en productos: contar y hacer scroll + actualizar héroe
 function countVisibleProducts(){
   let n = 0, first = null;
@@ -894,21 +867,41 @@ function scrollToCard(card){
     : (card.getBoundingClientRect().top + window.scrollY - 80);
   window.scrollTo({ top: y, behavior: 'smooth' });
 }
+function freezeHeroSubtitle(frozen, text){
+  if (!heroSubtitleEl) return;
+  if (frozen) {
+    heroSubtitleEl.dataset.frozen = 'true';
+    if (typeof text === 'string') heroSubtitleEl.textContent = text;
+  } else {
+    heroSubtitleEl.dataset.frozen = 'false';
+    const base = text || heroSubtitleEl.dataset.base || heroPhrases[0] || heroSubtitleEl.textContent;
+    heroSubtitleEl.textContent = base;
+    if (heroPhrases.length) {
+      const idx = heroPhrases.indexOf(base);
+      heroRotationIndex = idx >= 0 ? idx : 0;
+    }
+    startHeroRotation();
+  }
+}
+
 function setHeroResultText(q, n){
   const h = document.getElementById('hero-title');
-  const sub = document.querySelector('.productos-hero .hero-subtitle');
   if (!h) return;
   if (q){
     h.textContent = `Resultados para "${q}"`;
-    if (sub) sub.textContent = `${n} prenda${n===1?'':'s'} encontrad${n===1?'a':'as'}`;
+    freezeHeroSubtitle(true, `${n} prenda${n===1?'':'s'} encontrad${n===1?'a':'as'}`);
   } else {
     h.textContent = 'Descubrí nuestra colección';
-    if (sub) sub.textContent = 'Prendas urbanas, cómodas y con estilo';
+    freezeHeroSubtitle(false);
   }
 }
 const filterTipo  = document.getElementById('filter-tipo');
 const filterTalle = document.getElementById('filter-talle');
 const sortBy      = document.getElementById('sort-by');
+const resultsCountEl = document.getElementById('results-count');
+const chipButtons = Array.from(document.querySelectorAll('.chip-filter'));
+const chipState = { priceMax: null, badge: '' };
+const filtersResetBtn = document.getElementById('filters-reset');
 // --- Query de búsqueda proveniente de la lupa (productos.html?q=...)
 let searchQuery = '';
 try {
@@ -918,6 +911,96 @@ try {
 const categorySections = Array.from(document.querySelectorAll('.product-category'));
 const productosMain = document.querySelector('.productos-main');
 let emptyStateEl;
+const filtrosSection = document.getElementById('productos-filtros');
+if (filtrosSection && 'IntersectionObserver' in window) {
+  const sentinel = document.createElement('div');
+  sentinel.className = 'filters-sentinel';
+  filtrosSection.parentElement?.insertBefore(sentinel, filtrosSection);
+  const observer = new IntersectionObserver(entries => {
+    const entry = entries[0];
+    filtrosSection.classList.toggle('is-floating', !!entry && entry.intersectionRatio === 0);
+  }, { threshold: [0] });
+  observer.observe(sentinel);
+}
+
+const resetChipState = () => {
+  chipState.priceMax = null;
+  chipState.badge = '';
+};
+
+const syncQuickFilters = () => {
+  chipButtons.forEach(btn => {
+    btn.classList.remove('is-active');
+    if (btn.dataset.chipTipo && filterTipo && filterTipo.value === btn.dataset.chipTipo) {
+      btn.classList.add('is-active');
+    } else if (btn.dataset.chipSort && sortBy && sortBy.value === btn.dataset.chipSort) {
+      btn.classList.add('is-active');
+    } else if (btn.dataset.chipPriceMax && chipState.priceMax) {
+      const max = parseFloat(btn.dataset.chipPriceMax);
+      if (Number.isFinite(max) && max === chipState.priceMax) btn.classList.add('is-active');
+    } else if (btn.dataset.chipBadge && chipState.badge) {
+      if (norm(btn.dataset.chipBadge) === chipState.badge) btn.classList.add('is-active');
+    }
+  });
+};
+
+chipButtons.forEach(btn => {
+  btn.addEventListener('click', () => {
+    const isActive = btn.classList.contains('is-active');
+    chipButtons.forEach(other => { if (other !== btn) other.classList.remove('is-active'); });
+
+    if (btn.dataset.chipTipo || btn.dataset.chipSort) {
+      resetChipState();
+    }
+
+    if (isActive) {
+      btn.classList.remove('is-active');
+      if (btn.dataset.chipPriceMax || btn.dataset.chipBadge) {
+        resetChipState();
+      }
+      if (!btn.dataset.chipTipo && !btn.dataset.chipSort) {
+        applyFiltersWrapped();
+      } else {
+        if (btn.dataset.chipTipo && filterTipo) {
+          filterTipo.value = '';
+          filterTipo.dispatchEvent(new Event('change', { bubbles: true }));
+        }
+        if (btn.dataset.chipSort && sortBy) {
+          sortBy.value = 'relevancia';
+          sortBy.dispatchEvent(new Event('change', { bubbles: true }));
+        }
+      }
+      return;
+    }
+
+    btn.classList.add('is-active');
+
+    if (!btn.dataset.chipTipo && !btn.dataset.chipSort) {
+      resetChipState();
+    }
+    if (btn.dataset.chipTipo && filterTipo) {
+      filterTipo.dataset.chipTrigger = '1';
+      filterTipo.value = btn.dataset.chipTipo;
+      filterTipo.dispatchEvent(new Event('change', { bubbles: true }));
+    }
+    if (btn.dataset.chipSort && sortBy) {
+      sortBy.dataset.chipTrigger = '1';
+      sortBy.value = btn.dataset.chipSort;
+      sortBy.dispatchEvent(new Event('change', { bubbles: true }));
+    }
+    if (btn.dataset.chipPriceMax) {
+      const max = parseFloat(btn.dataset.chipPriceMax);
+      chipState.priceMax = Number.isFinite(max) ? max : null;
+    }
+    if (btn.dataset.chipBadge) {
+      chipState.badge = norm(btn.dataset.chipBadge);
+    }
+
+    if (!btn.dataset.chipTipo && !btn.dataset.chipSort) {
+      applyFiltersWrapped();
+    }
+  });
+});
 
 const LS_KEYS = {
   tipo:  'bera:filters:tipo',
@@ -960,6 +1043,7 @@ try {
   if (filterTalle && qpTalle !== null) filterTalle.value = qpTalle;
   if (sortBy && qpSort !== null)       sortBy.value      = qpSort;
 } catch(_) {}
+syncQuickFilters();
 const typeToSection = {
   remera: 'remeras',
   top: 'tops',
@@ -1035,6 +1119,8 @@ function applyFilters() {
 const talleVal = filterTalle ? filterTalle.value : '';
 const qValRaw  = searchQuery || '';
 const q = norm(qValRaw);
+const priceMax = chipState.priceMax;
+const badgeFilter = chipState.badge;
 
 // Construye variantes del término (singular/plural + alias de categoría)
 const variants = new Set();
@@ -1058,9 +1144,14 @@ allProductItems.forEach(item => {
     textOk = Array.from(variants).some(v => itemNorm.includes(v) || tipoNorm === v);
   }
 
+  const priceValue = parseFloat(item.dataset.price) || 0;
+  const badgeNorm = norm(item.dataset.badge);
+
   const match = textOk &&
     (!tipoVal  || item.dataset.tipo  === tipoVal) &&
-    (!talleVal || item.dataset.talle === talleVal);
+    (!talleVal || item.dataset.talle === talleVal) &&
+    (!priceMax || priceValue <= priceMax) &&
+    (!badgeFilter || badgeNorm === badgeFilter);
 
   item.style.display = match ? '' : 'none';
 });
@@ -1103,13 +1194,21 @@ allProductItems.forEach(item => {
   }
   updateURLParams();
   // --- Actualizar contador de resultados (si existe barra de filtros)
-  try {
-    const countHost = document.querySelector('.filters-bar .results-count');
-    if (countHost) {
-      const visibles = allProductItems.filter(el => el.style.display !== 'none').length;
-      countHost.textContent = `${visibles} producto${visibles===1?'':'s'} encontrado${visibles===1?'':'s'}.`;
+  if (resultsCountEl) {
+    const visibles = allProductItems.filter(el => el.style.display !== 'none').length;
+    let text = visibles === 0
+      ? 'Sin resultados con esos filtros.'
+      : `${visibles} producto${visibles===1?'':'s'} disponible${visibles===1?'':'s'}.`;
+    if (priceMax && visibles > 0) {
+      text += ` · Hasta $${priceMax.toLocaleString('es-AR')}`;
     }
-  } catch(_) {}
+    if (tipoVal && filterTipo) {
+      const label = filterTipo.options[filterTipo.selectedIndex]?.textContent?.trim();
+      if (label) text += ` · ${label}`;
+    }
+    resultsCountEl.textContent = text;
+    resultsCountEl.dataset.count = String(visibles);
+  }
 }
 
 /* ---------- Loader helpers (envoltorios) ---------- */
@@ -1133,6 +1232,12 @@ function applySortingWrapped() { withLoader(productsShell, () => applySorting())
       if (sel === filterTipo)  localStorage.setItem(LS_KEYS.tipo, sel.value);
       if (sel === filterTalle) localStorage.setItem(LS_KEYS.talle, sel.value);
     } catch(_) {}
+
+    if (sel === filterTipo && sel.dataset.chipTrigger !== '1') {
+      chipButtons.forEach(btn => { if (btn.dataset.chipTipo) btn.classList.remove('is-active'); });
+    }
+    sel.dataset.chipTrigger = '';
+
     // Al cambiar tipo/talle, la búsqueda deja de ser el driver
     clearSearch('filter-change');
     applyFiltersWrapped();
@@ -1141,10 +1246,41 @@ function applySortingWrapped() { withLoader(productsShell, () => applySorting())
 });
 if (sortBy) sortBy.addEventListener('change', () => {
   try { localStorage.setItem(LS_KEYS.sort, sortBy.value); } catch(_) {}
+  if (sortBy.dataset.chipTrigger !== '1') {
+    chipButtons.forEach(btn => { if (btn.dataset.chipSort) btn.classList.remove('is-active'); });
+  }
+  sortBy.dataset.chipTrigger = '';
   clearSearch('sort-change');
   applySortingWrapped();
   updateURLParams();
 });
+
+if (filtersResetBtn) {
+  filtersResetBtn.addEventListener('click', () => {
+    if (filterTipo) {
+      filterTipo.value = '';
+      filterTipo.dataset.chipTrigger = '';
+    }
+    if (filterTalle) {
+      filterTalle.value = '';
+    }
+    if (sortBy) {
+      sortBy.value = 'relevancia';
+      sortBy.dataset.chipTrigger = '';
+      try { localStorage.setItem(LS_KEYS.sort, 'relevancia'); } catch(_) {}
+    }
+    try {
+      localStorage.removeItem(LS_KEYS.tipo);
+      localStorage.removeItem(LS_KEYS.talle);
+    } catch(_) {}
+    resetChipState();
+    syncQuickFilters();
+    clearSearch('filters-reset');
+    applyFiltersWrapped();
+    applySortingWrapped();
+    updateURLParams();
+  });
+}
 
 /* ---------- Primera corrida (con loader) ---------- */
 applyFiltersWrapped();
@@ -1178,37 +1314,6 @@ updateURLParams();
   if (n > 0) scrollToCard(first);
   updateURLParams();
 })();
-// Crear botón y contador si existen filtros
-if (productosMain && (filterTipo || filterTalle)) {
-  const bar = document.createElement('div');
-  bar.className = 'filters-bar';
-  bar.innerHTML = `
-    <button type="button" class="btn clear-filters" aria-label="Limpiar filtros">Limpiar filtros</button>
-    <span class="results-count" aria-live="polite"></span>
-  `;
-  productosMain.prepend(bar);
-
-  const clearBtn = bar.querySelector('.clear-filters');
-  const countEl  = bar.querySelector('.results-count');
-
-  clearBtn.addEventListener('click', () => {
-    if (filterTipo)  filterTipo.value = '';
-    if (filterTalle) filterTalle.value = '';
-    try {
-      localStorage.removeItem('bera:filters:tipo');
-      localStorage.removeItem('bera:filters:talle');
-    } catch(_) {}
-    clearSearch('filters-clear');
-    applyFiltersWrapped();
-    updateURLParams();
-  });
-
-  // Inicializa el contador con el estado actual
-  (function initResultsCount(){
-    const visiblesNow = allProductItems.filter(el => el.style.display !== 'none').length;
-    countEl.textContent = `${visiblesNow} producto${visiblesNow===1?'':'s'} encontrado${visiblesNow===1?'':'s'}.`;
-  })();
-}
     /* ===========================
        8) TOAST DEL CARRITO SIN STACKING
        =========================== */
@@ -1426,6 +1531,12 @@ updateCartCount();
     window.openCartPanel = openCartPanel; // opcional, por si lo llamás desde otros lados
 
     cartFab?.addEventListener('click', openCartPanel);
+    document.querySelectorAll('[data-open-cart]').forEach(btn => {
+      btn.addEventListener('click', e => {
+        e.preventDefault();
+        openCartPanel();
+      });
+    });
     cartCloseFab?.addEventListener('click', closeCartPanel);
     cartOverlayElm?.addEventListener('click', closeCartPanel);
     document.addEventListener('keydown', e => {

@@ -7,100 +7,43 @@
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
-
   gtag('config', 'G-PRTXFGN64T');
 </script>
-<!-- Event snippet for Contacto conversion page -->
 <script>
   gtag('event', 'conversion', {'send_to': 'AW-11497289170/1miXCLjn64obENLrquoq'});
 </script>
-
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>BERA Clothing — Próximamente</title>
-  <meta name="description" content="Estamos cargando la nueva colección en la web. Mientras tanto, mirá todos los productos en Instagram y escribinos por DM." />
+  <meta name="description" content="Estamos subiendo la nueva colección BERA. Suscribite para recibir el drop apenas salga y mirá adelantos del lookbook." />
   <meta property="og:site_name" content="BERA Clothing" />
   <meta property="og:title" content="BERA Clothing — Próximamente" />
-  <meta property="og:description" content="Estamos cargando la nueva colección en la web. Mientras tanto, mirá todos los productos en Instagram y escribinos por DM." />
+  <meta property="og:description" content="Pronto habilitamos el catálogo completo en la web. Seguinos para ver los drops antes que nadie." />
   <meta property="og:type" content="website" />
   <meta property="og:image" content="assets/images/logoo.jpeg" />
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="BERA Clothing — Próximamente" />
-  <meta name="twitter:description" content="Estamos cargando la nueva colección en la web. Mientras tanto, mirá todos los productos en Instagram y escribinos por DM." />
+  <meta name="twitter:description" content="Pronto habilitamos el catálogo completo en la web. Seguinos para ver los drops antes que nadie." />
   <meta name="twitter:image" content="assets/images/logoo.jpeg" />
   <meta name="color-scheme" content="dark light" />
   <meta name="theme-color" content="#e91e63" />
   <link rel="icon" href="assets/images/favicon.ico" />
-    <link rel="stylesheet" href="css/style.css" />
-
-  <!-- Tipos: reutilizamos Poppins si ya la tenés en el sitio -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet" />
-
-  <!-- Estilos mínimos aislados para esta landing temporal -->
-  <style>
-    .proximamente-page{
-      --rosa:#e91e63;
-      --gris:#555;
-      --gris2:#777;
-      --bg:#0e0e10; /* acorde al look oscuro del sitio */
-      --card:#16161a;
-      --border:rgba(255,255,255,.08);
-    }
-    .proximamente-page .visually-hidden{ position:absolute !important; width:1px !important; height:1px !important; padding:0 !important; margin:-1px !important; overflow:hidden !important; clip:rect(0,0,0,0) !important; white-space:nowrap !important; border:0 !important; }
-    .proximamente-page *{box-sizing:border-box}
-    .proximamente-page{min-height:100vh}
-    .proximamente-page{
-      margin:0; font-family:Poppins, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
-      color:#fff; background:var(--bg);
-      display:flex; flex-direction:column;
-    }
-    .proximamente-page .wrap{flex:1; display:flex; align-items:center;}
-    .proximamente-page .container{width:min(1120px, 92vw); margin:0 auto;}
-    .proximamente-page header{padding:18px 0; border-bottom:1px solid var(--border);}
-    .proximamente-page .brand{display:flex; gap:12px; align-items:center; text-decoration:none; color:#fff}
-    .proximamente-page .brand img{width:40px; height:40px; border-radius:6px; object-fit:cover}
-    .proximamente-page .brand .t1{font-weight:700; letter-spacing:1px}
-    .proximamente-page .hero{display:grid; gap:28px; grid-template-columns:1.2fr .8fr; align-items:center; padding:40px 0 24px}
-    .proximamente-page .hero h1{font-size:clamp(28px, 3.4vw, 44px); line-height:1.15; margin:0}
-    .proximamente-page .hero p{color:var(--gris); margin:8px 0 0; font-size:clamp(15px,1.6vw,18px)}
-    .proximamente-page .badges{display:flex; gap:10px; flex-wrap:wrap; margin-top:12px}
-    .proximamente-page .badge{background:rgba(233,30,99,.12); color:#fff; border:1px solid var(--border); padding:6px 10px; border-radius:999px; font-size:12px}
-
-    .proximamente-page .cards{display:grid; grid-template-columns:repeat(3, 1fr); gap:16px}
-    .proximamente-page .card{background:var(--card); border:1px solid var(--border); border-radius:12px; overflow:hidden}
-    .proximamente-page .card img{width:100%; aspect-ratio:3/4; object-fit:cover; display:block}
-    .proximamente-page .card .info{padding:12px 12px 14px}
-    .proximamente-page .card .name{font-weight:600; font-size:14px}
-    .proximamente-page .card .price{color:#ccc; margin-top:2px; font-size:13px}
-
-    .proximamente-page .cta{display:flex; gap:12px; flex-wrap:wrap; margin-top:18px}
-    .proximamente-page .btn{appearance:none; border:none; padding:12px 16px; border-radius:10px; cursor:pointer; font-weight:600; text-decoration:none; display:inline-flex; gap:10px; align-items:center}
-    .proximamente-page .btn-primary{background:var(--rosa); color:#fff}
-    .proximamente-page .btn-ghost{background:transparent; color:#fff; border:1px solid var(--border)}
-    .proximamente-page .btn svg{width:18px; height:18px}
-
-    .proximamente-page footer{border-top:1px solid var(--border); color:var(--gris2); padding:16px 0; font-size:13px;}
-
-    /* Responsive */
-    @media (max-width:900px){
-      .proximamente-page .hero{grid-template-columns:1fr; padding:28px 0 12px}
-      .proximamente-page .cards{grid-template-columns:repeat(2,1fr)}
-    }
-    @media (max-width:560px){
-      .proximamente-page .cards{grid-template-columns:1fr}
-    }
-
-    .proximamente-page :focus-visible { outline: 3px solid var(--rosa); outline-offset: 3px; }
-    @media (prefers-reduced-motion: reduce){ .proximamente-page * { animation: none !important; transition: none !important; scroll-behavior: auto !important; } }
-  </style>
+  <link rel="stylesheet" href="css/style.css" />
 </head>
-<body class="proximamente-page">
-<a href="#main" class="visually-hidden">Saltar al contenido</a>
-<noscript><div style="background:#b00020;color:#fff;padding:8px 12px;text-align:center">La página funciona mejor con JavaScript activado.</div></noscript>
-  <!-- HEADER -->
+<body class="dark-page coming-soon-page">
+  <div class="announcement-bar" role="region" aria-label="Promociones y medios de pago">
+    <div class="ann-track" aria-hidden="true">
+      <div class="ann-row">
+        🔥 Nueva cápsula SS25 en camino • Shop Online 24/7 🖤 • Retiro en local o punto de encuentro •</div>
+    </div>
+    <button type="button" class="ann-close" aria-label="Cerrar mensaje">&times;</button>
+  </div>
+
+  <a href="#main-content" class="skip-link">Saltar al contenido</a>
+
   <header class="site-header" role="banner">
     <div class="container header-inner">
       <button class="collection-toggle" type="button"
@@ -115,14 +58,12 @@
         </svg>
       </button>
 
-      <!-- Botón lupita (desktop) -->
       <button class="header-search-toggle" type="button" aria-label="Abrir búsqueda">
         <svg viewBox="0 0 24 24" aria-hidden="true">
           <path d="M11 18a7 7 0 1 1 4.95-2.05L21 21l-1.5 1.5-5.05-5.05A6.96 6.96 0 0 1 11 18z" fill="currentColor"/>
         </svg>
       </button>
 
-      <!-- Campo que se despliega desde la lupita (desktop) -->
       <form class="header-search header-search-desktop" role="search" aria-label="Buscar (desktop)" action="productos.html" method="get">
         <input class="header-search-input" name="q" type="search" placeholder="Buscar prendas…" autocomplete="off" />
         <button class="header-search-btn" aria-label="Buscar">
@@ -153,7 +94,6 @@
       </button>
 
       <nav id="primary-navigation" class="main-nav" role="navigation" aria-label="Menú principal">
-        <!-- Buscador dentro del menú (mobile) -->
         <form class="menu-search" action="productos.html" method="get" role="search" aria-label="Buscar prendas">
           <label class="visually-hidden" for="menu-search-input">Buscar</label>
           <input id="menu-search-input" type="search" name="q" class="menu-search-input" placeholder="Buscar prendas..." autocomplete="off" aria-label="Buscar" />
@@ -166,84 +106,165 @@
         </form>
 
         <ul class="nav-list">
-          <li><a href="index.html" class="active" aria-current="page">Inicio</a></li>
+          <li><a href="index.html">Inicio</a></li>
           <li><a href="newsletter.html">Novedades</a></li>
-          <li><a href="proximamente.html">Productos</a></li>
+          <li><a href="productos.html">Productos</a></li>
           <li><a href="contacto.html">Contacto</a></li>
         </ul>
       </nav>
     </div>
   </header>
 
-  <main class="wrap" id="main">
-    <div class="container">
-      <section class="hero" aria-labelledby="proxi-title">
-        <div>
-          <h1 id="proxi-title">Estamos subiendo la nueva colección 👀</h1>
-          <p>
-            La página de <strong>Productos</strong> se encuentra en actualización. En breve vas a poder filtrar por categorías y talles desde la web.
-            Mientras tanto, podés ver <strong>todo el catálogo</strong> y las últimas novedades en nuestro Instagram.
-          </p>
-          <div class="badges">
-            <span class="badge">Shop online 24/7</span>
-            <span class="badge">Retiro en local o punto</span>
-            <span class="badge">DM para consultas</span>
-          </div>
-          <div class="cta">
-            <a class="btn btn-primary" href="https://instagram.com/beraclothingg" target="_blank" rel="noopener noreferrer">Ver catálogo completo en Instagram
-              <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M14 3h7v7h-2V6.41l-9.29 9.3-1.42-1.42 9.3-9.29H14V3z"/></svg>
-            </a>
-            <a class="btn btn-ghost" href="index.html">Volver al inicio</a>
-          </div>
-        </div>
-        <div>
-          <div class="cards" aria-label="Ejemplos de productos">
-            <article class="card">
-              <img src="assets/images/IMG_7230.jpeg" alt="Producto ejemplo 1" loading="lazy" decoding="async" />
-            </article>
-            <article class="card">
-              <img src="assets/images/IMG_7232.jpeg" alt="Producto ejemplo 2" loading="lazy" decoding="async" />
-            </article>
-            <article class="card">
-              <img src="assets/images/IMG_7239.PNG" alt="Producto ejemplo 3" loading="lazy" decoding="async" />
-            </article>
-            <article class="card">
-              <img src="assets/images/IMG_7223.jpeg" alt="Producto ejemplo 4" loading="lazy" decoding="async" />
-            </article>
-            <article class="card">
-              <img src="assets/images/IMG_7227.jpeg" alt="Producto ejemplo 5" loading="lazy" decoding="async" />
-            </article>
-            <article class="card">
-              <img src="assets/images/IMG_7240.PNG" alt="Producto ejemplo 6" loading="lazy" decoding="async" />
-            </article>
-          </div>
-        </div>
-      </section>
-
-      <section aria-labelledby="ig-title" style="margin:28px 0 8px">
-        <h2 id="ig-title" style="font-size:18px; margin:0 0 8px">Seguinos para ver lanzamientos y promos</h2>
-        <a class="btn btn-ghost" href="https://instagram.com/beraclothingg" target="_blank" rel="noopener noreferrer">@beraclothingg</a>
-      </section>
+  <div class="cart-banner">
+    <div class="container cart-banner-inner">
+      <span class="cart-banner-text">Tenés prendas guardadas, revisalas cuando quieras.</span>
+      <button type="button" class="cart-banner-btn" data-open-cart>Ver carrito</button>
     </div>
+  </div>
+
+  <main id="main-content" role="main">
+    <section class="page-hero page-hero--compact" role="region" aria-labelledby="soon-title">
+      <div class="container hero-shell">
+        <div class="hero-content">
+          <span class="hero-eyebrow">Próximamente online</span>
+          <h1 id="soon-title" class="hero-title">Estamos afinando los últimos detalles del catálogo digital</h1>
+          <p class="hero-lead">Mientras terminamos de subir fotos y filtros, podés mirar el lookbook adelantado y reservar tus prendas por Instagram. Te damos prioridad en el próximo drop.</p>
+          <div class="hero-actions">
+            <a class="btn btn-primary" href="https://instagram.com/beraclothingg" target="_blank" rel="noopener noreferrer">Abrir Instagram</a>
+            <a class="btn btn-secondary" data-scroll="#preview" href="#preview">Ver adelantos</a>
+          </div>
+          <dl class="hero-metrics">
+            <div class="metric-card">
+              <dt>Lanzamiento</dt>
+              <dd>Febrero 2025</dd>
+            </div>
+            <div class="metric-card">
+              <dt>Pre-venta</dt>
+              <dd>DM exclusivo</dd>
+            </div>
+            <div class="metric-card">
+              <dt>Beneficio</dt>
+              <dd>10% OFF efectivo</dd>
+            </div>
+          </dl>
+        </div>
+        <figure class="hero-media">
+          <img src="assets/images/IMG_7236.jpeg" alt="Editorial BERA cápsula SS25" loading="lazy" decoding="async" />
+        </figure>
+      </div>
+    </section>
+
+    <section id="preview" class="section surface-muted" role="region" aria-labelledby="preview-title">
+      <div class="container">
+        <h2 id="preview-title" class="section-title">Adelanto del drop</h2>
+        <div class="lookbook-grid">
+          <figure class="lookbook-card">
+            <img src="assets/images/IMG_7221.jpeg" alt="Set urban rosa" loading="lazy" decoding="async" />
+            <span>Urban set</span>
+          </figure>
+          <figure class="lookbook-card">
+            <img src="assets/images/IMG_7224.jpeg" alt="Top halter negro" loading="lazy" decoding="async" />
+            <span>Top halter</span>
+          </figure>
+          <figure class="lookbook-card">
+            <img src="assets/images/IMG_7229.jpeg" alt="Conjunto SS25" loading="lazy" decoding="async" />
+            <span>Capsule duo</span>
+          </figure>
+          <figure class="lookbook-card">
+            <img src="assets/images/IMG_7230.jpeg" alt="Body con falda eco cuero" loading="lazy" decoding="async" />
+            <span>Night drop</span>
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <section class="section surface-light" role="region" aria-labelledby="cta-proxi">
+      <div class="container content-split">
+        <div>
+          <span class="badge-inline">Pre-launch perks</span>
+          <h2 id="cta-proxi" class="section-title" style="text-align:left;">Sé la primera en enterarte</h2>
+          <p>Suscribite al newsletter y obtené acceso anticipado, combos sugeridos para la noche y prioridad en los restocks antes de que el catálogo salga a producción completa.</p>
+          <ul class="list-check">
+            <li>Alertas push por mail y WhatsApp</li>
+            <li>Sneak peek de editoriales y campañas</li>
+            <li>Código exclusivo para la semana de lanzamiento</li>
+          </ul>
+        </div>
+        <div class="glass-card">
+          <form class="newsletter-form" id="form-prelaunch">
+            <input type="email" name="email-prelaunch" placeholder="Tu correo electrónico" required />
+            <button type="submit" class="btn btn-secondary">Quiero el drop</button>
+          </form>
+          <p id="prelaunch-response" class="form-response" aria-live="polite"></p>
+        </div>
+      </div>
+    </section>
   </main>
 
- <!-- FOOTER -->
   <footer class="site-footer" role="contentinfo">
     <div class="container footer-inner">
       <p>
-        <a href="https://instagram.com/beraclothingg?utm_source=site&utm_medium=footer&utm_campaign=ig_redirect"
-           target="_blank" rel="noopener noreferrer" class="instagram-icon" aria-label="Instagram">
+        <a href="https://instagram.com/beraclothingg" target="_blank" rel="noopener" class="instagram-icon" aria-label="Instagram">
           <img src="assets/images/instaa.png" alt="Instagram" width="28" height="28" loading="lazy" decoding="async">
         </a>
-        | Shop online 24/7 | Envíos a todo el país | Berazategui centro
+        | Shop online 24/7 | Retiro en local | Berazategui centro
       </p>
-      By 
-      <a href="https://instagram.com/melinaffrias" target="_blank" rel="noopener noreferrer">@melinaffrias</a> <span>&amp;</span>
-      <a href="https://instagram.com/candelaffrias" target="_blank" rel="noopener noreferrer">@candelaffrias</a>
+      By
+        <a href="https://instagram.com/melinaffrias" target="_blank" rel="noopener">@melinaffrias</a> <span>&amp;</span>
+        <a href="https://instagram.com/candelaffrias" target="_blank" rel="noopener">@candelaffrias</a>
       <p>© 2025 BERA clothing. Todos los derechos reservados.</p>
     </div>
   </footer>
-  <script src="js/scriptt.js" defer></script>
 
+  <div id="collection-overlay" class="collection-overlay" aria-hidden="true"></div>
+  <aside id="collection-menu" class="collection-menu" aria-hidden="true" aria-labelledby="collection-heading">
+    <button id="collection-close" class="collection-close" aria-label="Cerrar menú">×</button>
+    <nav class="collection-nav" role="navigation" aria-label="Categorías de ropa">
+      <h2 id="collection-heading" class="collection-heading">CLOTHING ▾</h2>
+      <ul class="collection-list">
+        <li><a href="productos.html?tipo=remera#remeras">Remeras</a></li>
+        <li><a href="productos.html?tipo=short#shorts">Shorts / Minis</a></li>
+        <li><a href="productos.html?tipo=pantalon#pantalones">Pantalones</a></li>
+        <li><a href="productos.html?tipo=denim#denim">Denim (Jeans)</a></li>
+        <li><a href="productos.html?tipo=set#sets">Conjuntos (Sets)</a></li>
+        <li><a href="productos.html?tipo=abrigo#abrigos">Abrigos</a></li>
+        <li><a href="productos.html?tipo=vestido#vestidos">Vestidos y Monos</a></li>
+        <li><a href="productos.html?tipo=body#bodys">Bodys</a></li>
+        <li><a href="productos.html?tipo=accesorio#accesorios">Accesorios</a></li>
+      </ul>
+    </nav>
+  </aside>
+
+  <noscript>
+    <div style="background:#111;color:#fff;padding:1rem;text-align:center;">
+      Podés ver nuestros productos en <a href="https://instagram.com/beraclothingg" style="color:#e91e63;">Instagram</a> mientras activás JavaScript.
+    </div>
+  </noscript>
+
+  <button id="cart-fab" class="cart-fab" aria-label="Abrir carrito">
+    <svg class="cart-icon" viewBox="0 0 24 24" aria-hidden="true">
+      <path d="M6 6h15l-1.5 9h-12z" fill="none" stroke="currentColor" stroke-width="2"></path>
+      <circle cx="9" cy="20" r="1.5"></circle>
+      <circle cx="18" cy="20" r="1.5"></circle>
+    </svg>
+    <span class="cart-counter" data-count>0</span>
+    <span class="cart-total" data-total>$0</span>
+  </button>
+
+  <aside id="cart-panel" class="cart-panel hidden" aria-hidden="true" aria-labelledby="cart-panel-title">
+    <div class="cart-panel-header">
+      <h2 id="cart-panel-title">Mi Carrito</h2>
+      <button class="cart-close" aria-label="Cerrar carrito">×</button>
+    </div>
+    <ul class="cart-items" data-items></ul>
+    <div class="cart-summary">
+      <span>Total</span>
+      <strong data-total-final>$0</strong>
+    </div>
+    <button class="btn btn-primary btn-checkout" onclick="location.href='finalizarcompra.html'">Finalizar compra</button>
+  </aside>
+  <div id="cart-overlay" class="cart-overlay hidden" aria-hidden="true"></div>
+
+  <script src="js/scriptt.js" defer></script>
 </body>
 </html>

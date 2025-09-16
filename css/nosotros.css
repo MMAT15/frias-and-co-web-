@@ -1,80 +1,61 @@
-
-
-/* css/nosotros.css */
-
-/* Section styling */
-.section-about {
-  padding: 4rem 0;
-  background-color: #fafafa;
+/* --------------------------------------------------
+   Nosotros 2025 Refresh
+-------------------------------------------------- */
+.about-section {
+  padding: clamp(3rem, 6vw, 4.5rem) 0;
 }
-.section-about .section-title {
-  text-align: center;
-  margin-bottom: 2rem;
-  font-size: 2rem;
+
+.about-values .feature-card {
+  min-height: 190px;
+}
+
+.timeline-section {
+  padding: clamp(3rem, 6vw, 4.5rem) 0;
+}
+
+.timeline {
+  display: grid;
+  gap: 1.75rem;
+}
+.timeline-item {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 1.2rem;
+  align-items: start;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: clamp(14px, 3vw, 20px);
+  padding: 1.5rem;
   position: relative;
 }
-.section-about .section-title::after {
-  content: '';
-  display: block;
-  width: 60px;
-  height: 4px;
-  background-color: var(--color-acento);
-  margin: 0.5rem auto 0;
-}
-
-/* About content layout */
-.about-content {
-  display: flex;
-  flex-wrap: wrap;
+.timeline-bullet {
+  display: inline-flex;
   align-items: center;
-  gap: 2rem;
-  max-width: 1000px;
-  margin: 0 auto;
+  justify-content: center;
+  padding: 0.35rem 0.9rem;
+  border-radius: 999px;
+  background: rgba(233, 30, 99, 0.18);
+  color: #fff;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  font-size: 0.75rem;
 }
-.about-image {
-  flex: 1 1 300px;
+.timeline-item h3 {
+  margin: 0 0 0.35rem;
+  font-size: 1.2rem;
 }
-.about-image img {
-  width: 100%;
-  border-radius: var(--border-radius);
-  object-fit: cover;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-}
-.about-text {
-  flex: 2 1 400px;
-  text-align: left;
-  font-size: 1rem;
-  line-height: 1.6;
-}
-.about-text p {
-  margin-bottom: 1rem;
+.timeline-item p {
+  margin: 0;
+  color: rgba(255, 255, 255, 0.75);
 }
 
-/* Values list styling */
-.about-text ul {
-  list-style: disc inside;
-  margin: 1rem 0;
+@media (max-width: 640px) {
+  .timeline-item {
+    grid-template-columns: 1fr;
+    gap: 0.75rem;
+  }
+  .timeline-bullet {
+    justify-self: flex-start;
+  }
 }
-.about-text li {
-  margin-bottom: 0.5rem;
-}
-
-/* Button “Conoce más” styling if present */
-.about-text .btn-secondary {
-  display: inline-block;
-  margin-top: 1rem;
-}
-
-/* Container consistency */
-.container {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 1rem;
-}
-
-/* ----- Dark page variant (keeps header white) ----- */
-body.dark-page .section-about {
-  background: #0f0f10;
-  color: #f1f1f1;
-}
-body.dark-page .section-about :where(h1,h2,h3,h4,h5,h6,p,li) { color: #f1f1f1; }

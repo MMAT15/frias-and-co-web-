@@ -2,8 +2,7 @@
    Checkout Page Styles
 -------------------------------------------------- */
 .section-checkout {
-  padding: 4rem 0;
-  background-color: #f9f9f9;
+  padding: clamp(3rem, 6vw, 4.5rem) 0;
 }
 
 .checkout-container {
@@ -18,16 +17,20 @@
 
 /* Order summary */
 .checkout-summary-panel {
-  flex: 1 1 300px;
-  background: #fff;
-  border-radius: var(--border-radius);
-  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
-  padding: 2rem;
+  flex: 1 1 320px;
+  padding: clamp(1.75rem, 4vw, 2.25rem);
+  background: transparent;
 }
 .checkout-summary-panel h2 {
   margin-top: 0;
   margin-bottom: 1.5rem;
   font-size: 1.5rem;
+}
+.checkout-summary-panel,
+.checkout-summary-panel dt,
+.checkout-summary-panel dd,
+.checkout-summary-panel li {
+  color: rgba(255, 255, 255, 0.85);
 }
 .order-items {
   list-style: none;
@@ -47,7 +50,7 @@
 }
 .summary-row.total {
   font-weight: 600;
-  border-top: 1px solid #e0e0e0;
+  border-top: 1px solid rgba(255, 255, 255, 0.12);
   padding-top: 1rem;
   margin-top: 1rem;
 }
@@ -56,27 +59,27 @@
   margin-top: 2rem;
   display: block;
   width: 100%;
-  padding: 0.75rem;
-  background: #eb5757;
+  padding: 0.85rem;
+  background: rgba(235, 87, 87, 0.9);
   color: #fff;
   border: none;
-  border-radius: var(--border-radius);
+  border-radius: 999px;
   cursor: pointer;
   text-align: center;
   font-size: 1rem;
   transition: background var(--transition);
 }
 #cancel-checkout:hover {
-  background: #cf4646;
+  background: rgba(207, 70, 70, 0.95);
 }
 
 /* Checkout form */
 .checkout-form {
-  flex: 2 1 500px;
-  background: #fff;
-  border-radius: var(--border-radius);
-  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
-  padding: 2rem;
+  flex: 2 1 540px;
+  background: transparent;
+  padding: clamp(1.75rem, 4vw, 2.5rem);
+  display: grid;
+  gap: 1.5rem;
 }
 .checkout-form h2 {
   margin-top: 0;
@@ -90,22 +93,28 @@
   display: block;
   font-weight: 600;
   margin-bottom: 0.5rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  font-size: 0.8rem;
+  color: rgba(255, 255, 255, 0.7);
 }
 .checkout-form input[type="text"],
 .checkout-form input[type="email"],
 .checkout-form input[type="number"],
 .checkout-form select {
   width: 100%;
-  padding: 0.75rem;
-  border: 1px solid #ccc;
-  border-radius: var(--border-radius);
+  padding: 0.85rem 1rem;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: 14px;
+  background: rgba(11, 11, 15, 0.85);
+  color: #fff;
   font-family: var(--fuente-base);
   transition: border-color var(--transition), box-shadow var(--transition);
 }
 .checkout-form input:focus,
 .checkout-form select:focus {
-  border-color: var(--color-acento);
-  box-shadow: 0 0 6px rgba(0, 0, 0, 0.774);
+  border-color: rgba(233, 30, 99, 0.75);
+  box-shadow: 0 0 0 3px rgba(233, 30, 99, 0.2);
   outline: none;
 }
 
@@ -121,17 +130,17 @@
   display: flex;
   align-items: flex-start;
   justify-content: space-between;
-  border: 1px solid #ddd;
-  border-radius: var(--border-radius);
-  padding: 0.75rem 1rem;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 14px;
+  padding: 0.85rem 1rem;
   margin-bottom: 1rem;
   transition: border-color var(--transition), background var(--transition);
   gap: 0.75rem;
   flex-wrap: wrap;
 }
 .option-wrapper:hover {
-  border-color: var(--color-acento);
-  background: #fafafa;
+  border-color: rgba(233, 30, 99, 0.6);
+  background: rgba(233, 30, 99, 0.08);
 }
 .option-wrapper *, .option-wrapper label {
   overflow-wrap: anywhere;
@@ -141,8 +150,8 @@
   flex-shrink: 0;
 }
 .option-detail {
-  font-size: 0.9rem;
-  color: var(--color-acento-sec);
+  font-size: 0.85rem;
+  color: rgba(255, 255, 255, 0.65);
   white-space: normal;
   flex: 1 1 auto;
   text-align: right;
@@ -152,19 +161,19 @@
 #confirm-order {
   display: block;
   width: 100%;
-  padding: 0.85rem;
-  background: var(--color-ok, rgb(3,126,3));
+  padding: 0.95rem;
+  background: linear-gradient(135deg, #2cbf6c, #1e944c);
   color: #fff;
   border: none;
-  border-radius: var(--border-radius);
+  border-radius: 999px;
   font-size: 1rem;
   cursor: pointer;
   transition: opacity var(--transition), transform var(--transition), background 0.2s;
 }
 @media (hover: hover) {
   #confirm-order:hover {
-    background: var(--color-ok-hover, #065f06);
-    opacity: 0.9;
+    background: linear-gradient(135deg, #30d178, #1b7f40);
+    opacity: 0.95;
     transform: translateY(-2px);
   }
 }

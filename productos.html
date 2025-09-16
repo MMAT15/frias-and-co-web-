@@ -2,94 +2,84 @@
 <html lang="es">
 <head>
   <!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-PRTXFGN64T"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-PRTXFGN64T');
-</script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-PRTXFGN64T"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-PRTXFGN64T');
+  </script>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>BERA clothing – Productos</title>
-  <meta name="description" content="Explora nuestra colección completa de ropa y accesorios urbanos. Ordená por categoría, talle o precio." />
+  <meta name="description" content="Explora nuestra colección completa de ropa y accesorios urbanos. Ordená por categoría o precio y encontrá tu próximo outfit." />
   <meta name="theme-color" content="#e91e63" />
-<link rel="canonical" href="https://www.beraclothing.store/productos.html" />
-<meta property="og:type" content="website">
-<meta property="og:title" content="BERA clothing – Productos">
-<meta property="og:description" content="Explora nuestra colección completa de ropa y accesorios urbanos.">
-<meta property="og:url" content="https://www.beraclothing.store/productos.html">
-<meta property="og:image" content="https://www.beraclothing.store/assets/og/bera-products.jpg">
-<meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="BERA clothing – Productos">
-<meta name="twitter:description" content="Explora nuestra colección completa de ropa y accesorios urbanos.">
-<meta name="twitter:image" content="https://www.beraclothing.store/assets/og/bera-products.jpg">
-  <!-- Tipografía -->
+  <link rel="canonical" href="https://www.beraclothing.store/productos.html" />
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="BERA clothing – Productos">
+  <meta property="og:description" content="Explora nuestra colección completa de ropa y accesorios urbanos.">
+  <meta property="og:url" content="https://www.beraclothing.store/productos.html">
+  <meta property="og:image" content="https://www.beraclothing.store/assets/og/bera-products.jpg">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="BERA clothing – Productos">
+  <meta name="twitter:description" content="Explora nuestra colección completa de ropa y accesorios urbanos.">
+  <meta name="twitter:image" content="https://www.beraclothing.store/assets/og/bera-products.jpg">
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet" />
-
-  <!-- ESTILOS -->
   <link rel="stylesheet" href="css/style.css" />
   <link rel="stylesheet" href="css/productos.css" />
 </head>
-<body class="dark-page">
-<!-- Announcement / Marquee Bar -->
-<div class="announcement-bar" role="region" aria-label="Promociones y medios de pago">
-  <div class="ann-track" aria-hidden="true">
-    <div class="ann-row">
-       🔥 10% de descuento pagando en efectivo 💥 • Shop Online 24/7 🖤 • Retiro en local o en punto de encuentro  • 
-      🔥 10% de descuento pagando en efectivo 💥 • Shop Online 24/7 🖤 • Retiro en local o en punto de encuentro  • 
-
+<body class="dark-page productos-page">
+  <div class="announcement-bar" role="region" aria-label="Promociones y medios de pago">
+    <div class="ann-track" aria-hidden="true">
+      <div class="ann-row">🔥 10% OFF abonando en efectivo • Shop Online 24/7 🖤 • Retiro en local o punto de encuentro •</div>
     </div>
+    <button type="button" class="ann-close" aria-label="Cerrar mensaje">&times;</button>
   </div>
-</div>    
-  <!-- Skip link -->
+
   <a href="#main-content" class="skip-link">Saltar al contenido</a>
 
-  <!-- HEADER -->
   <header class="site-header" role="banner">
     <div class="container header-inner">
-   <button class="collection-toggle" type="button"
-        aria-label="Abrir menú Catálogo"
-        aria-expanded="false"
-        aria-controls="collection-menu">
-  <span class="collection-label">Catálogo</span>
-  <svg class="icon-hanger" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
-    <path d="M12 7.5c0-.8-.6-1.5-1.4-1.5S9 6.7 9 7.5c0 .9.7 1.3 1.5 1.8.6.4 1.1.7 1.1 1.2 0 .5-.4.9-1 .9H10"
-          fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
-    <path d="M3 16.5l9-6 9 6" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
-  </svg>
-</button>
-<!-- Botón lupita (desktop) -->
-<button class="header-search-toggle" type="button" aria-label="Abrir búsqueda">
-  <svg viewBox="0 0 24 24" aria-hidden="true">
-    <path d="M11 18a7 7 0 1 1 4.95-2.05L21 21l-1.5 1.5-5.05-5.05A6.96 6.96 0 0 1 11 18z" fill="currentColor"/>
-  </svg>
-</button>
+      <button class="collection-toggle" type="button"
+              aria-label="Abrir menú Catálogo"
+              aria-expanded="false"
+              aria-controls="collection-menu">
+        <span class="collection-label">Catálogo</span>
+        <svg class="icon-hanger" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+          <path d="M12 7.5c0-.8-.6-1.5-1.4-1.5S9 6.7 9 7.5c0 .9.7 1.3 1.5 1.8.6.4 1.1.7 1.1 1.2 0 .5-.4.9-1 .9H10" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+          <path d="M3 16.5l9-6 9 6" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </button>
 
-<!-- Campo que se despliega desde la lupita (desktop) -->
-<form class="header-search header-search-desktop" role="search" aria-label="Buscar (desktop)" action="productos.html" method="get">
-  <input class="header-search-input" name="q" type="search" placeholder="Buscar prendas…" autocomplete="off" />
-  <button class="header-search-btn" aria-label="Buscar">
-    <svg viewBox="0 0 24 24" aria-hidden="true">
-      <path d="M11 18a7 7 0 1 1 4.95-2.05L21 21l-1.5 1.5-5.05-5.05A6.96 6.96 0 0 1 11 18z" fill="currentColor"/>
-    </svg>
-  </button>
-</form>
-    <div class="site-branding">
-  <a href="index.html" class="logo-link" aria-label="Inicio">
-    <div class="logo-wrap">
-      <img src="assets/images/logoo.jpeg" alt="Logo BERA clothing" class="logo" decoding="async" />
-    </div>
-  </a>
-  <div class="site-title" aria-label="BERA CLOTHING">
-    <span class="title-bera">BERA</span>
-    <span class="title-clothing">CLOTHING</span>
-  </div>
-  <span class="site-tagline">BY FRIAS</span>
-</div>
+      <button class="header-search-toggle" type="button" aria-label="Abrir búsqueda">
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M11 18a7 7 0 1 1 4.95-2.05L21 21l-1.5 1.5-5.05-5.05A6.96 6.96 0 0 1 11 18z" fill="currentColor"/>
+        </svg>
+      </button>
+
+      <form class="header-search header-search-desktop" role="search" aria-label="Buscar (desktop)" action="productos.html" method="get">
+        <input class="header-search-input" name="q" type="search" placeholder="Buscar prendas…" autocomplete="off" />
+        <button class="header-search-btn" aria-label="Buscar">
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M11 18a7 7 0 1 1 4.95-2.05L21 21l-1.5 1.5-5.05-5.05A6.96 6.96 0 0 1 11 18z" fill="currentColor"/>
+          </svg>
+        </button>
+      </form>
+
+      <div class="site-branding">
+        <a href="index.html" class="logo-link" aria-label="Inicio">
+          <div class="logo-wrap">
+            <img src="assets/images/logoo.jpeg" alt="Logo BERA clothing" class="logo" width="60" height="60" decoding="async" />
+          </div>
+        </a>
+        <div class="site-title" aria-label="BERA CLOTHING">
+          <span class="title-bera">BERA</span>
+          <span class="title-clothing">CLOTHING</span>
+        </div>
+        <span class="site-tagline">BY FRIAS</span>
+      </div>
 
       <button class="nav-toggle" type="button"
               aria-controls="primary-navigation"
@@ -98,954 +88,275 @@
         <span class="bar"></span><span class="bar"></span><span class="bar"></span>
       </button>
 
-      <nav id="primary-navigation" class="main-nav"
-     role="navigation"
-     aria-label="Menú principal">
+      <nav id="primary-navigation" class="main-nav" role="navigation" aria-label="Menú principal">
+        <form class="menu-search" action="productos.html" method="get" role="search" aria-label="Buscar prendas">
+          <label class="visually-hidden" for="menu-search-input">Buscar</label>
+          <input id="menu-search-input" type="search" name="q" class="menu-search-input" placeholder="Buscar prendas..." autocomplete="off" aria-label="Buscar" />
+          <button class="menu-search-btn" type="submit" aria-label="Buscar">
+            <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" focusable="false">
+              <circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="2" fill="none"></circle>
+              <line x1="16.5" y1="16.5" x2="21" y2="21" stroke="currentColor" stroke-width="2" stroke-linecap="round"></line>
+            </svg>
+          </button>
+        </form>
 
-  <!-- ===== Buscador dentro del menú (mobile) ===== -->
-  <form class="menu-search" action="productos.html" method="get" role="search" aria-label="Buscar prendas">
-    <label class="visually-hidden" for="menu-search-input">Buscar</label>
-    <input
-      id="menu-search-input"
-      type="search"
-      name="q"
-      class="menu-search-input"
-      placeholder="Buscar prendas..."
-      autocomplete="off"
-      aria-label="Buscar"
-    />
-    <button class="menu-search-btn" type="submit" aria-label="Buscar">
-      <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" focusable="false">
-        <circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="2" fill="none"></circle>
-        <line x1="16.5" y1="16.5" x2="21" y2="21" stroke="currentColor" stroke-width="2" stroke-linecap="round"></line>
-      </svg>
-    </button>
-  </form>
-  <!-- ============================================ -->
-
-  <ul class="nav-list">
-    <li><a href="index.html" class="active" aria-current="page">Inicio</a></li>
-    <li><a href="newsletter.html">Novedades</a></li>
-    <li><a href="productos.html">Productos</a></li>
-    <li><a href="contacto.html">Contacto</a></li>
-  </ul>
-</nav>
-     
+        <ul class="nav-list">
+          <li><a href="index.html">Inicio</a></li>
+          <li><a href="newsletter.html">Novedades</a></li>
+          <li><a href="productos.html" class="active" aria-current="page">Productos</a></li>
+          <li><a href="contacto.html">Contacto</a></li>
+        </ul>
+      </nav>
     </div>
   </header>
 
-  <!-- Modal de Carrito -->
-  <div id="cart-modal" class="cart-modal hidden" role="dialog" aria-modal="true" aria-labelledby="cart-title">
-    <div class="cart-modal-content">
-      <button id="close-cart" class="cart-close" aria-label="Cerrar carrito">&times;</button>
-      <h2 id="cart-title" class="section-title">Mi Carrito</h2>
-      <div id="cart-items"></div>
-      <div class="cart-summary">
-        <p>Total: <strong id="cart-total">$0</strong></p>
-        <button id="checkout-btn" class="btn btn-primary">Finalizar compra</button>
-      </div>
-    </div>
-  </div>
-
-  <!-- MAIN CONTENT -->
   <main id="main-content">
-     <h1 class="visually-hidden">Productos – BERA clothing</h1>
-    <!-- Productos Hero -->
-   <section class="productos-hero" role="region" aria-labelledby="hero-title">
-    <div class="container">
-      <h2 id="hero-title" class="hero-title">Descubrí nuestra colección</h2>
-      <p class="hero-subtitle">Prendas urbanas, cómodas y con estilo</p>
-    </div>
-  </section>
-
-    <!-- Filtros y Orden -->
- <section class="productos-filtros-bar" role="region" aria-labelledby="filtros-title">
-  <div class="container">
-    <h2 id="filtros-title" class="visually-hidden">Filtros y orden</h2>
-    <div class="filtros-selects">
-      <label for="filter-tipo">Tipo de prenda</label>
-      <select id="filter-tipo" name="tipo">
-       <option value="">Todas las prendas</option>
-<option value="remera">Remeras</option>
-<option value="short">Shorts / Minis</option>
-<option value="pantalon">Pantalones</option>
-<option value="denim">Denim (Jeans)</option>
-<option value="set">Conjuntos (Sets)</option>
-<option value="abrigo">Abrigos</option>
-<option value="vestido">Vestidos y Monos</option>
-<option value="body">Bodys</option>
-<option value="accesorio">Accesorios</option>
-          </select>
-      <label for="filter-talle">Talle</label>
-      <select id="filter-talle" name="talle">
-        <option value="u">Único</option>
-      </select>
-          <label for="sort-by">Ordenar por</label>
-      <select id="sort-by" name="orden">
-        <option value="relevancia">Relevancia</option>
-        <option value="precio-asc">Precio: menor a mayor</option>
-        <option value="precio-desc">Precio: mayor a menor</option>
-        <option value="nuevos">Novedades</option>
-      </select>
-    </div>
-  </div>
-</section>
-
-    <!-- =================== GRID DE PRODUCTOS =================== -->
-
-    <!-- REMERAS -->
-    <section id="remeras" class="product-category" role="region" aria-labelledby="title-remeras">
-      <h2 id="title-remeras" class="category-title">Remeras</h2>
-      <div class="grid-products">
-  <!-- U -->
-  <div class="producto-item" data-tipo="remera" data-talle="u" data-price="15400">
-    <img src="assets/images/Gorra.png" alt="Remera Shift (Talle U)" width="800" height="1000" loading="lazy" decoding="async">
-    <h3>Remera Shift (Talle U)</h3>
-    <p class="price">$15.400</p>
-    <button type="button" class="add-to-cart-btn view-product-btn btn btn-secondary"
-            data-id="remera-shift-u" data-name="Remera Shift (Talle U)" data-price="15400"
-            data-images="assets/images/Gorra.png">Ver producto</button>
-    <button class="add-to-cart-icon" type="button"
-            data-id="remera-shift-u" data-name="Remera Shift (Talle U)" data-price="15400">+</button>
-    <span class="add-to-cart-label">Añadir al carrito</span>
-  </div>
-  <!-- XS -->
-  <div class="producto-item" data-tipo="remera" data-talle="xs" data-price="15400">
-    <img src="assets/images/Gorra.png" alt="Remera Shift (Talle XS)" width="800" height="1000" loading="lazy" decoding="async">
-    <h3>Remera Shift (Talle XS)</h3>
-    <p class="price">$15.400</p>
-    <button type="button" class="add-to-cart-btn view-product-btn btn btn-secondary"
-            data-id="remera-shift-xs" data-name="Remera Shift (Talle XS)" data-price="15400"
-            data-images="assets/images/Gorra.png">Ver producto</button>
-    <button class="add-to-cart-icon" type="button"
-            data-id="remera-shift-xs" data-name="Remera Shift (Talle XS)" data-price="15400">+</button>
-    <span class="add-to-cart-label">Añadir al carrito</span>
-  </div>
-  <!-- S -->
-  <div class="producto-item" data-tipo="remera" data-talle="s" data-price="15400">
-    <img src="assets/images/Gorra.png" alt="Remera Shift (Talle S)" width="800" height="1000" loading="lazy" decoding="async">
-    <h3>Remera Shift (Talle S)</h3>
-    <p class="price">$15.400</p>
-    <button type="button" class="add-to-cart-btn view-product-btn btn btn-secondary"
-            data-id="remera-shift-s" data-name="Remera Shift (Talle S)" data-price="15400"
-            data-images="assets/images/Gorra.png">Ver producto</button>
-    <button class="add-to-cart-icon" type="button"
-            data-id="remera-shift-s" data-name="Remera Shift (Talle S)" data-price="15400">+</button>
-    <span class="add-to-cart-label">Añadir al carrito</span>
-  </div>
-  <!-- M -->
-  <div class="producto-item" data-tipo="remera" data-talle="m" data-price="15400">
-    <img src="assets/images/Gorra.png" alt="Remera Shift (Talle M)" width="800" height="1000" loading="lazy" decoding="async">
-    <h3>Remera Shift (Talle M)</h3>
-    <p class="price">$15.400</p>
-    <button type="button" class="add-to-cart-btn view-product-btn btn btn-secondary"
-            data-id="remera-shift-m" data-name="Remera Shift (Talle M)" data-price="15400"
-            data-images="assets/images/Gorra.png">Ver producto</button>
-    <button class="add-to-cart-icon" type="button"
-            data-id="remera-shift-m" data-name="Remera Shift (Talle M)" data-price="15400">+</button>
-    <span class="add-to-cart-label">Añadir al carrito</span>
-  </div>
-  <!-- L -->
-  <div class="producto-item" data-tipo="remera" data-talle="l" data-price="15400">
-    <img src="assets/images/Gorra.png" alt="Remera Shift (Talle L)" width="800" height="1000" loading="lazy" decoding="async">
-    <h3>Remera Shift (Talle L)</h3>
-    <p class="price">$15.400</p>
-    <button type="button" class="add-to-cart-btn view-product-btn btn btn-secondary"
-            data-id="remera-shift-l" data-name="Remera Shift (Talle L)" data-price="15400"
-            data-images="assets/images/Gorra.png">Ver producto</button>
-    <button class="add-to-cart-icon" type="button"
-            data-id="remera-shift-l" data-name="Remera Shift (Talle L)" data-price="15400">+</button>
-    <span class="add-to-cart-label">Añadir al carrito</span>
-  </div>
-  <!-- XL -->
-  <div class="producto-item" data-tipo="remera" data-talle="xl" data-price="15400">
-    <img src="assets/images/Gorra.png" alt="Remera Shift (Talle XL)" width="800" height="1000" loading="lazy" decoding="async">
-    <h3>Remera Shift (Talle XL)</h3>
-    <p class="price">$15.400</p>
-    <button type="button" class="add-to-cart-btn view-product-btn btn btn-secondary"
-            data-id="remera-shift-xl" data-name="Remera Shift (Talle XL)" data-price="15400"
-            data-images="assets/images/Gorra.png">Ver producto</button>
-    <button class="add-to-cart-icon" type="button"
-            data-id="remera-shift-xl" data-name="Remera Shift (Talle XL)" data-price="15400">+</button>
-    <span class="add-to-cart-label">Añadir al carrito</span>
-  </div>
-  <!-- XXL -->
-  <div class="producto-item" data-tipo="remera" data-talle="xxl" data-price="15400">
-    <img src="assets/images/Gorra.png" alt="Remera Shift (Talle XXL)" width="800" height="1000" loading="lazy" decoding="async">
-    <h3>Remera Shift (Talle XXL)</h3>
-    <p class="price">$15.400</p>
-    <button type="button" class="add-to-cart-btn view-product-btn btn btn-secondary"
-            data-id="remera-shift-xxl" data-name="Remera Shift (Talle XXL)" data-price="15400"
-            data-images="assets/images/Gorra.png">Ver producto</button>
-    <button class="add-to-cart-icon" type="button"
-            data-id="remera-shift-xxl" data-name="Remera Shift (Talle XXL)" data-price="15400">+</button>
-    <span class="add-to-cart-label">Añadir al carrito</span>
-  </div>
-</div>
-    </section>
-<!-- DENIM (JEANS) -->
-<section id="denim" class="product-category" role="region" aria-labelledby="title-denim">
-  <h2 id="title-denim" class="category-title">Denim (Jeans)</h2>
-  <div class="grid-products">
-    <!-- U -->
-    <div class="producto-item" data-tipo="denim" data-talle="u" data-price="52000">
-      <img src="assets/images/PantalonS.png" alt="Jean Mom Fit (Talle U)" width="800" height="1000" loading="lazy" decoding="async">
-      <h3>Jean Mom Fit (Talle U)</h3>
-      <p class="price">$52.000</p>
-      <button type="button" class="add-to-cart-btn view-product-btn btn btn-secondary"
-              data-id="jean-mom-u" data-name="Jean Mom Fit (Talle U)" data-price="52000"
-              data-images="assets/images/PantalonS.png">Ver producto</button>
-      <button class="add-to-cart-icon" type="button"
-              data-id="jean-mom-u" data-name="Jean Mom Fit (Talle U)" data-price="52000">+</button>
-      <span class="add-to-cart-label">Añadir al carrito</span>
-    </div>
-  </div>
-</section>
-    <!-- PANTALONES -->
-    <section id="pantalones" class="product-category" role="region" aria-labelledby="title-pantalones">
-      <h2 id="title-pantalones" class="category-title">Pantalones</h2>
-      <div class="grid-products">
-  <!-- U -->
-  <div class="producto-item" data-tipo="pantalon" data-talle="u" data-price="45000">
-    <img src="assets/images/PantalonS.png" alt="Pantalón Rosa (Talle U)" width="800" height="1000" loading="lazy" decoding="async">
-    <h3>Pantalón Rosa (Talle U)</h3>
-    <p class="price">$45.000</p>
-    <button type="button" class="add-to-cart-btn view-product-btn btn btn-secondary"
-            data-id="pantalon-rosa-u" data-name="Pantalón Rosa (Talle U)" data-price="45000"
-            data-images="assets/images/PantalonS.png">Ver producto</button>
-    <button class="add-to-cart-icon" type="button"
-            data-id="pantalon-rosa-u" data-name="Pantalón Rosa (Talle U)" data-price="45000">+</button>
-    <span class="add-to-cart-label">Añadir al carrito</span>
-  </div>
-
-  <!-- XS -->
-  <div class="producto-item" data-tipo="pantalon" data-talle="xs" data-price="45000">
-    <img src="assets/images/PantalonS.png" alt="Pantalón Rosa (Talle XS)" width="800" height="1000" loading="lazy" decoding="async">
-    <h3>Pantalón Rosa (Talle XS)</h3>
-    <p class="price">$45.000</p>
-    <button type="button" class="add-to-cart-btn view-product-btn btn btn-secondary"
-            data-id="pantalon-rosa-xs" data-name="Pantalón Rosa (Talle XS)" data-price="45000"
-            data-images="assets/images/PantalonS.png">Ver producto</button>
-    <button class="add-to-cart-icon" type="button"
-            data-id="pantalon-rosa-xs" data-name="Pantalón Rosa (Talle XS)" data-price="45000">+</button>
-    <span class="add-to-cart-label">Añadir al carrito</span>
-  </div>
-
-  <!-- S -->
-  <div class="producto-item" data-tipo="pantalon" data-talle="s" data-price="45000">
-    <img src="assets/images/PantalonS.png" alt="Pantalón Rosa (Talle S)" width="800" height="1000" loading="lazy" decoding="async">
-    <h3>Pantalón Rosa (Talle S)</h3>
-    <p class="price">$45.000</p>
-    <button type="button" class="add-to-cart-btn view-product-btn btn btn-secondary"
-            data-id="pantalon-rosa-s" data-name="Pantalón Rosa (Talle S)" data-price="45000"
-            data-images="assets/images/PantalonS.png">Ver producto</button>
-    <button class="add-to-cart-icon" type="button"
-            data-id="pantalon-rosa-s" data-name="Pantalón Rosa (Talle S)" data-price="45000">+</button>
-    <span class="add-to-cart-label">Añadir al carrito</span>
-  </div>
-
-  <!-- M -->
-  <div class="producto-item" data-tipo="pantalon" data-talle="m" data-price="45000">
-    <img src="assets/images/PantalonS.png" alt="Pantalón Rosa (Talle M)" width="800" height="1000" loading="lazy" decoding="async">
-    <h3>Pantalón Rosa (Talle M)</h3>
-    <p class="price">$45.000</p>
-    <button type="button" class="add-to-cart-btn view-product-btn btn btn-secondary"
-            data-id="pantalon-rosa-m" data-name="Pantalón Rosa (Talle M)" data-price="45000"
-            data-images="assets/images/PantalonS.png">Ver producto</button>
-    <button class="add-to-cart-icon" type="button"
-            data-id="pantalon-rosa-m" data-name="Pantalón Rosa (Talle M)" data-price="45000">+</button>
-    <span class="add-to-cart-label">Añadir al carrito</span>
-  </div>
-
-  <!-- L -->
-  <div class="producto-item" data-tipo="pantalon" data-talle="l" data-price="45000">
-    <img src="assets/images/PantalonS.png" alt="Pantalón Rosa (Talle L)" width="800" height="1000" loading="lazy" decoding="async">
-    <h3>Pantalón Rosa (Talle L)</h3>
-    <p class="price">$45.000</p>
-    <button type="button" class="add-to-cart-btn view-product-btn btn btn-secondary"
-            data-id="pantalon-rosa-l" data-name="Pantalón Rosa (Talle L)" data-price="45000"
-            data-images="assets/images/PantalonS.png">Ver producto</button>
-    <button class="add-to-cart-icon" type="button"
-            data-id="pantalon-rosa-l" data-name="Pantalón Rosa (Talle L)" data-price="45000">+</button>
-    <span class="add-to-cart-label">Añadir al carrito</span>
-  </div>
-
-  <!-- XL -->
-  <div class="producto-item" data-tipo="pantalon" data-talle="xl" data-price="45000">
-    <img src="assets/images/PantalonS.png" alt="Pantalón Rosa (Talle XL)" width="800" height="1000" loading="lazy" decoding="async">
-    <h3>Pantalón Rosa (Talle XL)</h3>
-    <p class="price">$45.000</p>
-    <button type="button" class="add-to-cart-btn view-product-btn btn btn-secondary"
-            data-id="pantalon-rosa-xl" data-name="Pantalón Rosa (Talle XL)" data-price="45000"
-            data-images="assets/images/PantalonS.png">Ver producto</button>
-    <button class="add-to-cart-icon" type="button"
-            data-id="pantalon-rosa-xl" data-name="Pantalón Rosa (Talle XL)" data-price="45000">+</button>
-    <span class="add-to-cart-label">Añadir al carrito</span>
-  </div>
-
-  <!-- XXL -->
-  <div class="producto-item" data-tipo="pantalon" data-talle="xxl" data-price="45000">
-    <img src="assets/images/PantalonS.png" alt="Pantalón Rosa (Talle XXL)" width="800" height="1000" loading="lazy" decoding="async">
-    <h3>Pantalón Rosa (Talle XXL)</h3>
-    <p class="price">$45.000</p>
-    <button type="button" class="add-to-cart-btn view-product-btn btn btn-secondary"
-            data-id="pantalon-rosa-xxl" data-name="Pantalón Rosa (Talle XXL)" data-price="45000"
-            data-images="assets/images/PantalonS.png">Ver producto</button>
-    <button class="add-to-cart-icon" type="button"
-            data-id="pantalon-rosa-xxl" data-name="Pantalón Rosa (Talle XXL)" data-price="45000">+</button>
-    <span class="add-to-cart-label">Añadir al carrito</span>
-  </div>
-</div>
+    <h1 class="visually-hidden">Productos – BERA clothing</h1>
+    <section class="productos-hero" role="region" aria-labelledby="hero-title">
+      <div class="container">
+        <h2 id="hero-title" class="hero-title">Descubrí nuestra colección</h2>
+        <p class="hero-subtitle">Prendas urbanas, cómodas y listas para salir.</p>
+      </div>
     </section>
 
-    <!-- SHORTS -->
-    <section id="shorts" class="product-category" role="region" aria-labelledby="title-shorts">
-      <h2 id="title-shorts" class="category-title">Shorts / Minis</h2>
-     <div class="grid-products">
-  <!-- U -->
-  <div class="producto-item" data-tipo="short" data-talle="u" data-price="18000">
-    <img src="assets/images/IMG_7221.jpeg" alt="Shorts cuero negro (Talle U)" width="800" height="1000" loading="lazy" decoding="async">
-    <h3>Shorts cuero negro (Talle U)</h3>
-    <p class="price">$18.000</p>
-    <button type="button" class="add-to-cart-btn view-product-btn btn btn-secondary"
-            data-id="shorts-cuero-u" data-name="Shorts cuero negro (Talle U)" data-price="18000"
-            data-images="assets/images/IMG_7221.jpeg">Ver producto</button>
-    <button class="add-to-cart-icon" type="button"
-            data-id="shorts-cuero-u" data-name="Shorts cuero negro (Talle U)" data-price="18000">+</button>
-    <span class="add-to-cart-label">Añadir al carrito</span>
-  </div>
-
-  <!-- XS -->
-  <div class="producto-item" data-tipo="short" data-talle="xs" data-price="18000">
-    <img src="assets/images/IMG_7221.jpeg" alt="Shorts cuero negro (Talle XS)" width="800" height="1000" loading="lazy" decoding="async">
-    <h3>Shorts cuero negro (Talle XS)</h3>
-    <p class="price">$18.000</p>
-    <button type="button" class="add-to-cart-btn view-product-btn btn btn-secondary"
-            data-id="shorts-cuero-xs" data-name="Shorts cuero negro (Talle XS)" data-price="18000"
-            data-images="assets/images/IMG_7221.jpeg">Ver producto</button>
-    <button class="add-to-cart-icon" type="button"
-            data-id="shorts-cuero-xs" data-name="Shorts cuero negro (Talle XS)" data-price="18000">+</button>
-    <span class="add-to-cart-label">Añadir al carrito</span>
-  </div>
-
-  <!-- S -->
-  <div class="producto-item" data-tipo="short" data-talle="s" data-price="18000">
-    <img src="assets/images/IMG_7221.jpeg" alt="Shorts cuero negro (Talle S)" width="800" height="1000" loading="lazy" decoding="async">
-    <h3>Shorts cuero negro (Talle S)</h3>
-    <p class="price">$18.000</p>
-    <button type="button" class="add-to-cart-btn view-product-btn btn btn-secondary"
-            data-id="shorts-cuero-s" data-name="Shorts cuero negro (Talle S)" data-price="18000"
-            data-images="assets/images/IMG_7221.jpeg">Ver producto</button>
-    <button class="add-to-cart-icon" type="button"
-            data-id="shorts-cuero-s" data-name="Shorts cuero negro (Talle S)" data-price="18000">+</button>
-    <span class="add-to-cart-label">Añadir al carrito</span>
-  </div>
-
-  <!-- M -->
-  <div class="producto-item" data-tipo="short" data-talle="m" data-price="18000">
-    <img src="assets/images/IMG_7221.jpeg" alt="Shorts cuero negro (Talle M)" width="800" height="1000" loading="lazy" decoding="async">
-    <h3>Shorts cuero negro (Talle M)</h3>
-    <p class="price">$18.000</p>
-    <button type="button" class="add-to-cart-btn view-product-btn btn btn-secondary"
-            data-id="shorts-cuero-m" data-name="Shorts cuero negro (Talle M)" data-price="18000"
-            data-images="assets/images/IMG_7221.jpeg">Ver producto</button>
-    <button class="add-to-cart-icon" type="button"
-            data-id="shorts-cuero-m" data-name="Shorts cuero negro (Talle M)" data-price="18000">+</button>
-    <span class="add-to-cart-label">Añadir al carrito</span>
-  </div>
-
-  <!-- L -->
-  <div class="producto-item" data-tipo="short" data-talle="l" data-price="18000">
-    <img src="assets/images/IMG_7221.jpeg" alt="Shorts cuero negro (Talle L)" width="800" height="1000" loading="lazy" decoding="async">
-    <h3>Shorts cuero negro (Talle L)</h3>
-    <p class="price">$18.000</p>
-    <button type="button" class="add-to-cart-btn view-product-btn btn btn-secondary"
-            data-id="shorts-cuero-l" data-name="Shorts cuero negro (Talle L)" data-price="18000"
-            data-images="assets/images/IMG_7221.jpeg">Ver producto</button>
-    <button class="add-to-cart-icon" type="button"
-            data-id="shorts-cuero-l" data-name="Shorts cuero negro (Talle L)" data-price="18000">+</button>
-    <span class="add-to-cart-label">Añadir al carrito</span>
-  </div>
-
-  <!-- XL -->
-  <div class="producto-item" data-tipo="short" data-talle="xl" data-price="18000">
-    <img src="assets/images/IMG_7221.jpeg" alt="Shorts cuero negro (Talle XL)" width="800" height="1000" loading="lazy" decoding="async">
-    <h3>Shorts cuero negro (Talle XL)</h3>
-    <p class="price">$18.000</p>
-    <button type="button" class="add-to-cart-btn view-product-btn btn btn-secondary"
-            data-id="shorts-cuero-xl" data-name="Shorts cuero negro (Talle XL)" data-price="18000"
-            data-images="assets/images/IMG_7221.jpeg">Ver producto</button>
-    <button class="add-to-cart-icon" type="button"
-            data-id="shorts-cuero-xl" data-name="Shorts cuero negro (Talle XL)" data-price="18000">+</button>
-    <span class="add-to-cart-label">Añadir al carrito</span>
-  </div>
-
-  <!-- XXL -->
-  <div class="producto-item" data-tipo="short" data-talle="xxl" data-price="18000">
-    <img src="assets/images/IMG_7221.jpeg" alt="Shorts cuero negro (Talle XXL)" width="800" height="1000" loading="lazy" decoding="async">
-    <h3>Shorts cuero negro (Talle XXL)</h3>
-    <p class="price">$18.000</p>
-    <button type="button" class="add-to-cart-btn view-product-btn btn btn-secondary"
-            data-id="shorts-cuero-xxl" data-name="Shorts cuero negro (Talle XXL)" data-price="18000"
-            data-images="assets/images/IMG_7221.jpeg">Ver producto</button>
-    <button class="add-to-cart-icon" type="button"
-            data-id="shorts-cuero-xxl" data-name="Shorts cuero negro (Talle XXL)" data-price="18000">+</button>
-    <span class="add-to-cart-label">Añadir al carrito</span>
-  </div>
-</div>
+    <section class="productos-filtros-bar" role="region" aria-labelledby="filtros-title">
+      <div class="container filters-bar">
+        <div class="filters-bar__header">
+          <h2 id="filtros-title" class="visualmente-hidden">Filtros y orden</h2>
+          <p class="results-count" id="results-count" aria-live="polite">Mostrando toda la colección.</p>
+          <button type="button" id="filters-reset" class="filters-reset" aria-label="Limpiar filtros">Limpiar filtros</button>
+        </div>
+        <div class="filtros-selects" role="group" aria-label="Filtros disponibles">
+          <div class="form-field">
+            <label for="filter-tipo">Tipo de prenda</label>
+            <select id="filter-tipo" name="tipo">
+              <option value="">Todas las prendas</option>
+              <option value="remera">Remeras</option>
+              <option value="denim">Denim</option>
+              <option value="pantalon">Pantalones</option>
+              <option value="short">Shorts / Minis</option>
+              <option value="top">Tops</option>
+              <option value="body">Bodys</option>
+              <option value="set">Conjuntos</option>
+              <option value="abrigo">Abrigos</option>
+              <option value="vestido">Vestidos</option>
+              <option value="accesorio">Accesorios</option>
+            </select>
+          </div>
+          <div class="form-field">
+            <label for="sort-by">Ordenar por</label>
+            <select id="sort-by" name="orden">
+              <option value="relevancia">Relevancia</option>
+              <option value="precio-asc">Precio: menor a mayor</option>
+              <option value="precio-desc">Precio: mayor a menor</option>
+              <option value="nuevos">Novedades</option>
+            </select>
+          </div>
+        </div>
+        <div class="filtros-chips" role="group" aria-label="Filtros rápidos">
+          <button type="button" class="chip-filter" data-chip-sort="nuevos">🔥 Nuevos drops</button>
+          <button type="button" class="chip-filter" data-chip-tipo="denim">Denim favorito</button>
+          <button type="button" class="chip-filter" data-chip-price-max="25000">Menos de $25K</button>
+          <button type="button" class="chip-filter" data-chip-badge="Destacado">Ediciones limitadas</button>
+        </div>
+      </div>
     </section>
 
-    <!-- TOPS -->
-    <section id="tops" class="product-category" role="region" aria-labelledby="title-tops">
-      <h2 id="title-tops" class="category-title">Tops / Blusas</h2>
-      <div class="grid-products">
-  <!-- U -->
-  <div class="producto-item" data-tipo="top" data-talle="u" data-price="12000">
-    <img src="assets/images/IMG_7224.jpeg" alt="Top halter negro (Talle U)" width="800" height="1000" loading="lazy" decoding="async">
-    <h3>Top halter negro (Talle U)</h3>
-    <p class="price">$12.000</p>
-    <button type="button" class="add-to-cart-btn view-product-btn btn btn-secondary"
-            data-id="top-halter-u" data-name="Top halter negro (Talle U)" data-price="12000"
-            data-images="assets/images/IMG_7224.jpeg">Ver producto</button>
-    <button class="add-to-cart-icon" type="button"
-            data-id="top-halter-u" data-name="Top halter negro (Talle U)" data-price="12000">+</button>
-    <span class="add-to-cart-label">Añadir al carrito</span>
-  </div>
+    <div class="productos-main">
+      <section id="remeras" class="product-category" role="region" aria-labelledby="title-remeras">
+        <h2 id="title-remeras" class="category-title">Remeras</h2>
+        <div class="grid-products">
+          <div class="producto-item" data-tipo="remera" data-talle="u" data-price="18500" data-badge="Nuevo">
+            <img src="assets/images/IMG_7221.jpeg" alt="Remera Night Glow" width="800" height="1000" loading="lazy" decoding="async">
+            <h3>Remera Night Glow</h3>
+            <p class="price">$18.500</p>
+            <button type="button" class="add-to-cart-btn view-product-btn btn btn-secondary"
+                    data-id="remera-night-glow" data-name="Remera Night Glow" data-price="18500"
+                    data-images="assets/images/IMG_7221.jpeg">Ver producto</button>
+            <button class="add-to-cart-icon" type="button"
+                    data-id="remera-night-glow" data-name="Remera Night Glow" data-price="18500">+</button>
+            <span class="add-to-cart-label">Añadir al carrito</span>
+          </div>
+          <div class="producto-item" data-tipo="remera" data-talle="u" data-price="19200" data-badge="Destacado">
+            <img src="assets/images/IMG_7222.jpeg" alt="Remera Neon Wave" width="800" height="1000" loading="lazy" decoding="async">
+            <h3>Remera Neon Wave</h3>
+            <p class="price">$19.200</p>
+            <button type="button" class="add-to-cart-btn view-product-btn btn btn-secondary"
+                    data-id="remera-neon-wave" data-name="Remera Neon Wave" data-price="19200"
+                    data-images="assets/images/IMG_7222.jpeg">Ver producto</button>
+            <button class="add-to-cart-icon" type="button"
+                    data-id="remera-neon-wave" data-name="Remera Neon Wave" data-price="19200">+</button>
+            <span class="add-to-cart-label">Añadir al carrito</span>
+          </div>
+          <div class="producto-item" data-tipo="remera" data-talle="u" data-price="20500">
+            <img src="assets/images/IMG_7223.jpeg" alt="Remera After Party" width="800" height="1000" loading="lazy" decoding="async">
+            <h3>Remera After Party</h3>
+            <p class="price">$20.500</p>
+            <button type="button" class="add-to-cart-btn view-product-btn btn btn-secondary"
+                    data-id="remera-after-party" data-name="Remera After Party" data-price="20500"
+                    data-images="assets/images/IMG_7223.jpeg">Ver producto</button>
+            <button class="add-to-cart-icon" type="button"
+                    data-id="remera-after-party" data-name="Remera After Party" data-price="20500">+</button>
+            <span class="add-to-cart-label">Añadir al carrito</span>
+          </div>
+        </div>
+      </section>
 
-  <!-- XS -->
-  <div class="producto-item" data-tipo="top" data-talle="xs" data-price="12000">
-    <img src="assets/images/IMG_7224.jpeg" alt="Top halter negro (Talle XS)" width="800" height="1000" loading="lazy" decoding="async">
-    <h3>Top halter negro (Talle XS)</h3>
-    <p class="price">$12.000</p>
-    <button type="button" class="add-to-cart-btn view-product-btn btn btn-secondary"
-            data-id="top-halter-xs" data-name="Top halter negro (Talle XS)" data-price="12000"
-            data-images="assets/images/IMG_7224.jpeg">Ver producto</button>
-    <button class="add-to-cart-icon" type="button"
-            data-id="top-halter-xs" data-name="Top halter negro (Talle XS)" data-price="12000">+</button>
-    <span class="add-to-cart-label">Añadir al carrito</span>
-  </div>
+      <section id="denim" class="product-category" role="region" aria-labelledby="title-denim">
+        <h2 id="title-denim" class="category-title">Denim (Jeans)</h2>
+        <div class="grid-products">
+          <div class="producto-item" data-tipo="denim" data-talle="u" data-price="52000" data-badge="Destacado">
+            <img src="assets/images/IMG_7231.jpeg" alt="Jean Mom Fit" width="800" height="1000" loading="lazy" decoding="async">
+            <h3>Jean Mom Fit</h3>
+            <p class="price">$52.000</p>
+            <button type="button" class="add-to-cart-btn view-product-btn btn btn-secondary"
+                    data-id="jean-mom-fit" data-name="Jean Mom Fit" data-price="52000"
+                    data-images="assets/images/IMG_7231.jpeg">Ver producto</button>
+            <button class="add-to-cart-icon" type="button"
+                    data-id="jean-mom-fit" data-name="Jean Mom Fit" data-price="52000">+</button>
+            <span class="add-to-cart-label">Añadir al carrito</span>
+          </div>
+        </div>
+      </section>
 
-  <!-- S -->
-  <div class="producto-item" data-tipo="top" data-talle="s" data-price="12000">
-    <img src="assets/images/IMG_7224.jpeg" alt="Top halter negro (Talle S)" width="800" height="1000" loading="lazy" decoding="async">
-    <h3>Top halter negro (Talle S)</h3>
-    <p class="price">$12.000</p>
-    <button type="button" class="add-to-cart-btn view-product-btn btn btn-secondary"
-            data-id="top-halter-s" data-name="Top halter negro (Talle S)" data-price="12000"
-            data-images="assets/images/IMG_7224.jpeg">Ver producto</button>
-    <button class="add-to-cart-icon" type="button"
-            data-id="top-halter-s" data-name="Top halter negro (Talle S)" data-price="12000">+</button>
-    <span class="add-to-cart-label">Añadir al carrito</span>
-  </div>
+      <section id="pantalones" class="product-category" role="region" aria-labelledby="title-pantalones">
+        <h2 id="title-pantalones" class="category-title">Pantalones</h2>
+        <div class="grid-products">
+          <div class="producto-item" data-tipo="pantalon" data-talle="u" data-price="47000" data-badge="Nuevo">
+            <img src="assets/images/IMG_7229.jpeg" alt="Cargo Fucsia" width="800" height="1000" loading="lazy" decoding="async">
+            <h3>Cargo Fucsia</h3>
+            <p class="price">$47.000</p>
+            <button type="button" class="add-to-cart-btn view-product-btn btn btn-secondary"
+                    data-id="cargo-fucsia" data-name="Cargo Fucsia" data-price="47000"
+                    data-images="assets/images/IMG_7229.jpeg">Ver producto</button>
+            <button class="add-to-cart-icon" type="button"
+                    data-id="cargo-fucsia" data-name="Cargo Fucsia" data-price="47000">+</button>
+            <span class="add-to-cart-label">Añadir al carrito</span>
+          </div>
+        </div>
+      </section>
 
-  <!-- M -->
-  <div class="producto-item" data-tipo="top" data-talle="m" data-price="12000">
-    <img src="assets/images/IMG_7224.jpeg" alt="Top halter negro (Talle M)" width="800" height="1000" loading="lazy" decoding="async">
-    <h3>Top halter negro (Talle M)</h3>
-    <p class="price">$12.000</p>
-    <button type="button" class="add-to-cart-btn view-product-btn btn btn-secondary"
-            data-id="top-halter-m" data-name="Top halter negro (Talle M)" data-price="12000"
-            data-images="assets/images/IMG_7224.jpeg">Ver producto</button>
-    <button class="add-to-cart-icon" type="button"
-            data-id="top-halter-m" data-name="Top halter negro (Talle M)" data-price="12000">+</button>
-    <span class="add-to-cart-label">Añadir al carrito</span>
-  </div>
+      <section id="shorts" class="product-category" role="region" aria-labelledby="title-shorts">
+        <h2 id="title-shorts" class="category-title">Shorts / Minis</h2>
+        <div class="grid-products">
+          <div class="producto-item" data-tipo="short" data-talle="u" data-price="22000" data-badge="Nuevo">
+            <img src="assets/images/IMG_7230.jpeg" alt="Mini Skort Satin" width="800" height="1000" loading="lazy" decoding="async">
+            <h3>Mini Skort Satin</h3>
+            <p class="price">$22.000</p>
+            <button type="button" class="add-to-cart-btn view-product-btn btn btn-secondary"
+                    data-id="skort-satin" data-name="Mini Skort Satin" data-price="22000"
+                    data-images="assets/images/IMG_7230.jpeg">Ver producto</button>
+            <button class="add-to-cart-icon" type="button"
+                    data-id="skort-satin" data-name="Mini Skort Satin" data-price="22000">+</button>
+            <span class="add-to-cart-label">Añadir al carrito</span>
+          </div>
+        </div>
+      </section>
 
-  <!-- L -->
-  <div class="producto-item" data-tipo="top" data-talle="l" data-price="12000">
-    <img src="assets/images/IMG_7224.jpeg" alt="Top halter negro (Talle L)" width="800" height="1000" loading="lazy" decoding="async">
-    <h3>Top halter negro (Talle L)</h3>
-    <p class="price">$12.000</p>
-    <button type="button" class="add-to-cart-btn view-product-btn btn btn-secondary"
-            data-id="top-halter-l" data-name="Top halter negro (Talle L)" data-price="12000"
-            data-images="assets/images/IMG_7224.jpeg">Ver producto</button>
-    <button class="add-to-cart-icon" type="button"
-            data-id="top-halter-l" data-name="Top halter negro (Talle L)" data-price="12000">+</button>
-    <span class="add-to-cart-label">Añadir al carrito</span>
-  </div>
+      <section id="tops" class="product-category" role="region" aria-labelledby="title-tops">
+        <h2 id="title-tops" class="category-title">Tops</h2>
+        <div class="grid-products">
+          <div class="producto-item" data-tipo="top" data-talle="u" data-price="16000" data-badge="Destacado">
+            <img src="assets/images/IMG_7224.jpeg" alt="Top Halter Black" width="800" height="1000" loading="lazy" decoding="async">
+            <h3>Top Halter Black</h3>
+            <p class="price">$16.000</p>
+            <button type="button" class="add-to-cart-btn view-product-btn btn btn-secondary"
+                    data-id="top-halter-black" data-name="Top Halter Black" data-price="16000"
+                    data-images="assets/images/IMG_7224.jpeg">Ver producto</button>
+            <button class="add-to-cart-icon" type="button"
+                    data-id="top-halter-black" data-name="Top Halter Black" data-price="16000">+</button>
+            <span class="add-to-cart-label">Añadir al carrito</span>
+          </div>
+        </div>
+      </section>
 
-  <!-- XL -->
-  <div class="producto-item" data-tipo="top" data-talle="xl" data-price="12000">
-    <img src="assets/images/IMG_7224.jpeg" alt="Top halter negro (Talle XL)" width="800" height="1000" loading="lazy" decoding="async">
-    <h3>Top halter negro (Talle XL)</h3>
-    <p class="price">$12.000</p>
-    <button type="button" class="add-to-cart-btn view-product-btn btn btn-secondary"
-            data-id="top-halter-xl" data-name="Top halter negro (Talle XL)" data-price="12000"
-            data-images="assets/images/IMG_7224.jpeg">Ver producto</button>
-    <button class="add-to-cart-icon" type="button"
-            data-id="top-halter-xl" data-name="Top halter negro (Talle XL)" data-price="12000">+</button>
-    <span class="add-to-cart-label">Añadir al carrito</span>
-  </div>
+      <section id="bodys" class="product-category" role="region" aria-labelledby="title-bodys">
+        <h2 id="title-bodys" class="category-title">Bodys</h2>
+        <div class="grid-products">
+          <div class="producto-item" data-tipo="body" data-talle="u" data-price="23000" data-badge="Nuevo">
+            <img src="assets/images/IMG_7226.jpeg" alt="Body Lace Midnight" width="800" height="1000" loading="lazy" decoding="async">
+            <h3>Body Lace Midnight</h3>
+            <p class="price">$23.000</p>
+            <button type="button" class="add-to-cart-btn view-product-btn btn btn-secondary"
+                    data-id="body-lace-midnight" data-name="Body Lace Midnight" data-price="23000"
+                    data-images="assets/images/IMG_7226.jpeg">Ver producto</button>
+            <button class="add-to-cart-icon" type="button"
+                    data-id="body-lace-midnight" data-name="Body Lace Midnight" data-price="23000">+</button>
+            <span class="add-to-cart-label">Añadir al carrito</span>
+          </div>
+        </div>
+      </section>
 
-  <!-- XXL -->
-  <div class="producto-item" data-tipo="top" data-talle="xxl" data-price="12000">
-    <img src="assets/images/IMG_7224.jpeg" alt="Top halter negro (Talle XXL)" width="800" height="1000" loading="lazy" decoding="async">
-    <h3>Top halter negro (Talle XXL)</h3>
-    <p class="price">$12.000</p>
-    <button type="button" class="add-to-cart-btn view-product-btn btn btn-secondary"
-            data-id="top-halter-xxl" data-name="Top halter negro (Talle XXL)" data-price="12000"
-            data-images="assets/images/IMG_7224.jpeg">Ver producto</button>
-    <button class="add-to-cart-icon" type="button"
-            data-id="top-halter-xxl" data-name="Top halter negro (Talle XXL)" data-price="12000">+</button>
-    <span class="add-to-cart-label">Añadir al carrito</span>
-  </div>
-</div>
-    </section>
+      <section id="sets" class="product-category" role="region" aria-labelledby="title-sets">
+        <h2 id="title-sets" class="category-title">Conjuntos (Sets)</h2>
+        <div class="grid-products">
+          <div class="producto-item" data-tipo="set" data-talle="u" data-price="39000" data-badge="Destacado">
+            <img src="assets/images/IMG_7228.jpeg" alt="Set Velvet Night" width="800" height="1000" loading="lazy" decoding="async">
+            <h3>Set Velvet Night</h3>
+            <p class="price">$39.000</p>
+            <button type="button" class="add-to-cart-btn view-product-btn btn btn-secondary"
+                    data-id="set-velvet-night" data-name="Set Velvet Night" data-price="39000"
+                    data-images="assets/images/IMG_7228.jpeg">Ver producto</button>
+            <button class="add-to-cart-icon" type="button"
+                    data-id="set-velvet-night" data-name="Set Velvet Night" data-price="39000">+</button>
+            <span class="add-to-cart-label">Añadir al carrito</span>
+          </div>
+        </div>
+      </section>
 
-  
+      <section id="abrigos" class="product-category" role="region" aria-labelledby="title-abrigos">
+        <h2 id="title-abrigos" class="category-title">Abrigos</h2>
+        <div class="grid-products">
+          <div class="producto-item" data-tipo="abrigo" data-talle="u" data-price="65000" data-badge="Nuevo">
+            <img src="assets/images/IMG_7227.jpeg" alt="Buzo Oversize Cherry" width="800" height="1000" loading="lazy" decoding="async">
+            <h3>Buzo Oversize Cherry</h3>
+            <p class="price">$65.000</p>
+            <button type="button" class="add-to-cart-btn view-product-btn btn btn-secondary"
+                    data-id="buzo-oversize-cherry" data-name="Buzo Oversize Cherry" data-price="65000"
+                    data-images="assets/images/IMG_7227.jpeg">Ver producto</button>
+            <button class="add-to-cart-icon" type="button"
+                    data-id="buzo-oversize-cherry" data-name="Buzo Oversize Cherry" data-price="65000">+</button>
+            <span class="add-to-cart-label">Añadir al carrito</span>
+          </div>
+        </div>
+      </section>
 
-    <!-- BODYS -->
-    <section id="bodys" class="product-category" role="region" aria-labelledby="title-bodys">
-      <h2 id="title-bodys" class="category-title">Bodys</h2>
-     <div class="grid-products">
-  <!-- U -->
-  <div class="producto-item" data-tipo="body" data-talle="u" data-price="14000">
-    <img src="assets/images/IMG_7226.jpeg" alt="Body encaje negro (Talle U)" width="800" height="1000" loading="lazy" decoding="async">
-    <h3>Body encaje negro (Talle U)</h3>
-    <p class="price">$14.000</p>
-    <button type="button" class="add-to-cart-btn view-product-btn btn btn-secondary"
-            data-id="body-encaje-u" data-name="Body encaje negro (Talle U)" data-price="14000"
-            data-images="assets/images/IMG_7226.jpeg">Ver producto</button>
-    <button class="add-to-cart-icon" type="button"
-            data-id="body-encaje-u" data-name="Body encaje negro (Talle U)" data-price="14000">+</button>
-    <span class="add-to-cart-label">Añadir al carrito</span>
-  </div>
+      <section id="vestidos" class="product-category" role="region" aria-labelledby="title-vestidos">
+        <h2 id="title-vestidos" class="category-title">Vestidos</h2>
+        <div class="grid-products">
+          <div class="producto-item" data-tipo="vestido" data-talle="u" data-price="45000" data-destacado="true" data-badge="Destacado">
+            <img src="assets/images/IMG_7232.jpeg" alt="Vestido Midnight Spark" width="800" height="1000" loading="lazy" decoding="async">
+            <h3>Vestido Midnight Spark</h3>
+            <p class="price">$45.000</p>
+            <button type="button" class="add-to-cart-btn view-product-btn btn btn-secondary"
+                    data-id="vestido-midnight" data-name="Vestido Midnight Spark" data-price="45000"
+                    data-images="assets/images/IMG_7232.jpeg">Ver producto</button>
+            <button class="add-to-cart-icon" type="button"
+                    data-id="vestido-midnight" data-name="Vestido Midnight Spark" data-price="45000">+</button>
+            <span class="add-to-cart-label">Añadir al carrito</span>
+          </div>
+        </div>
+      </section>
 
-  <!-- XS -->
-  <div class="producto-item" data-tipo="body" data-talle="xs" data-price="14000">
-    <img src="assets/images/IMG_7226.jpeg" alt="Body encaje negro (Talle XS)" width="800" height="1000" loading="lazy" decoding="async">
-    <h3>Body encaje negro (Talle XS)</h3>
-    <p class="price">$14.000</p>
-    <button type="button" class="add-to-cart-btn view-product-btn btn btn-secondary"
-            data-id="body-encaje-xs" data-name="Body encaje negro (Talle XS)" data-price="14000"
-            data-images="assets/images/IMG_7226.jpeg">Ver producto</button>
-    <button class="add-to-cart-icon" type="button"
-            data-id="body-encaje-xs" data-name="Body encaje negro (Talle XS)" data-price="14000">+</button>
-    <span class="add-to-cart-label">Añadir al carrito</span>
-  </div>
-
-  <!-- S -->
-  <div class="producto-item" data-tipo="body" data-talle="s" data-price="14000">
-    <img src="assets/images/IMG_7226.jpeg" alt="Body encaje negro (Talle S)" width="800" height="1000" loading="lazy" decoding="async">
-    <h3>Body encaje negro (Talle S)</h3>
-    <p class="price">$14.000</p>
-    <button type="button" class="add-to-cart-btn view-product-btn btn btn-secondary"
-            data-id="body-encaje-s" data-name="Body encaje negro (Talle S)" data-price="14000"
-            data-images="assets/images/IMG_7226.jpeg">Ver producto</button>
-    <button class="add-to-cart-icon" type="button"
-            data-id="body-encaje-s" data-name="Body encaje negro (Talle S)" data-price="14000">+</button>
-    <span class="add-to-cart-label">Añadir al carrito</span>
-  </div>
-
-  <!-- M -->
-  <div class="producto-item" data-tipo="body" data-talle="m" data-price="14000">
-    <img src="assets/images/IMG_7226.jpeg" alt="Body encaje negro (Talle M)" width="800" height="1000" loading="lazy" decoding="async">
-    <h3>Body encaje negro (Talle M)</h3>
-    <p class="price">$14.000</p>
-    <button type="button" class="add-to-cart-btn view-product-btn btn btn-secondary"
-            data-id="body-encaje-m" data-name="Body encaje negro (Talle M)" data-price="14000"
-            data-images="assets/images/IMG_7226.jpeg">Ver producto</button>
-    <button class="add-to-cart-icon" type="button"
-            data-id="body-encaje-m" data-name="Body encaje negro (Talle M)" data-price="14000">+</button>
-    <span class="add-to-cart-label">Añadir al carrito</span>
-  </div>
-
-  <!-- L -->
-  <div class="producto-item" data-tipo="body" data-talle="l" data-price="14000">
-    <img src="assets/images/IMG_7226.jpeg" alt="Body encaje negro (Talle L)" width="800" height="1000" loading="lazy" decoding="async">
-    <h3>Body encaje negro (Talle L)</h3>
-    <p class="price">$14.000</p>
-    <button type="button" class="add-to-cart-btn view-product-btn btn btn-secondary"
-            data-id="body-encaje-l" data-name="Body encaje negro (Talle L)" data-price="14000"
-            data-images="assets/images/IMG_7226.jpeg">Ver producto</button>
-    <button class="add-to-cart-icon" type="button"
-            data-id="body-encaje-l" data-name="Body encaje negro (Talle L)" data-price="14000">+</button>
-    <span class="add-to-cart-label">Añadir al carrito</span>
-  </div>
-
-  <!-- XL -->
-  <div class="producto-item" data-tipo="body" data-talle="xl" data-price="14000">
-    <img src="assets/images/IMG_7226.jpeg" alt="Body encaje negro (Talle XL)" width="800" height="1000" loading="lazy" decoding="async">
-    <h3>Body encaje negro (Talle XL)</h3>
-    <p class="price">$14.000</p>
-    <button type="button" class="add-to-cart-btn view-product-btn btn btn-secondary"
-            data-id="body-encaje-xl" data-name="Body encaje negro (Talle XL)" data-price="14000"
-            data-images="assets/images/IMG_7226.jpeg">Ver producto</button>
-    <button class="add-to-cart-icon" type="button"
-            data-id="body-encaje-xl" data-name="Body encaje negro (Talle XL)" data-price="14000">+</button>
-    <span class="add-to-cart-label">Añadir al carrito</span>
-  </div>
-
-  <!-- XXL -->
-  <div class="producto-item" data-tipo="body" data-talle="xxl" data-price="14000">
-    <img src="assets/images/IMG_7226.jpeg" alt="Body encaje negro (Talle XXL)" width="800" height="1000" loading="lazy" decoding="async">
-    <h3>Body encaje negro (Talle XXL)</h3>
-    <p class="price">$14.000</p>
-    <button type="button" class="add-to-cart-btn view-product-btn btn btn-secondary"
-            data-id="body-encaje-xxl" data-name="Body encaje negro (Talle XXL)" data-price="14000"
-            data-images="assets/images/IMG_7226.jpeg">Ver producto</button>
-    <button class="add-to-cart-icon" type="button"
-            data-id="body-encaje-xxl" data-name="Body encaje negro (Talle XXL)" data-price="14000">+</button>
-    <span class="add-to-cart-label">Añadir al carrito</span>
-  </div>
-</div>
-    </section>
-
-
-    <!-- CONJUNTOS / SETS (nuevo) -->
-    <section id="sets" class="product-category" role="region" aria-labelledby="title-sets">
-      <h2 id="title-sets" class="category-title">Conjuntos (Sets)</h2>
-      <div class="grid-products" role="list"></div>
-    <div class="grid-products">
-  <!-- U -->
-  <div class="producto-item" data-tipo="set" data-talle="u" data-price="39000">
-    <img src="assets/images/IMG_7229.jpeg" alt="Conjunto Urban (Talle U)" width="800" height="1000" loading="lazy" decoding="async">
-    <h3>Conjunto Urban (Talle U)</h3>
-    <p class="price">$39.000</p>
-    <button type="button" class="add-to-cart-btn view-product-btn btn btn-secondary"
-            data-id="set-urban-u" data-name="Conjunto Urban (Talle U)" data-price="39000"
-            data-images="assets/images/IMG_7229.jpeg">Ver producto</button>
-    <div class="add-to-cart-wrapper">
-      <button class="add-to-cart-icon" type="button"
-              data-id="set-urban-u" data-name="Conjunto Urban (Talle U)" data-price="39000">+</button>
-      <span class="add-to-cart-label">Añadir al carrito</span>
+      <section id="accesorios" class="product-category" role="region" aria-labelledby="title-accesorios">
+        <h2 id="title-accesorios" class="category-title">Accesorios</h2>
+        <div class="grid-products">
+          <div class="producto-item" data-tipo="accesorio" data-talle="u" data-price="12000" data-badge="Nuevo">
+            <img src="assets/images/IMG_7238.PNG" alt="Clutch Mirror" width="800" height="1000" loading="lazy" decoding="async">
+            <h3>Clutch Mirror</h3>
+            <p class="price">$12.000</p>
+            <button type="button" class="add-to-cart-btn view-product-btn btn btn-secondary"
+                    data-id="clutch-mirror" data-name="Clutch Mirror" data-price="12000"
+                    data-images="assets/images/IMG_7238.PNG">Ver producto</button>
+            <button class="add-to-cart-icon" type="button"
+                    data-id="clutch-mirror" data-name="Clutch Mirror" data-price="12000">+</button>
+            <span class="add-to-cart-label">Añadir al carrito</span>
+          </div>
+        </div>
+      </section>
     </div>
-  </div>
-
-  <!-- XS -->
-  <div class="producto-item" data-tipo="set" data-talle="xs" data-price="39000">
-    <img src="assets/images/IMG_7229.jpeg" alt="Conjunto Urban (Talle XS)" width="800" height="1000" loading="lazy" decoding="async">
-    <h3>Conjunto Urban (Talle XS)</h3>
-    <p class="price">$39.000</p>
-    <button type="button" class="add-to-cart-btn view-product-btn btn btn-secondary"
-            data-id="set-urban-xs" data-name="Conjunto Urban (Talle XS)" data-price="39000"
-            data-images="assets/images/IMG_7229.jpeg">Ver producto</button>
-    <div class="add-to-cart-wrapper">
-      <button class="add-to-cart-icon" type="button"
-              data-id="set-urban-xs" data-name="Conjunto Urban (Talle XS)" data-price="39000">+</button>
-      <span class="add-to-cart-label">Añadir al carrito</span>
-    </div>
-  </div>
-
-  <!-- S -->
-  <div class="producto-item" data-tipo="set" data-talle="s" data-price="39000">
-    <img src="assets/images/IMG_7229.jpeg" alt="Conjunto Urban (Talle S)" width="800" height="1000" loading="lazy" decoding="async">
-    <h3>Conjunto Urban (Talle S)</h3>
-    <p class="price">$39.000</p>
-    <button type="button" class="add-to-cart-btn view-product-btn btn btn-secondary"
-            data-id="set-urban-s" data-name="Conjunto Urban (Talle S)" data-price="39000"
-            data-images="assets/images/IMG_7229.jpeg">Ver producto</button>
-    <div class="add-to-cart-wrapper">
-      <button class="add-to-cart-icon" type="button"
-              data-id="set-urban-s" data-name="Conjunto Urban (Talle S)" data-price="39000">+</button>
-      <span class="add-to-cart-label">Añadir al carrito</span>
-    </div>
-  </div>
-
-  <!-- M -->
-  <div class="producto-item" data-tipo="set" data-talle="m" data-price="39000">
-    <img src="assets/images/IMG_7229.jpeg" alt="Conjunto Urban (Talle M)" width="800" height="1000" loading="lazy" decoding="async">
-    <h3>Conjunto Urban (Talle M)</h3>
-    <p class="price">$39.000</p>
-    <button type="button" class="add-to-cart-btn view-product-btn btn btn-secondary"
-            data-id="set-urban-m" data-name="Conjunto Urban (Talle M)" data-price="39000"
-            data-images="assets/images/IMG_7229.jpeg">Ver producto</button>
-    <div class="add-to-cart-wrapper">
-      <button class="add-to-cart-icon" type="button"
-              data-id="set-urban-m" data-name="Conjunto Urban (Talle M)" data-price="39000">+</button>
-      <span class="add-to-cart-label">Añadir al carrito</span>
-    </div>
-  </div>
-
-  <!-- L -->
-  <div class="producto-item" data-tipo="set" data-talle="l" data-price="39000">
-    <img src="assets/images/IMG_7229.jpeg" alt="Conjunto Urban (Talle L)" width="800" height="1000" loading="lazy" decoding="async">
-    <h3>Conjunto Urban (Talle L)</h3>
-    <p class="price">$39.000</p>
-    <button type="button" class="add-to-cart-btn view-product-btn btn btn-secondary"
-            data-id="set-urban-l" data-name="Conjunto Urban (Talle L)" data-price="39000"
-            data-images="assets/images/IMG_7229.jpeg">Ver producto</button>
-    <div class="add-to-cart-wrapper">
-      <button class="add-to-cart-icon" type="button"
-              data-id="set-urban-l" data-name="Conjunto Urban (Talle L)" data-price="39000">+</button>
-      <span class="add-to-cart-label">Añadir al carrito</span>
-    </div>
-  </div>
-
-  <!-- XL -->
-  <div class="producto-item" data-tipo="set" data-talle="xl" data-price="39000">
-    <img src="assets/images/IMG_7229.jpeg" alt="Conjunto Urban (Talle XL)" width="800" height="1000" loading="lazy" decoding="async">
-    <h3>Conjunto Urban (Talle XL)</h3>
-    <p class="price">$39.000</p>
-    <button type="button" class="add-to-cart-btn view-product-btn btn btn-secondary"
-            data-id="set-urban-xl" data-name="Conjunto Urban (Talle XL)" data-price="39000"
-            data-images="assets/images/IMG_7229.jpeg">Ver producto</button>
-    <div class="add-to-cart-wrapper">
-      <button class="add-to-cart-icon" type="button"
-              data-id="set-urban-xl" data-name="Conjunto Urban (Talle XL)" data-price="39000">+</button>
-      <span class="add-to-cart-label">Añadir al carrito</span>
-    </div>
-  </div>
-
-  <!-- XXL -->
-  <div class="producto-item" data-tipo="set" data-talle="xxl" data-price="39000">
-    <img src="assets/images/IMG_7229.jpeg" alt="Conjunto Urban (Talle XXL)" width="800" height="1000" loading="lazy" decoding="async">
-    <h3>Conjunto Urban (Talle XXL)</h3>
-    <p class="price">$39.000</p>
-    <button type="button" class="add-to-cart-btn view-product-btn btn btn-secondary"
-            data-id="set-urban-xxl" data-name="Conjunto Urban (Talle XXL)" data-price="39000"
-            data-images="assets/images/IMG_7229.jpeg">Ver producto</button>
-    <div class="add-to-cart-wrapper">
-      <button class="add-to-cart-icon" type="button"
-              data-id="set-urban-xxl" data-name="Conjunto Urban (Talle XXL)" data-price="39000">+</button>
-      <span class="add-to-cart-label">Añadir al carrito</span>
-    </div>
-  </div>
-</div>
-    </section>
-
-    <!-- ABRIGOS (placeholder) -->
-    <section id="abrigos" class="product-category" role="region" aria-labelledby="title-abrigos">
-      <h2 id="title-abrigos" class="category-title">Abrigos</h2>
-      <div class="grid-products" role="list"></div>
-      <div class="grid-products">
-  <!-- U -->
-  <div class="producto-item" data-tipo="abrigo" data-talle="u" data-price="65000">
-    <img src="assets/images/BuzoOver.png" alt="Abrigo Parka (Talle U)" width="800" height="1000" loading="lazy" decoding="async">
-    <h3>Abrigo Parka (Talle U)</h3>
-    <p class="price">$65.000</p>
-    <button type="button" class="add-to-cart-btn view-product-btn btn btn-secondary"
-            data-id="abrigo-parka-u" data-name="Abrigo Parka (Talle U)" data-price="65000"
-            data-images="assets/images/BuzoOver.png">Ver producto</button>
-    <div class="add-to-cart-wrapper">
-      <button class="add-to-cart-icon" type="button"
-              data-id="abrigo-parka-u" data-name="Abrigo Parka (Talle U)" data-price="65000">+</button>
-      <span class="add-to-cart-label">Añadir al carrito</span>
-    </div>
-  </div>
-
-  <!-- XS -->
-  <div class="producto-item" data-tipo="abrigo" data-talle="xs" data-price="65000">
-    <img src="assets/images/BuzoOver.png" alt="Abrigo Parka (Talle XS)" width="800" height="1000" loading="lazy" decoding="async">
-    <h3>Abrigo Parka (Talle XS)</h3>
-    <p class="price">$65.000</p>
-    <button type="button" class="add-to-cart-btn view-product-btn btn btn-secondary"
-            data-id="abrigo-parka-xs" data-name="Abrigo Parka (Talle XS)" data-price="65000"
-            data-images="assets/images/BuzoOver.png">Ver producto</button>
-    <div class="add-to-cart-wrapper">
-      <button class="add-to-cart-icon" type="button"
-              data-id="abrigo-parka-xs" data-name="Abrigo Parka (Talle XS)" data-price="65000">+</button>
-      <span class="add-to-cart-label">Añadir al carrito</span>
-    </div>
-  </div>
-
-  <!-- S -->
-  <div class="producto-item" data-tipo="abrigo" data-talle="s" data-price="65000">
-    <img src="assets/images/BuzoOver.png" alt="Abrigo Parka (Talle S)" width="800" height="1000" loading="lazy" decoding="async">
-    <h3>Abrigo Parka (Talle S)</h3>
-    <p class="price">$65.000</p>
-    <button type="button" class="add-to-cart-btn view-product-btn btn btn-secondary"
-            data-id="abrigo-parka-s" data-name="Abrigo Parka (Talle S)" data-price="65000"
-            data-images="assets/images/BuzoOver.png">Ver producto</button>
-    <div class="add-to-cart-wrapper">
-      <button class="add-to-cart-icon" type="button"
-              data-id="abrigo-parka-s" data-name="Abrigo Parka (Talle S)" data-price="65000">+</button>
-      <span class="add-to-cart-label">Añadir al carrito</span>
-    </div>
-  </div>
-
-  <!-- M -->
-  <div class="producto-item" data-tipo="abrigo" data-talle="m" data-price="65000">
-    <img src="assets/images/BuzoOver.png" alt="Abrigo Parka (Talle M)" width="800" height="1000" loading="lazy" decoding="async">
-    <h3>Abrigo Parka (Talle M)</h3>
-    <p class="price">$65.000</p>
-    <button type="button" class="add-to-cart-btn view-product-btn btn btn-secondary"
-            data-id="abrigo-parka-m" data-name="Abrigo Parka (Talle M)" data-price="65000"
-            data-images="assets/images/BuzoOver.png">Ver producto</button>
-    <div class="add-to-cart-wrapper">
-      <button class="add-to-cart-icon" type="button"
-              data-id="abrigo-parka-m" data-name="Abrigo Parka (Talle M)" data-price="65000">+</button>
-      <span class="add-to-cart-label">Añadir al carrito</span>
-    </div>
-  </div>
-
-  <!-- L -->
-  <div class="producto-item" data-tipo="abrigo" data-talle="l" data-price="65000">
-    <img src="assets/images/BuzoOver.png" alt="Abrigo Parka (Talle L)" width="800" height="1000" loading="lazy" decoding="async">
-    <h3>Abrigo Parka (Talle L)</h3>
-    <p class="price">$65.000</p>
-    <button type="button" class="add-to-cart-btn view-product-btn btn btn-secondary"
-            data-id="abrigo-parka-l" data-name="Abrigo Parka (Talle L)" data-price="65000"
-            data-images="assets/images/BuzoOver.png">Ver producto</button>
-    <div class="add-to-cart-wrapper">
-      <button class="add-to-cart-icon" type="button"
-              data-id="abrigo-parka-l" data-name="Abrigo Parka (Talle L)" data-price="65000">+</button>
-      <span class="add-to-cart-label">Añadir al carrito</span>
-    </div>
-  </div>
-
-  <!-- XL -->
-  <div class="producto-item" data-tipo="abrigo" data-talle="xl" data-price="65000">
-    <img src="assets/images/BuzoOver.png" alt="Abrigo Parka (Talle XL)" width="800" height="1000" loading="lazy" decoding="async">
-    <h3>Abrigo Parka (Talle XL)</h3>
-    <p class="price">$65.000</p>
-    <button type="button" class="add-to-cart-btn view-product-btn btn btn-secondary"
-            data-id="abrigo-parka-xl" data-name="Abrigo Parka (Talle XL)" data-price="65000"
-            data-images="assets/images/BuzoOver.png">Ver producto</button>
-    <div class="add-to-cart-wrapper">
-      <button class="add-to-cart-icon" type="button"
-              data-id="abrigo-parka-xl" data-name="Abrigo Parka (Talle XL)" data-price="65000">+</button>
-      <span class="add-to-cart-label">Añadir al carrito</span>
-    </div>
-  </div>
-
-  <!-- XXL -->
-  <div class="producto-item" data-tipo="abrigo" data-talle="xxl" data-price="65000">
-    <img src="assets/images/BuzoOver.png" alt="Abrigo Parka (Talle XXL)" width="800" height="1000" loading="lazy" decoding="async">
-    <h3>Abrigo Parka (Talle XXL)</h3>
-    <p class="price">$65.000</p>
-    <button type="button" class="add-to-cart-btn view-product-btn btn btn-secondary"
-            data-id="abrigo-parka-xxl" data-name="Abrigo Parka (Talle XXL)" data-price="65000"
-            data-images="assets/images/BuzoOver.png">Ver producto</button>
-    <div class="add-to-cart-wrapper">
-      <button class="add-to-cart-icon" type="button"
-              data-id="abrigo-parka-xxl" data-name="Abrigo Parka (Talle XXL)" data-price="65000">+</button>
-      <span class="add-to-cart-label">Añadir al carrito</span>
-    </div>
-  </div>
-</div>
-    </section>
-
-    <!-- VESTIDOS Y MONOS (placeholder) -->
-    <section id="vestidos" class="product-category" role="region" aria-labelledby="title-vestidos">
-      <h2 id="title-vestidos" class="category-title">Vestidos y Monos</h2>
-      <div class="grid-products" role="list"></div>
-   <div class="grid-products">
-  <!-- U -->
-  <div class="producto-item" data-tipo="vestido" data-talle="u" data-price="45000">
-    <img src="assets/images/IMG_7236.jpeg" alt="Vestido Summer (Talle U)" width="800" height="1000" loading="lazy" decoding="async">
-    <h3>Vestido Summer (Talle U)</h3>
-    <p class="price">$45.000</p>
-    <button type="button" class="add-to-cart-btn view-product-btn btn btn-secondary"
-            data-id="vestido-summer-u" data-name="Vestido Summer (Talle U)" data-price="45000"
-            data-images="assets/images/IMG_7236.jpeg">Ver producto</button>
-    <div class="add-to-cart-wrapper">
-      <button class="add-to-cart-icon" type="button"
-              data-id="vestido-summer-u" data-name="Vestido Summer (Talle U)" data-price="45000">+</button>
-      <span class="add-to-cart-label">Añadir al carrito</span>
-    </div>
-  </div>
-
-  <!-- XS -->
-  <div class="producto-item" data-tipo="vestido" data-talle="xs" data-price="45000">
-    <img src="assets/images/IMG_7236.jpeg" alt="Vestido Summer (Talle XS)" width="800" height="1000" loading="lazy" decoding="async">
-    <h3>Vestido Summer (Talle XS)</h3>
-    <p class="price">$45.000</p>
-    <button type="button" class="add-to-cart-btn view-product-btn btn btn-secondary"
-            data-id="vestido-summer-xs" data-name="Vestido Summer (Talle XS)" data-price="45000"
-            data-images="assets/images/IMG_7236.jpeg">Ver producto</button>
-    <div class="add-to-cart-wrapper">
-      <button class="add-to-cart-icon" type="button"
-              data-id="vestido-summer-xs" data-name="Vestido Summer (Talle XS)" data-price="45000">+</button>
-      <span class="add-to-cart-label">Añadir al carrito</span>
-    </div>
-  </div>
-
-  <!-- S -->
-  <div class="producto-item" data-tipo="vestido" data-talle="s" data-price="45000">
-    <img src="assets/images/IMG_7236.jpeg" alt="Vestido Summer (Talle S)" width="800" height="1000" loading="lazy" decoding="async">
-    <h3>Vestido Summer (Talle S)</h3>
-    <p class="price">$45.000</p>
-    <button type="button" class="add-to-cart-btn view-product-btn btn btn-secondary"
-            data-id="vestido-summer-s" data-name="Vestido Summer (Talle S)" data-price="45000"
-            data-images="assets/images/IMG_7236.jpeg">Ver producto</button>
-    <div class="add-to-cart-wrapper">
-      <button class="add-to-cart-icon" type="button"
-              data-id="vestido-summer-s" data-name="Vestido Summer (Talle S)" data-price="45000">+</button>
-      <span class="add-to-cart-label">Añadir al carrito</span>
-    </div>
-  </div>
-
-  <!-- M -->
-  <div class="producto-item" data-tipo="vestido" data-talle="m" data-price="45000">
-    <img src="assets/images/IMG_7236.jpeg" alt="Vestido Summer (Talle M)" width="800" height="1000" loading="lazy" decoding="async">
-    <h3>Vestido Summer (Talle M)</h3>
-    <p class="price">$45.000</p>
-    <button type="button" class="add-to-cart-btn view-product-btn btn btn-secondary"
-            data-id="vestido-summer-m" data-name="Vestido Summer (Talle M)" data-price="45000"
-            data-images="assets/images/IMG_7236.jpeg">Ver producto</button>
-    <div class="add-to-cart-wrapper">
-      <button class="add-to-cart-icon" type="button"
-              data-id="vestido-summer-m" data-name="Vestido Summer (Talle M)" data-price="45000">+</button>
-      <span class="add-to-cart-label">Añadir al carrito</span>
-    </div>
-  </div>
-
-  <!-- L -->
-  <div class="producto-item" data-tipo="vestido" data-talle="l" data-price="45000">
-    <img src="assets/images/IMG_7236.jpeg" alt="Vestido Summer (Talle L)" width="800" height="1000" loading="lazy" decoding="async">
-    <h3>Vestido Summer (Talle L)</h3>
-    <p class="price">$45.000</p>
-    <button type="button" class="add-to-cart-btn view-product-btn btn btn-secondary"
-            data-id="vestido-summer-l" data-name="Vestido Summer (Talle L)" data-price="45000"
-            data-images="assets/images/IMG_7236.jpeg">Ver producto</button>
-    <div class="add-to-cart-wrapper">
-      <button class="add-to-cart-icon" type="button"
-              data-id="vestido-summer-l" data-name="Vestido Summer (Talle L)" data-price="45000">+</button>
-      <span class="add-to-cart-label">Añadir al carrito</span>
-    </div>
-  </div>
-     <!-- XL -->
-  <div class="producto-item" data-tipo="vestido" data-talle="xl" data-price="45000">
-    <img src="assets/images/IMG_7236.jpeg" alt="Vestido Summer (Talle XL)" width="800" height="1000" loading="lazy" decoding="async">
-    <h3>Vestido Summer (Talle XL)</h3>
-    <p class="price">$45.000</p>
-    <button type="button" class="add-to-cart-btn view-product-btn btn btn-secondary"
-            data-id="vestido-summer-xl" data-name="Vestido Summer (Talle XL)" data-price="45000"
-            data-images="assets/images/IMG_7236.jpeg">Ver producto</button>
-    <div class="add-to-cart-wrapper">
-      <button class="add-to-cart-icon" type="button"
-              data-id="vestido-summer-xl" data-name="Vestido Summer (Talle XL)" data-price="45000">+</button>
-      <span class="add-to-cart-label">Añadir al carrito</span>
-    </div>
-  </div>
-
-  <!-- XXL -->
-  <div class="producto-item" data-tipo="vestido" data-talle="xxl" data-price="45000">
-    <img src="assets/images/IMG_7236.jpeg" alt="Vestido Summer (Talle XXL)" width="800" height="1000" loading="lazy" decoding="async">
-    <h3>Vestido Summer (Talle XXL)</h3>
-    <p class="price">$45.000</p>
-    <button type="button" class="add-to-cart-btn view-product-btn btn btn-secondary"
-            data-id="vestido-summer-xxl" data-name="Vestido Summer (Talle XXL)" data-price="45000"
-            data-images="assets/images/IMG_7236.jpeg">Ver producto</button>
-    <div class="add-to-cart-wrapper">
-      <button class="add-to-cart-icon" type="button"
-              data-id="vestido-summer-xxl" data-name="Vestido Summer (Talle XXL)" data-price="45000">+</button>
-      <span class="add-to-cart-label">Añadir al carrito</span>
-    </div>
-  </div>
-    </section>
   </main>
-  <!-- ACCESORIOS -->
-<section id="accesorios" class="product-category" role="region" aria-labelledby="title-accesorios">
-  <h2 id="title-accesorios" class="category-title">Accesorios</h2>
-  <div class="grid-products">
-    <!-- U -->
-    <div class="producto-item" data-tipo="accesorio" data-talle="u" data-price="8000">
-      <img src="assets/images/Gorra.png" alt="Gorra BERA (Talle U)" width="800" height="1000" loading="lazy" decoding="async">
-      <h3>Gorra BERA (Talle U)</h3>
-      <p class="price">$8.000</p>
-      <button type="button" class="add-to-cart-btn view-product-btn btn btn-secondary"
-              data-id="gorra-bera-u" data-name="Gorra BERA (Talle U)" data-price="8000"
-              data-images="assets/images/Gorra.png">Ver producto</button>
-      <button class="add-to-cart-icon" type="button"
-              data-id="gorra-bera-u" data-name="Gorra BERA (Talle U)" data-price="8000">+</button>
-      <span class="add-to-cart-label">Añadir al carrito</span>
-    </div>
-  </div>
-</section>
 
-  <!-- FOOTER -->
   <footer class="site-footer" role="contentinfo">
     <div class="container footer-inner">
       <p>
@@ -1061,9 +372,6 @@
     </div>
   </footer>
 
-  <script src="https://unpkg.com/swiper/swiper-bundle.min.js" defer></script>
-
-  <!-- ---------- PRODUCT MODAL ---------- -->
   <div id="product-modal"
        class="product-modal"
        role="dialog"
@@ -1075,7 +383,6 @@
     <div class="product-modal-content" tabindex="-1">
       <button class="product-modal-close" aria-label="Cerrar">×</button>
 
-      <!-- Swiper gallery -->
       <div class="product-gallery swiper">
         <div class="swiper-wrapper" id="product-gallery-wrapper"></div>
         <div class="swiper-pagination"></div>
@@ -1083,7 +390,6 @@
         <div class="swiper-button-next" aria-label="Siguiente foto"></div>
       </div>
 
-      <!-- Info -->
       <div class="product-info">
         <h2 id="product-modal-title"></h2>
         <p id="product-modal-price" class="price"></p>
@@ -1091,83 +397,53 @@
       </div>
     </div>
   </div>
-  <!-- ---------- /PRODUCT MODAL ---------- -->
 
-  <!-- SCRIPTS -->
   <script src="https://unpkg.com/swiper/swiper-bundle.min.js" defer></script>
   <script src="js/scriptt.js" defer></script>
 
-  <!-- Overlay oscurece la pantalla y cierra el menú al tocar fuera -->
   <div id="collection-overlay" class="collection-overlay" aria-hidden="true"></div>
-
-  <!-- Off-canvas con las categorías -->
   <aside id="collection-menu" class="collection-menu" aria-hidden="true" aria-labelledby="collection-heading">
     <button id="collection-close" class="collection-close" aria-label="Cerrar menú">×</button>
 
     <nav class="collection-nav" role="navigation" aria-label="Categorías de ropa">
       <h2 id="collection-heading" class="collection-heading">CLOTHING ▾</h2>
       <ul class="collection-list">
-      <li><a href="#remeras">Remeras</a></li>
-<li><a href="#shorts">Shorts / Minis</a></li>
-<li><a href="#pantalones">Pantalones</a></li>
-<li><a href="#denim">Denim (Jeans)</a></li>
-<li><a href="#sets">Conjuntos (Sets)</a></li>
-<li><a href="#abrigos">Abrigos</a></li>
-<li><a href="#vestidos">Vestidos y Monos</a></li>
-<li><a href="#bodys">Bodys</a></li>
-<li><a href="#accesorios">Accesorios</a></li>
+        <li><a href="#remeras">Remeras</a></li>
+        <li><a href="#denim">Denim</a></li>
+        <li><a href="#pantalones">Pantalones</a></li>
+        <li><a href="#shorts">Shorts / Minis</a></li>
+        <li><a href="#tops">Tops</a></li>
+        <li><a href="#bodys">Bodys</a></li>
+        <li><a href="#sets">Conjuntos (Sets)</a></li>
+        <li><a href="#abrigos">Abrigos</a></li>
+        <li><a href="#vestidos">Vestidos</a></li>
+        <li><a href="#accesorios">Accesorios</a></li>
       </ul>
     </nav>
   </aside>
 
-  <!-- Mejora: auto‑scroll también para 'body' y 'falda' (tu script ya cubre el resto) -->
-  <script>
-    document.addEventListener('DOMContentLoaded', () => {
-      const selectTipo = document.getElementById('filter-tipo');
-      if (!selectTipo) return;
-      selectTipo.addEventListener('change', () => {
-        const v = selectTipo.value;
-       const mapExtra = { body: 'bodys', denim: 'denim', accesorio: 'accesorios' };
-        if (mapExtra[v]) {
-          const sec = document.getElementById(mapExtra[v]);
-          if (sec) {
-            const top = sec.getBoundingClientRect().top + window.scrollY - 60;
-            window.scrollTo({ top, behavior: 'smooth' });
-          }
-        }
-      }, { passive: true });
-    });
-  </script>
-  <!-- Botón flotante del carrito -->
-<button id="cart-fab" class="cart-fab" aria-label="Abrir carrito">
-  <!-- ícono -->
-  <svg class="cart-icon" viewBox="0 0 24 24" aria-hidden="true">
-    <path d="M6 6h15l-1.5 9h-12z" fill="none" stroke="currentColor" stroke-width="2"></path>
-    <circle cx="9" cy="20" r="1.5"></circle>
-    <circle cx="18" cy="20" r="1.5"></circle>
-  </svg>
-  <!-- contador y total (los usa tu JS) -->
-  <span class="cart-counter" data-count>0</span>
-  <span class="cart-total" data-total>$0</span>
-</button>
+  <button id="cart-fab" class="cart-fab" aria-label="Abrir carrito">
+    <svg class="cart-icon" viewBox="0 0 24 24" aria-hidden="true">
+      <path d="M6 6h15l-1.5 9h-12z" fill="none" stroke="currentColor" stroke-width="2"></path>
+      <circle cx="9" cy="20" r="1.5"></circle>
+      <circle cx="18" cy="20" r="1.5"></circle>
+    </svg>
+    <span class="cart-counter" data-count>0</span>
+    <span class="cart-total" data-total>$0</span>
+  </button>
 
-<!-- Panel lateral del carrito -->
-<aside id="cart-panel" class="cart-panel hidden" aria-hidden="true" aria-labelledby="cart-panel-title">
-  <div class="cart-panel-header">
-    <h2 id="cart-panel-title">Mi Carrito</h2>
-    <button class="cart-close" aria-label="Cerrar carrito">×</button>
-  </div>
-
-  <ul class="cart-items" data-items></ul>
-
-  <div class="cart-summary">
-    <span>Total</span>
-    <strong data-total-final>$0</strong>
-  </div>
-  <button class="btn btn-primary btn-checkout" onclick="location.href='finalizarcompra.html'">Finalizar compra</button>
-</aside>
-
-<!-- Overlay del carrito -->
-<div id="cart-overlay" class="cart-overlay hidden" aria-hidden="true"></div>
+  <aside id="cart-panel" class="cart-panel hidden" aria-hidden="true" aria-labelledby="cart-panel-title">
+    <div class="cart-panel-header">
+      <h2 id="cart-panel-title">Mi Carrito</h2>
+      <button class="cart-close" aria-label="Cerrar carrito">×</button>
+    </div>
+    <ul class="cart-items" data-items></ul>
+    <div class="cart-summary">
+      <span>Total</span>
+      <strong data-total-final>$0</strong>
+    </div>
+    <button class="btn btn-primary btn-checkout" onclick="location.href='finalizarcompra.html'">Finalizar compra</button>
+  </aside>
+  <div id="cart-overlay" class="cart-overlay hidden" aria-hidden="true"></div>
 </body>
 </html>

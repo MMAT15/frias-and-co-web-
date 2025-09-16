@@ -5,108 +5,155 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>BERA clothing – Testimonios</title>
-  <meta name="description" content="Opiniones de clientes sobre BERA clothing. Moda urbana desde Berazategui centro con envíos a todo el país." />
+  <meta name="description" content="La crew BERA opina: reseñas reales de clientas que ya probaron nuestros drops." />
   <meta name="theme-color" content="#e91e63">
   <link rel="icon" href="assets/images/favicon.ico" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
   <link rel="stylesheet" href="css/style.css" />
   <link rel="stylesheet" href="css/testimonios.css" />
-
 </head>
-<body class="dark-page">
-  <!-- Skip link -->
+<body class="dark-page testimonials-page">
   <a href="#main-content" class="skip-link">Saltar al contenido</a>
 
-  <!-- HEADER -->
   <header class="site-header" role="banner">
     <div class="container header-inner">
+      <button class="collection-toggle" type="button"
+              aria-label="Abrir menú Catálogo"
+              aria-expanded="false"
+              aria-controls="collection-menu">
+        <span class="collection-label">Catálogo</span>
+        <svg class="icon-hanger" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+          <path d="M12 7.5c0-.8-.6-1.5-1.4-1.5S9 6.7 9 7.5c0 .9.7 1.3 1.5 1.8.6.4 1.1.7 1.1 1.2 0 .5-.4.9-1 .9H10" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+          <path d="M3 16.5l9-6 9 6" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </button>
+
+      <button class="header-search-toggle" type="button" aria-label="Abrir búsqueda">
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M11 18a7 7 0 1 1 4.95-2.05L21 21l-1.5 1.5-5.05-5.05A6.96 6.96 0 0 1 11 18z" fill="currentColor"/>
+        </svg>
+      </button>
+
+      <form class="header-search header-search-desktop" role="search" aria-label="Buscar (desktop)" action="productos.html" method="get">
+        <input class="header-search-input" name="q" type="search" placeholder="Buscar prendas…" autocomplete="off" />
+        <button class="header-search-btn" aria-label="Buscar">
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M11 18a7 7 0 1 1 4.95-2.05L21 21l-1.5 1.5-5.05-5.05A6.96 6.96 0 0 1 11 18z" fill="currentColor"/>
+          </svg>
+        </button>
+      </form>
+
       <div class="site-branding">
         <a href="index.html" class="logo-link" aria-label="Inicio">
           <div class="logo-wrap">
-            <img src="assets/images/logoo.jpeg" alt="Logo BERA clothing" class="logo" />
+            <img src="assets/images/logoo.jpeg" alt="Logo BERA clothing" class="logo" width="60" height="60" decoding="async" />
           </div>
         </a>
-        <h1 class="site-title">BERA clothing</h1>
-       <span class="site-tagline">By FRIAS</span>
+        <div class="site-title" aria-label="BERA CLOTHING">
+          <span class="title-bera">BERA</span>
+          <span class="title-clothing">CLOTHING</span>
+        </div>
+        <span class="site-tagline">BY FRIAS</span>
       </div>
-      <button class="nav-toggle"
-              aria-controls="primary-navigation"
-              aria-expanded="false"
-              aria-label="Abrir menú">
+
+      <button class="nav-toggle" type="button" aria-controls="primary-navigation" aria-expanded="false" aria-label="Abrir menú">
         <span class="bar"></span><span class="bar"></span><span class="bar"></span>
       </button>
-      <nav id="primary-navigation" class="main-nav"
-           role="navigation"
-           aria-label="Menú principal">
+
+      <nav id="primary-navigation" class="main-nav" role="navigation" aria-label="Menú principal">
+        <form class="menu-search" action="productos.html" method="get" role="search" aria-label="Buscar prendas">
+          <label class="visually-hidden" for="menu-search-input">Buscar</label>
+          <input id="menu-search-input" type="search" name="q" class="menu-search-input" placeholder="Buscar prendas..." autocomplete="off" aria-label="Buscar" />
+          <button class="menu-search-btn" type="submit" aria-label="Buscar">
+            <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" focusable="false">
+              <circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="2" fill="none"></circle>
+              <line x1="16.5" y1="16.5" x2="21" y2="21" stroke="currentColor" stroke-width="2" stroke-linecap="round"></line>
+            </svg>
+          </button>
+        </form>
         <ul class="nav-list">
-          <li><a href="index.html" class="active">Inicio</a></li>
+          <li><a href="index.html">Inicio</a></li>
           <li><a href="newsletter.html">Novedades</a></li>
           <li><a href="productos.html">Productos</a></li>
           <li><a href="contacto.html">Contacto</a></li>
         </ul>
       </nav>
-      <!-- Carrito de compras -->
-      <a href="#" class="cart-toggle" aria-label="Ver carrito">
-        <div class="icon-container">
-          <!-- Closed cart icon -->
-          <span class="cart-icon-closed">
-            <svg class="cart-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                 fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                 stroke-linejoin="round" viewBox="0 0 24 24">
-              <polyline points="6 8 8 16 17 16 19 10 7 10"/>
-              <path d="M7 10 L5 6"/>
-              <circle cx="9" cy="19" r="1.5"/>
-              <circle cx="16" cy="19" r="1.5"/>
-            </svg>
-          </span>
-          <!-- Open cart icon -->
-          <span class="cart-icon-open">
-            <svg class="cart-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                 fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                 stroke-linejoin="round" viewBox="0 0 24 24">
-              <polyline points="6 8 8 16 17 16 19 10 7 10"/>
-              <path d="M7 10 L5 6"/>
-              <circle cx="9" cy="19" r="1.5"/>
-              <circle cx="16" cy="19" r="1.5"/>
-            </svg>
-          </span>
-        </div>
-        <span class="cart-count" aria-live="polite">0</span>
-      </a>
     </div>
   </header>
 
-  <!-- MAIN CONTENT -->
-  <main id="main-content">
-    <section id="testimonios" class="section section-testimonios" role="region" aria-labelledby="testimonios-title">
-      <h1 class="visually-hidden">Testimonios de clientes satisfechos con BERA clothing</h1>
-      <div class="container">
-        <h2 id="testimonios-title" class="section-title">Testimonios</h2>
-        <div class="swiper-container swiper-testimonios">
-          <div class="swiper-wrapper">
-            <div class="swiper-slide">
-              <blockquote>“La calidad de las prendas supera mis expectativas, me encanta!”</blockquote>
-              <cite>— Laura M.</cite>
-            </div>
-            <div class="swiper-slide">
-              <blockquote>“Servicio rápido y atención excelente. Volveré a comprar sin duda.”</blockquote>
-              <cite>— Marcos G.</cite>
-            </div>
-            <div class="swiper-slide">
-              <blockquote>“Diseños originales y cómodos. ¡Toda mi ropa viene de BERA!”</blockquote>
-              <cite>— Sofía R.</cite>
-            </div>
+  <div class="cart-banner">
+    <div class="container cart-banner-inner">
+      <span class="cart-banner-text">Llevate los looks que mencionan nuestras clientas.</span>
+      <button type="button" class="cart-banner-btn" data-open-cart>Revisar carrito</button>
+    </div>
+  </div>
+
+  <main id="main-content" role="main">
+    <section class="page-hero page-hero--compact" role="region" aria-labelledby="testimonios-title">
+      <div class="container hero-shell">
+        <div class="hero-content">
+          <span class="hero-eyebrow">Crew BERA</span>
+          <h1 id="testimonios-title" class="hero-title">Historias reales de clientas que viven nuestros drops</h1>
+          <p class="hero-lead">Nos importa lo que pasa después de la compra. Estas reseñas salieron de WhatsApp, Instagram y encuestas del club. Gracias por ser parte.</p>
+          <div class="hero-badges">
+            <span class="hero-badge">+3.400 reviews</span>
+            <span class="hero-badge">4.9/5 satisfacción</span>
+            <span class="hero-badge">Atención humana</span>
           </div>
-          <div class="swiper-pagination"></div>
+        </div>
+        <figure class="hero-media">
+          <img src="assets/images/IMG_7238.PNG" alt="Clientas BERA" loading="lazy" decoding="async" />
+        </figure>
+      </div>
+    </section>
+
+    <section class="section surface-light" role="region" aria-labelledby="reseñas-grid">
+      <div class="container">
+        <h2 id="reseñas-grid" class="section-title">Qué dicen</h2>
+        <div class="testimonial-grid">
+          <article class="testimonial-card">
+            <blockquote>“La calidad de las prendas supera mis expectativas. Los buzos son super suaves y el packaging es hermoso.”</blockquote>
+            <cite>— Laura M.</cite>
+          </article>
+          <article class="testimonial-card">
+            <blockquote>“Pedí por DM un restock y me reservaron el look completo. Llegó en 24 hs. Son un 10 en atención y velocidad.”</blockquote>
+            <cite>— Marcos G.</cite>
+          </article>
+          <article class="testimonial-card">
+            <blockquote>“Los outfits combinan entre sí, amo que todo tenga el mismo vibe urbano. Ya soy parte del club.”</blockquote>
+            <cite>— Sofía R.</cite>
+          </article>
+          <article class="testimonial-card">
+            <blockquote>“Siempre me ayudan a armar outfits y adaptan el retiro a mis horarios. El servicio post compra es clave.”</blockquote>
+            <cite>— Erika V.</cite>
+          </article>
+          <article class="testimonial-card">
+            <blockquote>“La experiencia en el showroom es divina. Probé todo tranqui y me recomendaron combinaciones.”</blockquote>
+            <cite>— Nico P.</cite>
+          </article>
+          <article class="testimonial-card">
+            <blockquote>“Recibí mi pedido en el interior en una semana y con regalito. Volvería a comprar mil veces.”</blockquote>
+            <cite>— Mica D.</cite>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section surface-muted" role="region" aria-labelledby="cta-testimonios">
+      <div class="container home-cta">
+        <span class="ribbon">Compartí tu review</span>
+        <h2 id="cta-testimonios">¿Ya sos parte de la crew?</h2>
+        <p>Si compraste un drop y querés dejar tu testimonio, escribinos por DM o completá el formulario. Tu feedback ayuda a seguir creando prendas que ames.</p>
+        <div class="cta-actions">
+          <a class="btn btn-primary" href="https://instagram.com/beraclothingg" target="_blank" rel="noopener noreferrer">Enviar reseña por Instagram</a>
+          <a class="btn btn-secondary" href="contacto.html">Ir al formulario</a>
         </div>
       </div>
     </section>
   </main>
 
-  <!-- BACK TO TOP BUTTON -->
   <button id="back-to-top" class="back-to-top" aria-label="Volver arriba">↑</button>
 
   <footer class="site-footer" role="contentinfo">
@@ -117,15 +164,56 @@
         </a>
         | Shop online 24/7 | Envíos a todo el país | Berazategui centro
       </p>
-      By 
-        <a href="https://instagram.com/melinaffrias" target="_blank" rel="noopener">@melinaffrias</a> <span>&</span>
+      By
+        <a href="https://instagram.com/melinaffrias" target="_blank" rel="noopener">@melinaffrias</a> <span>&amp;</span>
         <a href="https://instagram.com/candelaffrias" target="_blank" rel="noopener">@candelaffrias</a>
       <p>© 2025 BERA clothing. Todos los derechos reservados.</p>
     </div>
   </footer>
 
-  <!-- SCRIPTS -->
-  <script src="https://unpkg.com/swiper/swiper-bundle.min.js" defer></script>
-  <script src="js/script.js" defer></script>
+  <div id="collection-overlay" class="collection-overlay" aria-hidden="true"></div>
+  <aside id="collection-menu" class="collection-menu" aria-hidden="true" aria-labelledby="collection-heading">
+    <button id="collection-close" class="collection-close" aria-label="Cerrar menú">×</button>
+    <nav class="collection-nav" role="navigation" aria-label="Categorías de ropa">
+      <h2 id="collection-heading" class="collection-heading">CLOTHING ▾</h2>
+      <ul class="collection-list">
+        <li><a href="productos.html?tipo=remera#remeras">Remeras</a></li>
+        <li><a href="productos.html?tipo=short#shorts">Shorts / Minis</a></li>
+        <li><a href="productos.html?tipo=pantalon#pantalones">Pantalones</a></li>
+        <li><a href="productos.html?tipo=denim#denim">Denim (Jeans)</a></li>
+        <li><a href="productos.html?tipo=set#sets">Conjuntos (Sets)</a></li>
+        <li><a href="productos.html?tipo=abrigo#abrigos">Abrigos</a></li>
+        <li><a href="productos.html?tipo=vestido#vestidos">Vestidos y Monos</a></li>
+        <li><a href="productos.html?tipo=body#bodys">Bodys</a></li>
+        <li><a href="productos.html?tipo=accesorio#accesorios">Accesorios</a></li>
+      </ul>
+    </nav>
+  </aside>
+
+  <button id="cart-fab" class="cart-fab" aria-label="Abrir carrito">
+    <svg class="cart-icon" viewBox="0 0 24 24" aria-hidden="true">
+      <path d="M6 6h15l-1.5 9h-12z" fill="none" stroke="currentColor" stroke-width="2"></path>
+      <circle cx="9" cy="20" r="1.5"></circle>
+      <circle cx="18" cy="20" r="1.5"></circle>
+    </svg>
+    <span class="cart-counter" data-count>0</span>
+    <span class="cart-total" data-total>$0</span>
+  </button>
+
+  <aside id="cart-panel" class="cart-panel hidden" aria-hidden="true" aria-labelledby="cart-panel-title">
+    <div class="cart-panel-header">
+      <h2 id="cart-panel-title">Mi Carrito</h2>
+      <button class="cart-close" aria-label="Cerrar carrito">×</button>
+    </div>
+    <ul class="cart-items" data-items></ul>
+    <div class="cart-summary">
+      <span>Total</span>
+      <strong data-total-final>$0</strong>
+    </div>
+    <button class="btn btn-primary btn-checkout" onclick="location.href='finalizarcompra.html'">Finalizar compra</button>
+  </aside>
+  <div id="cart-overlay" class="cart-overlay hidden" aria-hidden="true"></div>
+
+  <script src="js/scriptt.js" defer></script>
 </body>
 </html>
