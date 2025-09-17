@@ -160,6 +160,7 @@ function setAppInert(on){
       mobileMenu.classList.remove('is-open');
       mobileMenu.hidden = true;
       mobileMenu.setAttribute('hidden', '');
+      mobileMenu.style.display = '';
       hamburgerBtn.setAttribute('aria-expanded', 'false');
       hamburgerBtn.classList.remove('open');
       document.body.classList.remove('no-scroll');
@@ -178,6 +179,7 @@ function setAppInert(on){
       mobileMenu.hidden = false;
       mobileMenu.removeAttribute('hidden');
       mobileMenu.classList.add('is-open');
+      mobileMenu.style.display = 'flex';
       hamburgerBtn.setAttribute('aria-expanded', 'true');
       hamburgerBtn.classList.add('open');
       document.body.classList.add('no-scroll');
@@ -231,6 +233,7 @@ function setAppInert(on){
           mobileMenu.hidden = false;
           mobileMenu.removeAttribute('hidden');
           mobileMenu.classList.add('is-open');
+          mobileMenu.style.display = '';
           document.body.classList.remove('no-scroll');
           hamburgerBtn.setAttribute('aria-expanded', 'false');
           hamburgerBtn.classList.remove('open');
@@ -238,6 +241,7 @@ function setAppInert(on){
           mobileMenu.classList.remove('is-open');
           mobileMenu.hidden = true;
           mobileMenu.setAttribute('hidden', '');
+          mobileMenu.style.display = '';
           hamburgerBtn.classList.remove('open');
         }
         setHeaderHeightVar();
