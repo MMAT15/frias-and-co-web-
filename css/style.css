@@ -4686,7 +4686,7 @@ textarea:focus-visible{
   }
   .site-header .mobile-menu {
     position: fixed !important;
-    top: calc(var(--ann-h, 0px) + var(--header-height, var(--hdr-h, 64px)) + 8px);
+    top: calc(var(--ann-h, 0px) + var(--header-height, var(--hdr-h, 64px)) + 22px);
     left: clamp(12px, 4vw, 26px);
     right: clamp(12px, 4vw, 26px);
     z-index: 2100;
@@ -4694,7 +4694,7 @@ textarea:focus-visible{
     color: #f5f5f8 !important;
     border-radius: 20px !important;
     padding: 28px 20px 28px !important;
-    max-height: calc(100dvh - (var(--ann-h, 0px) + var(--header-height, var(--hdr-h, 64px)) + var(--nav-gap, 0px))) !important;
+    max-height: calc(100dvh - (var(--ann-h, 0px) + var(--header-height, var(--hdr-h, 64px)) + 22px)) !important;
     overflow-y: auto;
     box-shadow: 0 28px 70px rgba(0,0,0,0.45) !important;
     backdrop-filter: blur(18px);
