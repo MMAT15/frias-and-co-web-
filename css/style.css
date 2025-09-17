@@ -811,9 +811,10 @@ body.no-scroll {
   content: '';
   position: absolute;
   inset: 0;
-  background: linear-gradient(135deg, rgba(233, 30, 99, 0.12), transparent 55%);
-  opacity: 0;
-  transition: opacity var(--transition);
+  background: linear-gradient(135deg, rgba(233, 30, 99, 0.18), transparent 60%);
+  opacity: 1;
+  transition: transform var(--transition), opacity var(--transition);
+  pointer-events: none;
 }
 .feature-card:hover {
   transform: translateY(-6px);
@@ -822,6 +823,7 @@ body.no-scroll {
 }
 .feature-card:hover::after {
   opacity: 1;
+  transform: translateY(-4px);
 }
 .feature-card h3 {
   font-size: 1.15rem;
@@ -1582,35 +1584,44 @@ body.no-scroll {
    Cart item layout and remove button styling
 -------------------------------------------------- */
 .cart-item {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 0.5rem 0;
-    border-bottom: 1px solid #eee;
-  }
-  
-  .cart-item-info {
-    display: flex;
-    flex-direction: row;
-    gap: 1rem;
-    align-items: center;
-    flex: 1;
-  }
-  
-  .remove-item {
-    background: transparent;
-    border: none;
-    color: var(--color-acento);
-    font-size: 1.25rem;
-    line-height: 1;
-    cursor: pointer;
-    padding: 0;
-    transition: color var(--transition);
-  }
-  
-  .remove-item:hover {
-    color: #e00;
-  }
+  display: grid;
+  grid-template-columns: 1fr auto auto auto;
+  gap: 0.75rem;
+  align-items: center;
+  padding: 0.9rem 1rem;
+  margin-bottom: 0.85rem;
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+.cart-item:last-child {
+  margin-bottom: 0;
+}
+.cart-item .name {
+  font-weight: 600;
+  color: #fff;
+  margin-right: auto;
+}
+.cart-item .price {
+  font-weight: 600;
+  color: #fff;
+  justify-self: end;
+}
+.cart-item .remove {
+  background: none;
+  border: none;
+  color: rgba(255, 255, 255, 0.55);
+  font-size: 1.35rem;
+  line-height: 1;
+  cursor: pointer;
+  transition: color var(--transition), transform var(--transition);
+  justify-self: end;
+}
+.cart-item .remove:hover,
+.cart-item .remove:focus-visible {
+  color: #ff7ba8;
+  transform: scale(1.1);
+}
   
 .text-center {
   text-align: center;
@@ -1800,6 +1811,9 @@ body.no-scroll {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
   gap: 0.5rem;
+  margin-bottom: 1.5rem;
+  padding-bottom: 1.5rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.15);
 }
 .menu-tags a {
   padding: 0.4rem 0.75rem;
@@ -1820,6 +1834,7 @@ body.no-scroll {
 .menu-media {
   display: grid;
   gap: 0.5rem;
+  margin-top: 1.25rem;
 }
 .menu-media a {
   display: inline-flex;
@@ -2340,72 +2355,69 @@ body:not(.productos-page) .cart-banner {
 /* Botón flotante (FAB) */
 .cart-fab {
   position: fixed;
-  bottom: calc(env(safe-area-inset-bottom, 0) + 5rem);
+  bottom: calc(env(safe-area-inset-bottom, 0) + 4.5rem);
   right: clamp(1rem, 4vw, 2rem);
-  display: none;
+  display: inline-flex;
   align-items: center;
-  justify-content: center;
-  width: 60px;
-  height: 60px;
-  border-radius: 50%;
-  background: var(--color-acento);
+  gap: 0.75rem;
+  padding: 0 1.35rem;
+  height: 56px;
+  border-radius: 999px;
+  background: linear-gradient(135deg, #ff5c8a, #e91e63);
   color: #fff;
   border: none;
-  box-shadow: 0 6px 20px rgba(0,0,0,0.25);
+  box-shadow: 0 18px 30px rgba(233, 30, 99, 0.25);
   cursor: pointer;
   z-index: 1500;
-  transition: transform var(--transition), box-shadow var(--transition);
+  transition: transform var(--transition), box-shadow var(--transition), filter var(--transition);
 }
 .cart-fab:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 8px 24px rgba(0,0,0,0.3);
+  transform: translateY(-4px);
+  box-shadow: 0 22px 34px rgba(233, 30, 99, 0.32);
+  filter: saturate(1.1);
 }
 
 /* Ícono SVG del carrito */
 .cart-fab .cart-icon {
-  width: 28px;
-  height: 28px;
+  width: 26px;
+  height: 26px;
   fill: currentColor;
 }
 
 /* Burbuja con cantidad de ítems */
 .cart-fab .cart-counter {
   position: absolute;
-  top: 6px;
-  right: 6px;
+  top: -6px;
+  right: -6px;
   background: #fff;
   color: var(--color-acento);
   font-size: 0.7rem;
-  width: 18px;
-  height: 18px;
+  width: 20px;
+  height: 20px;
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-weight: 600;
+  font-weight: 700;
+  box-shadow: 0 4px 10px rgba(233, 30, 99, 0.35);
 }
 
 /* Total acumulado en pesos, a la izquierda del FAB */
 .cart-fab .cart-total {
-  position: absolute;
-  left: -115%;
+  position: static;
   white-space: nowrap;
-  font-size: 0.85rem;
-  background: #fff;
-  color: var(--color-acento);
-  padding: 0.15rem 0.55rem;
-  border-radius: 0.5rem;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+  font-size: 0.95rem;
   font-weight: 600;
+  letter-spacing: 0.03em;
 }
 
 /* Ajustes para pantallas chicas */
 @media (max-width: 480px) {
   .cart-fab {
-    width: 52px;
     height: 52px;
-    bottom: calc(env(safe-area-inset-bottom, 0) + 4rem);
-    right: clamp(1rem, 4vw, 1.5rem);
+    padding: 0 1.1rem;
+    bottom: calc(env(safe-area-inset-bottom, 0) + 3.75rem);
+    right: clamp(0.75rem, 4vw, 1.5rem);
   }
 }
 
@@ -2421,8 +2433,10 @@ body:not(.productos-page) .cart-banner {
   width: 100%;
   max-width: 420px;
   height: 100vh;
-  background: #fff;
-  box-shadow: -2px 0 14px rgba(0,0,0,0.15);
+  background: rgba(12, 14, 24, 0.95);
+  color: #f5f5f8;
+  backdrop-filter: blur(18px);
+  box-shadow: -12px 0 32px rgba(0, 0, 0, 0.32);
   transform: translateX(100%);
   transition: transform var(--transition);
   z-index: 1600;
@@ -2438,8 +2452,8 @@ body:not(.productos-page) .cart-banner {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 1rem 1.25rem;
-  border-bottom: 1px solid #eee;
+  padding: 1.1rem 1.4rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
 }
 .cart-panel-header h2 {
   font-size: 1.25rem;
@@ -2450,7 +2464,7 @@ body:not(.productos-page) .cart-banner {
 .cart-items {
   flex: 1 1 auto;
   overflow-y: auto;
-  padding: 1rem 1.25rem;
+  padding: 1.2rem 1.4rem;
 }
 
 /* Resumen y botón de checkout */
@@ -2458,14 +2472,15 @@ body:not(.productos-page) .cart-banner {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 1rem 1.25rem;
-  border-top: 1px solid #eee;
+  padding: 1.1rem 1.4rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  background: linear-gradient(135deg, rgba(233, 30, 99, 0.16), transparent);
   font-size: 1.1rem;
   font-weight: 600;
 }
 .btn-checkout {
-  width: calc(100% - 2.5rem);
-  margin: 0 1.25rem 1.5rem;
+  width: calc(100% - 2.8rem);
+  margin: 0 1.4rem 1.6rem;
 }
 
 /* Overlay oscuro detrás del panel */
@@ -2493,10 +2508,12 @@ body:not(.productos-page) .cart-banner {
 .qty-stepper .qty{
   width:48px;
   text-align:center;
-  border:1px solid #ddd;
-  border-radius:.25rem;
-  padding:.25rem .5rem;
+  border:1px solid rgba(255, 255, 255, 0.15);
+  border-radius:.4rem;
+  padding:.3rem .6rem;
   font-size:.9rem;
+  background: rgba(255, 255, 255, 0.06);
+  color: inherit;
 }
 /* quitar flechas nativas */
 .qty-stepper .qty::-webkit-inner-spin-button,
@@ -2505,14 +2522,15 @@ body:not(.productos-page) .cart-banner {
 
 .qty-stepper button{
   width:28px;height:28px;
-  border:1px solid #ddd;
-  background:#f5f5f5;
+  border:1px solid rgba(255, 255, 255, 0.2);
+  background: rgba(255, 255, 255, 0.1);
+  color: inherit;
   font-size:1rem;line-height:1;
-  border-radius:.25rem;
+  border-radius:.4rem;
   cursor:pointer;
   transition:background var(--transition);
 }
-.qty-stepper button:hover{ background:#e3e3e3; }
+.qty-stepper button:hover{ background:rgba(255, 255, 255, 0.18); }
 .qty-stepper button:disabled{ opacity:.5; cursor:not-allowed; }
 
 
@@ -4676,6 +4694,15 @@ textarea:focus-visible{
     max-height: calc(100dvh - var(--header-height, var(--hdr-h, 64px)));
     overflow-y: auto;
     box-shadow: 0 20px 45px rgba(0,0,0,0.14);
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-12px);
+    transition: opacity 0.24s ease, transform 0.24s ease;
+  }
+  .site-header .mobile-menu.is-open {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
   }
   .site-header .mobile-menu[hidden] {
     display: none !important;

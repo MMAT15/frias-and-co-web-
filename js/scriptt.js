@@ -157,7 +157,9 @@ function setAppInert(on){
     const closeMobileMenu = ({ focusTrigger = false } = {}) => {
       if (!hamburgerBtn || !mobileMenu) return;
       if (mobileMenu.hidden) return;
+      mobileMenu.classList.remove('is-open');
       mobileMenu.hidden = true;
+      mobileMenu.setAttribute('hidden', '');
       hamburgerBtn.setAttribute('aria-expanded', 'false');
       hamburgerBtn.classList.remove('open');
       document.body.classList.remove('no-scroll');
@@ -174,6 +176,8 @@ function setAppInert(on){
       if (!hamburgerBtn || !mobileMenu) return;
       if (!mobileMenu.hidden) return;
       mobileMenu.hidden = false;
+      mobileMenu.removeAttribute('hidden');
+      mobileMenu.classList.add('is-open');
       hamburgerBtn.setAttribute('aria-expanded', 'true');
       hamburgerBtn.classList.add('open');
       document.body.classList.add('no-scroll');
@@ -225,11 +229,15 @@ function setAppInert(on){
       const syncMenuWithViewport = (mqEvent) => {
         if (mqEvent.matches) {
           mobileMenu.hidden = false;
+          mobileMenu.removeAttribute('hidden');
+          mobileMenu.classList.add('is-open');
           document.body.classList.remove('no-scroll');
           hamburgerBtn.setAttribute('aria-expanded', 'false');
           hamburgerBtn.classList.remove('open');
         } else if (hamburgerBtn.getAttribute('aria-expanded') !== 'true') {
+          mobileMenu.classList.remove('is-open');
           mobileMenu.hidden = true;
+          mobileMenu.setAttribute('hidden', '');
           hamburgerBtn.classList.remove('open');
         }
         setHeaderHeightVar();
@@ -1348,6 +1356,23 @@ updateURLParams();
        SHOPPING CART & MODAL (con delegación para add-to-cart)
        =========================== */
     let cart = [];
+    let cartCurrencyFormatter;
+    const formatCartMoney = (value) => {
+      const amount = Number.isFinite(value) ? value : 0;
+      try {
+        if (!cartCurrencyFormatter) {
+          cartCurrencyFormatter = new Intl.NumberFormat('es-AR', {
+            style: 'currency',
+            currency: 'ARS',
+            minimumFractionDigits: 0,
+            maximumFractionDigits: 0
+          });
+        }
+        return cartCurrencyFormatter.format(amount);
+      } catch (_) {
+        return '$' + Math.round(amount || 0).toString();
+      }
+    };
     try {
       const raw = localStorage.getItem('cart');
       cart = raw ? JSON.parse(raw) : [];
@@ -1369,10 +1394,10 @@ updateURLParams();
       const cartCounterFab   = cartFab?.querySelector('[data-count]');
       const cartTotalFab     = cartFab?.querySelector('[data-total]');
       if (cartCounterFab) cartCounterFab.textContent = totalItems;
-      if (cartTotalFab) cartTotalFab.textContent = '$' + totalPrice.toLocaleString('es-AR');
+      if (cartTotalFab) cartTotalFab.textContent = formatCartMoney(totalPrice);
 
       document.querySelectorAll('[data-total-final]').forEach(el => {
-        el.textContent = '$' + totalPrice.toLocaleString('es-AR');
+        el.textContent = formatCartMoney(totalPrice);
       });
 
       if (document.getElementById('cart-panel')?.classList.contains('show')) renderCartPanel();
@@ -1459,7 +1484,7 @@ updateURLParams();
     <input type="number" class="qty" min="1" max="10" value="${item.qty}" data-qty>
     <button class="qty-inc" aria-label="Más">+</button>
   </div>
-  <span class="price" data-price>$${(item.price * item.qty).toLocaleString('es-AR')}</span>
+  <span class="price" data-price="${item.price}">${formatCartMoney(item.price * item.qty)}</span>
   <button class="remove" aria-label="Quitar">×</button>
 `;
         cartItemsList.appendChild(li);
