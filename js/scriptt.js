@@ -149,96 +149,100 @@ function setAppInert(on){
       }, { passive: false });
     });
     /* ===========================
-       NAVIGATION TOGGLE (accesible) + lock/unlock scroll + cierres
+       NAVIGATION TOGGLE (mobile panel)
        =========================== */
-    const navToggle = document.querySelector('.nav-toggle');
-    const mainNav   = document.querySelector('.main-nav');
-    if (navToggle && mainNav) {
-      // Asegura atributos ARIA
-      if (!navToggle.getAttribute('aria-controls')) {
-        // Usa id existente o inyecta uno
-        if (!mainNav.id) mainNav.id = 'primary-navigation';
-        navToggle.setAttribute('aria-controls', mainNav.id);
+    const hamburgerBtn = document.querySelector('.hamburger');
+    const mobileMenu   = document.getElementById('mobile-menu');
+
+    const closeMobileMenu = ({ focusTrigger = false } = {}) => {
+      if (!hamburgerBtn || !mobileMenu) return;
+      if (mobileMenu.hidden) return;
+      mobileMenu.hidden = true;
+      hamburgerBtn.setAttribute('aria-expanded', 'false');
+      hamburgerBtn.classList.remove('open');
+      document.body.classList.remove('no-scroll');
+      if (focusTrigger) {
+        try {
+          hamburgerBtn.focus({ preventScroll: true });
+        } catch (err) {
+          hamburgerBtn.focus();
+        }
       }
-      navToggle.setAttribute('aria-expanded', 'false');
+    };
 
-      // === Alinear el off‑canvas por debajo del header (iOS Safari friendly)
-      const getAnnH = () => {
-        const v = getComputedStyle(document.documentElement).getPropertyValue('--ann-h').trim();
-        const n = parseInt(v, 10);
-        return isNaN(n) ? 0 : n;
+    const openMobileMenu = () => {
+      if (!hamburgerBtn || !mobileMenu) return;
+      if (!mobileMenu.hidden) return;
+      mobileMenu.hidden = false;
+      hamburgerBtn.setAttribute('aria-expanded', 'true');
+      hamburgerBtn.classList.add('open');
+      document.body.classList.add('no-scroll');
+    };
+
+    if (hamburgerBtn && mobileMenu) {
+      const navCloseBtn = mobileMenu.querySelector('.nav-close');
+      const desktopMq = window.matchMedia('(min-width: 769px)');
+
+      const setHeaderHeightVar = () => {
+        const header = document.querySelector('.site-header');
+        if (!header) return;
+        const height = Math.ceil(header.getBoundingClientRect().height);
+        document.documentElement.style.setProperty('--header-height', `${height}px`);
       };
-      const getHdrH = () => {
-        const hEl = document.querySelector('.site-header');
-        return hEl ? Math.ceil(hEl.getBoundingClientRect().height) : 0;
-      };
-      const getNavGap = () => {
-        const v = getComputedStyle(document.documentElement).getPropertyValue('--nav-gap').trim();
-        const n = parseInt(v, 10);
-        return isNaN(n) ? 0 : n;
-      };
-      const applyMobileNavOffset = () => {
-        const top = getAnnH() + getHdrH() + getNavGap();
-        // Fuerza la prioridad para ganar a cualquier CSS previo con !important
-        mainNav.style.setProperty('top', top + 'px', 'important');
-        // Evita que el panel tape el header y limita su alto en viewport móvil
-        mainNav.style.setProperty('max-height', `calc(100vh - ${top}px)`, 'important');
-      };
+      const scheduleHeaderVar = throttle(setHeaderHeightVar, 120);
 
-      const lock   = () => document.body.style.overflow = 'hidden';
-      const unlock = () => document.body.style.overflow = '';
-
-      const openMenu = () => {
-        applyMobileNavOffset();
-        mainNav.classList.add('show');
-        navToggle.classList.add('open');
-        navToggle.setAttribute('aria-expanded', 'true');
-        lock();
-        requestAnimationFrame(applyMobileNavOffset);
-        const focusClose = () => navCloseBtn?.focus({ preventScroll: true });
-        window.setTimeout(focusClose, 80);
-      };
-      const closeMenu = () => {
-        mainNav.classList.remove('show');
-        navToggle.classList.remove('open');
-        navToggle.setAttribute('aria-expanded', 'false');
-        unlock();
-        // Limpia estilos en línea para no dejar residuos
-        mainNav.style.removeProperty('top');
-        mainNav.style.removeProperty('max-height');
-      };
-
-      navToggle.addEventListener('click', () => {
-        mainNav.classList.contains('show') ? closeMenu() : openMenu();
-      });
-
-      const navCloseBtn = mainNav.querySelector('.nav-close');
-      navCloseBtn?.addEventListener('click', () => {
-        closeMenu();
-        navToggle.focus({ preventScroll: true });
-      });
-
-      // Cerrar por click fuera
-      document.addEventListener('click', (e) => {
-        if (!mainNav.classList.contains('show')) return;
-        const inside = mainNav.contains(e.target) || navToggle.contains(e.target);
-        if (!inside) closeMenu();
-      });
-
-      // Cerrar con Escape
-      document.addEventListener('keydown', (e) => {
-        if (e.key === 'Escape' && mainNav.classList.contains('show')) closeMenu();
-      });
-
-      // Recalcular cuando cambia el viewport (iOS Safari, orientación, fuentes)
-      window.addEventListener('resize', throttle(applyMobileNavOffset, 120), { passive: true });
-      if (window.visualViewport && window.visualViewport.addEventListener) {
-        window.visualViewport.addEventListener('resize', throttle(applyMobileNavOffset, 120), { passive: true });
+      function toggleMobileMenu() {
+        const expanded = hamburgerBtn.getAttribute('aria-expanded') === 'true';
+        if (expanded) {
+          closeMobileMenu();
+        } else {
+          setHeaderHeightVar();
+          openMobileMenu();
+        }
       }
-      window.addEventListener('orientationchange', () => applyMobileNavOffset(), { passive: true });
-      window.addEventListener('load', () => applyMobileNavOffset(), { passive: true });
+
+      hamburgerBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        toggleMobileMenu();
+      });
+
+      navCloseBtn?.addEventListener('click', () => closeMobileMenu({ focusTrigger: true }));
+
+      mobileMenu.querySelectorAll('a[href]').forEach(link => {
+        link.addEventListener('click', () => closeMobileMenu());
+      });
+
+      document.addEventListener('click', (event) => {
+        if (mobileMenu.hidden) return;
+        const isInside = mobileMenu.contains(event.target) || hamburgerBtn.contains(event.target);
+        if (!isInside) closeMobileMenu();
+      });
+
+      document.addEventListener('keydown', (event) => {
+        if (event.key === 'Escape' && !mobileMenu.hidden) closeMobileMenu({ focusTrigger: true });
+      });
+
+      const syncMenuWithViewport = (mqEvent) => {
+        if (mqEvent.matches) {
+          mobileMenu.hidden = false;
+          document.body.classList.remove('no-scroll');
+          hamburgerBtn.setAttribute('aria-expanded', 'false');
+          hamburgerBtn.classList.remove('open');
+        } else if (hamburgerBtn.getAttribute('aria-expanded') !== 'true') {
+          mobileMenu.hidden = true;
+          hamburgerBtn.classList.remove('open');
+        }
+        setHeaderHeightVar();
+      };
+
+      syncMenuWithViewport(desktopMq);
+      desktopMq.addEventListener('change', syncMenuWithViewport);
+
+      window.addEventListener('resize', scheduleHeaderVar, { passive: true });
+      window.addEventListener('orientationchange', () => setTimeout(setHeaderHeightVar, 0), { passive: true });
+      window.addEventListener('load', setHeaderHeightVar, { passive: true });
       if (document.fonts && document.fonts.ready) {
-        document.fonts.ready.then(() => applyMobileNavOffset()).catch(() => {});
+        document.fonts.ready.then(setHeaderHeightVar).catch(() => {});
       }
     }
 
@@ -357,12 +361,9 @@ function setAppInert(on){
         const target = document.querySelector(sel);
         if (!target) return;
         e.preventDefault();
-        // cierra mainNav si estaba abierto
-        if (mainNav && navToggle && mainNav.classList.contains('show')) {
-          mainNav.classList.remove('show');
-          navToggle.classList.remove('open');
-          navToggle.setAttribute('aria-expanded', 'false');
-          document.body.style.overflow = ''; // unlock
+        // cierra el menú mobile si estaba abierto
+        if (hamburgerBtn && mobileMenu && !mobileMenu.hidden) {
+          closeMobileMenu();
         }
         window.scrollTo({ top: computeOffsetTop(target), behavior: 'smooth' });
       });
@@ -475,14 +476,10 @@ function setAppInert(on){
           const input = form.querySelector(inputSelector);
           const q = (input?.value || '').trim();
           form.action = q ? `productos.html?q=${encodeURIComponent(q)}` : 'productos.html';
-          // Si es el buscador del menú, cerramos el off‑canvas al enviar
+          // Si es el buscador del menú mobile, cierra el panel
           if (form.classList.contains('menu-search')) {
-            const nav = document.getElementById('primary-navigation') || document.querySelector('.main-nav');
-            const toggle = document.querySelector('.nav-toggle');
-            if (nav && toggle && nav.classList.contains('show')) {
-              nav.classList.remove('show');
-              toggle.setAttribute('aria-expanded', 'false');
-              document.body.style.overflow = '';
+            if (hamburgerBtn && mobileMenu && !mobileMenu.hidden) {
+              closeMobileMenu();
             }
           }
         });
@@ -1640,7 +1637,7 @@ updateCartCount();
   if (lc === '' || lc === '/') current = 'index.html';
   if (lc.includes('newst')) current = 'newsletter.html';
 
-  document.querySelectorAll('#primary-navigation a, .collection-menu a').forEach(a => {
+  document.querySelectorAll('#mobile-menu a, .collection-menu a').forEach(a => {
     a.classList.remove('active');
     const hrefRaw = a.getAttribute('href') || '';
     // Ignorar anchors internos (hash) para no marcarlos como activos por filename

@@ -100,14 +100,14 @@
   <span class="site-tagline">BY FRIAS</span>
 </div>
 
-      <button class="nav-toggle"
-              aria-controls="primary-navigation"
+      <button class="hamburger nav-toggle"
+              aria-controls="mobile-menu"
               aria-expanded="false"
               aria-label="Abrir menú">
         <span class="bar"></span><span class="bar"></span><span class="bar"></span>
       </button>
 
-            <nav id="primary-navigation" class="main-nav" role="navigation" aria-label="Menú principal">
+      <nav id="mobile-menu" class="mobile-menu main-nav" role="navigation" aria-label="Menú principal" hidden>
         <button type="button" class="nav-close" aria-label="Cerrar menú">×</button>
         <form class="menu-search" action="productos.html" method="get" role="search" aria-label="Buscar prendas">
           <label class="visualmente-hidden" for="menu-search-input">Buscar</label>
@@ -120,7 +120,7 @@
           </button>
         </form>
 
-        <ul class="nav-list">
+        <ul class="mobile-menu__list nav-list">
           <li><a href="index.html">Inicio</a></li>
           <li><a href="newsletter.html">Novedades</a></li>
           <li><a href="productos.html" class="active" aria-current="page">Productos</a></li>
@@ -128,7 +128,7 @@
         </ul>
 
         <div class="menu-feature-card">
-          <h3>Nuevas llegadas 🔥</h3>
+          <h3>Nuevas llegadas</h3>
           <p>Revisa los últimos drops listos para salir.</p>
           <a href="productos.html" class="menu-feature-btn">Ver catálogo</a>
         </div>
@@ -193,7 +193,9 @@
             <dl class="summary-totals" aria-live="polite" id="summary-totals">
               <div class="summary-row">
                 <dt>Subtotal (precio final con IVA)</dt>
-                <dd id="summary-subtotal">$0</dd>
+                <dd id="summary-subtotal">
+                  <span id="subtotal" data-subtotal="0">$0</span>
+                </dd>
               </div>
               <div class="summary-row">
                 <dt>Precio sin impuestos (−21% IVA)</dt>
@@ -205,7 +207,9 @@
               </div>
               <div class="summary-row total">
                 <dt>Total a pagar</dt>
-                <dd id="summary-total">$0</dd>
+                <dd id="summary-total">
+                  <span id="total" data-total="0">$0</span>
+                </dd>
               </div>
             </dl>
             <p class="summary-note">El descuento del 10% aplica solo pagando en efectivo. Con Mercado Pago se abona el precio final sin descuento.</p>
@@ -256,12 +260,12 @@
 
               <div class="payment-methods">
                 <label class="option-wrapper">
-                  <input type="radio" name="payment" value="cash" checked />
-                  <span>Efectivo (10% de descuento)</span>
+                  <input type="radio" name="metodo_pago" value="efectivo" checked>
+                  <span>Efectivo (10% OFF)</span>
                 </label>
                 <label class="option-wrapper">
-                  <input type="radio" name="payment" value="mercadopago" />
-                  <span>Mercado Pago (precio final)</span>
+                  <input type="radio" name="metodo_pago" value="mp">
+                  <span>Mercado Pago (precio final sin descuento)</span>
                 </label>
                 <p class="payment-help" aria-live="polite">
                   Con efectivo aplicamos 10% de descuento sobre el precio final. Con Mercado Pago abonás el precio final sin descuento. Al presionar “Confirmar pedido” te vamos a redirigir a nuestro perfil de Instagram (@beraclothingg). Ya copiamos el resumen para que lo pegues y nos escribas por DM.
@@ -291,7 +295,7 @@
             </fieldset>
 
             <!-- Confirmación -->
-            <button type="button" id="confirm-order" class="btn btn-primary btn-block" aria-describedby="dm-title dm-instructions">
+            <button type="button" id="btn-confirmar" class="btn btn-primary btn-block" aria-describedby="dm-title dm-instructions">
               Confirmar pedido
             </button>
           </form>

@@ -74,14 +74,14 @@
         <span class="site-tagline">BY FRIAS</span>
       </div>
 
-      <button class="nav-toggle" type="button"
-              aria-controls="primary-navigation"
+      <button class="hamburger nav-toggle" type="button"
+              aria-controls="mobile-menu"
               aria-expanded="false"
               aria-label="Abrir menú">
         <span class="bar"></span><span class="bar"></span><span class="bar"></span>
       </button>
 
-            <nav id="primary-navigation" class="main-nav" role="navigation" aria-label="Menú principal">
+      <nav id="mobile-menu" class="mobile-menu main-nav" role="navigation" aria-label="Menú principal" hidden>
         <button type="button" class="nav-close" aria-label="Cerrar menú">×</button>
         <form class="menu-search" action="productos.html" method="get" role="search" aria-label="Buscar prendas">
           <label class="visualmente-hidden" for="menu-search-input">Buscar</label>
@@ -94,7 +94,7 @@
           </button>
         </form>
 
-        <ul class="nav-list">
+        <ul class="mobile-menu__list nav-list">
           <li><a href="index.html">Inicio</a></li>
           <li><a href="newsletter.html" class="active" aria-current="page">Novedades</a></li>
           <li><a href="productos.html">Productos</a></li>
@@ -102,7 +102,7 @@
         </ul>
 
         <div class="menu-feature-card">
-          <h3>Nuevas llegadas 🔥</h3>
+          <h3>Nuevas llegadas</h3>
           <p>Revisa los últimos drops listos para salir.</p>
           <a href="productos.html" class="menu-feature-btn">Ver catálogo</a>
         </div>
@@ -187,7 +187,8 @@
           <h2 id="newsletter-title" class="section-title" style="text-align:left;">Sumate al mailing</h2>
           <p class="newsletter-intro">Dejanos tu correo y recibí en primicia el próximo drop, styling tips y acceso a BERA Rewards.</p>
           <form class="newsletter-form" id="form-newsletter">
-            <input type="email" name="email-newsletter" placeholder="Tu correo electrónico" required />
+            <label for="nl-email" class="visually-hidden">Tu email</label>
+            <input id="nl-email" type="email" name="email" placeholder="tu@email.com" autocomplete="email" required>
             <button type="submit" class="btn btn-secondary">Suscribirme</button>
           </form>
           <p id="newsletter-response" class="form-response" aria-live="polite"></p>
@@ -237,6 +238,7 @@
         <li><a href="productos.html#abrigos">Abrigos</a></li>
         <li><a href="productos.html#vestidos">Vestidos</a></li>
         <li><a href="productos.html#accesorios">Accesorios</a></li>
+        <li class="menu-separator" role="separator" aria-hidden="true"></li>
       </ul>
       <div class="collection-tags">
         <a href="productos.html?sort=nuevos">Nuevos</a>
