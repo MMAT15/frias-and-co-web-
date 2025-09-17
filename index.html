@@ -369,82 +369,46 @@
     </div>
   </footer>
 
-  <!-- Overlay oscurece la pantalla y cierra el menú al tocar fuera -->
-  <div id="collection-overlay" class="collection-overlay" aria-hidden="true"></div>
-
-  <!-- Off-canvas con las categorías -->
+    <!-- Overlay oscurece la pantalla y cierra el menú al tocar fuera -->
   <aside id="collection-menu" class="collection-menu" aria-hidden="true" aria-labelledby="collection-heading">
     <button id="collection-close" class="collection-close" aria-label="Cerrar menú">×</button>
 
     <nav class="collection-nav" role="navigation" aria-label="Categorías de ropa">
-      <h2 id="collection-heading" class="collection-heading">CLOTHING ▾</h2>
+      <h2 id="collection-heading" class="collection-heading">Clothing <span>Catálogo</span></h2>
+      <div class="collection-featured">
+        <h3>Drop de la semana</h3>
+        <p>Sets velvet y denim listos para tus noches.</p>
+        <div class="collection-featured-links">
+          <a href="productos.html#sets">Ver sets</a>
+          <a href="productos.html#denim">Ver denim</a>
+        </div>
+      </div>
       <ul class="collection-list">
-        <li><a href="productos.html?tipo=remera#remeras">Remeras</a></li>
-        <li><a href="productos.html?tipo=short#shorts">Shorts / Minis</a></li>
-        <li><a href="productos.html?tipo=pantalon#pantalones">Pantalones</a></li>
-        <li><a href="productos.html?tipo=denim#denim">Denim (Jeans)</a></li>
-        <li><a href="productos.html?tipo=set#sets">Conjuntos (Sets)</a></li>
-        <li><a href="productos.html?tipo=abrigo#abrigos">Abrigos</a></li>
-        <li><a href="productos.html?tipo=vestido#vestidos">Vestidos y Monos</a></li>
-        <li><a href="productos.html?tipo=body#bodys">Bodys</a></li>
-        <li><a href="productos.html?tipo=accesorio#accesorios">Accesorios</a></li>
+        <li><a href="productos.html#remeras">Remeras</a></li>
+        <li><a href="productos.html#denim">Denim</a></li>
+        <li><a href="productos.html#pantalones">Pantalones</a></li>
+        <li><a href="productos.html#shorts">Shorts / Minis</a></li>
+        <li><a href="productos.html#tops">Tops</a></li>
+        <li><a href="productos.html#bodys">Bodys</a></li>
+        <li><a href="productos.html#sets">Conjuntos</a></li>
+        <li><a href="productos.html#abrigos">Abrigos</a></li>
+        <li><a href="productos.html#vestidos">Vestidos</a></li>
+        <li><a href="productos.html#accesorios">Accesorios</a></li>
       </ul>
+      <div class="collection-tags">
+        <a href="productos.html?sort=nuevos">Nuevos</a>
+        <a href="productos.html#sets">Party looks</a>
+        <a href="productos.html?sort=precio-asc">Menos de $25K</a>
+        <a href="productos.html#bodys">Bodys</a>
+      </div>
+      <div class="collection-social">
+        <a href="https://instagram.com/beraclothingg" target="_blank" rel="noopener">Instagram</a>
+        <a href="https://wa.me/5491123456789" target="_blank" rel="noopener">WhatsApp</a>
+      </div>
     </nav>
   </aside>
+  <div id="collection-overlay" class="collection-overlay" aria-hidden="true"></div>
 
-  <!-- PRODUCT MODAL (opcional) -->
-  <div id="product-modal"
-       class="product-modal"
-       role="dialog"
-       aria-modal="true"
-       aria-labelledby="product-modal-title"
-       aria-describedby="product-modal-description"
-       aria-hidden="true"
-       tabindex="-1">
-    <div class="product-modal-content" tabindex="-1">
-      <button class="product-modal-close" aria-label="Cerrar">×</button>
-
-      <div class="product-gallery swiper">
-        <div class="swiper-wrapper" id="product-gallery-wrapper"></div>
-        <div class="swiper-pagination"></div>
-        <div class="swiper-button-prev" aria-label="Anterior foto"></div>
-        <div class="swiper-button-next" aria-label="Siguiente foto"></div>
-      </div>
-
-      <div class="product-info">
-        <h2 id="product-modal-title"></h2>
-        <p id="product-modal-price" class="price"></p>
-        <div id="product-modal-description"></div>
-      </div>
-    </div>
-  </div>
-
-  <!-- Botón flotante del carrito -->
-  <button id="cart-fab" class="cart-fab" aria-label="Abrir carrito">
-    <svg class="cart-icon" viewBox="0 0 24 24" aria-hidden="true">
-      <path d="M6 6h15l-1.5 9h-12z" fill="none" stroke="currentColor" stroke-width="2"></path>
-      <circle cx="9" cy="20" r="1.5"></circle>
-      <circle cx="18" cy="20" r="1.5"></circle>
-    </svg>
-    <span class="cart-counter" data-count>0</span>
-    <span class="cart-total" data-total>$0</span>
-  </button>
-
-  <aside id="cart-panel" class="cart-panel hidden" aria-hidden="true" aria-labelledby="cart-panel-title">
-    <div class="cart-panel-header">
-      <h2 id="cart-panel-title">Mi Carrito</h2>
-      <button class="cart-close" aria-label="Cerrar carrito">×</button>
-    </div>
-    <ul class="cart-items" data-items></ul>
-    <div class="cart-summary">
-      <span>Total</span>
-      <strong data-total-final>$0</strong>
-    </div>
-    <button class="btn btn-primary btn-checkout" onclick="location.href='finalizarcompra.html'">Finalizar compra</button>
-  </aside>
-  <div id="cart-overlay" class="cart-overlay hidden" aria-hidden="true"></div>
-
-  <!-- SCRIPTS -->
   <script src="https://unpkg.com/swiper/swiper-bundle.min.js" defer></script>
   <script src="js/scriptt.js" defer></script>
 </body>
