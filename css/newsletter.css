@@ -25,10 +25,10 @@
   flex: 1 1 260px;
   min-width: 220px;
   padding: 0.85rem 1rem;
-  border-radius: 999px;
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  background: rgba(11, 11, 15, 0.85);
-  color: #fff;
+  border-radius: 14px;
+  border: 1px solid rgba(255, 255, 255, 0.28);
+  background: rgba(16, 16, 22, 0.88);
+  color: #ffffff;
   font-family: var(--fuente-base);
   transition: border-color var(--transition), box-shadow var(--transition);
 }
