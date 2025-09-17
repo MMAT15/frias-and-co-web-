@@ -195,6 +195,8 @@ function setAppInert(on){
         navToggle.setAttribute('aria-expanded', 'true');
         lock();
         requestAnimationFrame(applyMobileNavOffset);
+        const focusClose = () => navCloseBtn?.focus({ preventScroll: true });
+        window.setTimeout(focusClose, 80);
       };
       const closeMenu = () => {
         mainNav.classList.remove('show');
@@ -208,6 +210,12 @@ function setAppInert(on){
 
       navToggle.addEventListener('click', () => {
         mainNav.classList.contains('show') ? closeMenu() : openMenu();
+      });
+
+      const navCloseBtn = mainNav.querySelector('.nav-close');
+      navCloseBtn?.addEventListener('click', () => {
+        closeMenu();
+        navToggle.focus({ preventScroll: true });
       });
 
       // Cerrar por click fuera
