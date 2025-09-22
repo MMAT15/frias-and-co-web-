@@ -1260,8 +1260,8 @@ body.no-scroll {
 .newsletter-form input[type="email"] {
   width: 100%;
   max-width: 420px;
-  height: 46px;
-  padding: 0 12px;
+  height: 40px;
+  padding: 0 10px;
   border: 1px solid var(--border-200, #e1e1e1);
   border-radius: 6px;
   background: var(--surface, #fff);
@@ -1278,8 +1278,8 @@ body.no-scroll {
   outline: none;
 }
 .newsletter-form button {
-  height: 46px;
-  padding: 0 16px;
+  height: 40px;
+  padding: 0 14px;
   border-radius: 6px;
   white-space: nowrap;
 }
@@ -4686,7 +4686,7 @@ textarea:focus-visible{
   }
   .site-header .mobile-menu {
     position: fixed !important;
-    top: calc(var(--ann-h, 0px) + var(--header-height, 96px));
+    top: calc(var(--ann-h, 0px) + var(--hdr-h, 64px));
     left: clamp(12px, 4vw, 26px);
     right: clamp(12px, 4vw, 26px);
     z-index: 2100;
@@ -4694,7 +4694,7 @@ textarea:focus-visible{
     color: #f5f5f8 !important;
     border-radius: 20px !important;
     padding: 28px 20px calc(32px + env(safe-area-inset-bottom, 0px)) !important;
-    max-height: calc(100dvh - (var(--ann-h, 0px) + var(--header-height, 96px))) !important;
+    max-height: calc(100dvh - (var(--ann-h, 0px) + var(--hdr-h, 64px))) !important;
     overflow-y: auto;
     -webkit-overflow-scrolling: touch;
     scrollbar-gutter: stable both-edges;
