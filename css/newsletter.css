@@ -25,15 +25,15 @@
   flex: 1 1 260px;
   min-width: min(260px, 100%);
   max-width: 100%;
-  padding: 0.7rem 1rem;
+  padding: 0.55rem 0.95rem;
   border-radius: 14px;
   border: 1px solid rgba(255, 255, 255, 0.28);
   background: rgba(16, 16, 22, 0.88);
   color: #ffffff;
   font-family: var(--fuente-base);
-  font-size: clamp(0.95rem, 3.4vw, 1.05rem);
-  line-height: 1.4;
-  min-height: 52px;
+  font-size: clamp(0.92rem, 3vw, 1.02rem);
+  line-height: 1.35;
+  min-height: 46px;
   transition: border-color var(--transition), box-shadow var(--transition);
 }
 .newsletter-form input[type="email"]::placeholder {
@@ -64,17 +64,17 @@
   .newsletter-form input[type="email"],
   .newsletter-form .btn {
     width: 100%;
-    min-height: 52px;
+    min-height: 46px;
   }
 }
 
 @media (max-width: 480px) {
   .newsletter-form input[type="email"] {
-    padding: 0.65rem 0.9rem;
-    min-height: 48px;
-    font-size: 1rem;
+    padding: 0.5rem 0.85rem;
+    min-height: 44px;
+    font-size: 0.98rem;
   }
   .newsletter-form .btn {
-    min-height: 48px;
+    min-height: 44px;
   }
 }

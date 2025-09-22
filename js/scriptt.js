@@ -165,15 +165,15 @@ function setAppInert(on){
 
       const header = document.querySelector('.site-header');
       const annFallback = readRootNumber('--ann-h', 0);
-      const hdrFallback = Math.max(readRootNumber('--hdr-h', 64), 96);
-      const fallback = annFallback + hdrFallback + 24;
-      const gap = 18; // respiración bajo el header
+      const hdrFallback = Math.max(readRootNumber('--hdr-h', 64), 88);
+      const fallback = annFallback + hdrFallback;
+      const gap = 0;
 
       let offset = fallback;
       if (header) {
         const rect = header.getBoundingClientRect();
         if (rect.height > 0) {
-          offset = Math.ceil(rect.bottom) + gap;
+          offset = Math.ceil(rect.bottom + gap);
         }
       }
 
@@ -296,8 +296,9 @@ function setAppInert(on){
           mobileMenu.style.removeProperty('--mobile-menu-offset');
           hamburgerBtn.classList.remove('open');
           document.body.classList.remove('menu-open');
+        } else {
+          applyMobileMenuOffset();
         }
-        applyMobileMenuOffset();
       };
 
       handleLayoutMetrics();
