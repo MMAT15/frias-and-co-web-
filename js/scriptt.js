@@ -365,8 +365,13 @@ function setAppInert(on){
           return;
         }
 
-        // Caso 2: enlaces que van a productos.html (desde otras páginas) → cerrar y permitir la navegación por defecto
-        if (href.includes('productos.html') || href.startsWith('productos')) {
+        // Caso 2: enlaces que van a productos/proximamente (desde otras páginas) → cerrar y permitir la navegación por defecto
+        if (
+          href.includes('productos.html') ||
+          href.includes('proximamente.html') ||
+          href.startsWith('productos') ||
+          href.startsWith('proximamente')
+        ) {
           closeMenu();
           return; // no preventDefault → el navegador navega
         }
@@ -432,7 +437,7 @@ function setAppInert(on){
         const href = a.getAttribute('href') || '';
 
         // Sólo actuamos si apunta a productos o a un hash de categoría
-        if (href.includes('productos') || href.startsWith('#')) {
+        if (href.includes('productos') || href.includes('proximamente') || href.startsWith('#')) {
           clearSearch('topnav-click');
 
           let nextTipo = '';
@@ -497,7 +502,7 @@ function setAppInert(on){
       form?.addEventListener('submit', (e) => {
         const q = (input?.value || '').trim();
         if (!q) { e.preventDefault(); input?.focus(); return; }
-        form.action = `productos.html?q=${encodeURIComponent(q)}`;
+        form.action = `proximamente.html?q=${encodeURIComponent(q)}`;
       });
       btn?.addEventListener('click', (e) => {
         const q = (input?.value || '').trim();
@@ -529,7 +534,7 @@ function setAppInert(on){
         form.addEventListener('submit', (e) => {
           const input = form.querySelector(inputSelector);
           const q = (input?.value || '').trim();
-          form.action = q ? `productos.html?q=${encodeURIComponent(q)}` : 'productos.html';
+          form.action = q ? `proximamente.html?q=${encodeURIComponent(q)}` : 'proximamente.html';
           // Si es el buscador del menú mobile, cierra el panel
           if (form.classList.contains('menu-search')) {
             if (hamburgerBtn && mobileMenu && !mobileMenu.hidden) {
