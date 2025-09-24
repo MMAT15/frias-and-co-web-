@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Agregar producto</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style2.css') }}">
+</head>
+<body>
+  <div class="container">
+    <h1>Cargar nuevo producto</h1>
+
+    {% with messages = get_flashed_messages() %}
+      {% if messages %}
+        <ul class="flash">
+          {% for msg in messages %}
+            <li>{{ msg }}</li>
+          {% endfor %}
+        </ul>
+      {% endif %}
+    {% endwith %}
+
+    <form action="/" method="post" enctype="multipart/form-data">
+      <label>Nombre:</label><br>
+      <input type="text" name="name" required><br>
+
+      <label>Precio (solo número):</label><br>
+      <input type="number" name="price" required><br>
+
+      <label>Categoría:</label><br>
+      <select name="category" required>
+        {% for code, label in categories.items() %}
+          <option value="{{ code }}">{{ label }}</option>
+        {% endfor %}
+      </select><br>
+
+      <label>Talle:</label><br>
+      <input type="text" name="talle" value="u"><br>
+
+      <label>Etiqueta (badge):</label><br>
+      <input type="text" name="badge" placeholder="Nuevo, Destacado, etc"><br>
+
+      <label>¿Destacado?</label>
+      <input type="checkbox" name="destacado"><br>
+
+      <label>Imagen:</label><br>
+      <input type="file" name="image" accept="image/*" required><br>
+
+      <label>Detalles (separados por ;):</label><br>
+      <input type="text" name="details" value="Medida: Único;Material: ver tabla"><br>
+
+      <label>Descripción breve:</label><br>
+      <textarea name="description">Descripción pendiente.</textarea><br>
+
+      <button type="submit">Agregar producto</button>
+    </form>
+  </div>
+</body>
+</html>
