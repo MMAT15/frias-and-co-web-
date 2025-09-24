@@ -1012,6 +1012,9 @@ body.no-scroll {
 .main-nav.show .menu-feature-card { gap: 0.5rem; }
 .main-nav.show .menu-media { grid-auto-flow: row; }
 
+.home-testimonios {
+  color: var(--color-principal);
+}
 .testimonial-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
@@ -1023,12 +1026,12 @@ body.no-scroll {
   font-size: 0.95rem;
 }
 .testimonial-card {
-  background: rgba(255, 255, 255, 0.04);
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(255, 255, 255, 0.92);
+  border: 1px solid rgba(17, 17, 17, 0.05);
   border-radius: clamp(16px, 3vw, 24px);
   padding: clamp(1.5rem, 3vw, 2rem);
-  color: rgba(255, 255, 255, 0.88);
-  box-shadow: 0 24px 45px rgba(0, 0, 0, 0.28);
+  color: var(--color-principal);
+  box-shadow: 0 24px 45px rgba(17, 17, 17, 0.12);
   display: flex;
   flex-direction: column;
   gap: 1.25rem;
@@ -1051,13 +1054,13 @@ body.no-scroll {
   left: -0.65rem;
   top: -0.5rem;
   font-size: 3rem;
-  opacity: 0.35;
+  color: rgba(233, 30, 99, 0.18);
 }
 .testimonial-card cite {
   font-style: normal;
   letter-spacing: 0.12em;
   text-transform: uppercase;
-  color: rgba(255, 255, 255, 0.55);
+  color: rgba(17, 17, 17, 0.45);
   font-size: 0.75rem;
 }
 .empty-reviews {
@@ -1065,31 +1068,31 @@ body.no-scroll {
   margin: 0;
   padding: 2rem;
   border-radius: 18px;
-  border: 1px dashed rgba(255, 255, 255, 0.15);
-  color: rgba(255, 255, 255, 0.7);
+  border: 1px dashed rgba(17, 17, 17, 0.12);
+  color: rgba(17, 17, 17, 0.6);
   text-align: center;
-  background: rgba(255, 255, 255, 0.03);
+  background: rgba(255, 255, 255, 0.85);
 }
 .review-divider {
   height: 1px;
-  background: linear-gradient(90deg, rgba(255,255,255,0.04), rgba(255,255,255,0.28), rgba(255,255,255,0.04));
+  background: linear-gradient(90deg, rgba(17,17,17,0.08), rgba(17,17,17,0.18), rgba(17,17,17,0.08));
   margin: clamp(1.5rem, 4vw, 2.5rem) 0;
 }
 .review-form {
   display: grid;
   gap: 1rem;
-  background: rgba(255, 255, 255, 0.04);
+  background: rgba(17, 17, 17, 0.9);
   padding: clamp(1.5rem, 4vw, 2rem);
   border-radius: clamp(18px, 3vw, 24px);
   border: 1px solid rgba(255, 255, 255, 0.08);
-  box-shadow: 0 22px 40px rgba(0,0,0,0.25);
+  box-shadow: 0 22px 40px rgba(17,17,17,0.2);
 }
 .review-form label span,
 .review-form legend {
   display: block;
   font-weight: 600;
   margin-bottom: 0.35rem;
-  color: rgba(255, 255, 255, 0.85);
+  color: rgba(255, 255, 255, 0.9);
 }
 .review-form textarea,
 .review-form input[type="text"] {
