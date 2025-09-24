@@ -1173,6 +1173,14 @@ body.no-scroll {
   opacity: 0.6;
   cursor: not-allowed;
 }
+.captcha-wrap {
+  display: flex;
+  justify-content: flex-start;
+}
+.captcha-wrap > div {
+  transform: scale(0.94);
+  transform-origin: left top;
+}
 
 .badge-inline {
   display: inline-flex;

@@ -1028,6 +1028,7 @@ setAppInert(true);
         const rating = Number(formData.get('rating'));
         const comment = (formData.get('comment') || '').trim();
         const name = (formData.get('name') || '').trim();
+        const captchaToken = window.hcaptcha?.getResponse?.();
 
         if (!rating || rating < 1 || rating > 5) {
           setFormMessage('Elegí cuántas estrellas querés dar.');
@@ -1035,6 +1036,10 @@ setAppInert(true);
         }
         if (comment.length < 10) {
           setFormMessage('Contanos un poco más (mínimo 10 caracteres).');
+          return;
+        }
+        if (!captchaToken) {
+          setFormMessage('Confirmá que no sos un robot.');
           return;
         }
 
@@ -1062,6 +1067,7 @@ setAppInert(true);
           if (!res.ok) throw new Error(`HTTP ${res.status}`);
 
           reviewForm.reset();
+          window.hcaptcha?.reset?.();
           setFormMessage('¡Gracias! Revisamos tu reseña y la publicamos dentro de poco.', true);
         } catch (error) {
           console.error('Error enviando reseña', error);
