@@ -325,7 +325,12 @@
 
         <div class="review-divider" role="presentation"></div>
 
-        <form id="review-form" class="review-form" novalidate data-review-form>
+        <div class="review-login" data-review-login>
+          <p>Para dejar tu reseña necesitás ingresar con Google.</p>
+          <button class="btn btn-secondary" type="button" data-review-google>Ingresar con Google</button>
+        </div>
+
+        <form id="review-form" class="review-form" novalidate data-review-form hidden>
           <fieldset class="review-stars" aria-labelledby="review-stars-label">
             <legend id="review-stars-label">Tu valoración</legend>
             <div class="stars-wrapper" role="radiogroup" aria-required="true">
@@ -455,5 +460,6 @@
 
   <script src="https://unpkg.com/swiper/swiper-bundle.min.js" defer></script>
   <script src="js/scriptt.js" defer></script>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.min.js" integrity="sha384-RXJbd9mxEn5XeoASzSIBNmu7L9PQcP2fkpMphgEXL+dfJ0V+a/z+SjJ+ctUTWnhz" crossorigin="anonymous" defer></script>
 </body>
 </html>
