@@ -317,20 +317,62 @@
     <section id="testimonios-home" class="section surface-light home-testimonios" role="region" aria-labelledby="testimonios-home-title">
       <div class="container container-narrow">
         <h2 id="testimonios-home-title" class="section-title">Lo que dice la crew</h2>
-        <div class="testimonial-grid">
-          <article class="testimonial-card">
-            <blockquote>“La atención es increíble. Me sugirieron combos para la noche y el pedido llegó impecable, con packaging hermoso.”</blockquote>
-            <cite>— Agus F.</cite>
-          </article>
-          <article class="testimonial-card">
-            <blockquote>“Las prendas son súper cómodas y combinan todas entre sí. Se nota el estilo que manejan. Mi marca favorita.”</blockquote>
-            <cite>— Cami R.</cite>
-          </article>
-          <article class="testimonial-card">
-            <blockquote>“Retiré en Berazategui el mismo día. La calidad y terminaciones son nivel showroom premium.”</blockquote>
-            <cite>— Joaco M.</cite>
-          </article>
+        <p class="reviews-intro">Opiniones reales de quienes ya se sumaron a BERA. Tus reseñas nos ayudan a mejorar cada drop.</p>
+
+        <div class="testimonial-grid" data-review-list>
+          <p class="empty-reviews">Todavía no hay reseñas aprobadas. Sé la primera persona en compartir tu experiencia.</p>
         </div>
+
+        <div class="review-divider" role="presentation"></div>
+
+        <form id="review-form" class="review-form" novalidate data-review-form>
+          <fieldset class="review-stars" aria-labelledby="review-stars-label">
+            <legend id="review-stars-label">Tu valoración</legend>
+            <div class="stars-wrapper" role="radiogroup" aria-required="true">
+              <label class="star-option">
+                <input type="radio" name="rating" value="5" required>
+                <span aria-hidden="true">★★★★★</span>
+                <span class="sr-only">5 estrellas</span>
+              </label>
+              <label class="star-option">
+                <input type="radio" name="rating" value="4" required>
+                <span aria-hidden="true">★★★★☆</span>
+                <span class="sr-only">4 estrellas</span>
+              </label>
+              <label class="star-option">
+                <input type="radio" name="rating" value="3" required>
+                <span aria-hidden="true">★★★☆☆</span>
+                <span class="sr-only">3 estrellas</span>
+              </label>
+              <label class="star-option">
+                <input type="radio" name="rating" value="2" required>
+                <span aria-hidden="true">★★☆☆☆</span>
+                <span class="sr-only">2 estrellas</span>
+              </label>
+              <label class="star-option">
+                <input type="radio" name="rating" value="1" required>
+                <span aria-hidden="true">★☆☆☆☆</span>
+                <span class="sr-only">1 estrella</span>
+              </label>
+            </div>
+          </fieldset>
+
+          <label class="review-field">
+            <span>Contanos tu experiencia</span>
+            <textarea name="comment" rows="4" maxlength="400" placeholder="¿Qué te gustó? ¿Qué mejorarías?" required></textarea>
+          </label>
+
+          <label class="review-field optional">
+            <span>Tu nombre (opcional)</span>
+            <input type="text" name="name" maxlength="80" placeholder="Ej: Cami">
+          </label>
+
+          <input type="text" name="website" class="hp-field" autocomplete="off" tabindex="-1" aria-hidden="true">
+
+          <button type="submit" class="btn btn-secondary" data-review-submit>Enviar reseña</button>
+          <p class="review-hint">Revisamos cada mensaje antes de publicarlo. Gracias por compartir tu experiencia.</p>
+          <p class="form-response" data-review-response aria-live="polite"></p>
+        </form>
       </div>
     </section>
 

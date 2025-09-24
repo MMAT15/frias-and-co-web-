@@ -826,33 +826,196 @@ setAppInert(true);
     }
 
     // NEWSLETTER FORM (validación en español + mensajes propios)
-[{ formId: 'form-newsletter', responseId: 'newsletter-response' },
- { formId: 'form-prelaunch', responseId: 'prelaunch-response' }]
- .forEach(({ formId, responseId }) => {
-   const formEl = document.getElementById(formId);
-   const respEl = responseId ? document.getElementById(responseId) : null;
-   if (!formEl) return;
-   const emailInput = formEl.querySelector('input[type="email"], [name="email-newsletter"], [name="email-prelaunch"]');
-   formEl.setAttribute('novalidate', 'novalidate');
+    [{ formId: 'form-newsletter', responseId: 'newsletter-response' },
+     { formId: 'form-prelaunch', responseId: 'prelaunch-response' }]
+    .forEach(({ formId, responseId }) => {
+      const formEl = document.getElementById(formId);
+      const respEl = responseId ? document.getElementById(responseId) : null;
+      if (!formEl) return;
+      const emailInput = formEl.querySelector('input[type="email"], [name="email-newsletter"], [name="email-prelaunch"]');
+      formEl.setAttribute('novalidate', 'novalidate');
 
-   const setMsg = (msg, ok = false) => {
-     if (!respEl) return;
-     respEl.textContent = msg;
-     respEl.style.color = ok ? 'var(--color-acento)' : '#f66';
-   };
+      const setMsg = (msg, ok = false) => {
+        if (!respEl) return;
+        respEl.textContent = msg;
+        respEl.style.color = ok ? 'var(--color-acento)' : '#f66';
+      };
 
-   emailInput?.addEventListener('input', () => { emailInput.setCustomValidity(''); });
+      emailInput?.addEventListener('input', () => { emailInput.setCustomValidity(''); });
 
-   formEl.addEventListener('submit', (e) => {
-     e.preventDefault();
-     const email = (emailInput?.value || '').trim();
-     const valid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
-     if (!email) { setMsg('Ingresá tu correo electrónico.'); emailInput?.focus(); return; }
-     if (!valid) { setMsg('Formato inválido. Ejemplo: nombre@dominio.com'); emailInput?.focus(); return; }
-     setMsg('¡Gracias! Te avisamos cuando se active el drop.', true);
-     formEl.reset();
-   });
- });
+      formEl.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const email = (emailInput?.value || '').trim();
+        const valid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+        if (!email) { setMsg('Ingresá tu correo electrónico.'); emailInput?.focus(); return; }
+        if (!valid) { setMsg('Formato inválido. Ejemplo: nombre@dominio.com'); emailInput?.focus(); return; }
+        setMsg('¡Gracias! Te avisamos cuando se active el drop.', true);
+        formEl.reset();
+      });
+    });
+
+    /* ===========================
+       REVIEWS (Supabase REST)
+       =========================== */
+    (function initCrewReviews() {
+      const reviewList = document.querySelector('[data-review-list]');
+      const reviewForm = document.querySelector('[data-review-form]');
+      if (!reviewList || !reviewForm) return;
+
+      const reviewSubmitBtn = reviewForm.querySelector('[data-review-submit]');
+      const reviewResp = reviewForm.querySelector('[data-review-response]');
+      const honeypot = reviewForm.querySelector('.hp-field');
+
+      const SUPABASE_URL = 'https://qylrooxrmrdqrvvzqwsq.supabase.co';
+      const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InF5bHJvb3hybXJkcXJ2dnpxd3NxIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTg3MTQxMTgsImV4cCI6MjA3NDI5MDExOH0.ZXmvOPjjQGk1pxJv10pBVkrhLNwOkA4tzSKGDS3cHJg';
+      const REVIEWS_ENDPOINT = `${SUPABASE_URL}/rest/v1/rese%C3%B1as`;
+      const SELECT_COLUMNS = ['Nombre', 'Comentario', 'Valoración', 'created_at']
+        .map(encodeURIComponent)
+        .join(',');
+      const SELECT_QUERY = `?select=${SELECT_COLUMNS}&approved=eq.true&order=created_at.desc&limit=12`;
+      const DEFAULT_HEADERS = {
+        apikey: SUPABASE_KEY,
+        Authorization: `Bearer ${SUPABASE_KEY}`
+      };
+
+      const renderStars = (value) => {
+        const rating = Math.max(1, Math.min(5, Number(value) || 0));
+        return '★★★★★☆☆☆☆☆'.slice(5 - rating, 10 - rating);
+      };
+
+      const escapeHTML = (str = '') => str
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#39;');
+
+      const formatDate = (iso) => {
+        if (!iso) return '';
+        try {
+          return new Date(iso).toLocaleDateString('es-AR', {
+            day: '2-digit', month: 'short', year: 'numeric'
+          });
+        } catch (_) {
+          return '';
+        }
+      };
+
+      const clearList = () => {
+        reviewList.innerHTML = '';
+      };
+
+      const renderEmpty = () => {
+        const msg = document.createElement('p');
+        msg.className = 'empty-reviews';
+        msg.textContent = 'Todavía no hay reseñas aprobadas. Sé la primera persona en compartir tu experiencia.';
+        reviewList.appendChild(msg);
+      };
+
+      const renderReviews = (rows) => {
+        clearList();
+        if (!rows?.length) {
+          renderEmpty();
+          return;
+        }
+
+        rows.forEach((row) => {
+          const card = document.createElement('article');
+          card.className = 'testimonial-card';
+          const rating = renderStars(row['Valoración']);
+          const comment = (row['Comentario'] || '').trim();
+          const name = (row['Nombre'] || 'Anónimo').trim();
+          const dateLabel = formatDate(row.created_at);
+
+          card.innerHTML = `
+            <div class="testimonial-rating" aria-hidden="true">${rating}</div>
+            <blockquote>${comment ? escapeHTML(comment) : 'Sin comentario.'}</blockquote>
+            <cite>${escapeHTML(name)}${dateLabel ? ` · ${dateLabel}` : ''}</cite>
+          `;
+
+          reviewList.appendChild(card);
+        });
+      };
+
+      const fetchReviews = async () => {
+        try {
+          const res = await fetch(`${REVIEWS_ENDPOINT}${SELECT_QUERY}`, {
+            headers: { ...DEFAULT_HEADERS, Accept: 'application/json' }
+          });
+          if (!res.ok) throw new Error(`HTTP ${res.status}`);
+          const data = await res.json();
+          renderReviews(data);
+        } catch (error) {
+          console.error('Error cargando reseñas', error);
+          clearList();
+          const err = document.createElement('p');
+          err.className = 'empty-reviews';
+          err.textContent = 'No pudimos cargar las reseñas. Intentá nuevamente en unos minutos.';
+          reviewList.appendChild(err);
+        }
+      };
+
+      const setFormMessage = (text, ok = false) => {
+        if (!reviewResp) return;
+        reviewResp.textContent = text;
+        reviewResp.style.color = ok ? 'var(--color-acento)' : '#f66';
+      };
+
+      reviewForm.addEventListener('submit', async (event) => {
+        event.preventDefault();
+        if (honeypot && honeypot.value.trim()) {
+          reviewForm.reset();
+          return;
+        }
+
+        const formData = new FormData(reviewForm);
+        const rating = Number(formData.get('rating'));
+        const comment = (formData.get('comment') || '').trim();
+        const name = (formData.get('name') || '').trim();
+
+        if (!rating || rating < 1 || rating > 5) {
+          setFormMessage('Elegí cuántas estrellas querés dar.');
+          return;
+        }
+        if (comment.length < 10) {
+          setFormMessage('Contanos un poco más (mínimo 10 caracteres).');
+          return;
+        }
+
+        setFormMessage('Enviando reseña…', true);
+        reviewSubmitBtn?.setAttribute('disabled', 'disabled');
+
+        try {
+          const payload = {
+            'Valoración': rating,
+            'Comentario': comment,
+            'Nombre': name || null
+          };
+
+          const res = await fetch(REVIEWS_ENDPOINT, {
+            method: 'POST',
+            headers: {
+              ...DEFAULT_HEADERS,
+              'Content-Type': 'application/json',
+              Prefer: 'return=representation'
+            },
+            body: JSON.stringify(payload)
+          });
+
+          if (!res.ok) throw new Error(`HTTP ${res.status}`);
+
+          reviewForm.reset();
+          setFormMessage('¡Gracias! Revisamos tu reseña y la publicamos dentro de poco.', true);
+        } catch (error) {
+          console.error('Error enviando reseña', error);
+          setFormMessage('No pudimos guardar tu reseña. Intentá de nuevo en un momento.');
+        } finally {
+          reviewSubmitBtn?.removeAttribute('disabled');
+        }
+      });
+
+      fetchReviews();
+    })();
 
     /* ===========================
        Modernización de grilla de productos (acciones, datos auxiliares)
