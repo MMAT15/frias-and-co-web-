@@ -632,7 +632,15 @@ function setAppInert(on){
         details: 'Medida: Único<br>Textura: vinilo espejado<br>Cierre: imán oculto',
         description: 'Clutch espejado para llevar lo básico y sumar luz a tu outfit.',
         images: ['assets/images/IMG_7238.PNG']
-      }
+      },
+
+'remera-roja': {
+  title: 'Remera roja',
+  price: '$15',
+  details: 'Medida: Único<br>Material: ver tabla',
+  description: 'Remera roja de algodon calidad premium. abrazo.',
+  images: ['assets/images/remera-roja.jpeg']
+}
     };
 
     const productModal      = document.getElementById('product-modal');
