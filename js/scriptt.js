@@ -997,7 +997,7 @@ setAppInert(true);
             headers: {
               ...DEFAULT_HEADERS,
               'Content-Type': 'application/json',
-              Prefer: 'return=representation'
+              Prefer: 'return=minimal'
             },
             body: JSON.stringify(payload)
           });
