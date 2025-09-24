@@ -867,15 +867,7 @@ setAppInert(true);
       const honeypot = reviewForm.querySelector('.hp-field');
 
       const SUPABASE_URL = 'https://qylrooxrmrdqrvvzqwsq.supabase.co';
-      const SUPABASE_PROJECT_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InF5bHJvb3hybXJkcXJ2dnpxd3NxIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTg3MTQxMTgsImV4cCI6MjA3NDI5MDExOH0.ZXmvOPjjQGk1pxJv10pBVkrhLNwOkA4tzSKGDS3cHJg';
-      const supabaseAnon = window.supabase.createClient(SUPABASE_URL, SUPABASE_PROJECT_KEY, {
-        auth: {
-          flowType: 'pkce',
-          detectSessionInUrl: true,
-          persistSession: true,
-          autoRefreshToken: true
-        }
-      });
+      const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InF5bHJvb3hybXJkcXJ2dnpxd3NxIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTg3MTQxMTgsImV4cCI6MjA3NDI5MDExOH0.ZXmvOPjjQGk1pxJv10pBVkrhLNwOkA4tzSKGDS3cHJg';
 
       const REVIEWS_ENDPOINT = `${SUPABASE_URL}/rest/v1/rese%C3%B1as`;
       const SELECT_COLUMNS = ['Nombre', 'Comentario', 'Valoración', 'created_at']
@@ -883,7 +875,8 @@ setAppInert(true);
         .join(',');
       const SELECT_QUERY = `?select=${SELECT_COLUMNS}&approved=eq.true&order=created_at.desc&limit=12`;
       const DEFAULT_HEADERS = {
-        apikey: SUPABASE_PROJECT_KEY
+        apikey: SUPABASE_KEY,
+        Authorization: `Bearer ${SUPABASE_KEY}`
       };
 
       const renderStars = (value) => {
@@ -969,58 +962,10 @@ setAppInert(true);
         reviewResp.style.color = ok ? 'var(--color-acento)' : '#f66';
       };
 
-      const handleAuthState = async () => {
-        const { data: { session } } = await supabaseAnon.auth.getSession();
-        const loginArea = document.querySelector('[data-review-login]');
-
-        if (!session) {
-          reviewForm.setAttribute('hidden', 'hidden');
-          reviewForm.classList.add('is-disabled');
-          reviewSubmitBtn?.setAttribute('disabled', 'disabled');
-          if (loginArea) loginArea.removeAttribute('hidden');
-          return;
-        }
-
-        reviewForm.removeAttribute('hidden');
-        reviewForm.classList.remove('is-disabled');
-        reviewSubmitBtn?.removeAttribute('disabled');
-        if (loginArea) loginArea.setAttribute('hidden', 'hidden');
-
-        const userName = session.user?.user_metadata?.full_name || session.user?.email?.split('@')[0] || '';
-        const nameInput = reviewForm.querySelector('input[name="name"]');
-        if (nameInput && !nameInput.value) {
-          nameInput.value = userName;
-        }
-      };
-
-      const startOAuth = async () => {
-        await supabaseAnon.auth.signInWithOAuth({
-          provider: 'google',
-          options: {
-            redirectTo: `${window.location.origin}/index.html`
-          }
-        });
-      };
-
-      document.querySelector('[data-review-google]')?.addEventListener('click', (ev) => {
-        ev.preventDefault();
-        startOAuth();
-      });
-
-      supabaseAnon.auth.onAuthStateChange(() => {
-        handleAuthState();
-      });
-
       reviewForm.addEventListener('submit', async (event) => {
         event.preventDefault();
         if (honeypot && honeypot.value.trim()) {
           reviewForm.reset();
-          return;
-        }
-
-        const { data: { session } } = await supabaseAnon.auth.getSession();
-        if (!session) {
-          setFormMessage('Ingresá con Google para dejar tu reseña.');
           return;
         }
 
@@ -1057,7 +1002,6 @@ setAppInert(true);
             method: 'POST',
             headers: {
               ...DEFAULT_HEADERS,
-              Authorization: `Bearer ${session.access_token}`,
               'Content-Type': 'application/json',
               Prefer: 'return=minimal'
             },
@@ -1078,7 +1022,6 @@ setAppInert(true);
       });
 
       fetchReviews();
-      handleAuthState();
     })();
 
     /* ===========================
