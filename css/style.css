@@ -46,11 +46,11 @@ textarea:focus {
 
 /* Variables de tema */
 :root {
-  /* Modern color palette */
-  --color-principal: #333333;          /* base text color */
-  --color-fondo: #ffffff;              /* page background */
-  --color-acento: #e91e63;             /* primary accent */
-  --color-acento-sec: #757575;         /* secondary accent */
+  /* Viviana Varacca Boutique palette */
+  --color-principal: #2f2521;          /* warm espresso text */
+  --color-fondo: #fdf8f3;              /* soft ivory background */
+  --color-acento: #b07a56;             /* terracotta accent */
+  --color-acento-sec: #8b6b5a;         /* cocoa secondary */
   /* Layout vars for stable header/announcement heights */
   --ann-h: 0px;  /* JS la ajusta si hay barra de anuncio */
   --hdr-h: 56px; /* JS coloca la altura real del header */
