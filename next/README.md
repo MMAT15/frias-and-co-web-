@@ -1,4 +1,4 @@
-# BERA Clothing
+# Viviana Varacca Boutique
 
 Proyecto de e-commerce basado en Next.js 14.
 
