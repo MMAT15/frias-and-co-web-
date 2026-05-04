@@ -9,8 +9,8 @@ const inter = Inter({ subsets: ['latin'], variable: '--font-inter' });
 
 export const metadata: Metadata = {
   title: {
-    default: 'BERA Clothing',
-    template: '%s | BERA Clothing'
+    default: 'Viviana Varacca Boutique',
+    template: '%s | Viviana Varacca Boutique'
   },
   description: 'Tienda online de indumentaria urbana.'
 };
@@ -21,7 +21,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
       <body className="min-h-screen font-sans antialiased bg-white text-gray-900">
         <header className="border-b sticky top-0 bg-white z-50">
           <nav className="max-w-7xl mx-auto flex items-center justify-between p-4">
-            <Link href="/" className="text-lg font-bold">BERA</Link>
+            <Link href="/" className="text-lg font-bold">VIVIANA</Link>
             <div className="flex items-center gap-4">
               <Link href="/products" className="text-sm">Catálogo</Link>
               <DarkModeToggle />
@@ -30,7 +30,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
         </header>
         {children}
         <footer className="border-t mt-10 p-4 text-center text-sm">
-          &copy; {new Date().getFullYear()} BERA Clothing.
+          &copy; {new Date().getFullYear()} Viviana Varacca Boutique.
         </footer>
         <script
           dangerouslySetInnerHTML={{
