@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { useEffect, useMemo, useState } from "react";
 import {
   DEFAULT_CATALOG_URL,
@@ -170,12 +171,12 @@ export function CatalogAdmin() {
   return (
     <main className="adminShell">
       <header className="adminHeader">
-        <a className="brandMark" href="/" aria-label="Volver al sitio">
+        <Link className="brandMark" href="/" aria-label="Volver al sitio">
           <img
             src="/assets/brand/viviana-boutique-logo.png"
             alt="Viviana Boutique"
           />
-        </a>
+        </Link>
         <div>
           <p className="eyebrow">Administración interna</p>
           <h1>Cargar productos</h1>
@@ -207,7 +208,7 @@ export function CatalogAdmin() {
               Ver CSV publicado
             </a>
           ) : null}
-          <a href="/">Ver tienda</a>
+          <Link href="/">Ver tienda</Link>
         </div>
 
         <div className="adminSummary">
