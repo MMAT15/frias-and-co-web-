@@ -1,0 +1,40 @@
+id,nombre,precio,descripcion,categoria,talles,promo,imagen,imagenes,posicion
+buzo-scotland,Buzo Scotland,65000,Capucha lisa de abrigo,Abrigos,,,/assets/catalog/catalogo-1.png,"/assets/catalog/catalogo-1.png | https://res.cloudinary.com/whx9tgdx/image/upload/f_auto,q_auto/IMG_6632_gtoy47",4.8% 14.5%
+remera-botones,Remera Botones,30000,Manga larga con detalle de botones,Remeras,Talles S y M,,/assets/catalog/catalogo-1.png,/assets/catalog/catalogo-1.png,4.8% 25.8%
+pantalon-tim,Pantalón Tim,45000,Pantalón cómodo para uso diario,Pantalones,,,/assets/catalog/catalogo-1.png,/assets/catalog/catalogo-1.png,4.8% 37.5%
+termicas,Térmicas,15000,Básicas térmicas manga larga,Remeras,,,/assets/catalog/catalogo-1.png,/assets/catalog/catalogo-1.png,4.8% 49.2%
+jeans-talon,Jeans Talon,75000,Jean con calce recto,Jeans,,,/assets/catalog/catalogo-1.png,/assets/catalog/catalogo-1.png,4.8% 61.0%
+jeans-margarite,Jeans Margarite,85000,Jean azul tiro alto,Jeans,,,/assets/catalog/catalogo-1.png,/assets/catalog/catalogo-1.png,4.8% 72.6%
+gorro-lana,Gorro Lana,8000,Gorro tejido de invierno,Accesorios,,,/assets/catalog/catalogo-1.png,/assets/catalog/catalogo-1.png,4.8% 84.4%
+sweater-haruka,Sweater Haruka,45000,Sweater liviano de media estación,Abrigos,,,/assets/catalog/catalogo-1.png,/assets/catalog/catalogo-1.png,4.8% 96.1%
+remera-arden,Remera Arden,40000,Remera básica premium,Remeras,,,/assets/catalog/catalogo-2.png,/assets/catalog/catalogo-2.png,4.8% 13.8%
+cardigan-hinata,Cardigan Hinata,69000,Cardigan abierto con botones,Abrigos,,,/assets/catalog/catalogo-2.png,/assets/catalog/catalogo-2.png,4.8% 25.4%
+remera-edna-bordo,Remera Edna Bordo,30000,Remera manga larga,Remeras,,,/assets/catalog/catalogo-2.png,/assets/catalog/catalogo-2.png,4.8% 37.1%
+remera-edna-negra,Remera Edna Negra,30000,Remera manga larga,Remeras,,,/assets/catalog/catalogo-2.png,/assets/catalog/catalogo-2.png,4.8% 48.7%
+remera-edna-blanca,Remera Edna Blanca,30000,Remera manga larga,Remeras,,,/assets/catalog/catalogo-2.png,/assets/catalog/catalogo-2.png,4.8% 60.4%
+buzo-izan,Buzo Izan,50000,Buzo escote en V,Abrigos,,,/assets/catalog/catalogo-2.png,/assets/catalog/catalogo-2.png,4.8% 72.1%
+polera-clasica,Polera Clásica,25000,Polera lisa de invierno,Abrigos,,,/assets/catalog/catalogo-2.png,/assets/catalog/catalogo-2.png,4.8% 83.8%
+poleras-morley,Poleras Morley,30000,Poleras en colores surtidos,Abrigos,,,/assets/catalog/catalogo-2.png,/assets/catalog/catalogo-2.png,4.8% 95.5%
+pantalon-dark,Pantalón Dark,50000,Pantalón negro con bolsillo,Pantalones,,,/assets/catalog/catalogo-3.png,/assets/catalog/catalogo-3.png,4.8% 15.6%
+campera-peluche,Campera Peluche,45000,Campera abrigada con textura,Abrigos,,,/assets/catalog/catalogo-3.png,/assets/catalog/catalogo-3.png,4.8% 27.0%
+buzo-iven-soft,Buzo Iven Soft,55000,Buzo suave en tonos tierra,Abrigos,,,/assets/catalog/catalogo-3.png,/assets/catalog/catalogo-3.png,4.8% 38.8%
+remera-inti-print,Remera Inti Print,35000,Remera con print animal,Remeras,,,/assets/catalog/catalogo-3.png,/assets/catalog/catalogo-3.png,4.8% 50.5%
+camisa-floyd,Camisa Floyd,55000,Camisa liviana para combinar,Camisas,,,/assets/catalog/catalogo-3.png,/assets/catalog/catalogo-3.png,4.8% 62.3%
+bufandones,Bufandones,15000,Accesorios de invierno,Accesorios,,,/assets/catalog/catalogo-3.png,/assets/catalog/catalogo-3.png,4.8% 74.1%
+remera-mirabilla,Remera Mirabilla,25000,Remera básica estampada,Remeras,,,/assets/catalog/catalogo-3.png,/assets/catalog/catalogo-3.png,4.8% 85.9%
+campera-karl,Campera Karl,75000,Campera deportiva con cierre,Abrigos,,,/assets/catalog/catalogo-3.png,/assets/catalog/catalogo-3.png,4.8% 97.6%
+pantalon-jones,Pantalón Jones,85000,Pantalón de vestir cómodo,Pantalones,,,/assets/catalog/catalogo-4.png,/assets/catalog/catalogo-4.png,4.8% 14.4%
+sweater-liso,Sweater Liso,30000,Sweater amplio,Abrigos,Hasta talle 4,,/assets/catalog/catalogo-4.png,/assets/catalog/catalogo-4.png,4.8% 26.1%
+cinto-elastizado,Cinto Elastizado,7000,Cinto elástico con hebilla,Accesorios,,,/assets/catalog/catalogo-4.png,/assets/catalog/catalogo-4.png,4.8% 37.6%
+short-pollera,Short Pollera,25000,Short pollera de temporada,Shorts,,,/assets/catalog/catalogo-4.png,/assets/catalog/catalogo-4.png,4.8% 49.5%
+short-miami-plain,Short Miami Plain,50000,Short con calce clásico,Shorts,"Talles S, M y L",,/assets/catalog/catalogo-4.png,/assets/catalog/catalogo-4.png,4.8% 61.1%
+short-solenea,Short Solenea,65000,Short con brillo sutil,Shorts,,,/assets/catalog/catalogo-4.png,/assets/catalog/catalogo-4.png,4.8% 72.9%
+pantalon-euphoria,Pantalón Euphoria,65000,Pantalón negro elegante,Pantalones,"Talles S, M y L",,/assets/catalog/catalogo-4.png,/assets/catalog/catalogo-4.png,4.8% 84.6%
+pantalon-velvet,Pantalón Velvet,45000,Pantalón estampado animal print,Pantalones,,,/assets/catalog/catalogo-4.png,/assets/catalog/catalogo-4.png,4.8% 96.3%
+pantalon-bennet-leorap,Pantalón Bennet Leorap,95000,Pantalón animal print,Pantalones,,,/assets/catalog/catalogo-5.png,/assets/catalog/catalogo-5.png,4.8% 17.4%
+short-coty-plain,Short Coty Plain,35000,Short liso con cordon,Shorts,,2 x $60.000,/assets/catalog/catalogo-5.png,/assets/catalog/catalogo-5.png,4.8% 28.9%
+musculosa-shiboru,Musculosa Shiboru,25000,Musculosa básica escote V,Remeras,,2 x $45.000,/assets/catalog/catalogo-5.png,/assets/catalog/catalogo-5.png,4.8% 40.4%
+perfume-only,Perfume Only,15000,Perfume de cartera,Accesorios,,,/assets/catalog/catalogo-5.png,/assets/catalog/catalogo-5.png,4.8% 52.0%
+remera-escote-cuadrado,Remera Escote Cuadrado,35000,Remera manga larga escote cuadrado,Remeras,"Talles S, M y L",,/assets/catalog/catalogo-5.png,/assets/catalog/catalogo-5.png,4.8% 63.5%
+calza-ssex,Calza Ssex,30000,Calza negra elastizada,Pantalones,Talle S y M,,/assets/catalog/catalogo-5.png,/assets/catalog/catalogo-5.png,4.8% 75.5%
+babuchas-bengalina,Babuchas Bengalina,35000,Babuchas cómodas en colores,Pantalones,"Talles S, M y L",,/assets/catalog/catalogo-5.png,/assets/catalog/catalogo-5.png,4.8% 87.1%
